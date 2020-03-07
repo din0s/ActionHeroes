@@ -1,0 +1,19 @@
+.Footer {
+  background-color: rgba($color: black, $alpha: 0.05);
+  bottom: 0;
+  text-align: left;
+  position: absolute;
+  width: 100vw;
+
+  .Divider {
+    border: none;
+    border-bottom: 1px ridge rgba($color: black, $alpha: 0.25);
+    display: flex;
+    margin: 0;
+  }
+
+  > p {
+    color: rgba($color: black, $alpha: 0.95);
+    padding: 0 1rem;
+  }
+}

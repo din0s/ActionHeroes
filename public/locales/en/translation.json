@@ -1,0 +1,13 @@
+{
+  "search": "Search...",
+  "nav": {
+    "actions": "Actions",
+    "teams": "Teams",
+    "contact": "Contact",
+    "login": "Login",
+    "signup": "Sign Up"
+  },
+  "footer": {
+    "icons": "Icons from {{site}}"
+  }
+}
