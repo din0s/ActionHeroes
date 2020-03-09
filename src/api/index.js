@@ -1,27 +1,34 @@
 const express = require('express')
 require('dotenv').config()
-const postgres = require('@metamodules/postgres')()
+
+const userRoutes = require('./routes/user');
 
 const app = express()
 const port = 4000
 
-postgres.query(`CREATE TABLE IF NOT EXISTS clicks (
-  id BIGSERIAL PRIMARY KEY,
-  created_at TIMESTAMP DEFAULT NOW()
-)`)
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.get('/api/count', (req, res) => {
-  postgres.query('SELECT count(*) AS count FROM clicks', (err, resp) => {
-    res.send({ count: resp.rows[0].count || 0 })
-  })
-})
+// Routes
+app.use('/user', userRoutes);
 
-app.post('/api/count/increment', (req, res) => {
-  postgres.query('INSERT INTO clicks DEFAULT VALUES', (err, insert) => {
-    postgres.query('SELECT count(*) AS count FROM clicks', (err, resp) => {
-      res.send({ count: resp.rows[0].count || 0 })
-    })
-  })
-})
+/* Can't find the requested resourse */
+app.use((req, res, next) => {
+  const error = new Error('Resource not found');
+  error.status = 404;
+  next(error);
+});
 
+/* Any other error */
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message
+    }
+  });
+});
+
+// Start server
 app.listen(port, () => console.log(`Example backend API listening on port ${port}!`))

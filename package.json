@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@metamodules/postgres": "^1.2.1",
+    "@metamodules/mongo": "^1.1.1",
     "deploy-node-app": "^1.4.3",
     "dotenv": "^8.0.0",
+    "mongoose": "^5.9.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "^3.4.0"
@@ -29,7 +30,7 @@
     "deploy": "deploy-node-app",
     "test": "react-scripts test",
     "eject-www": "react-scripts eject",
-    "psql": "export $(cat .env | xargs) && PGPASSWORD=${POSTGRES_PASSWORD} psql -h ${POSTGRES_SERVICE_HOST} -p ${POSTGRES_SERVICE_PORT} -U ${POSTGRES_USER} ${POSTGRES_DB}"
+    "mongo": "export $(cat .env | xargs) && mongo mongodb://${MONGO_SERVICE_HOST}:${MONGO_SERVICE_PORT}"
   },
   "eslintConfig": {
     "extends": "react-app"
