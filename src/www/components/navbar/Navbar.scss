@@ -1,5 +1,8 @@
-.navbar {
+@import "../../vars.scss";
+
+nav {
   align-items: center;
+  background-color: white;
   border-bottom: 1px solid black;
   display: flex;
   flex-direction: row;
@@ -7,74 +10,166 @@
   top: 0;
   width: 100%;
 
-  .Nav-logo {
-    margin: 1rem;
-  }
-}
-
-.Links {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100vw;
-  padding-right: 1rem;
-
-  > ul {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    margin: 0;
-  }
-
-  .Page-link {
-    transition: 0.2s ease-in-out;
-
-    &:hover {
-      background-color: rgba($color: #000000, $alpha: 0.1);
-    }
-
-    > a {
-      align-items: center;
-      color: black;
-      display: flex;
-      height: 4rem;
-      padding: 0 1rem;
-      text-decoration: none;
-    }
-  }
-
-  .Button-link {
+  .Top {
     align-items: center;
     display: flex;
-    padding-left: 1rem;
+    flex-direction: row;
 
-    button {
-      background-color: rgba($color: #000000, $alpha: 0.1);
-      border: none;
-      border-radius: 0.25rem;
+    .Hamburger {
       cursor: pointer;
-      outline: none;
-      padding: 0.5rem;
-      transition: 0.2s ease-in-out;
+      display: none;
+      height: 1rem;
+      left: 0;
+      padding: 1rem;
+      position: fixed;
+    }
 
-      &:hover {
-        background-color: rgba($color: #000000, $alpha: 0.2);
+    .Logo {
+      margin: 1rem;
+    }
+  }
+
+  .Menu {
+    display: flex;
+    flex-direction: row;
+
+    > ul {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+      margin: 0 1rem;
+      padding: 0;
+    }
+
+    .Pages {
+      list-style: none;
+
+      .Page-link > a {
+        align-items: center;
+        color: initial;
+        display: flex;
+        height: calc(4rem + 2px);
+        padding: 0 1rem;
+        text-decoration: none;
+        transition: 0.2s ease-in-out;
+
+        &:hover {
+          background-color: $grayHover;
+        }
+      }
+    }
+
+    .Right-sticky {
+      align-self: center;
+      display: flex;
+      flex-direction: row;
+      position: fixed;
+      right: 0;
+
+      > * {
+        padding-left: 1rem;
       }
     }
   }
+}
 
-  .Lang-selector {
-    align-items: center;
-    cursor: pointer;
-    display: flex;
-    margin-left: 1rem;
-
-    .dropdown-arrow {
-      height: 0.6rem;
-      padding: 0 0.25rem;
-      // TODO: rotate?
-    }
+@media only screen and(max-width: 1024px) {
+  .SearchBar {
+    display: none;
   }
 }
 
-// 1040px break
+@media only screen and(max-width: 800px) {
+  nav {
+    flex-flow: column;
+
+    .Top .Hamburger {
+      display: inline;
+    }
+
+    .Menu-hidden {
+      display: none;
+    }
+
+    .Menu {
+      flex-direction: column;
+
+      * {
+        padding: 0 2rem !important;
+      }
+
+      .SearchBar {
+        border-bottom: 1px solid $blackTransparent;
+        height: 3rem;
+        display: block;
+        width: 100vw;
+
+        > * {
+          padding: 0.5rem 2rem !important;
+          width: 75vw;
+        }
+      }
+
+      ul {
+        flex-flow: column;
+        margin: 0;
+
+        > li {
+          width: 100vw;
+        }
+      }
+
+      .Pages .Page-link > a,
+      .Buttons a {
+        height: 3rem;
+        padding: 0;
+      }
+
+      .Right-sticky {
+        flex-flow: column;
+        position: relative;
+
+        .Buttons {
+          margin: 0;
+
+          a {
+            align-items: center;
+            display: flex;
+          }
+        }
+
+        .User-nav {
+          border-top: 1px solid $blackTransparent;
+          padding: 0;
+        }
+
+        .Lang-selector {
+          border-top: 1px solid $blackTransparent;
+
+          .Picker {
+            display: none;
+          }
+
+          .Dropdown {
+            border: none;
+            display: block !important;
+            margin: 0;
+            position: relative;
+
+            > li {
+              align-items: center;
+              display: flex;
+              height: 3rem;
+              transition: none;
+            }
+
+            .Flag {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

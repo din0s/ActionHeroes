@@ -1,27 +1,14 @@
 import "./SearchBar.scss";
 
-import React, { Component } from "react";
+import React from "react";
 
 import { useTranslation } from "react-i18next";
 
-function SearchInput() {
+export default function() {
   const { t } = useTranslation();
   return (
-    <input
-      type="text"
-      name="q"
-      placeholder={t("search")}
-      className="SearchBar"
-    />
+    <form action="/search" method="get" className="SearchBar">
+      <input type="text" name="q" placeholder={t("search")} />
+    </form>
   );
-}
-
-export default class SearchBar extends Component {
-  render() {
-    return (
-      <form action="/search" method="get">
-        <SearchInput />
-      </form>
-    );
-  }
 }

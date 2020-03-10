@@ -1,9 +1,15 @@
+@import "../../vars.scss";
+
 .SearchBar {
-  background: url("/img/search.png") no-repeat scroll -2px;
-  background-color: rgba($color: #000000, $alpha: 0.1);
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  padding: 0.75rem 1rem;
-  padding-left: 1.75rem;
+  align-self: center;
+
+  > input {
+    background: url("/img/search.png") no-repeat scroll -2px;
+    background-color: $grayHover;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    padding: 0.75rem 1rem;
+    padding-left: 1.75rem;
+  }
 }
