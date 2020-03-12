@@ -1,21 +1,25 @@
-const express = require('express')
-require('dotenv').config()
+const express = require("express");
+const mongo = require("@metamodules/mongo")().base;
+require("dotenv").config();
+require("dotenv-defaults").config();
 
-const userRoutes = require('./routes/user');
+const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/user");
 
-const app = express()
-const port = 4000
+const app = express();
+const port = 4000;
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Routes
-app.use('/user', userRoutes);
+app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
 
 /* Can't find the requested resourse */
 app.use((req, res, next) => {
-  const error = new Error('Resource not found');
+  const error = new Error("Resource not found");
   error.status = 404;
   next(error);
 });
@@ -31,4 +35,6 @@ app.use((error, req, res, next) => {
 });
 
 // Start server
-app.listen(port, () => console.log(`Example backend API listening on port ${port}!`))
+app.listen(port, () =>
+  console.log(`Example backend API listening on port ${port}!`)
+);

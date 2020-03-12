@@ -1,35 +1,33 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongo = require('@metamodules/mongo')().base;
+// const EventSchema = require('./EventModel');
 
-const UserSchema = new Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+const UserSchema = new mongo.Schema({
+    _id: mongo.Schema.Types.ObjectId,
     email: {
         type: String,
         required: true,
         unique: true,
         match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
       },
-      password: { type: String, required: true },
-      hometown: { type: String },
-      favoriteEventTypes: { type: List(eventTypes) },
-      language: { type: languages },
-      isOrganizer: { type: Boolean, default: false },
-
+    password: { type: String, required: true },
+    hometown: { type: String },
+    // favoriteEventTypes: { type: [eventTypes] },
+    // language: { type: languages },
 })
 
-const eventTypes = {
-    ENVIRONMENT: 'environment',
-    STUDENT: 'student',
-    ANIMALS: 'animals',
-    ARTS: 'arts',
-    CULTURE: 'culture',
-    HUNGER: 'hunger',
-    HEALTH: 'health'
-}
+// const eventTypes = {
+//     ENVIRONMENT: 'environment',
+//     STUDENT: 'student',
+//     ANIMALS: 'animals',
+//     ARTS: 'arts',
+//     CULTURE: 'culture',
+//     HUNGER: 'hunger',
+//     HEALTH: 'health'
+// }
 
-const languages = {
-    ENGLISH: 'en',
-    GREEK: 'ελ'
-}
+// const languages = {
+//     ENGLISH: 'en',
+//     GREEK: 'ελ'
+// }
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongo.model('User', UserSchema);

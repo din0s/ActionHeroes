@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "@metamodules/mongo": "^1.1.1",
+    "bcrypt": "^4.0.1",
     "deploy-node-app": "^1.4.3",
     "dotenv": "^8.0.0",
-    "mongoose": "^5.9.3",
+    "dotenv-defaults": "^1.1.1",
+    "jsonwebtoken": "^8.5.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "^3.4.0"
@@ -30,7 +32,7 @@
     "deploy": "deploy-node-app",
     "test": "react-scripts test",
     "eject-www": "react-scripts eject",
-    "mongo": "export $(cat .env | xargs) && mongo mongodb://${MONGO_SERVICE_HOST}:${MONGO_SERVICE_PORT}"
+    "mongo": "export $(cat .env | xargs) && mongo mongodb://${MONGO_SERVICE_HOST}:${MONGO_SERVICE_PORT}/${MONGO_INITDB_DATABASE}"
   },
   "eslintConfig": {
     "extends": "react-app"

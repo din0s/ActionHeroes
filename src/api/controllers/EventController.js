@@ -1,19 +1,11 @@
-const mongoose = require('mongoose');
+const mongo = require("@metamodules/mongo")().base;
 
 module.exports = {
-    changeInfo: (req, res) => {
+  changeInfo: (req, res) => {},
 
-    },
+  createEvent: (req, res) => {},
 
-    createEvent: (req, res) => {
+  deleteEvent: (req, res) => {},
 
-    },
-
-    deleteEvent: (req, res) => {
-
-    },
-
-    showInfo: (req, res) => {
-
-    },
-}
+  showInfo: (req, res) => {}
+};
