@@ -2,18 +2,17 @@ const mongo = require("mongoose");
 // const EventSchema = require('./EventModel');
 
 const UserSchema = new mongo.Schema({
-    _id: mongo.Schema.Types.ObjectId,
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
-      },
-    password: { type: String, required: true },
-    hometown: { type: String },
-    // favoriteEventTypes: { type: [eventTypes] },
-    // language: { type: languages },
-})
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+  },
+  hash: { type: String, required: true },
+  hometown: { type: String }
+  // favoriteEventTypes: { type: [eventTypes] },
+  // language: { type: languages },
+});
 
 // const eventTypes = {
 //     ENVIRONMENT: 'environment',
@@ -30,4 +29,4 @@ const UserSchema = new mongo.Schema({
 //     GREEK: 'ελ'
 // }
 
-module.exports = mongo.model('User', UserSchema);
+module.exports = mongo.model("User", UserSchema);

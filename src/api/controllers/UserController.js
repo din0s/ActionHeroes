@@ -1,10 +1,9 @@
-const mongo = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const UserModel = require("../models/UserModel");
 
-const generateToken = user => {
+const generateToken = user =>
   jwt.sign(
     // payload
     {
@@ -18,15 +17,26 @@ const generateToken = user => {
       expiresIn: process.env.TOKEN_LIFE
     }
   );
+
+const sanitizeUser = user => {
+  user = user.toJSON();
+  user._id = undefined;
+  user.hash = undefined;
+  user.__v = undefined;
+  return user;
 };
+
+const authResponse = user => ({
+  jwt: generateToken(user),
+  user: sanitizeUser(user)
+});
 
 module.exports = {
   login: (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    UserModel.findOne({ email: email })
-      .exec()
+    UserModel.findOne({ email })
       .then(user => {
         if (!user) {
           return res.status(401).json({
@@ -34,33 +44,24 @@ module.exports = {
           });
         }
 
-        bcrypt.compare(password, user.password, (err, success) => {
+        bcrypt.compare(password, user.hash, (err, success) => {
           if (err) {
+            console.error(`Error during hash comparison:\n${err}`);
             return res.status(500).send();
           }
 
           if (success) {
-            // user = user.toJSON();
-            // user._id = undefined;
-            // user.password = undefined;
-            // user.__v = undefined;
-            console.log(user);
-
-            return res.status(200).json({
-              token: generateToken(user),
-              user: user
+            res.status(200).json(authResponse(user));
+          } else {
+            res.status(401).json({
+              error: "Invalid credentials"
             });
           }
-
-          return res.status(401).json({
-            error: "Invalid credentials"
-          });
         });
       })
       .catch(err => {
-        res.status(500).json({
-          error: err
-        });
+        console.error(`Error during login find():\n${err}`);
+        res.status(500).send();
       });
   },
 
@@ -68,47 +69,38 @@ module.exports = {
     const email = req.body.email;
     const password = req.body.password;
 
-    UserModel.find({ email: email })
-      .exec()
+    UserModel.find({ email })
       .then(user => {
         if (user.length == 1) {
           return res.status(409).json({
-            message: "Email already exists!"
-          });
-        } else {
-          bcrypt.hash(password, 10, (err, hash) => {
-            if (err) {
-              return res.status(400).json({
-                error: "Invalid request"
-              });
-            } else {
-              const user = new UserModel({
-                _id: new mongo.Types.ObjectId(),
-                email: email,
-                password: hash
-              });
-
-              user
-                .save()
-                .then(() => {
-                  res.status(201).json({
-                    token: generateToken(user),
-                    user: user
-                  });
-                })
-                .catch(() => {
-                  res.status(500).json({
-                    error: "Invalid credentials"
-                  });
-                });
-            }
+            error: "Email already exists"
           });
         }
+
+        bcrypt.hash(password, 10, (err, hash) => {
+          if (err) {
+            return res.status(400).json({
+              error: "Invalid request"
+            });
+          }
+
+          const user = new UserModel({
+            email,
+            hash
+          });
+
+          user
+            .save()
+            .then(() => res.status(201).json(authResponse(user)))
+            .catch(err => {
+              console.error(`Error during user save():\n${err}`);
+              res.status(500).send();
+            });
+        });
       })
       .catch(err => {
-        res.status(500).json({
-          error: err
-        });
+        console.error(`Error during signup find():\n${err}`);
+        res.status(500).send();
       });
   }
 };
