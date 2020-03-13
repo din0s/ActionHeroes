@@ -43,13 +43,9 @@ app.use((req, res, next) => {
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.json({
-    error: {
-      message: error.message
-    }
+    error: error.message
   });
 });
 
 // Start server
-app.listen(port, () =>
-  console.log(`Example backend API listening on port ${port}!`)
-);
+app.listen(port, () => console.log(`Backend API listening on port ${port}!`));
