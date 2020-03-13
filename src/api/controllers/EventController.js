@@ -1,4 +1,4 @@
-const mongo = require("@metamodules/mongo")().base;
+const mongo = require("mongoose");
 
 module.exports = {
   changeInfo: (req, res) => {},

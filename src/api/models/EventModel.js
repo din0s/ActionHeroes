@@ -1,4 +1,4 @@
-const mongo = require("@metamodules/mongo")().base;
+const mongo = require("mongoose");
 const UserSchema = require("./UserModel");
 
 const EventSchema = new mongo.Schema({

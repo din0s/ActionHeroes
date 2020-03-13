@@ -1,4 +1,4 @@
-const mongo = require("@metamodules/mongo")().base;
+const mongo = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
