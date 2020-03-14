@@ -1,8 +1,8 @@
 import "./LanguageSelector.scss";
 
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 
+import ReactDOM from "react-dom";
 import i18next from "i18next";
 
 const languages = {
@@ -22,9 +22,9 @@ export default class LanguageSelector extends Component {
   };
 
   hideMenu = async () => {
-    this.setState({
-      hideDropdown: true
-    });
+    if (!this.state.hideDropdown) {
+      this.setState({ hideDropdown: true });
+    }
   };
 
   changeLang = async lang => {

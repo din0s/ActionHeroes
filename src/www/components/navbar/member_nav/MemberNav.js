@@ -19,7 +19,9 @@ export default withTranslation()(
     };
 
     hideOptions = async () => {
-      this.setState({ hiddenOptions: true });
+      if (!this.state.hiddenOptions) {
+        this.setState({ hiddenOptions: true });
+      }
     };
 
     componentDidMount() {
