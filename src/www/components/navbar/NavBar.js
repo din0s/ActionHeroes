@@ -21,6 +21,12 @@ class NavBar extends Component {
     });
   };
 
+  hideMenu = async () => {
+    if (!this.state.hiddenMenu) {
+      this.setState({ hiddenMenu: true });
+    }
+  };
+
   render() {
     const { t } = this.props;
     return (
@@ -38,7 +44,7 @@ class NavBar extends Component {
         </span>
         <div className={`Menu${this.state.hiddenMenu ? " Menu-hidden" : ""}`}>
           <SearchBar />
-          <ul className="Pages">
+          <ul className="Pages" onClick={this.hideMenu}>
             <li className="Page-link">
               <NavLink to="/actions" children={t("nav.actions")} />
             </li>
@@ -49,7 +55,7 @@ class NavBar extends Component {
               <NavLink to="/contact" children={t("nav.contact")} />
             </li>
           </ul>
-          <div className="Right-sticky">
+          <div className="Right-sticky" onClick={this.hideMenu}>
             <span className="User-nav">
               {this.props.loggedIn ? (
                 <MemberNav user={this.props.user} />
@@ -57,7 +63,7 @@ class NavBar extends Component {
                 <GuestNav />
               )}
             </span>
-            <LanguageSelector />
+            <LanguageSelector onClick={this.hideMenu} />
           </div>
         </div>
       </nav>
