@@ -2,13 +2,13 @@ import "./NavBar.scss";
 
 import React, { Component } from "react";
 
-import { Link } from "react-router-dom";
-import SearchBar from "../searchbar/SearchBar";
-import { withTranslation } from "react-i18next";
-import { connect } from "react-redux";
 import GuestNav from "./guest_nav/GuestNav";
-import MemberNav from "./member_nav/MemberNav";
 import LanguageSelector from "./language_selector/LanguageSelector";
+import { Link } from "react-router-dom";
+import MemberNav from "./member_nav/MemberNav";
+import SearchBar from "../searchbar/SearchBar";
+import { connect } from "react-redux";
+import { withTranslation } from "react-i18next";
 
 class NavBar extends Component {
   state = {
@@ -51,7 +51,11 @@ class NavBar extends Component {
           </ul>
           <div className="Right-sticky">
             <span className="User-nav">
-              {this.props.loggedIn ? <MemberNav /> : <GuestNav />}
+              {this.props.loggedIn ? (
+                <MemberNav user={this.props.user} />
+              ) : (
+                <GuestNav />
+              )}
             </span>
             <LanguageSelector />
           </div>

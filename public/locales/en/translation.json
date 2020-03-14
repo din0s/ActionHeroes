@@ -5,7 +5,13 @@
     "teams": "Teams",
     "contact": "Contact",
     "login": "Login",
-    "signup": "Sign Up"
+    "signup": "Sign Up",
+    "user": {
+      "greet": "Hello",
+      "profile": "Profile",
+      "pref": "Preferences",
+      "exit": "Log Out"
+    }
   },
   "footer": {
     "icons": "Icons from {{site}}"

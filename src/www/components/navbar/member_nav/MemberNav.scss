@@ -1,0 +1,48 @@
+@import "../../../vars.scss";
+
+.User-info {
+  display: flex;
+  justify-content: center;
+
+  .User-greet {
+    cursor: pointer;
+    padding: 1.5rem 0.5rem;
+    margin: 0;
+    text-decoration: underline;
+    transition: 0.1s ease-in-out;
+
+    &:hover {
+      background-color: $grayHover;
+    }
+  }
+
+  .User-options {
+    background-color: white;
+    border: 1px solid black;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: calc(4rem + 2px);
+
+    > li {
+      cursor: pointer;
+      display: flex;
+
+      > a {
+        color: initial;
+        text-decoration: none;
+        padding: 1rem 2.5rem;
+        width: 100%;
+      }
+
+      &:hover {
+        background-color: $grayHover;
+      }
+    }
+  }
+
+  .Options-hidden {
+    display: none;
+  }
+}
