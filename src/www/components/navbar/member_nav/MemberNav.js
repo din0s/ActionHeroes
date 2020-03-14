@@ -1,8 +1,8 @@
 import "./MemberNav.scss";
 
+import { Link, NavLink } from "react-router-dom";
 import React, { Component } from "react";
 
-import { Link } from "react-router-dom";
 import ReactDOM from "react-dom";
 import { withTranslation } from "react-i18next";
 
@@ -55,10 +55,10 @@ export default withTranslation()(
             onClick={this.hideOptions}
           >
             <li className="Page-link">
-              <Link to="/user/profile" children={t("nav.user.profile")} />
+              <NavLink to="/user/profile" children={t("nav.user.profile")} />
             </li>
             <li className="Page-link">
-              <Link to="/user/preferences" children={t("nav.user.pref")} />
+              <NavLink to="/user/preferences" children={t("nav.user.pref")} />
             </li>
             <li className="Page-link">
               <Link to="/logout" children={t("nav.user.exit")} />

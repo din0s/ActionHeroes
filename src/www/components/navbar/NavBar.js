@@ -1,10 +1,10 @@
 import "./NavBar.scss";
 
+import { Link, NavLink } from "react-router-dom";
 import React, { Component } from "react";
 
 import GuestNav from "./guest_nav/GuestNav";
 import LanguageSelector from "./language_selector/LanguageSelector";
-import { Link } from "react-router-dom";
 import MemberNav from "./member_nav/MemberNav";
 import SearchBar from "../searchbar/SearchBar";
 import { connect } from "react-redux";
@@ -40,13 +40,13 @@ class NavBar extends Component {
           <SearchBar />
           <ul className="Pages">
             <li className="Page-link">
-              <Link to="/actions" children={t("nav.actions")} />
+              <NavLink to="/actions" children={t("nav.actions")} />
             </li>
             <li className="Page-link">
-              <Link to="/teams" children={t("nav.teams")} />
+              <NavLink to="/teams" children={t("nav.teams")} />
             </li>
             <li className="Page-link">
-              <Link to="/contact" children={t("nav.contact")} />
+              <NavLink to="/contact" children={t("nav.contact")} />
             </li>
           </ul>
           <div className="Right-sticky">

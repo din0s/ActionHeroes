@@ -57,6 +57,14 @@ nav {
         &:hover {
           background-color: $grayHover;
         }
+
+        &.active {
+          background-color: $grayHover;
+
+          &:hover {
+            background-color: $grayHoverStrong;
+          }
+        }
       }
     }
 
@@ -97,6 +105,7 @@ nav {
 
       * {
         padding: 0 2rem !important;
+        transition: none !important;
       }
 
       .SearchBar {
@@ -189,7 +198,6 @@ nav {
               align-items: center;
               display: flex;
               height: 3rem;
-              transition: none;
             }
 
             .Flag {

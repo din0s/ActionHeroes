@@ -30,10 +30,21 @@
       display: flex;
 
       > a {
+        align-items: center;
         color: initial;
-        text-decoration: none;
+        display: flex;
+        height: 100%;
         padding: 1rem 2.5rem;
+        text-decoration: none;
         width: 100%;
+
+        &.active {
+          background-color: $grayHover;
+
+          &:hover {
+            background-color: $grayHoverStrong;
+          }
+        }
       }
 
       &:hover {
