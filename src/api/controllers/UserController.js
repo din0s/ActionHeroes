@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const UserModel = require("../models/UserModel");
+const User = require("../models/UserModel");
 
 const generateToken = user =>
   jwt.sign(
@@ -36,7 +36,7 @@ module.exports = {
     const email = req.body.email;
     const password = req.body.password;
 
-    UserModel.findOne({ email })
+    User.findOne({ email })
       .then(user => {
         if (!user) {
           return res.status(401).json({
@@ -67,9 +67,10 @@ module.exports = {
 
   signup: (req, res) => {
     const email = req.body.email;
+    const username = req.body.username;
     const password = req.body.password;
 
-    UserModel.find({ email })
+    User.find({ email })
       .then(user => {
         if (user.length == 1) {
           return res.status(409).json({
@@ -84,8 +85,9 @@ module.exports = {
             });
           }
 
-          const user = new UserModel({
+          const user = new User({
             email,
+            username,
             hash
           });
 

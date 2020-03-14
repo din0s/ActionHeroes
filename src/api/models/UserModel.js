@@ -1,5 +1,4 @@
 const mongo = require("mongoose");
-// const EventSchema = require('./EventModel');
 
 const UserSchema = new mongo.Schema({
   email: {
@@ -8,25 +7,16 @@ const UserSchema = new mongo.Schema({
     unique: true,
     match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
   },
+  username: { type: String, required: true },
   hash: { type: String, required: true },
-  hometown: { type: String }
-  // favoriteEventTypes: { type: [eventTypes] },
-  // language: { type: languages },
+  hometown: { type: String },
+  favoriteEventTypes: { type: [String] },
+  language: { type: String },
+  eventsOrganized: { type: [mongo.Schema.Types.ObjectId] },
 });
 
-// const eventTypes = {
-//     ENVIRONMENT: 'environment',
-//     STUDENT: 'student',
-//     ANIMALS: 'animals',
-//     ARTS: 'arts',
-//     CULTURE: 'culture',
-//     HUNGER: 'hunger',
-//     HEALTH: 'health'
-// }
+// const eventTypes = ['environment','student','animals','arts','culture','hunger','health'];
 
-// const languages = {
-//     ENGLISH: 'en',
-//     GREEK: 'ελ'
-// }
+// const languages = ['en','ελ']
 
 module.exports = mongo.model("User", UserSchema);
