@@ -9,7 +9,7 @@ services:
       - 'MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}'
       - 'MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}'
     volumes:
-      - 'mongo_data:/data/db'
+      - 'mongo-data:/data/db'
 volumes:
-  mongo_data: null
+  mongo-data: null
 

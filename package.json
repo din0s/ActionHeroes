@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@metamodules/mongo": "din0s/mongo#79aae9c",
+    "@metamodules/mongo": "din0s/mongo#e7113d1",
     "bcrypt": "^4.0.1",
     "deploy-node-app": "din0s/deploy-node-app#ae9ae38",
     "dotenv": "^8.0.0",
