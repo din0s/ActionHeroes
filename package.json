@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@metamodules/mongo": "^1.1.1",
+    "@metamodules/mongo": "din0s/mongo#79aae9c",
     "bcrypt": "^4.0.1",
-    "deploy-node-app": "^1.4.3",
+    "deploy-node-app": "din0s/deploy-node-app#ae9ae38",
     "dotenv": "^8.0.0",
     "dotenv-defaults": "^1.1.1",
     "jsonwebtoken": "^8.5.1",
