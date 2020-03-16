@@ -5,6 +5,8 @@ require("dotenv-defaults").config();
 
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
+const teamRoutes = require("./routes/team");
+const eventRoutes = require("./routes/event");
 
 const app = express();
 const port = 4000;
@@ -31,6 +33,8 @@ app.use(express.json());
 // Routes
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
+app.use("/team", teamRoutes);
+app.user("/event", eventRoutes);
 
 /* Can't find the requested resourse */
 app.use((req, res, next) => {
