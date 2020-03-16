@@ -1,9 +1,15 @@
 version: '3'
 services:
-  postgres:
-    image: 'postgres:11.4'
+  mongo:
+    image: 'mongo:3.4.21-xenial'
     ports:
-      - 5432
+      - 27017
     environment:
-      - 'POSTGRES_PASSWORD=${POSTGRES_PASSWORD}'
+      - 'MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}'
+      - 'MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}'
+      - 'MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}'
+    volumes:
+      - 'mongo-data:/data/db'
+volumes:
+  mongo-data: null
 

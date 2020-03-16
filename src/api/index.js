@@ -1,27 +1,55 @@
-const express = require('express')
-require('dotenv').config()
-const postgres = require('@metamodules/postgres')()
+const express = require("express");
+const mongo = require("mongoose");
+require("dotenv").config();
+require("dotenv-defaults").config();
 
-const app = express()
-const port = 4000
+const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/user");
 
-postgres.query(`CREATE TABLE IF NOT EXISTS clicks (
-  id BIGSERIAL PRIMARY KEY,
-  created_at TIMESTAMP DEFAULT NOW()
-)`)
+const app = express();
+const port = 4000;
 
-app.get('/api/count', (req, res) => {
-  postgres.query('SELECT count(*) AS count FROM clicks', (err, resp) => {
-    res.send({ count: resp.rows[0].count || 0 })
-  })
-})
+// Database init connection
+const dbUser = process.env.MONGO_INITDB_ROOT_USERNAME;
+const dbPass = process.env.MONGO_INITDB_ROOT_PASSWORD;
+const dbHost = process.env.MONGO_SERVICE_HOST;
+const dbPort = process.env.MONGO_SERVICE_PORT;
+const dbName = process.env.MONGO_INITDB_DATABASE;
 
-app.post('/api/count/increment', (req, res) => {
-  postgres.query('INSERT INTO clicks DEFAULT VALUES', (err, insert) => {
-    postgres.query('SELECT count(*) AS count FROM clicks', (err, resp) => {
-      res.send({ count: resp.rows[0].count || 0 })
-    })
-  })
-})
+mongo
+  .connect(
+    `mongodb://${dbUser}:${dbPass}@${dbHost}:${dbPort}/${dbName}?authSource=admin`,
+    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
+  )
+  .then(() => console.log("Connected to database."))
+  .catch(() => console.error("Could not connect to database!"));
 
-app.listen(port, () => console.log(`Example backend API listening on port ${port}!`))
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Routes
+app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
+
+/* Can't find the requested resourse */
+app.use((req, res, next) => {
+  const error = new Error("Resource not found");
+  error.status = 404;
+  next(error);
+});
+
+/* Any other error */
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+  if (error.status) {
+    res.json({
+      error: error.message
+    });
+  } else {
+    res.send();
+  }
+});
+
+// Start server
+app.listen(port, () => console.log(`Backend API listening on port ${port}!`));
