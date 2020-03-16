@@ -1,0 +1,17 @@
+footer {
+  background-color: rgba($color: gray, $alpha: 0.05);
+  text-align: left;
+  padding-bottom: 0.25rem;
+
+  .Divider {
+    border: none;
+    border-bottom: 1px ridge rgba($color: black, $alpha: 0.25);
+    margin: 0;
+  }
+
+  > p {
+    color: rgba($color: black, $alpha: 0.95);
+    font-size: 0.75rem;
+    padding: 0 1rem;
+  }
+}

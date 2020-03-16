@@ -1,61 +1,34 @@
-import React, { Component } from 'react'
-import logos from './logos.svg'
-import './App.css'
+import "./App.scss";
 
-class App extends Component {
-  state = {
-    count: 'loading...'
-  }
+import React, { Component, Suspense } from "react";
 
-  componentDidMount = async () => {
-    const { count } = await window.fetch(`/api/count`).then(res => res.json())
-    this.setState({ count })
-  }
+import Footer from "./components/footer/Footer";
+import NavBar from "./components/navbar/NavBar";
+import { BrowserRouter as Router } from "react-router-dom";
+import { createStore } from "redux";
+import reducer from "./reducers";
+import { Provider } from "react-redux";
 
-  increment = async () => {
-    const { count } = await window
-      .fetch(`/api/count/increment`, { method: 'POST' })
-      .then(res => res.json())
-    this.setState({ count })
-  }
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
+export default class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logos} className="App-logo" alt="logo" />
-          <p>
-            {'Learn '}
-            <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-              React
-            </a>
-            {', '}
-            <a href="https://expressjs.com" target="_blank" rel="noopener noreferrer">
-              Express
-            </a>
-            {', and '}
-            <a href="https://kubernetes.io" target="_blank" rel="noopener noreferrer">
-              Kubernetes
-            </a>
-          </p>
-          <p>
-            Modify <code>src/www/App.js</code> or <code>src/api/index.js</code> to reload UI or API.
-          </p>
-          <p>
-            <code>yarn deploy</code> to build containers and deploy them to production
-          </p>
-          <hr />
-          <h2>Count: {this.state.count}</h2>
-          <p>
-            Call <code>/api/count/increment</code>
-            <button onClick={this.increment} className="App-button">
-              Go
-            </button>
-          </p>
-        </header>
-      </div>
-    )
+      // TODO: loading fallback?
+      <Provider store={store}>
+        <Suspense fallback="">
+          <Router>
+            <div className="App">
+              <NavBar />
+              <main></main>
+              <Footer />
+            </div>
+          </Router>
+        </Suspense>
+      </Provider>
+    );
   }
 }
-
-export default App

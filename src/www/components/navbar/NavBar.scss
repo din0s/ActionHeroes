@@ -1,0 +1,211 @@
+@import "../../vars.scss";
+
+nav {
+  align-items: center;
+  background-color: white;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  .Top {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+
+    .Hamburger {
+      cursor: pointer;
+      display: none;
+      height: 1rem;
+      left: 0;
+      padding: 1rem;
+      position: fixed;
+    }
+
+    .Logo {
+      margin: 1rem;
+    }
+  }
+
+  .Menu {
+    display: flex;
+    flex-direction: row;
+
+    > ul {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+      margin: 0 1rem;
+      padding: 0;
+    }
+
+    .Pages {
+      list-style: none;
+
+      .Page-link > a {
+        align-items: center;
+        color: initial;
+        display: flex;
+        height: calc(4rem + 2px);
+        padding: 0 1rem;
+        text-decoration: none;
+        transition: 0.2s ease-in-out;
+
+        &:hover {
+          background-color: $grayHover;
+        }
+
+        &.active {
+          background-color: $grayHover;
+
+          &:hover {
+            background-color: $grayHoverStrong;
+          }
+        }
+      }
+    }
+
+    .Right-sticky {
+      align-self: center;
+      display: flex;
+      flex-direction: row;
+      position: fixed;
+      right: 0;
+
+      > * {
+        padding-left: 1rem;
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 1024px) {
+  .SearchBar {
+    display: none;
+  }
+}
+
+@media only screen and(max-width: 800px) {
+  nav {
+    flex-flow: column;
+
+    .Top .Hamburger {
+      display: inline;
+    }
+
+    .Menu-hidden {
+      display: none;
+    }
+
+    .Menu {
+      flex-direction: column;
+
+      * {
+        padding: 0 2rem !important;
+        transition: none !important;
+      }
+
+      .SearchBar {
+        border-bottom: 1px solid $blackTransparent;
+        height: 3rem;
+        display: block;
+        width: 100vw;
+
+        > * {
+          padding: 0.5rem 2rem !important;
+          width: 75vw;
+        }
+      }
+
+      ul {
+        flex-flow: column;
+        margin: 0;
+
+        > li {
+          width: 100vw;
+        }
+      }
+
+      .Pages .Page-link > a,
+      .Buttons a {
+        height: 3rem;
+        padding: 0;
+      }
+
+      .Right-sticky {
+        flex-flow: column;
+        position: relative;
+
+        .Buttons {
+          margin: 0;
+
+          a {
+            align-items: center;
+            display: flex;
+          }
+        }
+
+        .User-nav {
+          border-top: 1px solid $blackTransparent;
+          padding: 0;
+
+          .User-info {
+            .User-greet {
+              display: none;
+            }
+
+            .User-options {
+              background: none;
+              border: none;
+              position: relative;
+              top: 0;
+              width: auto;
+
+              > li {
+                align-items: center;
+                display: flex;
+                height: 3rem;
+
+                > a {
+                  text-align: start;
+                }
+              }
+            }
+
+            .Options-hidden {
+              display: block;
+            }
+          }
+        }
+
+        .Lang-selector {
+          border-top: 1px solid $blackTransparent;
+
+          .Picker {
+            display: none;
+          }
+
+          .Dropdown {
+            border: none;
+            display: block !important;
+            margin: 0;
+            position: relative;
+
+            > li {
+              align-items: center;
+              display: flex;
+              height: 3rem;
+            }
+
+            .Flag {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

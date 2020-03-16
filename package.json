@@ -8,11 +8,20 @@
     "deploy-node-app": "din0s/deploy-node-app#ae9ae38",
     "dotenv": "^8.0.0",
     "dotenv-defaults": "^1.1.1",
+    "i18next": "^19.3.2",
+    "i18next-browser-languagedetector": "^4.0.2",
+    "i18next-xhr-backend": "^3.2.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.4",
+    "node-sass": "^4.13.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "^3.4.0"
+    "react-i18next": "^11.3.3",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",
