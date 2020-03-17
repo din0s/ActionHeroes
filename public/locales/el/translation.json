@@ -37,11 +37,16 @@
   "contactpage": {
     "title1": "Έχεις κάποια ερώτηση;",
     "title2": "Θα θέλαμε να σε ακούσουμε.",
-    "firstname":"Όνομα",
-    "lastname":"Επίθετο",
-    "email":"Email",
-    "message":"Μήνυμα",
-    "submit":"Υποβολή",
+    "firstname": "Όνομα",
+    "lastname": "Επίθετο",
+    "email": "Email",
+    "message": "Μήνυμα",
+    "submit": "Υποβολή",
     "thanks": "Ευχαριστούμε, θα επικοινωνήσουμε μαζί σας σύντομα!"
+  },
+  "landingpage": {
+    "catchphrase": "Όσα περισότερα δίνουμε, τόσο πιο ευτυχισμένοι είμαστε.",
+    "desc": "Λορεμ ipsum dolor sit amet, consectetur adipiscing elit. Duis neque nisl, tincidunt quis lorem vel, efficitur luctus orci. Vivamus dignissim tincidunt erat ac semper.",
+    "join": "Βοήθησε στο έργο μας!"
   }
 }

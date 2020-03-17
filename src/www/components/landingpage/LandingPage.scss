@@ -1,0 +1,90 @@
+.container {
+
+  .parallax {
+    padding-top: 20vh;
+    width: 100vw;
+    height: 80vh;
+    align-items: center; 
+
+    .panel {
+      margin-top: 3vh;
+      margin-left: 10rem;
+      margin-right: 10rem;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      background-color: rgba($color: white, $alpha: 0.65);
+      border-radius: 1rem;
+
+      .innerphoto{
+        margin-left: 3rem;
+        width: 65vh;
+        height: 35vh;         //Not sure what measurement unit to use for the best responsive result.
+        // width: 40%;
+        // height: 40%;
+      }
+
+      .innertextcontainer{
+        text-align: left;
+        margin-left: 3rem;
+        margin-right: 3rem;
+
+        .catchphrase{
+          font-size: 6vh;
+          font-family: actionwide;
+        }
+
+        .desc{
+          margin-left: 4px;
+          font-size: 3vh;
+          font-family: actionwide;
+        }
+        
+        .joinbutton {
+          background-color: rgb(16, 48, 136);
+          border: 2px solid rgba($color: black, $alpha: 0.3);
+          border-radius: 0.5rem;
+          color: white;
+          padding: 14px 32px;
+          font-size: 3vh;
+          margin-top: 30px;
+          margin-bottom: 40px;
+          margin-left: 8vw;
+          transition: 0.5s;
+          //display: inline-block;
+          cursor: pointer;
+          opacity: 0.9;
+
+          .joinlink {
+            text-decoration: none;
+            color: white;
+            
+          }
+        }
+        
+        .joinbutton:hover {
+          transition: 0.5s;
+          opacity: 0.6
+        }
+        
+     }
+
+    } 
+}
+
+/*@media only screen and(max-width: 1024px) {
+  .innerBox {
+    margin-top: 60vh;
+    align-items: center;
+    display: block;
+    flex-flow: column;
+  }
+}
+
+@media only screen and(max-width: 800px) {
+
+}*/
+}
