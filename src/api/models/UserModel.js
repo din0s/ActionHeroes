@@ -9,10 +9,12 @@ const UserSchema = new mongo.Schema({
   },
   username: { type: String, required: true },
   hash: { type: String, required: true },
+  profilePhoto: { type: String },
   hometown: { type: String },
   favoriteEventTypes: { type: [String] },
   language: { type: String },
-  eventsOrganized: { type: [mongo.Schema.Types.ObjectId] },
+  eventsAttended: { type: [mongo.Schema.Types.ObjectId] },
+  eventsSaved: { type: [mongo.Schema.Types.ObjectId] }
 });
 
 // const eventTypes = ['environment','student','animals','arts','culture','hunger','health'];
