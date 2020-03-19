@@ -3,6 +3,8 @@ const router = express.Router();
 
 const checkAuth = require("../middleware/check-auth");
 const checkOwner = require("../middleware/check-owner");
+const logSearch = require("../middleware/log-search");
+
 const TeamController = require("../controllers/TeamController");
 
 /* CRUD */
@@ -28,5 +30,9 @@ router.delete(
   checkOwner,
   TeamController.deleteMembers
 );
+
+/* Search */
+
+router.get("/search", checkAuth, logSearch, TeamController.search);
 
 module.exports = router;

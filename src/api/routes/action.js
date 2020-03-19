@@ -4,6 +4,8 @@ const router = express.Router();
 const checkAuth = require("../middleware/check-auth");
 const checkAdmin = require("../middleware/check-admin");
 const checkPermissions = require("../middleware/check-permissions");
+const logSearch = require("../middleware/log-search");
+
 const ActionController = require("../controllers/ActionController");
 const ActionUserController = require("../controllers/ActionUserController");
 
@@ -68,5 +70,9 @@ router.delete(
   checkAuth,
   ActionUserController.removeSavedAction
 );
+
+/* Search */
+
+router.get("/search", checkAuth, logSearch, ActionController.search);
 
 module.exports = router;

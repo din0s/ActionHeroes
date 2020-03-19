@@ -1,21 +1,13 @@
 module.exports = {
-  addMembers: (req, res) => {
+  addMembers: (req, res) => {},
 
-  },
+  createTeam: (req, res) => {},
 
-  createTeam: (req, res) => {
+  deleteMembers: (req, res) => {},
 
-  },
+  deleteTeam: (req, res) => {},
 
-  deleteMembers: (req, res) => {
+  search: (req, res) => {},
 
-  },
-  
-  deleteTeam: (req, res) => {
-
-  },
-
-  updateTeam: (req, res) => {
-
-  }
+  updateTeam: (req, res) => {}
 };

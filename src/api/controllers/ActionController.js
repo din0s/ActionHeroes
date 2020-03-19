@@ -1,21 +1,13 @@
 module.exports = {
-    approveAction: (req, res) => {
+  approveAction: (req, res) => {},
 
-    },
+  cancelAction: (req, res) => {},
 
-    cancelAction: (req, res) => {
+  createAction: (req, res) => {},
 
-    },
+  declineAction: (req, res) => {},
 
-    createAction: (req, res) => {
+  search: (req, res) => {},
 
-    },
-
-    declineAction: (req, res) => {
-
-    },
-
-    updateAction: (req, res) => {
-
-    },
-}
+  updateAction: (req, res) => {}
+};
