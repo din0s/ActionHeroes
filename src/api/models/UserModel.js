@@ -27,8 +27,4 @@ const UserSchema = new mongo.Schema({
   actionsSaved: { type: [mongo.Schema.Types.ObjectId] }
 });
 
-// const actionTypes = ['environment','student','animals','arts','culture','hunger','health'];
-
-// const languages = ['en','ελ']
-
 module.exports = mongo.model("User", UserSchema);
