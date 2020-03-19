@@ -10,14 +10,24 @@ const UserSchema = new mongo.Schema({
   username: { type: String, required: true },
   hash: { type: String, required: true },
   profilePhoto: { type: String },
-  hometown: { type: String },
-  favoriteEventTypes: { type: [String] },
+  location: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      required: true
+    },
+    coordinates: {
+      type: [Number],
+      required: true
+    }
+  },
+  favoriteCategories: { type: [mongo.Schema.Types.ObjectId] },
   language: { type: String },
-  eventsAttended: { type: [mongo.Schema.Types.ObjectId] },
-  eventsSaved: { type: [mongo.Schema.Types.ObjectId] }
+  actionsAttended: { type: [mongo.Schema.Types.ObjectId] },
+  actionsSaved: { type: [mongo.Schema.Types.ObjectId] }
 });
 
-// const eventTypes = ['environment','student','animals','arts','culture','hunger','health'];
+// const actionTypes = ['environment','student','animals','arts','culture','hunger','health'];
 
 // const languages = ['en','ελ']
 
