@@ -23,10 +23,6 @@ const sanitizeUser = user => {
   user._id = undefined;
   user.hash = undefined;
   user.__v = undefined;
-  user.favoriteActionTypes = undefined;
-  user.ActionsAttended = undefined;
-  user.ActionsSaved = undefined;
-  user.ActionsOrganized = undefined;
   return user;
 };
 
@@ -36,17 +32,11 @@ const authResponse = user => ({
 });
 
 module.exports = {
-  changePassword: (req, res) => {
+  changePassword: (req, res) => {},
 
-  },
+  getProfile: (req, res) => {},
 
-  getProfile: (req, res) => {
-
-  },
-
-  getSelfProfile: (req, res) => {
-    
-  },
+  getSelfProfile: (req, res) => {},
 
   login: (req, res) => {
     const email = req.body.email;
@@ -122,7 +112,5 @@ module.exports = {
       });
   },
 
-  updateProfile: (req, res) => {
-
-  }
+  updateProfile: (req, res) => {}
 };

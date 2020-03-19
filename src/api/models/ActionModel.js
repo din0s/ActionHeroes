@@ -24,4 +24,4 @@ const ActionSchema = new mongo.Schema({
   attendees: { type: [mongo.Schema.Types.ObjectId] }
 });
 
-module.exports = mongo.model("action", ActionSchema);
+module.exports = mongo.model("Action", ActionSchema);

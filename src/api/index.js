@@ -3,10 +3,10 @@ const mongo = require("mongoose");
 require("dotenv").config();
 require("dotenv-defaults").config();
 
-const authRoutes = require("./routes/auth");
-const userRoutes = require("./routes/user");
-const teamRoutes = require("./routes/team");
 const actionRoutes = require("./routes/action");
+const authRoutes = require("./routes/auth");
+const teamRoutes = require("./routes/team");
+const userRoutes = require("./routes/user");
 
 const app = express();
 const port = 4000;
@@ -31,10 +31,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Routes
+app.use("/actions", actionRoutes);
 app.use("/auth", authRoutes);
-app.use("/user", userRoutes);
-app.use("/team", teamRoutes);
-app.use("/action", actionRoutes);
+app.use("/teams", teamRoutes);
+app.use("/users", userRoutes);
 
 /* Can't find the requested resourse */
 app.use((req, res, next) => {
