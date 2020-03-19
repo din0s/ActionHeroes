@@ -34,7 +34,7 @@ app.use(express.json());
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/team", teamRoutes);
-app.user("/event", eventRoutes);
+app.use("/event", eventRoutes);
 
 /* Can't find the requested resourse */
 app.use((req, res, next) => {
