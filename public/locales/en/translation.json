@@ -13,6 +13,24 @@
       "exit": "Log Out"
     }
   },
+  "auth": {
+    "username": "username",
+    "email": "email",
+    "password": "password",
+    "confirm_password": "confirm password",
+    "fb": "with Facebook (soon!)",
+    "login": {
+      "action": "Log in",
+      "greeting": "Welcome back!",
+      "alt-call": "Don't have an account?"
+    },
+    "signup": {
+      "action": "Sign Up",
+      "greeting": "Join us!",
+      "alt-call": "Already have an account?",
+      "mismatch": "Your passwords don't match!"
+    }
+  },
   "footer": {
     "icons": "Icons from {{site}}"
   }

@@ -13,6 +13,24 @@
       "exit": "Αποσύνδεση"
     }
   },
+  "auth": {
+    "username": "όνομα χρήστη",
+    "email": "email",
+    "password": "κωδικός",
+    "confirm_password": "επιβεβαίωση κωδικού",
+    "fb": "με Facebook (σύντομα!)",
+    "login": {
+      "action": "Σύνδεση",
+      "greeting": "Καλωσήρθες!",
+      "alt-call": "Δεν έχεις λογαριασμό;"
+    },
+    "signup": {
+      "action": "Εγγραφή",
+      "greeting": "Γίνε μέλος!",
+      "alt-call": "Έχεις ήδη λογαριασμό;",
+      "mismatch": "Οι κωδικοί δεν είναι ίδιοι!"
+    }
+  },
   "footer": {
     "icons": "Εικόνες από το {{site}}"
   }

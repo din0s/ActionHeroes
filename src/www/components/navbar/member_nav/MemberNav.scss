@@ -10,6 +10,11 @@
     margin: 0;
     text-decoration: underline;
     transition: 0.1s ease-in-out;
+    
+    .Arrow {
+      height: 0.5rem;
+      margin-left: 0.5rem;
+    }
 
     &:hover {
       background-color: $grayHover;
@@ -29,11 +34,13 @@
       cursor: pointer;
       display: flex;
 
-      > a {
+      > a,
+      > p {
         align-items: center;
         color: initial;
         display: flex;
         height: 100%;
+        margin: 0;
         padding: 1rem 2.5rem;
         text-decoration: none;
         width: 100%;
