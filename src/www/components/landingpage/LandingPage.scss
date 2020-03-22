@@ -1,9 +1,95 @@
 .container {
   background-image: linear-gradient(  rgb(129, 129, 129) ,white);
-  height: 310vh; //parallax(110vh) + 2 pages(200vh)
+  height: 325vh; //parallax(110vh) + 2 pages(200vh) + 15vh more empty space
   max-width: 100vw;
   align-items: center;
   justify-content: center;
+
+  .thirdpage{
+    
+    .phrase{
+      margin-top: 20vh;
+      margin-bottom: 10vh;
+      float: left;
+      margin-left: 15vw;
+      font-size: 6vh;
+      font-family: actionwide;
+    }
+
+    .parallaxbg{
+      
+      width: 74vw;
+      height: 65vh;
+      margin-left: 13vw;
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      //border-radius: 1rem;
+      
+      
+      .panel{
+        width: 80vw;
+        height: 65vh;   //same as parallaxbg height 
+        flex-wrap: wrap;
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-left: 2rem;
+        box-shadow: inset 0px 0px 30px 1px black;
+
+        .card{
+          margin-right: 2rem;
+          height: 23vh;
+          width: 18vw;
+          min-width: 13rem;
+          min-height: 6.5rem;
+          align-items: center;
+          border-radius: 1rem;
+          background-color: rgba($color: white, $alpha: 0.65);
+
+          .box{
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            //justify-content: center;
+            border-bottom: solid;
+
+            .category{
+              margin-top: 0.8rem;
+              margin-left: 0.8rem;
+              margin-bottom: 0.8rem;
+              font-size: 4vh;
+              font-family: actionwide;
+            }
+
+            .boximg{
+              margin-top: 0.8rem;
+              margin-left: 0.8rem;
+              margin-bottom: 0.8rem;
+              height: 7vh;
+              width: 7vh;
+              border: solid;
+              border-width: 2px;
+              border-color: rgba($color: black, $alpha: 0.5);
+            }
+          }
+
+          .boxdesc{
+            margin-top: 0.8rem;
+            font-size: 2.7vh;
+            font-family: actionwide;
+          }
+          
+        }
+
+      }
+
+    }
+
+  }
+
   .secondpage{
     
     .phrase{
@@ -22,24 +108,32 @@
       display: flex;
       flex-direction: row;
       justify-content: center;
-      border-radius: 1rem;
+      //border-radius: 0.5rem;
+      
       
       .panel{
+        width: 80vw;
+        height: 60vh;
+        
         align-items: center;
         display: flex;
         flex-direction: row;
         justify-content: center;
         margin-left: 2rem;
+        box-shadow: inset 0px 0px 30px 1px black;
 
-        .box{
+        .card{
           margin-right: 2rem;
           //margin-top:1rem;
           height: 48vh;
-          width: 62vh;
+          width: 28vw;
+          min-width: 20rem;
           align-items: center;
           //display: block;
           border-radius: 1rem;
           background-color: rgba($color: white, $alpha: 0.65);
+          //box-shadow: 0px 0px 3px white;
+          //text-shadow: 1px 1px 3px ;
 
           .boxphrase{
             margin-top: 0.5rem;
