@@ -3,7 +3,7 @@ const mongo = require("mongoose");
 const ActionSchema = new mongo.Schema({
   name: { type: String, required: true },
   description: { type: String },
-  type: { type: [mongo.Schema.Types.ObjectId] },
+  categories: { type: [mongo.Schema.Types.ObjectId] },
   location: {
     type: {
       type: String,
@@ -15,10 +15,11 @@ const ActionSchema = new mongo.Schema({
       required: true
     }
   },
-  date: { type: Date },
+  date: { type: Date, required: true },
   photo: { type: String },
   organizer: {
-    _id: { type: mongo.Schema.Types.ObjectId },
+    required: true,
+    organizerId: { type: mongo.Schema.Types.ObjectId },
     isTeam: { type: Boolean }
   },
   attendees: { type: [mongo.Schema.Types.ObjectId] }

@@ -35,21 +35,24 @@ module.exports = {
   changePassword: (req, res) => {},
 
   getProfile: (req, res) => {
-    User.findOne({ _id: req.params.userId })
-      .exec()
-      .then(user => {
-        user = sanitizeUser(user);
-        res.status(200).json({ user });
-      })
-      .catch(err => {
-        console.error(`Error during user find():\n${err}`);
-        res.status(500).send();
-      });
+    if (req.params.user_id === req.userData.userId) {
+      User.findOne({ _id: req.params.user_id })
+        .exec()
+        .then(user => {
+          user = sanitizeUser(user);
+          res.status(200).json({ user });
+        })
+        .catch(err => {
+          console.error(`Error during user find():\n${err}`);
+          res.status(500).send();
+        });
+    } else {
+      res.status(401).send();
+    }
   },
 
-  getSelfProfile: (req, res, next) => {
-    req.params.userId = req.userData.userId;
-    next();
+  getSelfProfile: (req, res) => {
+    res.redirect(`/users/${req.userData.userId}/profile`);
   },
 
   login: (req, res) => {
@@ -110,18 +113,19 @@ module.exports = {
           if (err.name === "ValidationError") {
             if (err.errors.email) {
               if (err.errors.email.kind === "regexp") {
-                res.status(500).json({ error: "Invalid email address" });
+                res.status(400).json({ error: "Invalid email address" });
               } else if (err.errors.email.kind === "unique") {
-                res.status(500).json({ error: "Email already exists" });
+                res.status(400).json({ error: "Email already exists" });
               }
             }
 
             if (err.errors.username) {
               if (err.errors.username.kind === "unique") {
-                res.status(500).json({ error: "Username already exists" });
+                res.status(400).json({ error: "Username already exists" });
               }
             }
-            res.status(500).json(err);
+            console.error(err);
+            res.status(500).send();
           } else {
             console.error(`Error during user save():\n${err}`);
             res.status(500).json(err);

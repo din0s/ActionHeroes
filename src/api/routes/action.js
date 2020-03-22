@@ -45,28 +45,20 @@ router.post(
 
 /* Attendants */
 
-router.post(
-  "/:action_id/attendees/:user_id",
-  checkAuth,
-  ActionUserController.addAttendant
-);
+router.post("/:action_id/attend", checkAuth, ActionUserController.addAttendant);
 
 router.delete(
-  "/:action_id/attendees/:user_id",
+  "/:action_id/attend",
   checkAuth,
   ActionUserController.removeAttendant
 );
 
 /* Saved Actions */
 
-router.post(
-  "/:action_id/saved/:user_id",
-  checkAuth,
-  ActionUserController.addSavedAction
-);
+router.post("/:action_id/save", checkAuth, ActionUserController.addSavedAction);
 
 router.delete(
-  "/:action_id/saved/:user_id",
+  "/:action_id/save",
   checkAuth,
   ActionUserController.removeSavedAction
 );
