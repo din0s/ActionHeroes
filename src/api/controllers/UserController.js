@@ -34,9 +34,23 @@ const authResponse = user => ({
 module.exports = {
   changePassword: (req, res) => {},
 
-  getProfile: (req, res) => {},
+  getProfile: (req, res) => {
+    User.findOne({ _id: req.params.userId })
+      .exec()
+      .then(user => {
+        user = sanitizeUser(user);
+        res.status(200).json({ user });
+      })
+      .catch(err => {
+        console.error(`Error during user find():\n${err}`);
+        res.status(500).send();
+      });
+  },
 
-  getSelfProfile: (req, res) => {},
+  getSelfProfile: (req, res, next) => {
+    req.params.userId = req.userData.userId;
+    next();
+  },
 
   login: (req, res) => {
     const email = req.body.email;
