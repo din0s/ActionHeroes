@@ -7,6 +7,7 @@ const actionRoutes = require("./routes/action");
 const authRoutes = require("./routes/auth");
 const teamRoutes = require("./routes/team");
 const userRoutes = require("./routes/user");
+const contactRoutes = require("./routes/contact");
 
 const app = express();
 const port = 4000;
@@ -35,6 +36,7 @@ app.use("/actions", actionRoutes);
 app.use("/auth", authRoutes);
 app.use("/teams", teamRoutes);
 app.use("/users", userRoutes);
+app.use("/contact", contactRoutes);
 
 /* Can't find the requested resourse */
 app.use((req, res, next) => {
