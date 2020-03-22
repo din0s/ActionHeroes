@@ -5,6 +5,7 @@ import React, { Component, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import { applyMiddleware, compose, createStore } from "redux";
 
+import ContactPage from "./components/contactpage/ContactPage";
 import Footer from "./components/footer/Footer";
 import Login from "./containers/authentication/Login.jsx";
 import NavBar from "./components/navbar/NavBar";
@@ -45,6 +46,7 @@ export default class App extends Component {
                   <Route path="/signup" children={<Signup />} />
                   <Route path="/" children="Hello" />
                 </Switch>
+                <ContactPage />
               </main>
               <Footer />
             </div>

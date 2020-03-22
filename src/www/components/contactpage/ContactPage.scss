@@ -1,0 +1,104 @@
+.container {
+
+    align-items: center;
+    width: 100%;
+
+    .contact-form{
+        display: flex;
+        flex-direction: column;
+        margin-top: 2vw;
+
+        > * {
+            border-style: groove;
+            border-radius: 20px;
+            font-family: Poppins-Regular;
+            font-size: 2vh;
+            font-weight: 0;
+            height: 4vh;
+            margin-top: 1vh;
+            margin-left: 5vh;
+            margin-right: 5vh;
+            margin-bottom: 2vh;
+            outline: none;
+            padding: 0.75rem 1rem;
+            padding-left: 1.75rem;
+            width: 60vh;
+            text-emphasis-color: #000; opacity: 0.5;
+        }
+
+        > .question{
+            height: 20vh;
+            resize: none;
+        }
+    }
+
+    .contact-form-block{
+        background-color: white;
+        border-radius: 25px;
+        display: flex;
+        flex-direction: row;
+        margin-top: 2vh;
+        height: 35vw;
+        margin-bottom: 3vw;
+    }
+
+    .contact-form-title1{
+        color: #fff;
+        font-family: Poppins-Bold;
+        font-size: 2.5vw;
+        margin-top: 6vh;
+        line-height: 1.2;
+        text-align: center;
+        padding-bottom: 7px;
+    }
+
+    .contact-form-title2{
+        color: #fff;
+        font-family: Poppins-Regular;
+        font-size: 1.5vw;
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    .form-image{
+        border-radius: 25px;
+    }
+
+    .submit-btn{
+        align-items: center;
+        border: none;
+        border-radius: 40px;
+        background: rgb(0, 102, 255);
+        cursor: pointer;
+        font-size: 3vh;
+        font-family: Poppins-Regular;
+        height: 6vh;
+        margin-left: 30%;
+        margin-top: 3vh;
+        padding-left: 1.5vh;
+        outline: none;
+        width: 40%;
+    }
+
+    .submit-btn:hover {
+        opacity: 0.6;
+        transition: 0.5s;
+      }
+
+    .title-block {
+        display: flex;
+        margin-top: 2vh;
+        flex-direction: column;
+        align-items: center;
+        top: 2vw;
+        color: black;
+        width: 100%;
+    }
+
+    .top-img{
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+    }
+}
+

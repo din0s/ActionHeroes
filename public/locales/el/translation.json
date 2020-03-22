@@ -33,5 +33,14 @@
   },
   "footer": {
     "icons": "Εικόνες από το {{site}}"
+  },
+  "contactpage": {
+    "title1": "Έχεις κάποια ερώτηση;",
+    "title2": "Θα θέλαμε να σε ακούσουμε.",
+    "first_name":"Όνομα",
+    "last_name":"Επίθετο",
+    "email":"Email",
+    "question":"Ερώτηση",
+    "submit":"Υποβολή"
   }
 }
