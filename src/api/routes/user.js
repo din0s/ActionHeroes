@@ -7,7 +7,12 @@ const UserController = require("../controllers/UserController");
 
 /* User Profile */
 
-router.get("/me/profile", checkAuth, UserController.getSelfProfile);
+router.get(
+  "/me/profile",
+  checkAuth,
+  UserController.getSelfProfile,
+  UserController.getProfile
+);
 
 router.patch("/me/profile", checkAuth, UserController.updateProfile);
 
