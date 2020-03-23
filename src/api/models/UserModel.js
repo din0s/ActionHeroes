@@ -1,4 +1,5 @@
 const mongo = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
 
 const UserSchema = new mongo.Schema({
   email: {
@@ -7,16 +8,23 @@ const UserSchema = new mongo.Schema({
     unique: true,
     match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
   },
-  username: { type: String, required: true },
+  username: { type: String, required: true, unique: true },
   hash: { type: String, required: true },
-  hometown: { type: String },
-  favoriteEventTypes: { type: [String] },
+  profilePhoto: { type: String },
+  location: {
+    type: {
+      type: String,
+      enum: ["Point"]
+    },
+    coordinates: {
+      type: [Number]
+    }
+  },
+  favoriteCategories: { type: [mongo.Schema.Types.ObjectId] },
   language: { type: String },
-  eventsOrganized: { type: [mongo.Schema.Types.ObjectId] },
+  actionsAttended: { type: [mongo.Schema.Types.ObjectId] },
+  actionsSaved: { type: [mongo.Schema.Types.ObjectId] }
 });
 
-// const eventTypes = ['environment','student','animals','arts','culture','hunger','health'];
-
-// const languages = ['en','ελ']
-
+UserSchema.plugin(uniqueValidator);
 module.exports = mongo.model("User", UserSchema);

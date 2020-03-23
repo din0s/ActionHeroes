@@ -32,6 +32,29 @@ const authResponse = user => ({
 });
 
 module.exports = {
+  changePassword: (req, res) => {},
+
+  getProfile: (req, res) => {
+    if (req.params.user_id === req.userData.userId) {
+      User.findOne({ _id: req.params.user_id })
+        .exec()
+        .then(user => {
+          user = sanitizeUser(user);
+          res.status(200).json({ user });
+        })
+        .catch(err => {
+          console.error(`Error during user find():\n${err}`);
+          res.status(500).send();
+        });
+    } else {
+      res.status(401).send();
+    }
+  },
+
+  getSelfProfile: (req, res) => {
+    res.redirect(`/users/${req.userData.userId}/profile`);
+  },
+
   login: (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -70,39 +93,46 @@ module.exports = {
     const username = req.body.username;
     const password = req.body.password;
 
-    User.find({ email })
-      .then(user => {
-        if (user.length == 1) {
-          return res.status(409).json({
-            error: "Email already exists"
-          });
-        }
-
-        bcrypt.hash(password, 10, (err, hash) => {
-          if (err) {
-            return res.status(400).json({
-              error: "Invalid request"
-            });
-          }
-
-          const user = new User({
-            email,
-            username,
-            hash
-          });
-
-          user
-            .save()
-            .then(() => res.status(201).json(authResponse(user)))
-            .catch(err => {
-              console.error(`Error during user save():\n${err}`);
-              res.status(500).send();
-            });
+    bcrypt.hash(password, 10, (err, hash) => {
+      if (err) {
+        return res.status(400).json({
+          error: "Invalid request"
         });
-      })
-      .catch(err => {
-        console.error(`Error during signup find():\n${err}`);
-        res.status(500).send();
+      }
+
+      const user = new User({
+        email,
+        username,
+        hash
       });
-  }
+
+      user
+        .save()
+        .then(() => res.status(201).json(authResponse(user)))
+        .catch(err => {
+          if (err.name === "ValidationError") {
+            if (err.errors.email) {
+              if (err.errors.email.kind === "regexp") {
+                res.status(400).json({ error: "Invalid email address" });
+              } else if (err.errors.email.kind === "unique") {
+                res.status(400).json({ error: "Email already exists" });
+              }
+            }
+
+            if (err.errors.username) {
+              if (err.errors.username.kind === "unique") {
+                res.status(400).json({ error: "Username already exists" });
+              }
+            }
+            console.error(err);
+            res.status(500).send();
+          } else {
+            console.error(`Error during user save():\n${err}`);
+            res.status(500).json(err);
+          }
+        });
+    });
+  },
+
+  updateProfile: (req, res) => {}
 };
