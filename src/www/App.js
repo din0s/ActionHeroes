@@ -1,32 +1,54 @@
 import "./App.scss";
 
+import { ConnectedRouter, routerMiddleware } from "connected-react-router";
 import React, { Component, Suspense } from "react";
+import { Route, Switch } from "react-router-dom";
+import { applyMiddleware, compose, createStore } from "redux";
 
 import Footer from "./components/footer/Footer";
+import Login from "./containers/authentication/Login.jsx";
 import NavBar from "./components/navbar/NavBar";
-import { BrowserRouter as Router } from "react-router-dom";
-import { createStore } from "redux";
-import reducer from "./reducers";
 import { Provider } from "react-redux";
+import Signup from "./containers/authentication/Signup.jsx";
+import { createBrowserHistory } from "history";
+import { createRootReducer } from "./reducers";
+import { handshake } from "./actions/auth";
+import thunk from "redux-thunk";
+
+export const history = createBrowserHistory();
 
 const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  createRootReducer(history),
+  compose(
+    applyMiddleware(routerMiddleware(history), thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 );
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    store.dispatch(handshake());
+  }
+
   render() {
     return (
       // TODO: loading fallback?
       <Provider store={store}>
         <Suspense fallback="">
-          <Router>
+          <ConnectedRouter history={history}>
             <div className="App">
               <NavBar />
-              <main></main>
+              <main>
+                <Switch>
+                  <Route path="/login" children={<Login />} />
+                  <Route path="/signup" children={<Signup />} />
+                  <Route path="/" children="Hello" />
+                </Switch>
+              </main>
               <Footer />
             </div>
-          </Router>
+          </ConnectedRouter>
         </Suspense>
       </Provider>
     );

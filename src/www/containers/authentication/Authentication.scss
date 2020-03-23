@@ -1,0 +1,103 @@
+$softBlack: rgba(
+  $color: black,
+  $alpha: 0.1
+);
+
+.Auth-page {
+  background-color: rgba($color: peachpuff, $alpha: 0.1); // TODO: change to image
+  display: flex;
+  justify-content: center;
+  padding: 4rem;
+
+  .Auth-panel {
+    align-items: center;
+    background-color: white;
+    border: 1px solid $softBlack;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+
+    .Auth-header {
+      padding: 1rem;
+
+      > * {
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    .Auth-error,
+    .Password-mismatch {
+      color: red;
+      margin-top: 0;
+    }
+
+    .Username-field,
+    .Email-field,
+    .Password-field,
+    .Submit-button {
+      border: 1px solid $softBlack;
+      border-radius: 0.5rem;
+      box-shadow: 1px 1px $softBlack;
+      margin-bottom: 1rem;
+      outline: none;
+      padding: 0.75rem;
+    }
+
+    .Submit-button {
+      cursor: pointer;
+      transition: 0.1s ease-in-out;
+      width: 6rem;
+
+      &:hover {
+        background-color: $softBlack;
+      }
+    }
+
+    .Alt-option {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+
+      > a {
+        margin-left: 0.25rem;
+
+        &,
+        &:visited {
+          color: initial;
+        }
+      }
+    }
+
+    .Social {
+      cursor: pointer;
+      margin-top: 0;
+      text-decoration: underline;
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .Auth-page .Auth-panel {
+    width: 75vw;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .Auth-page {
+    padding: 4rem 0;
+    
+    .Auth-panel {
+      width: 99vw;
+
+      .Alt-option {
+        flex-direction: column;
+        margin-bottom: 1rem;
+    
+        > p {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
