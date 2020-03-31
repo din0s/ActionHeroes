@@ -1,5 +1,10 @@
 @import "../../vars.scss";
 
+$softBlack: rgba(
+  $color: black,
+  $alpha: 0.1
+);
+
 .container {
     align-items: center;
     display: flex;
@@ -8,14 +13,15 @@
     margin-top: 2vh;
     width: 100%;
 
-    .contact-form{
+    form{
         display: flex;
         flex-direction: column;
         margin-top: 2vw;
 
-        > * {
-            border-style: ridge;
+        * {
+            border: 1px solid $softBlack;
             border-radius: 20px;
+            box-shadow: 1px 1px $softBlack;
             font-family: $globalFonts;
             font-size: 2vh;
             height: 4vh;
@@ -28,9 +34,10 @@
             padding: 0.75rem 1rem;
             padding-left: 1.75rem;
             width: 40vh;
+            word-break: break-all;
         }
 
-        > .question{
+        textarea{
             min-height: 10vh;
             height: 20vh;
             resize: none;
@@ -71,9 +78,7 @@
 
     .submit-btn{
         align-items: center;
-        border: none;
         border-radius: 2vh;
-        background: rgb(0, 102, 255);
         cursor: pointer;
         font-size: 3vh;
         font-family: $globalFonts;
@@ -82,13 +87,13 @@
         margin-top: 3vh;
         padding-left: 1.5vh;
         outline: none;
+        transition: 0.1s ease-in-out;
         width: 40%;
-    }
 
-    .submit-btn:hover {
-        opacity: 0.8;
-        transition: 0.8s;
-      }
+        &:hover {
+            background-color: $softBlack;
+          }
+    }
 
     .title-block {
         display: flex;

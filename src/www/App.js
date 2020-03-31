@@ -5,7 +5,7 @@ import React, { Component, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import { applyMiddleware, compose, createStore } from "redux";
 
-import ContactPage from "./components/contactpage/ContactPage";
+import ContactPage from "./components/contactpage/ContactPage.jsx";
 import Footer from "./components/footer/Footer";
 import Login from "./containers/authentication/Login.jsx";
 import NavBar from "./components/navbar/NavBar";
@@ -22,7 +22,7 @@ const store = createStore(
   createRootReducer(history),
   compose(
     applyMiddleware(routerMiddleware(history), thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 
@@ -40,13 +40,14 @@ export default class App extends Component {
           <ConnectedRouter history={history}>
             <div className="App">
               <NavBar />
-              <main>
-                <Switch>
+              <main>              
+                <Switch>                                   
                   <Route path="/login" children={<Login />} />
                   <Route path="/signup" children={<Signup />} />
+                  <Route path="/contact" children={<ContactPage />} /> 
+                  {/*<Route path="/actions" children={<ContactPage2 />} /> */}
                   <Route path="/" children="Hello" />
                 </Switch>
-                <ContactPage />
               </main>
               <Footer />
             </div>
