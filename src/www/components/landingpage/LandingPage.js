@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 const bgkidimg = '/img/KidBackground.png';
 const bgimg = '/img/background.jpg';
 const innerimg = './img/volunteer.svg';
-const categories = {category:"Category", image:"./img/background.jpg", desc:"Description Desc ription Descri ption Des c ription Descrip tion."}
+const categories = { category: "Category", image: "./img/background.jpg", desc: "Description Desc ription Descri ption Des c ription." }
 
 
 export default function LandingPage() {       //I need to fill the "alt"s
@@ -33,18 +33,18 @@ export default function LandingPage() {       //I need to fill the "alt"s
 
 
       <div className='secondpage'>
-        <p className='phrase' >Become an Action Hero</p>    
-        <Parallax blur={0.5} className='parallaxbg' bgImage={bgkidimg} bgImageAlt="the alt" strength={200}>
+        <p className='phrase' >{t("landingpage.become")}</p>
+        <Parallax blur={0.5} className='parallaxbg' bgImage={bgkidimg} bgImageAlt="the alt" strength={150}>
           <div className='panel'>
             <div className='card'>
-              <p className='boxphrase'>Volunteer</p>
+              <p className='boxphrase'>{t("landingpage.volunteer")}</p>
               <img className='boximg' src={bgimg} />
-              <p className='boxdesc'>Lorem ipsum dolor sit amet. Duis neque nisl, tincidunt quis lorem vel, efficitur luctus orci. Vivamus dignissim tincidunt erat ac semper.</p>
+              <p className='boxdesc'>{t("landingpage.volunteerdesc")}</p>
             </div>
             <div className='card'>
-              <p className='boxphrase'>Organise</p>
+              <p className='boxphrase'>{t("landingpage.organise")}</p>
               <img className='boximg' src={bgimg} />
-              <p className='boxdesc'>Lorem ipsum dolor sit amet. Duis neque nisl, tincidunt quis lorem vel, efficitur luctus orci. Vivamus dignissim tincidunt erat ac semper.</p>
+              <p className='boxdesc'>{t("landingpage.organisedesc")}</p>
             </div>
           </div>
         </Parallax>
@@ -52,8 +52,8 @@ export default function LandingPage() {       //I need to fill the "alt"s
 
 
       <div className='thirdpage'>
-        <p className='phrase' >You can find events & actions for:</p>    
-        <Parallax blur={0.5} className='parallaxbg' bgImage={bgkidimg} bgImageAlt="the alt" strength={200}>
+        <p className='phrase' >{t("landingpage.findactions")}</p>
+        <Parallax blur={0.5} className='parallaxbg' bgImage={bgkidimg} bgImageAlt="the alt" strength={150}>
           <div className='panel'>
             <div className='card'>
               <div className='box'>

@@ -47,6 +47,12 @@
   "landingpage": {
     "catchphrase": "The more we give, the happier we feel.",
     "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis neque nisl, tincidunt quis lorem vel, efficitur luctus orci. Vivamus dignissim tincidunt erat ac semper.",
-    "join": "Join Our Cause!"
+    "join": "Join Our Cause!",
+    "become": "Become an Action Hero",
+    "volunteer": "Volunteer",
+    "organise": "Organise",
+    "volunteerdesc": "Lorem ipsum dolor sit amet. Duis neque nisl, tincidunt quis lorem vel, efficitur luctus orci. Vivamus dignissim tincidunt erat ac semper.",
+    "organisedesc": "Lorem ipsum dolor sit amet. Duis neque nisl, tincidunt quis lorem vel, efficitur luctus orci. Vivamus dignissim tincidunt erat ac semper.",
+    "findactions": "You can find events & actions for:"
   }
 }

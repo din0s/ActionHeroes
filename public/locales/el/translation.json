@@ -47,6 +47,12 @@
   "landingpage": {
     "catchphrase": "Όσα περισότερα δίνουμε, τόσο πιο ευτυχισμένοι είμαστε.",
     "desc": "Λορεμ ipsum dolor sit amet, consectetur adipiscing elit. Duis neque nisl, tincidunt quis lorem vel, efficitur luctus orci. Vivamus dignissim tincidunt erat ac semper.",
-    "join": "Βοήθησε στο έργο μας!"
+    "join": "Βοήθησε στο έργο μας!",
+    "become": "Λάβε Δράση!",
+    "volunteer": "Εθελοντής",
+    "organise": "Διοργανωτής",
+    "volunteerdesc": "Λορεμ ipsum dolor sit amet. Duis neque nisl, tincidunt quis lorem vel, efficitur luctus orci. Vivamus dignissim tincidunt erat ac semper.",
+    "organisedesc": "Λορεμ ipsum dolor sit amet. Duis neque nisl, tincidunt quis lorem vel, efficitur luctus orci. Vivamus dignissim tincidunt erat ac semper.",
+    "findactions": "Αναζήτησε εκδηλώσεις και δράσεις σχετικά με:"
   }
 }
