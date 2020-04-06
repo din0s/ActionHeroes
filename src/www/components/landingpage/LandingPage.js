@@ -69,7 +69,14 @@ export default function LandingPage() {       //I need to fill the "alt"s
               </div>
               <p className='boxdesc'>{categories.desc}</p>
             </div>
-            <div className='card'>
+             <div className='card'>
+              <div className='box'>
+                <img className='boximg' src={categories.image} />
+                <p className='category'>{categories.category}</p>
+              </div>
+              <p className='boxdesc'>{categories.desc}</p>
+            </div>
+            {/* <div className='card'>
               <div className='box'>
                 <img className='boximg' src={categories.image} />
                 <p className='category'>{categories.category}</p>
@@ -89,14 +96,7 @@ export default function LandingPage() {       //I need to fill the "alt"s
                 <p className='category'>{categories.category}</p>
               </div>
               <p className='boxdesc'>{categories.desc}</p>
-            </div>
-            <div className='card'>
-              <div className='box'>
-                <img className='boximg' src={categories.image} />
-                <p className='category'>{categories.category}</p>
-              </div>
-              <p className='boxdesc'>{categories.desc}</p>
-            </div>
+            </div> */}
           </div>
         </Parallax>
       </div>
