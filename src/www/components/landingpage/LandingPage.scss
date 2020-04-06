@@ -13,7 +13,7 @@
       margin-bottom: 10vh;
       float: left;
       margin-left: 15vw;
-      font-size: 5vh;
+      font-size: calc(4vh + 1vw);
     }
 
     .parallaxbg{
@@ -57,16 +57,16 @@
             border-bottom: solid;
 
             .category{
-              margin-top: 0.8rem;
-              margin-left: 0.8rem;
-              margin-bottom: 0.8rem;
-              font-size: 4vh;
+              margin-top: 1vh;
+              margin-left: 1vh;
+              margin-bottom: 1vh;
+              font-size: calc(1.8vh + 1vw);
             }
 
             .boximg{
-              margin-top: 0.8rem;
-              margin-left: 0.8rem;
-              margin-bottom: 0.8rem;
+              margin-top: 1vh;
+              margin-left: 1vh;
+              margin-bottom: 1vh;
               height: 7vh;
               width: 7vh;
               border: solid;
@@ -77,7 +77,7 @@
 
           .boxdesc{
             margin-top: 0.8rem;
-            font-size: 2.7vh;
+            font-size: calc(1.7vh + 0.9vw);
           }
           
         }
@@ -94,7 +94,7 @@
       margin-top: 20vh;
       margin-left: 1vh;
       margin-bottom: 10vh;
-      font-size: 6vh;
+      font-size: calc(5vh + 1vw);
     }
 
     .parallaxbg{
@@ -137,14 +137,14 @@
           .boxphrase{
             margin-top: 0.5rem;
             margin-bottom: 0.5rem;
-            font-size: 5vh;
+            font-size: calc(3.5vh + 1vw);
           }
 
           .boximg{
             margin-top: 2vh;
             height: 20vh;
             width: 20vh;
-            border-radius: 80px;
+            border-radius: 160px;
             border: solid;
             border-width: 2px;
             border-color: rgba($color: black, $alpha: 0.5);
@@ -153,7 +153,7 @@
           .boxdesc{
             margin-top: 0.5rem;
             margin-bottom: 0.5rem;
-            font-size: 3vh;
+            font-size: calc(2vh + 0.6vw);
           }
           
         }
@@ -206,12 +206,12 @@
         margin-right: 3rem;
 
         .catchphrase{
-          font-size: 6vh;
+          font-size: calc(4vh + 1vw);
         }
 
         .desc{
           margin-left: 4px;
-          font-size: 3vh;
+          font-size: calc(2.5vh + 0.5vw);
         }
         
         .joinbutton {
@@ -220,10 +220,10 @@
           border-radius: 0.5rem;
           color: white;
           padding: 14px 32px;
-          font-size: 3vh;
+          font-size: calc(2.5vh + 0.5vw);
           margin-top: 30px;
           margin-bottom: 40px;
-          margin-left: 8vw;
+          margin-left: 12%;
           transition: 0.5s;
           cursor: pointer;
           opacity: 0.9;
@@ -262,7 +262,7 @@
   
             .boxphrase{
               margin-top: 0.3rem;
-              font-size: 4vh;
+              font-size: calc(3vh + 0.5vw);
             }
   
             .boximg{
@@ -273,7 +273,7 @@
   
             .boxdesc{
               margin-top: 0.3rem;
-              font-size: 2.5vh;
+              font-size: calc(1.7vh + 0.5vw);
             }
             
           }
@@ -285,9 +285,12 @@
     }
 
     .thirdpage{
-
+      .phrase{
+        float: none;
+        margin-left: 0vw;
+      }
       .parallaxbg{
-
+        
         .panel{
 
           .card{
@@ -315,7 +318,7 @@
     .secondpage{
       .phrase{
         margin-left: 1vh;
-        font-size: 5vh;
+        font-size: calc(3vh + 3vw);
       }
       .parallaxbg{
         height: 95vh;
@@ -341,7 +344,7 @@
   
             .boxphrase{
               margin-top: 0.3rem;
-              font-size: 4vh;
+              //font-size: 4vh;
             }
   
             .boximg{
@@ -352,7 +355,7 @@
   
             .boxdesc{
               margin-top: 0.3rem;
-              font-size: 2.4vh;
+              font-size: calc(2vh + 0.5vw);
             }
             
           }
@@ -405,16 +408,16 @@
               border-bottom: solid;
   
               .category{
-                margin-top: 4vh;
-                margin-left: 4vh;
-                margin-bottom: 4vh;
-                font-size: 4vh;
+                margin-top: calc(1vh + 0.8vw);
+                margin-left: calc(1vh + 0.8vw);
+                margin-bottom: calc(1vh + 0.8vw);
+                font-size: calc(2vh + 0.8vw);
               }
   
               .boximg{
-                margin-top: 4vh;
-                margin-left: 4vh;
-                margin-bottom: 4vh;
+                margin-top: calc(1vh + 0.8vw);
+                margin-left: calc(1vh + 0.8vw);
+                margin-bottom: calc(1vh + 0.8vw);
                 height: 7vh;
                 width: 7vh;
                 border: solid;
@@ -437,7 +440,7 @@
     }
 
     .parallax {
-      padding-top: calc(19.5vh + 5vw);
+      padding-top: 23vh;
       max-width: 100vw;
       height: 90vh;
   
@@ -460,7 +463,7 @@
   
         .innerphoto{
           margin-left: -11vh;
-          margin-top: calc(38vh - 2vw);
+          margin-top: 39vh;
           width: 21vh;
           height: calc(15vh + 4.5vw);         //Not sure what measurement unit to use for the best responsive result.
           position: absolute;
@@ -473,19 +476,19 @@
           margin-right: 1rem;
   
           .catchphrase{
-            font-size: 5vh;
+            font-size: calc(3vh + 2vw);
           }
   
           .desc{
-            margin-top: 2vw;
-            margin-bottom: 3vw;
+            //margin-top: 2vw;
+            //margin-bottom: 3vw;
             margin-left: 0px;
-            font-size: 2.8vh;
+            font-size: calc(2vh + 1vw);
           }
           
           .joinbutton {
             padding: 1.2vh 3vh;
-            font-size: 2.5vh;
+            font-size: calc(1.5vh + 0.5vw);
             margin-top: 1vh;
             margin-bottom: 40px;
             margin-left: 0vh;
