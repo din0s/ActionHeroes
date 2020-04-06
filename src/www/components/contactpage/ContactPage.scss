@@ -55,7 +55,7 @@ $softBlack: rgba(
     }
 
     .contact-form-title1{
-        color: #fff;
+        color: black;
         font-family: Poppins-Bold;
         font-size: 3.1vw;
         margin-top: 4.3vh;
@@ -65,7 +65,7 @@ $softBlack: rgba(
     }
 
     .contact-form-title2{
-        color: #fff;
+        color: black;
         font-family: $globalFonts;
         font-size: 2vw;
         line-height: 1.5;
@@ -96,10 +96,10 @@ $softBlack: rgba(
     }
 
     .title-block {
+        align-items: center;
         display: flex;
         margin-top: 2vh;
         flex-direction: column;
-        align-items: center;
         top: 2vw;
         color: black;
         width: 100%;
