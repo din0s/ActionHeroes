@@ -45,14 +45,14 @@
     "thanks": "Ευχαριστούμε, θα επικοινωνήσουμε μαζί σας σύντομα!"
   },
   "landingpage": {
-    "catchphrase": "Όσα περισότερα δίνουμε, τόσο πιο ευτυχισμένοι είμαστε.",
-    "desc": "Λορεμ ipsum dolor sit amet, consectetur adipiscing elit. Duis neque nisl, tincidunt quis lorem vel, efficitur luctus orci. Vivamus dignissim tincidunt erat ac semper.",
+    "catchphrase": "Όσα περισότερα δίνουμε, τόσο πιο ευτυχισμένοι νιώθουμε!",
+    "desc": "Το μεγαλύτερο δώρο που μπορείς να δώσεις σε κάποιον είναι ο χρόνος σου. Πάρε μέρος σε κάτι μεγαλύτερο. Γίνε η αλλαγή που περιμένεις. Γίνε εθελοντής σήμερα!",
     "join": "Βοήθησε στο έργο μας!",
     "become": "Λάβε Δράση!",
     "volunteer": "Εθελοντής",
-    "organise": "Διοργανωτής",
-    "volunteerdesc": "Λορεμ ipsum dolor sit amet. Duis neque nisl, tincidunt quis lorem vel, efficitur luctus orci. Vivamus dignissim tincidunt erat ac semper.",
-    "organisedesc": "Λορεμ ipsum dolor sit amet. Duis neque nisl, tincidunt quis lorem vel, efficitur luctus orci. Vivamus dignissim tincidunt erat ac semper.",
+    "organize": "Διοργανωτής",
+    "volunteerdesc": "Δεν ξέρεις από που να ξεκινήσεις; Βρες ένα σύνολο από δράσεις, διαθέσιμες στην ιστοσελίδα μας. ",
+    "organizedesc": "Δεν έχεις το ανθρώπινο δυναμικό; Διοργάνωσε μια εκδήλωση εθελοντισμού και θα σε βοηθήσουμε να βρεις τα απαραίτητα άτομα.",
     "findactions": "Αναζήτησε εκδηλώσεις και δράσεις σχετικά με:"
   }
 }

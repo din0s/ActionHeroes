@@ -46,13 +46,13 @@
   },
   "landingpage": {
     "catchphrase": "The more we give, the happier we feel.",
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis neque nisl, tincidunt quis lorem vel, efficitur luctus orci. Vivamus dignissim tincidunt erat ac semper.",
+    "desc": "It has been said that the giving of one’s time to others is the best gift one can give. Be a part of something bigger than yourself. Be a gift to the community. Volunteer today!",
     "join": "Join Our Cause!",
     "become": "Become an Action Hero",
     "volunteer": "Volunteer",
-    "organise": "Organise",
-    "volunteerdesc": "Lorem ipsum dolor sit amet. Duis neque nisl, tincidunt quis lorem vel, efficitur luctus orci. Vivamus dignissim tincidunt erat ac semper.",
-    "organisedesc": "Lorem ipsum dolor sit amet. Duis neque nisl, tincidunt quis lorem vel, efficitur luctus orci. Vivamus dignissim tincidunt erat ac semper.",
+    "organize": "Organize",
+    "volunteerdesc": "Don't know where to start? Search for a variety of actions available in our site.",
+    "organizedesc": "Don't have the manpower? Host a voluntary event and we'll help you gather the human resources.",
     "findactions": "You can find events & actions for:"
   }
 }
