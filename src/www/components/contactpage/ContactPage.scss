@@ -17,6 +17,7 @@ $softBlack: rgba(
         display: flex;
         flex-direction: column;
         margin-top: 2vw;
+        width: 100%;
 
         * {
             border: 1px solid $softBlack;
@@ -29,7 +30,6 @@ $softBlack: rgba(
             margin-left: 5rem;
             margin-right: 5rem;
             margin-bottom: 2vh;
-            min-width: 20vh;
             outline: none;
             padding: 0.75rem 1rem;
             padding-left: 1.75rem;
@@ -38,7 +38,6 @@ $softBlack: rgba(
         }
 
         textarea{
-            min-height: 10vh;
             height: 20vh;
             resize: none;
         }
@@ -46,10 +45,11 @@ $softBlack: rgba(
 
     .contact-form-block{
         background-color: white;
+        border: 1px solid $softBlack;
         border-radius: 2vh;
         display: flex;
         flex-direction: row;
-        height: 30vw;
+        height: 60vh;
         margin-top: 2vh;
         margin-bottom: 3vw;
     }
@@ -130,9 +130,14 @@ $softBlack: rgba(
 
   }
 
-  @media only screen and(max-width: 500px) {
+@media only screen and(max-width: 600px) {
     .container{
         height: 83vh;
+        width: 100%;
+
+        .contact-form-block{
+            border: none;
+        }
         
         .contact-form{
             > *{
@@ -143,6 +148,14 @@ $softBlack: rgba(
 
         .submit-btn{
             margin-left: 30%;
+        }
+
+        .top-img{
+            display: none;
+        }
+
+        .contact-form-title1{
+            font-size: 6vw;
         }
     }
 }
