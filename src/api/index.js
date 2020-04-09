@@ -36,6 +36,10 @@ morgan.token("body", function(req, res) {
   return JSON.stringify(req.body);
 });
 
+morgan.token("ip", (req, res) => {
+  return req.ip.split(":").pop();
+});
+
 var accessLogStream = rfs.createStream("access.log", {
   interval: "30d", // rotate monthly
   path: path.join(__dirname, "log"),
@@ -43,13 +47,13 @@ var accessLogStream = rfs.createStream("access.log", {
 
 // Logging to file
 app.use(
-  morgan(":remote-addr :method :url :status [:date[web]] :body", {
+  morgan("[:date[web]] :ip :method :url :status :body", {
     stream: accessLogStream,
   })
 );
 
 // Logging to console
-app.use(morgan(":remote-addr :method :url :status [:date[web]] :body"));
+app.use(morgan("[:date[web]] :ip :method :url :status  :body"));
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
