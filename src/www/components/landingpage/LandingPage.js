@@ -10,19 +10,29 @@ import { useTranslation } from "react-i18next";
 const bgkidimg = '/img/KidBackground.png';
 const bgimg = '/img/background.jpg';
 const innerimg = './img/smallicon.svg';
-const categories = { category: "Category", image: "./img/background.jpg", desc: "Description Desc ription Descri ption Des c ription." }
+const categoriesList = { "Category1": { "image": "./img/background.jpg", "name": "Category1", "desc": "AAADescription Desc ription Descri ption Des c ription." }, "Category2": { "image": "./img/background.jpg", "name": "Category2", "desc": "Description Desc ription Descri ption Des c ription." }, "Category3": { "image": "./img/background.jpg", "name": "Category3", "desc": "Description Desc ription Descri ption Des c ription." }, "Category4": { "image": "./img/background.jpg", "name": "Category4", "desc": "AAADescription Desc ription Descri ption Des c ription." }, "Category5": { "image": "./img/background.jpg", "name": "Category5", "desc": "AAADescription Desc ription Descri ption Des c ription." }, "Category6": { "image": "./img/background.jpg", "name": "Category6", "desc": "AAADescription Desc ription Descri ption Des c ription." } }
 
-const categoriesList = '{ "Category1": { "image":"./img/background.jpg", "name": "Category1", "desc": "AAADescription Desc ription Descri ption Des c ription." }, "Category2": { "image": "./img/background.jpg", "name": "Category2", "desc": "Description Desc ription Descri ption Des c ription." } }'
-const JSONcat = JSON.parse(categoriesList)
 
-export default function LandingPage() {       //I need to fill the "alt"s
+export default function LandingPage() { 
+
+const [width, setWidth] = React.useState(window.innerWidth);
+
+const updateWidth= () => {
+  setWidth(window.innerWidth);
+};
+
+React.useEffect(() => {
+  window.addEventListener("resize", updateWidth);
+  return () => window.removeEventListener("resize", updateWidth);
+});
+
   const { t } = useTranslation();
   return (
     <div className='container'>
 
-      <Parallax className='parallax' bgImage={bgkidimg} bgImageAlt="the alt" strength={500}>
+      <Parallax className='parallax' bgImage={bgkidimg} bgImageAlt='Backgroundimage' strength={500}>
         <div className='panel'>
-          <img className='innerphoto' src={innerimg} />
+          <img className='innerphoto' alt='Frontimage' src={innerimg} />
           <div className='innertextcontainer'>
             <p className='catchphrase'>{t("landingpage.catchphrase")}</p>
             <p className='desc'>{t("landingpage.desc")}</p>
@@ -36,16 +46,16 @@ export default function LandingPage() {       //I need to fill the "alt"s
 
       <div className='secondpage'>
         <p className='phrase' >{t("landingpage.become")}</p>
-        <Parallax blur={0.5} className='parallaxbg' bgImage={bgkidimg} bgImageAlt="the alt" strength={150}>
+        <Parallax blur={0.5} className='parallaxbg' bgImage={bgkidimg} bgImageAlt="Backgroundimage" strength={150}>
           <div className='panel'>
             <div className='card'>
               <p className='boxphrase'>{t("landingpage.volunteer")}</p>
-              <img className='boximg' src={"./img/volunteer.svg"} />
+              <img className='boximg' alt='volunteer' src={"./img/volunteer.svg"} />
               <p className='boxdesc'>{t("landingpage.volunteerdesc")}</p>
             </div>
             <div className='card'>
               <p className='boxphrase'>{t("landingpage.organize")}</p>
-              <img className='boximg' src={"./img/organizer.svg"} />
+              <img className='boximg' alt='organize' src={"./img/organizer.svg"} />
               <p className='boxdesc'>{t("landingpage.organizedesc")}</p>
             </div>
           </div>
@@ -55,62 +65,9 @@ export default function LandingPage() {       //I need to fill the "alt"s
 
       <div className='thirdpage'>
         <p className='phrase' >{t("landingpage.findactions")}</p>
-        <Parallax blur={0.5} className='parallaxbg' bgImage={bgkidimg} bgImageAlt="the alt" strength={150}>
-          <div className='panel'>
-
-            {/* {JSONcat.map((category) => {
-              return(
-                <div className='card'>
-                  <div className='box'>
-                    <img className='boximg' src={category.image} />
-                    <p className='category'>{category.name}</p>
-                  </div>
-                  <p className='boxdesc'>{category.desc}</p>
-                </div>);
-            })} */}
-
-            <div className='card'>
-              <div className='box'>
-                <img className='boximg' src={categories.image} />
-                <p className='category'>{categories.category}</p>
-              </div>
-              <p className='boxdesc'>{categories.desc}</p>
-            </div>
-            <div className='card'>
-              <div className='box'>
-                <img className='boximg' src={categories.image} />
-                <p className='category'>{categories.category}</p>
-              </div>
-              <p className='boxdesc'>{categories.desc}</p>
-            </div>
-            <div className='card'>
-              <div className='box'>
-                <img className='boximg' src={categories.image} />
-                <p className='category'>{categories.category}</p>
-              </div>
-              <p className='boxdesc'>{categories.desc}</p>
-            </div>
-            <div className='card'>
-              <div className='box'>
-                <img className='boximg' src={categories.image} />
-                <p className='category'>{categories.category}</p>
-              </div>
-              <p className='boxdesc'>{categories.desc}</p>
-            </div>
-            <div className='card'>
-              <div className='box'>
-                <img className='boximg' src={categories.image} />
-                <p className='category'>{categories.category}</p>
-              </div>
-              <p className='boxdesc'>{categories.desc}</p>
-            </div>
-            <div className='card'>
-              <div className='box'>
-                <img className='boximg' src={categories.image} />
-                <p className='category'>{categories.category}</p>
-              </div>
-              <p className='boxdesc'>{categories.desc}</p>
-            </div>
+        <Parallax blur={0.5} className='parallaxbg' bgImage={bgkidimg} bgImageAlt="Backgroundimage" strength={150}>
+          <div className="panel">
+            {window.onresize = showCategories(categoriesList)}
           </div>
         </Parallax>
       </div>
@@ -118,3 +75,47 @@ export default function LandingPage() {       //I need to fill the "alt"s
   )
 };
 //export default LandingPage;
+
+function showCategories(categoriesList) {
+  if (window.innerWidth <= 800) {
+    return (Object.keys(categoriesList).map((key, index) => {
+      if (index < 3)
+        return (
+          <div className='card'>
+            <div className='box'>
+              <img className='boximg' src={categoriesList[key].image} />
+              <p className='category'>{categoriesList[key].name}</p>
+            </div>
+            <p className='boxdesc'>{categoriesList[key].desc}</p>
+          </div>);
+    })
+    )
+  }
+  else if (window.innerWidth <= 1024) {
+    return (Object.keys(categoriesList).map((key, index) => {
+      if (index < 4)
+        return (
+          <div className='card'>
+            <div className='box'>
+              <img className='boximg' src={categoriesList[key].image} />
+              <p className='category'>{categoriesList[key].name}</p>
+            </div>
+            <p className='boxdesc'>{categoriesList[key].desc}</p>
+          </div>);
+    })
+    )
+  }
+  else {
+    return (Object.keys(categoriesList).map((key) => {
+        return (
+          <div className='card'>
+            <div className='box'>
+              <img className='boximg' src={categoriesList[key].image} />
+              <p className='category'>{categoriesList[key].name}</p>
+            </div>
+            <p className='boxdesc'>{categoriesList[key].desc}</p>
+          </div>);
+    })
+    )
+  }
+}
