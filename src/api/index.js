@@ -42,7 +42,7 @@ morgan.token("ip", (req, res) => {
 
 var accessLogStream = rfs.createStream("access.log", {
   interval: "30d", // rotate monthly
-  path: path.join(__dirname, "log"),
+  path: path.join(process.cwd(), "log"),
 });
 
 // Logging to file
