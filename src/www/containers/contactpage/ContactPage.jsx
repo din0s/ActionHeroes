@@ -115,7 +115,7 @@ class ContactPage extends Component {
                   <input
                       className="submit-btn"
                       type="submit"
-                      placeholder={t("contactpage.submit")}
+                      value={t("contactpage.submit")}
                   />
                 </form>
             </div>
