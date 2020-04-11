@@ -35,12 +35,12 @@
     "icons": "Icons from {{site}}"
   },
   "contactpage": {
-    "title1": "HAVE ANY QUESTIONS ?",
+    "title1": "HAVE ANY QUESTIONS?",
     "title2": "We'd love to hear from you.",
     "first_name":"Your First Name",
     "last_name":"Your Last Name",
     "email":"Your Email",
     "question":"Your Question",
-    "submit":"Sumbit"
+    "submit":"Submit"
   }
 }

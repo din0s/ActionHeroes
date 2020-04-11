@@ -3,6 +3,7 @@ import "./ContactPage.scss"
 import React, { Component } from "react";
 import { clearErrors, contact } from "../../actions/contact";
 
+import Input from "../../components/input/Input";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 
@@ -10,7 +11,7 @@ const top_img = '/img/top_img.png'; //Photo by Patrick Perkins on Unsplash
 const form_img = '/img/form_img.png'; //Photo by LinkedIn Sales Navigator on Unsplash
 
 const mapState = state => ({
-  error: state.auth.error
+  undefined
 });
 
 const mapDispatch = {
@@ -26,44 +27,51 @@ class ContactPage extends Component {
   constructor() {
     super();
     this.state = {
-      fisrt_name: '',
+      first_name: '',
       last_name: '',
       email: '',
-      question: ''
-  }
-    this.onChangeFirstName = this.onChangeFirstName.bind(this);
-    this.onChangeLastName = this.onChangeLastName.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangeQuestion = this.onChangeQuestion.bind(this);
-
-    this.handleSubmit = this.handleSubmit.bind(this);
+      question: '',
+      first_nameHighlight: false,
+      last_nameHighlight: false,
+      emailHighlight: false
+    }
   }
 
-  onChangeFirstName(e) {
-    this.setState({ first_name: e.target.value })
+  onChangeQuestion = (e) => {
+    this.setState({ question: e.target.value.trim() })
   }
 
-  onChangeLastName(e) {
-    this.setState({ last_name: e.target.value })
+  clearHighlights = async () => {
+    this.setState({ first_nameHighlight: false,
+      last_nameHighlight: false,
+      emailHighlight: false,});
+  };
+
+  componentDidMount() {
+    this.props.clearErrors();
   }
 
-  onChangeEmail(e) {
-    this.setState({ email: e.target.value })
-  }
-
-  onChangeQuestion(e) {
-    this.setState({ question: e.target.value })
-  }
-
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
     this.props.clearErrors();
     const data = new FormData(event.target);
-    console.log(stringifyFormData(data))
 
-    //alert(stringifyFormData(data));
-    this.props.contact(data.get('first_name'), data.get('last_name'), data.get('email'), data.get('question'));
-    this.setState({ first_name: '', last_name: '', email: '', question: '' })
+    const { first_name, last_name, email, question } = this.state;
+
+    if (first_name !== "" && last_name !== "" && email !== "" && question !== "") {
+      this.clearHighlights();
+      this.props.contact(first_name, last_name, email, question);
+      console.log(stringifyFormData(data));
+    } else {
+      console.log("ELSE")
+      this.setState({
+        first_nameHighlight: first_name === "",
+        last_nameHighlight: last_name === "",
+        emailHighlight: email === "",
+      });
+    }
+
+    if(!alert('Thank you!')){window.location.reload();}
   }
 
     render() {
@@ -76,42 +84,38 @@ class ContactPage extends Component {
             <div className="contact-form-block">
                 <img className="form-image" alt="form_img" src={form_img}/>
                 <form onSubmit={this.handleSubmit} >
-                   <input
+                   <Input
                       name="first_name" 
+                      onChange={e => this.setState({ first_name: e.target.value.trim() })}
+                      shouldHighlight={this.state.first_nameHighlight}
                       type='text'
-                      value={this.state.first_name}
-                      onChange={this.onChangeFirstName}
-                      required
                       placeholder={t("contactpage.first_name")} 
                   />
-                  <input
+                  <Input
                       name="last_name" 
+                      onChange={e => this.setState({ last_name: e.target.value.trim() })}
+                      shouldHighlight={this.state.last_nameHighlight}
                       type='text'
-                      value={this.state.last_name}
-                      onChange={this.onChangeLastName}
-                      required
                       placeholder={t("contactpage.last_name")} 
                   />
-                  <input
+                  <Input
                       name="email" 
+                      onChange={e => this.setState({ email: e.target.value.trim() })}
+                      shouldHighlight={this.state.emailHighlight}
                       type='email'
-                      value={this.state.email}
-                      onChange={this.onChangeEmail}
-                      required
                       placeholder={t("contactpage.email")}
                   />
-                  <textarea 
+                  <textarea
                       name="question"
-                      type='text'
-                      value={this.state.question}
                       onChange={this.onChangeQuestion}
                       required
+                      type='text'
                       placeholder={t("contactpage.question")}
                   />
                   <input
-                      type="submit"
                       className="submit-btn"
-                      value={t("contactpage.submit")}
+                      type="submit"
+                      placeholder={t("contactpage.submit")}
                   />
                 </form>
             </div>

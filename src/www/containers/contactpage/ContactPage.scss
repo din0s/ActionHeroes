@@ -9,8 +9,8 @@ $softBlack: rgba(
     align-items: center;
     display: flex;
     flex-direction: column;
-    height: 85vh;
     margin-top: 2vh;
+    padding-bottom: 4rem;
     width: 100%;
 
     form{
@@ -18,13 +18,14 @@ $softBlack: rgba(
         flex-direction: column;
         margin-top: 2vw;
         width: 100%;
+        align-items: center;
 
-        * {
+        Input, textarea{
             border: 1px solid $softBlack;
             border-radius: 20px;
             box-shadow: 1px 1px $softBlack;
             font-family: $globalFonts;
-            font-size: 2vh;
+            font-size: 1.2rem;
             height: 4vh;
             margin-top: 1vh;
             margin-left: 5rem;
@@ -33,13 +34,32 @@ $softBlack: rgba(
             outline: none;
             padding: 0.75rem 1rem;
             padding-left: 1.75rem;
-            width: 40vh;
+            width: 20rem;
             word-break: break-all;
         }
 
         textarea{
             height: 20vh;
             resize: none;
+        }
+
+        .submit-btn{
+            cursor: pointer;
+            font-family: $globalFonts;
+            font-size: 1.5rem;
+            transition: 0.1s ease-in-out;
+            width: 10rem;
+            height: 4rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            outline: none;
+            padding: 0.75rem;
+    
+          &:hover {
+            background-color: $softBlack;
+            }
         }
     }
 
@@ -49,16 +69,14 @@ $softBlack: rgba(
         border-radius: 2vh;
         display: flex;
         flex-direction: row;
-        height: 60vh;
-        margin-top: 2vh;
-        margin-bottom: 3vw;
+        height: 35rem;
     }
 
     .contact-form-title1{
         color: black;
-        font-family: Poppins-Bold;
-        font-size: 3.1vw;
-        margin-top: 4.3vh;
+        font-family: $globalFonts;
+        font-size: 3.3rem;
+        margin-top: 3.8vh;
         line-height: 1.2;
         text-align: center;
         padding-bottom: 7px;
@@ -67,32 +85,14 @@ $softBlack: rgba(
     .contact-form-title2{
         color: black;
         font-family: $globalFonts;
-        font-size: 2vw;
+        font-size: 2rem;
         line-height: 1.5;
         text-align: center;
+        padding-bottom: 1vh;
     }
 
     .form-image{
         border-radius: 2vh;
-    }
-
-    .submit-btn{
-        align-items: center;
-        border-radius: 2vh;
-        cursor: pointer;
-        font-size: 3vh;
-        font-family: $globalFonts;
-        height: 6vh;
-        margin-left: 30%;
-        margin-top: 3vh;
-        padding-left: 1.5vh;
-        outline: none;
-        transition: 0.1s ease-in-out;
-        width: 40%;
-
-        &:hover {
-            background-color: $softBlack;
-          }
     }
 
     .title-block {
@@ -106,13 +106,14 @@ $softBlack: rgba(
     }
 
     .top-img{
+        min-height: 20rem;
         position: absolute;
         width: 100%;
         z-index: -1;
     }
 }
 
-@media only screen and(max-width: 1350px) {
+@media only screen and(max-width: 1300px) {
     .form-image{
         display: none;
     }
@@ -146,16 +147,12 @@ $softBlack: rgba(
             }
         }
 
-        .submit-btn{
-            margin-left: 30%;
-        }
-
         .top-img{
             display: none;
         }
 
         .contact-form-title1{
-            font-size: 6vw;
+            font-size: 2rem;
         }
     }
 }
