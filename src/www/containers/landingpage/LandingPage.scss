@@ -1,0 +1,541 @@
+.container {
+  align-items: center;
+  //background-image: linear-gradient(  rgb(129, 129, 129) ,white);
+  font-family: "Times New Roman", Times, serif;
+  justify-content: center;
+  margin-bottom: 15vh;
+  margin-top: -4rem;
+  max-width: 100vw;
+
+  .parallax {
+    align-items: center;
+    height: 90vh;
+    max-width: 100vw;
+    padding-top: 20vh;
+
+    .panel {
+      align-items: center;
+      background-color: rgba($color: white, $alpha: 0.7);
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin-left: 10vw;
+      margin-right: 10vw;
+      margin-top: 3vh;
+      max-height: 60vh;
+      padding-bottom: 2vw;
+      padding-top: 2rem;
+
+      .innerphoto {
+        height: calc(15vh + 7vw);
+        margin-left: 3.5vw;
+        width: calc(14vh +7vw);
+      }
+
+      .innertextcontainer {
+        margin-left: 3.5vw;
+        margin-right: 3.5vw;
+        text-align: left;
+
+        .catchphrase {
+          font-size: calc(3.8vh + 1vw);
+        }
+
+        .desc {
+          font-size: calc(2.5vh + 0.4vw);
+          margin-left: 4px;
+          margin-top: -2vh;
+        }
+
+        .joinbutton {
+          background-color: rgb(16, 48, 136);
+          border: 2px solid rgba($color: black, $alpha: 0.3);
+          border-radius: 0.5rem;
+          color: white;
+          cursor: pointer;
+          font-size: calc(1.8vh + 0.3vw);
+          margin-bottom: 40px;
+          margin-left: 21%;
+          margin-top: 30px;
+          opacity: 0.9;
+          padding: 1.2vh 2.5vw;
+          transition: 0.5s;
+
+          .joinlink {
+            color: white;
+            text-decoration: none;
+          }
+        }
+
+        .joinbutton:hover {
+          opacity: 0.6;
+          transition: 0.5s;
+        }
+      }
+    }
+
+    .scrollbutton {
+      border-radius: 5px;
+      margin-bottom: -9px;
+      outline: none;
+    }
+  }
+
+  .secondpage {
+    .parallaxbg {
+      align-items: center;
+      border-radius: 0.5rem;
+      display: flex;
+      flex-direction: row;
+      height: 60vh;
+      justify-content: center;
+      margin-left: 13vw;
+      width: 74vw;
+
+      .panel {
+        align-items: center;
+        box-shadow: inset 0px 0px 30px 1px black;
+        display: flex;
+        flex-direction: row;
+        height: 60vh;
+        justify-content: center;
+        margin-left: 2rem;
+        width: 80vw;
+
+        .card {
+          align-items: center;
+          background-color: rgba($color: white, $alpha: 0.7);
+          border-radius: 1rem;
+          height: 48vh;
+          margin-right: 2rem;
+          min-width: 16rem;
+          padding-left: 1vw;
+          padding-right: 1vw;
+          width: 24vw;
+
+          .boxdesc {
+            font-size: calc(2vh + 0.5vw);
+            margin-bottom: 0.5rem;
+            margin-left: 0.1rem;
+            margin-right: 0.1rem;
+            margin-top: 0.5rem;
+          }
+
+          .boximg {
+            border: solid;
+            border-color: rgba($color: black, $alpha: 0.5);
+            border-radius: 160px;
+            border-width: 2px;
+            height: 20vh;
+            margin-top: 2vh;
+            width: 20vh;
+          }
+
+          .boxphrase {
+            font-size: calc(3.5vh + 1vw);
+            margin-bottom: 0.5rem;
+            margin-top: 0.5rem;
+          }
+        }
+      }
+    }
+
+    .phrase {
+      font-size: calc(4vh + 1vw);
+      margin-bottom: 10vh;
+      margin-left: 1vh;
+      margin-top: 20vh;
+    }
+  }
+
+  .thirdpage {
+    .parallaxbg {
+      align-items: center;
+      border-radius: 0.5rem;
+      display: flex;
+      flex-direction: row;
+      height: 65vh;
+      justify-content: center;
+      margin: auto;
+      width: 74vw;
+
+      .panel {
+        align-items: center;
+        box-shadow: inset 0px 0px 30px 1px black;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: 65vh; //same as parallaxbg height
+        justify-content: center;
+        margin: 0 1 rem;
+        width: 80vw;
+
+        .card {
+          align-items: center;
+          background-color: rgba($color: white, $alpha: 0.7);
+          border-radius: 1rem;
+          height: 23vh;
+          margin-left: 2rem;
+          margin-right: 2rem;
+          min-height: 6.5rem;
+          min-width: 13rem;
+          width: 18vw;
+
+          .box {
+            align-items: center;
+            border-bottom: solid;
+            display: flex;
+            flex-direction: row;
+            //justify-content: center;
+
+            .boximg {
+              border: solid;
+              border-color: rgba($color: black, $alpha: 0.5);
+              border-width: 2px;
+              height: calc(4vh + 1vw);
+              margin-bottom: 1.5vh;
+              margin-left: 1.5vh;
+              margin-top: 1.5vh;
+              width: calc(4vh + 1vw);
+            }
+
+            .category {
+              font-size: calc(1vh + 1vw);
+              margin-bottom: 1vh;
+              margin-left: 1vh;
+              margin-top: 1vh;
+            }
+          }
+
+          .boxdesc {
+            font-size: calc(1.5vh + 0.8vw);
+            margin: 1vh;
+          }
+        }
+      }
+    }
+
+    .phrase {
+      float: left;
+      font-size: calc(3.5vh + 1vw);
+      margin-bottom: 10vh;
+      margin-left: 15vw;
+      margin-top: 20vh;
+    }
+  }
+}
+
+@media only screen and(max-width: 1024px) {
+  .container {
+    .parallax {
+      align-items: center;
+      height: 90vh;
+      max-width: 100vw;
+      padding-top: 18vh;
+
+      .panel {
+        align-items: center;
+        background-color: rgba($color: white, $alpha: 0.7);
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-left: 10vw;
+        margin-right: 10vw;
+        margin-top: 3vh;
+        max-height: 60vh;
+        padding-bottom: 2vw;
+        padding-top: 2rem;
+
+        .innerphoto {
+          height: calc(14vh + 7vw);
+          margin-left: 3.5vw;
+          width: calc(14vh +7vw);
+        }
+
+        .innertextcontainer {
+          margin-left: 3.5vw;
+          margin-right: 3.5vw;
+          text-align: left;
+
+          .catchphrase {
+            font-size: calc(3.8vh + 1vw);
+          }
+
+          .desc {
+            font-size: calc(2.7vh + 0.4vw);
+            margin-left: 4px;
+            margin-top: -2vh;
+          }
+
+          .joinbutton {
+            background-color: rgb(16, 48, 136);
+            border: 2px solid rgba($color: black, $alpha: 0.3);
+            border-radius: 0.5rem;
+            color: white;
+            cursor: pointer;
+            font-size: calc(1.8vh + 0.3vw);
+            margin-bottom: 40px;
+            margin-left: 5vw;
+            margin-top: 20px;
+            opacity: 0.9;
+            padding: 1.4vh 2.4vw;
+            transition: 0.5s;
+
+            .joinlink {
+              color: white;
+              text-decoration: none;
+            }
+          }
+
+          .joinbutton:hover {
+            opacity: 0.6;
+            transition: 0.5s;
+          }
+        }
+
+        .scrollbutton {
+          border-radius: 5px;
+          margin-bottom: -9px;
+          outline: none;
+        }
+      }
+    }
+
+    .secondpage {
+      .parallaxbg {
+        .panel {
+          margin-left: 2.5rem;
+
+          .card {
+            height: 42vh;
+            margin-right: 2.5rem;
+            min-width: 10rem;
+
+            .boxdesc {
+              font-size: calc(1.7vh + 0.5vw);
+              margin-top: 0.2vh;
+            }
+
+            .boximg {
+              height: 12vh;
+              margin-bottom: 0.5vh;
+              margin-top: 0.5vh;
+              width: 12vh;
+            }
+
+            .boxphrase {
+              font-size: calc(3vh + 0.5vw);
+              margin-top: 1.5vh;
+            }
+          }
+        }
+      }
+    }
+
+    .thirdpage {
+      .parallaxbg {
+        .panel {
+          .card {
+            height: 22vh;
+            margin-left: 1.5rem;
+            margin-right: 3rem;
+            min-width: 10rem;
+            width: 25vw;
+
+            .box {
+              .boximg {
+                height: 5vh;
+                margin: 1vh;
+                width: 5vh;
+              }
+
+              .category {
+                font-size: calc(1.4vh + 1.2vw);
+              }
+            }
+
+            .boxdesc {
+              font-size: calc(1.4vh + 1vw);
+              margin-top: 2vh;
+            }
+          }
+        }
+      }
+
+      .phrase {
+        float: none;
+        margin-left: 0vw;
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 800px) {
+  .container {
+    .parallax {
+      height: 90vh;
+      max-width: 100vw;
+      padding-top: 20vh;
+
+      .panel {
+        display: block;
+        flex-direction: column;
+        height: 36vh;
+        margin-left: 10vw;
+        margin-right: 10vw;
+        margin-top: -2vh;
+        max-height: 36vh;
+        padding-bottom: 25vh;
+        padding-top: 10vh;
+
+        .innerphoto {
+          height: calc(15vh + 3vw);
+          margin-left: -9vh;
+          margin-top: calc(42vh - 5vw);
+          position: absolute;
+          width: calc(15vh + 3vw);
+        }
+
+        .innertextcontainer {
+          margin-left: 1rem;
+          margin-right: 1rem;
+          margin-top: -8vh;
+          text-align: center;
+
+          .catchphrase {
+            font-size: calc(3vh + 2vw);
+          }
+
+          .desc {
+            font-size: calc(2vh + 1vw);
+            margin-left: 0px;
+          }
+
+          .joinbutton {
+            font-size: calc(1.5vh + 0.5vw);
+            margin-bottom: 40px;
+            margin-left: 0vh;
+            margin-top: 0vh;
+            padding: 1.2vh 3vh;
+          }
+        }
+      }
+    }
+
+    .secondpage {
+      .parallaxbg {
+        height: 95vh;
+        padding-top: 5vh;
+
+        .panel {
+          align-items: center;
+          box-shadow: inset 0px 0px 30px 1px black;
+          flex-direction: column;
+          height: 100vh;
+          justify-content: center;
+          margin-left: 0rem;
+          padding-top: 5vh;
+
+          .card {
+            height: 38vh;
+            margin-bottom: 9vh;
+            margin-left: 1.5vh;
+            margin-right: 1.5vh;
+            margin-top: 0vh;
+            min-width: 10rem;
+            width: 50vw;
+
+            .boxdesc {
+              font-size: calc(2vh + 0.5vw);
+              margin-top: 0.3rem;
+            }
+
+            .boximg {
+              height: 15vh;
+              margin-top: 0.2rem;
+              width: 15vh;
+            }
+
+            .boxphrase {
+              margin-top: 0.3rem;
+            }
+          }
+        }
+      }
+
+      .phrase {
+        font-size: calc(3vh + 3vw);
+        margin-left: 1vh;
+      }
+    }
+
+    .thirdpage {
+      .parallaxbg {
+        height: 105vh;
+        padding-top: 5vh;
+
+        .panel {
+          align-items: center;
+          box-shadow: inset 0px 0px 30px 1px black;
+          display: flex;
+          height: 110vh;
+          justify-content: center;
+          margin-left: 0rem;
+          padding-top: 5vh;
+          width: 80vw;
+
+          .card {
+            height: 29vh;
+            margin-bottom: 5vh;
+            margin-left: 1.5vh;
+            margin-right: 1.5vh;
+            margin-top: -5vh;
+            min-height: 0rem;
+            width: 50vw;
+
+            .box {
+              align-items: center;
+              border-bottom: solid;
+              display: flex;
+              flex-direction: row;
+              //justify-content: center;
+
+              .boximg {
+                border: solid;
+                border-color: rgba($color: black, $alpha: 0.5);
+                border-width: 2px;
+                height: 7vh;
+                margin-bottom: calc(1vh + 0.8vw);
+                margin-left: calc(1vh + 0.8vw);
+                margin-top: calc(1vh + 0.8vw);
+                width: 7vh;
+              }
+
+              .category {
+                font-size: calc(2vh + 0.8vw);
+                margin-bottom: calc(1vh + 0.8vw);
+                margin-left: calc(1vh + 0.8vw);
+                margin-top: calc(1vh + 0.8vw);
+              }
+            }
+
+            .boxdesc {
+              font-size: 2.7vh;
+              margin-top: 4vh;
+            }
+          }
+        }
+      }
+
+      .phrase {
+        float: none;
+        font-size: 4.5vh;
+        margin-bottom: 10vh;
+        margin-left: 1vh;
+        margin-top: 20vh;
+      }
+    }
+  }
+}

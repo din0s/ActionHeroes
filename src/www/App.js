@@ -11,7 +11,7 @@ import ContactPage from "./containers/contactpage/ContactPage.jsx";
 import Footer from "./components/footer/Footer";
 import Login from "./containers/authentication/Login.jsx";
 import NavBar from "./components/navbar/NavBar";
-import LandingPage from "./components/landingpage/LandingPage";
+import LandingPage from "./containers/landingpage/LandingPage";
 import { Provider } from "react-redux";
 import Signup from "./containers/authentication/Signup.jsx";
 import { createBrowserHistory } from "history";

@@ -46,8 +46,13 @@
   },
   "landingpage": {
     "catchphrase": "The more we give, the happier we feel.",
+<<<<<<< HEAD
     "desc": "It has been said that the giving of one’s time to others is the best gift one can give. Be a part of something bigger than yourself. Be a gift to the community. Volunteer today!",
     "join": "Join Our Cause!",
+=======
+    "desc": "Spending part of your time to help others is one of the best gifts you could give. Be a part of something bigger than yourself. Be a gift to the community. Volunteer today!",
+    "join":"Join Our Cause!",
+>>>>>>> Working on requested changes
     "become": "Become an Action Hero",
     "volunteer": "Volunteer",
     "organize": "Organize",
