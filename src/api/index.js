@@ -1,5 +1,9 @@
 const express = require("express");
 const mongo = require("mongoose");
+const morgan = require("morgan");
+const rfs = require("rotating-file-stream");
+const path = require("path");
+
 require("dotenv").config();
 require("dotenv-defaults").config();
 
@@ -27,6 +31,30 @@ mongo
   .then(() => console.log("Connected to database."))
   .catch(() => console.error("Could not connect to database!"));
 
+// Logging
+morgan.token("body", function(req, res) {
+  return JSON.stringify(req.body);
+});
+
+morgan.token("ip", (req, res) => {
+  return req.ip.split(":").pop();
+});
+
+var accessLogStream = rfs.createStream("access.log", {
+  interval: "30d", // rotate monthly
+  path: path.join(process.cwd(), "log"),
+});
+
+// Logging to file
+app.use(
+  morgan("[:date[web]] :ip :method :url :status :body", {
+    stream: accessLogStream,
+  })
+);
+
+// Logging to console
+app.use(morgan("[:date[web]] :ip :method :url :status  :body"));
+
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -50,7 +78,7 @@ app.use((error, req, res, next) => {
   res.status(error.status || 500);
   if (error.status) {
     res.json({
-      error: error.message
+      error: error.message,
     });
   } else {
     res.send();
