@@ -37,10 +37,10 @@
   "contactpage": {
     "title1": "Έχεις κάποια ερώτηση;",
     "title2": "Θα θέλαμε να σε ακούσουμε.",
-    "first_name":"Όνομα",
-    "last_name":"Επίθετο",
+    "firstname":"Όνομα",
+    "lastname":"Επίθετο",
     "email":"Email",
-    "question":"Ερώτηση",
+    "message":"Μήνυμα",
     "submit":"Υποβολή"
   }
 }

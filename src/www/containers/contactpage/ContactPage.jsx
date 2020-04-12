@@ -1,77 +1,80 @@
 import "./ContactPage.scss"
 
 import React, { Component } from "react";
-import { clearErrors, contact } from "../../actions/contact";
 
 import Input from "../../components/input/Input";
-import { connect } from "react-redux";
+import axios from "axios";
+import { push } from "connected-react-router";
 import { withTranslation } from "react-i18next";
 
 const top_img = '/img/top_img.png'; //Photo by Patrick Perkins on Unsplash
 const form_img = '/img/form_img.png'; //Photo by LinkedIn Sales Navigator on Unsplash
 
-const mapState = state => ({
-  undefined
-});
+const clearErrors = () => ({ type: "CLEAR" });
 
-const mapDispatch = {
-  contact,
-  clearErrors
+const handleResponse = (data) => {
+  if (data.error) {
+    console.log(data.error);
+  } else {
+    push("/");
+  }
 };
 
-export default connect(
-  mapState,
-  mapDispatch
-)( withTranslation()(
+const contact = (firstName, lastName,  email, message) => {
+  axios.post("/contact/submit", {
+      firstName, lastName,
+      email, message
+    })
+    .then(res => handleResponse(res.data))
+    .catch(err => handleResponse(err.response.data));
+};
+
+export default ( withTranslation()(
 class ContactPage extends Component {
   constructor() {
     super();
     this.state = {
-      first_name: '',
-      last_name: '',
+      firstName: '',
+      lastName: '',
       email: '',
-      question: '',
-      first_nameHighlight: false,
-      last_nameHighlight: false,
+      message: '',
+      firstΝameHighlight: false,
+      lastNameHighlight: false,
       emailHighlight: false
     }
   }
 
-  onChangeQuestion = (e) => {
-    this.setState({ question: e.target.value.trim() })
+  onChangemessage = (e) => {
+    this.setState({ message: e.target.value.trim() })
   }
 
   clearHighlights = async () => {
-    this.setState({ first_nameHighlight: false,
-      last_nameHighlight: false,
+    this.setState({ firstNameHighlight: false,
+      lastNameHighlight: false,
       emailHighlight: false,});
   };
 
   componentDidMount() {
-    this.props.clearErrors();
+    clearErrors();
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.clearErrors();
-    const data = new FormData(event.target);
+    clearErrors();
 
-    const { first_name, last_name, email, question } = this.state;
+    const { firstName, lastName, email, message } = this.state;
 
-    if (first_name !== "" && last_name !== "" && email !== "" && question !== "") {
+    if (firstName !== "" && lastName !== "" && email !== "" && message !== "") {
       this.clearHighlights();
-      this.props.contact(first_name, last_name, email, question);
-      console.log(stringifyFormData(data));
+      contact(firstName, lastName, email, message);
     } else {
-      console.log("ELSE")
       this.setState({
-        first_nameHighlight: first_name === "",
-        last_nameHighlight: last_name === "",
+        firstΝameHighlight: firstName === "",
+        lastNameHighlight: lastName === "",
         emailHighlight: email === "",
       });
     }
 
-    if(!alert('Thank you!')){window.location.reload();}
   }
 
     render() {
@@ -85,18 +88,18 @@ class ContactPage extends Component {
                 <img className="form-image" alt="form_img" src={form_img}/>
                 <form onSubmit={this.handleSubmit} >
                    <Input
-                      name="first_name" 
-                      onChange={e => this.setState({ first_name: e.target.value.trim() })}
-                      shouldHighlight={this.state.first_nameHighlight}
+                      name="firstname" 
+                      onChange={e => this.setState({ firstName: e.target.value.trim() })}
+                      shouldHighlight={this.state.firstNameHighlight}
                       type='text'
-                      placeholder={t("contactpage.first_name")} 
+                      placeholder={t("contactpage.firstname")} 
                   />
                   <Input
-                      name="last_name" 
-                      onChange={e => this.setState({ last_name: e.target.value.trim() })}
-                      shouldHighlight={this.state.last_nameHighlight}
+                      name="lastname" 
+                      onChange={e => this.setState({ lastName: e.target.value.trim() })}
+                      shouldHighlight={this.state.lastNameHighlight}
                       type='text'
-                      placeholder={t("contactpage.last_name")} 
+                      placeholder={t("contactpage.lastname")} 
                   />
                   <Input
                       name="email" 
@@ -106,11 +109,11 @@ class ContactPage extends Component {
                       placeholder={t("contactpage.email")}
                   />
                   <textarea
-                      name="question"
-                      onChange={this.onChangeQuestion}
+                      name="message"
+                      onChange={this.onChangemessage}
                       required
                       type='text'
-                      placeholder={t("contactpage.question")}
+                      placeholder={t("contactpage.message")}
                   />
                   <input
                       className="submit-btn"
@@ -123,11 +126,3 @@ class ContactPage extends Component {
         );
     }
 }));
-
-function stringifyFormData(fd) {
-  const data = {};
-	for (let key of fd.keys()) {
-  	data[key] = fd.get(key);
-  }
-  return JSON.stringify(data, null, 2);
-}

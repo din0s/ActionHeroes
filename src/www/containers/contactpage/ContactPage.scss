@@ -17,7 +17,6 @@ $softBlack: rgba(
         display: flex;
         flex-direction: column;
         margin-top: 2vw;
-        width: 100%;
         align-items: center;
 
         Input, textarea{
@@ -26,7 +25,7 @@ $softBlack: rgba(
             box-shadow: 1px 1px $softBlack;
             font-family: $globalFonts;
             font-size: 1.2rem;
-            height: 4vh;
+            height: 2rem;
             margin-top: 1vh;
             margin-left: 5rem;
             margin-right: 5rem;
@@ -75,7 +74,7 @@ $softBlack: rgba(
     .contact-form-title1{
         color: black;
         font-family: $globalFonts;
-        font-size: 3.3rem;
+        font-size: 3.1rem;
         margin-top: 3.8vh;
         line-height: 1.2;
         text-align: center;
@@ -106,7 +105,6 @@ $softBlack: rgba(
     }
 
     .top-img{
-        min-height: 20rem;
         position: absolute;
         width: 100%;
         z-index: -1;
@@ -119,7 +117,7 @@ $softBlack: rgba(
     }
 }
 
-@media only screen and(max-width: 850px) {
+@media only screen and(max-width: 900px) {
 
     .contact-form-block{
         margin-top: 1vh;
@@ -133,26 +131,34 @@ $softBlack: rgba(
 
 @media only screen and(max-width: 600px) {
     .container{
-        height: 83vh;
-        width: 100%;
+
+        form{
+            width: 25rem;
+        }
 
         .contact-form-block{
             border: none;
         }
-        
-        .contact-form{
-            > *{
-                margin-left: 0rem;
-                margin-right: 0rem;
-            }
+
+        .contact-form-title1{
+            padding-bottom: 0;
         }
 
         .top-img{
-            display: none;
+            width: 100%;
+            height: 15rem;
         }
+    }
+}
 
-        .contact-form-title1{
-            font-size: 2rem;
+@media only screen and(max-width: 400px) {
+    .container{
+
+        form{
+            width: 0;
+            Input, textarea{
+                width: 15rem;
+            }
         }
     }
 }
