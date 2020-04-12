@@ -1,4 +1,5 @@
 {
+  "actions": "Actions",
   "search": "Search...",
   "filterlist": {
     "filters": "Filters",
@@ -6,9 +7,8 @@
     "categories": "Categories",
     "none": "None."
   },
+  "teams": "Teams",
   "nav": {
-    "actions": "Actions",
-    "teams": "Teams",
     "contact": "Contact",
     "login": "Login",
     "signup": "Sign Up",
@@ -36,6 +36,12 @@
       "alt-call": "Already have an account?",
       "mismatch": "Your passwords don't match!"
     }
+  },
+  "profile": {
+    "attended": "Attended",
+    "categories": "Categories",
+    "edit": "Edit Profile",
+    "organized": "Organized"
   },
   "footer": {
     "icons": "Icons from {{site}}"
