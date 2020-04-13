@@ -1,0 +1,6 @@
+{
+  "name": "ActionHeroes",
+  "repository": "https://github.com/din0s/ActionHeroes",
+  "image": "heroku/nodejs",
+  "addons": ["mongolab"]
+}
