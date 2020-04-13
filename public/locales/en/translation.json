@@ -42,7 +42,8 @@
     "categories": "Categories",
     "edit": "Edit Profile",
     "organized": "Organized",
-    "show-more": "Show more..."
+    "show-more": "Show more...",
+    "show-less": "Show less..."
   },
   "footer": {
     "icons": "Icons from {{site}}"

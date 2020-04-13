@@ -79,7 +79,8 @@
         display: none;
       }
 
-      .Actions {
+      .Actions,
+      .Teams {
         > div {
           border: 1px solid rgba($color: black, $alpha: 0.3);
           border-radius: 0.5rem;
@@ -103,16 +104,20 @@
             }
           }
 
-          .Action-card {
+          > p {
+            cursor: pointer;
+          }
+
+          .Card {
             display: flex;
             flex-direction: row;
 
-            .Action-image {
+            .Card-image {
               border-radius: 0.5rem;
               width: 10rem;
             }
 
-            .Action-body {
+            .Card-body {
               display: flex;
               flex-direction: column;
               justify-content: space-between;
@@ -122,7 +127,7 @@
                 margin: 0;
               }
 
-              .Action-categories {
+              .Card-categories {
                 display: flex;
                 flex-direction: row;
                 align-items: center;

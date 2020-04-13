@@ -26,6 +26,28 @@ const actionsAttended = {
       "Description Description Description Description Description Description",
     categories: [{ name: "ABC" }, { name: "BCD" }],
     photo: "/img/profilePhoto.jpg"
+  },
+  Action4: {
+    name: "ABCDE",
+    description:
+      "Description Description Description Description Description Description",
+    categories: [{ name: "ABC" }, { name: "BCD" }],
+    photo: "/img/profilePhoto.jpg"
+  }
+};
+
+const teams = {
+  Team1: {
+    name: "ABCDE",
+    description: "Description Description Description Description Description",
+    categories: [{ name: "ABC" }, { name: "BCD" }],
+    photo: "/img/teams.jpg"
+  },
+  Team2: {
+    name: "ABCDE",
+    description: "Description Description Description Description Description",
+    categories: [{ name: "ABC" }, { name: "BCD" }],
+    photo: "/img/teams.jpg"
   }
 };
 
@@ -42,47 +64,69 @@ export default connect(
       state = {
         activeTab: "actions",
         attendedShown: 3,
-        organizedShown: 3
+        organizedShown: 3,
+        teamsShown: 3
       };
 
-      showActions = (actions, count) => {
+      showCards = (cards, count) => {
         const { t } = this.props;
-        return Object.keys(actions).map((key, index) => {
-          const action = actions[key];
+        return Object.keys(cards).map((key, index) => {
+          const card = cards[key];
           if (index >= count) {
             return null;
           }
           return (
             <li>
-              <span className="Action-card">
-                <img
-                  className="Action-image"
-                  src={action.photo}
-                  alt=""
-                />
-                <div className="Action-body">
+              <span className="Card">
+                <img className="Card-image" src={card.photo} alt="" />
+                <div className="Card-body">
                   <div>
-                    <h4>{action.name}</h4>
-                    <p>{action.description}</p>
+                    <h4>{card.name}</h4>
+                    <p>{card.description}</p>
                   </div>
-                  <div className="Action-categories">
+                  <div className="Card-categories">
                     <h4>{t("profile.categories")}:</h4>
                     <ul>
-                      {Object.keys(action.categories).map(
-                        cKey => {
-                          const category =
-                            action.categories[cKey];
-                          return <li>{category.name}</li>;
-                        }
-                      )}
+                      {Object.keys(card.categories).map(cKey => {
+                        const category = card.categories[cKey];
+                        return <li>{category.name}</li>;
+                      })}
                     </ul>
                   </div>
                 </div>
               </span>
             </li>
           );
-        })
-      }
+        });
+      };
+
+      expandActions = (actions, isAttended, minimum) => {
+        const { t } = this.props;
+        const count = isAttended
+          ? this.state.attendedShown
+          : this.state.organizedShown;
+        const list = isAttended ? "attendedShown" : "organizedShown";
+
+        if (Object.keys(actions).length < count) {
+          return null;
+        } else if (count <= minimum) {
+          return (
+            <p
+              onClick={() =>
+                this.setState({ [list]: Object.keys(actions).length })
+              }
+            >
+              {t("profile.show-more")}
+            </p>
+          );
+        } else if (count === Object.keys(actions).length) {
+          return (
+            <p onClick={() => this.setState({ [list]: minimum })}>
+              {t("profile.show-less")}
+            </p>
+          );
+        }
+      };
 
       render() {
         const { t, user } = this.props;
@@ -133,33 +177,43 @@ export default connect(
                 <div
                   className={`Actions${
                     this.state.activeTab === "actions" ? " active" : ""
-                    }`}
+                  }`}
                 >
                   <div>
                     <h3>{t("profile.attended")}</h3>
                     <ul>
-                      {this.showActions(actionsAttended, this.state.attendedShown)}
+                      {this.showCards(
+                        actionsAttended,
+                        this.state.attendedShown
+                      )}
                     </ul>
-                    <p>
-                      {t("profile.show-more")}
-                    </p>
+                    <p>{this.expandActions(actionsAttended, true, 3)}</p>
                   </div>
                   <div>
                     <h3>{t("profile.organized")}</h3>
                     <ul>
-                      {this.showActions(actionsAttended, this.state.organizedShown)}
+                      {this.showCards(
+                        actionsAttended,
+                        this.state.organizedShown
+                      )}
                     </ul>
+                    {/*TODO: change to actionsOrganized*/}
+                    <p>{this.expandActions(actionsAttended, false, 3)}</p>
                   </div>
                 </div>
                 <div
                   className={`Teams${
                     this.state.activeTab === "teams" ? " active" : ""
-                    }`}
-                ></div>
+                  }`}
+                >
+                  <div>
+                    <ul>{this.showCards(teams, this.state.teamsShown)}</ul>
+                  </div>
+                </div>
                 <div
                   className={`Categories${
                     this.state.activeTab === "categories" ? " active" : ""
-                    }`}
+                  }`}
                 >
                   456
                 </div>

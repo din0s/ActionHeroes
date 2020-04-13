@@ -1,5 +1,6 @@
 const mongo = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
+const Team = require("../models/TeamModel");
 
 const UserSchema = new mongo.Schema({
   email: {
@@ -11,7 +12,7 @@ const UserSchema = new mongo.Schema({
   username: { type: String, required: true, unique: true },
   hash: { type: String, required: true },
   profilePhoto: { data: Buffer, contentType: String },
-  profilePhoto: { type: String },
+  bio: { type: String },
   location: {
     type: {
       type: String,
