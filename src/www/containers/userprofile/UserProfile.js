@@ -40,8 +40,49 @@ export default connect(
   withTranslation()(
     class UserProfile extends Component {
       state = {
-        activeTab: "actions"
+        activeTab: "actions",
+        attendedShown: 3,
+        organizedShown: 3
       };
+
+      showActions = (actions, count) => {
+        const { t } = this.props;
+        return Object.keys(actions).map((key, index) => {
+          const action = actions[key];
+          if (index >= count) {
+            return null;
+          }
+          return (
+            <li>
+              <span className="Action-card">
+                <img
+                  className="Action-image"
+                  src={action.photo}
+                  alt=""
+                />
+                <div className="Action-body">
+                  <div>
+                    <h4>{action.name}</h4>
+                    <p>{action.description}</p>
+                  </div>
+                  <div className="Action-categories">
+                    <h4>{t("profile.categories")}:</h4>
+                    <ul>
+                      {Object.keys(action.categories).map(
+                        cKey => {
+                          const category =
+                            action.categories[cKey];
+                          return <li>{category.name}</li>;
+                        }
+                      )}
+                    </ul>
+                  </div>
+                </div>
+              </span>
+            </li>
+          );
+        })
+      }
 
       render() {
         const { t, user } = this.props;
@@ -92,58 +133,33 @@ export default connect(
                 <div
                   className={`Actions${
                     this.state.activeTab === "actions" ? " active" : ""
-                  }`}
+                    }`}
                 >
                   <div>
                     <h3>{t("profile.attended")}</h3>
                     <ul>
-                      {Object.keys(actionsAttended).map(key => {
-                        const action = actionsAttended[key];
-                        return (
-                          <li>
-                            <span className="Action-card">
-                              <img
-                                className="Action-image"
-                                src={action.photo}
-                                alt=""
-                              />
-                              <div className="Action-body">
-                                <div>
-                                  <h4>{action.name}</h4>
-                                  <p>{action.description}</p>
-                                </div>
-                                <div className="Action-categories">
-                                  <h4>{t("profile.categories")}:</h4>
-                                  <ul>
-                                    {Object.keys(action.categories).map(
-                                      cKey => {
-                                        const category =
-                                          action.categories[cKey];
-                                        return <li>{category.name}</li>;
-                                      }
-                                    )}
-                                  </ul>
-                                </div>
-                              </div>
-                            </span>
-                          </li>
-                        );
-                      })}
+                      {this.showActions(actionsAttended, this.state.attendedShown)}
                     </ul>
+                    <p>
+                      {t("profile.show-more")}
+                    </p>
                   </div>
                   <div>
                     <h3>{t("profile.organized")}</h3>
+                    <ul>
+                      {this.showActions(actionsAttended, this.state.organizedShown)}
+                    </ul>
                   </div>
                 </div>
                 <div
                   className={`Teams${
                     this.state.activeTab === "teams" ? " active" : ""
-                  }`}
+                    }`}
                 ></div>
                 <div
                   className={`Categories${
                     this.state.activeTab === "categories" ? " active" : ""
-                  }`}
+                    }`}
                 >
                   456
                 </div>

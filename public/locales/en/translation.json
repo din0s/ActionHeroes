@@ -41,7 +41,8 @@
     "attended": "Attended",
     "categories": "Categories",
     "edit": "Edit Profile",
-    "organized": "Organized"
+    "organized": "Organized",
+    "show-more": "Show more..."
   },
   "footer": {
     "icons": "Icons from {{site}}"
