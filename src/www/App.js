@@ -1,10 +1,12 @@
 import "./App.scss";
 
+import { Provider as AlertProvider, positions, transitions } from 'react-alert'
 import { ConnectedRouter, routerMiddleware } from "connected-react-router";
 import React, { Component, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import { applyMiddleware, compose, createStore } from "redux";
 
+import AlertTemplate from "./components/alert/AlertTemplate";
 import ContactPage from "./containers/contactpage/ContactPage.jsx";
 import Footer from "./components/footer/Footer";
 import Login from "./containers/authentication/Login.jsx";
@@ -26,6 +28,13 @@ const store = createStore(
   )
 );
 
+const alert_options = {
+  position: positions.BOTTOM_CENTER,
+  timeout: 3000,
+  offset: '100px',
+  transition: transitions.SCALE
+}
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -38,6 +47,7 @@ export default class App extends Component {
       <Provider store={store}>
         <Suspense fallback="">
           <ConnectedRouter history={history}>
+          <AlertProvider template={AlertTemplate} {...alert_options}>
             <div className="App">
               <NavBar />
               <main>              
@@ -50,6 +60,7 @@ export default class App extends Component {
               </main>
               <Footer />
             </div>
+            </AlertProvider>
           </ConnectedRouter>
         </Suspense>
       </Provider>

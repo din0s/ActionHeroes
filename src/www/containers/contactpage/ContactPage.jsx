@@ -1,128 +1,140 @@
-import "./ContactPage.scss"
+import "./ContactPage.scss";
 
 import React, { Component } from "react";
 
 import Input from "../../components/input/Input";
 import axios from "axios";
-import { push } from "connected-react-router";
+import { withAlert } from "react-alert";
 import { withTranslation } from "react-i18next";
 
-const top_img = '/img/top_img.png'; //Photo by Patrick Perkins on Unsplash
-const form_img = '/img/form_img.png'; //Photo by LinkedIn Sales Navigator on Unsplash
+const form_img = "/img/form_img.png"; //Photo by LinkedIn Sales Navigator on Unsplash
 
-const clearErrors = () => ({ type: "CLEAR" });
+export default withAlert()(
+  withTranslation()(
+    class ContactPage extends Component {
+      state = {
+        firstName: "",
+        lastName: "",
+        email: "",
+        message: "",
+        serverMessage: "",
+        check_success: false,
+        firstΝameHighlight: false,
+        lastNameHighlight: false,
+        emailHighlight: false
+      };
 
-const handleResponse = (data) => {
-  if (data.error) {
-    console.log(data.error);
-  } else {
-    push("/");
-  }
-};
+      clearHighlights = async () => {
+        this.setState({
+          firstNameHighlight: false,
+          lastNameHighlight: false,
+          emailHighlight: false
+        });
+      };
 
-const contact = (firstName, lastName,  email, message) => {
-  axios.post("/contact/submit", {
-      firstName, lastName,
-      email, message
-    })
-    .then(res => handleResponse(res.data))
-    .catch(err => handleResponse(err.response.data));
-};
+      handleResponse = (data, target) => {
+        const { t, alert } = this.props;
+        if (data.error) {
+          alert.error(data.error);
+        } else {
+          alert.success(t("contactpage.thanks"));
+          target.reset();
+        }
+      };
 
-export default ( withTranslation()(
-class ContactPage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      message: '',
-      firstΝameHighlight: false,
-      lastNameHighlight: false,
-      emailHighlight: false
-    }
-  }
+      contact = (firstName, lastName, email, message, target) => {
+        axios
+          .post("/contact/submit", {
+            firstName,
+            lastName,
+            email,
+            message
+          })
+          .then(res => this.handleResponse(res.data, target))
+          .catch(err => this.handleResponse(err.response.data, target));
+      };
 
-  onChangemessage = (e) => {
-    this.setState({ message: e.target.value.trim() })
-  }
+      handleSubmit = event => {
+        event.preventDefault();
 
-  clearHighlights = async () => {
-    this.setState({ firstNameHighlight: false,
-      lastNameHighlight: false,
-      emailHighlight: false,});
-  };
+        const { firstName, lastName, email, message } = this.state;
 
-  componentDidMount() {
-    clearErrors();
-  }
+        if (
+          firstName !== "" &&
+          lastName !== "" &&
+          email !== "" &&
+          message !== ""
+        ) {
+          this.clearHighlights();
+          this.contact(firstName, lastName, email, message, event.target);
+        } else {
+          this.setState({
+            firstΝameHighlight: firstName === "",
+            lastNameHighlight: lastName === "",
+            emailHighlight: email === ""
+          });
+        }
+      };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    clearErrors();
-
-    const { firstName, lastName, email, message } = this.state;
-
-    if (firstName !== "" && lastName !== "" && email !== "" && message !== "") {
-      this.clearHighlights();
-      contact(firstName, lastName, email, message);
-    } else {
-      this.setState({
-        firstΝameHighlight: firstName === "",
-        lastNameHighlight: lastName === "",
-        emailHighlight: email === "",
-      });
-    }
-
-  }
-
-    render() {
-      const { t } = this.props;
-      return (
-        <div className="container">    
-            <img className="top-img" alt="top_img" src={top_img}/>
-            <span className="contact-form-title1">{t("contactpage.title1")}</span>
-            <span className="contact-form-title2">{t("contactpage.title2")}</span>
+      render() {
+        const { t } = this.props;
+        return (
+          <div className="container">
+            <span className="contact-form-title1">
+              {t("contactpage.title1")}
+            </span>
+            <span className="contact-form-title2">
+              {t("contactpage.title2")}
+            </span>
             <div className="contact-form-block">
-                <img className="form-image" alt="form_img" src={form_img}/>
-                <form onSubmit={this.handleSubmit} >
-                   <Input
-                      name="firstname" 
-                      onChange={e => this.setState({ firstName: e.target.value.trim() })}
-                      shouldHighlight={this.state.firstNameHighlight}
-                      type='text'
-                      placeholder={t("contactpage.firstname")} 
-                  />
-                  <Input
-                      name="lastname" 
-                      onChange={e => this.setState({ lastName: e.target.value.trim() })}
-                      shouldHighlight={this.state.lastNameHighlight}
-                      type='text'
-                      placeholder={t("contactpage.lastname")} 
-                  />
-                  <Input
-                      name="email" 
-                      onChange={e => this.setState({ email: e.target.value.trim() })}
-                      shouldHighlight={this.state.emailHighlight}
-                      type='email'
-                      placeholder={t("contactpage.email")}
-                  />
-                  <textarea
-                      name="message"
-                      onChange={this.onChangemessage}
-                      required
-                      type='text'
-                      placeholder={t("contactpage.message")}
-                  />
-                  <input
-                      className="submit-btn"
-                      type="submit"
-                      value={t("contactpage.submit")}
-                  />
-                </form>
+              <img className="form-image" alt="form_img" src={form_img} />
+              <form onSubmit={this.handleSubmit}>
+                <Input
+                  name="firstname"
+                  onChange={e =>
+                    this.setState({ firstName: e.target.value.trim() })
+                  }
+                  shouldHighlight={this.state.firstΝameHighlight}
+                  type="text"
+                  placeholder={t("contactpage.firstname")}
+                />
+                <Input
+                  name="lastname"
+                  onChange={e =>
+                    this.setState({ lastName: e.target.value.trim() })
+                  }
+                  shouldHighlight={this.state.lastNameHighlight}
+                  type="text"
+                  placeholder={t("contactpage.lastname")}
+                />
+                <Input
+                  name="email"
+                  onChange={e =>
+                    this.setState({ email: e.target.value.trim() })
+                  }
+                  shouldHighlight={this.state.emailHighlight}
+                  type="email"
+                  placeholder={t("contactpage.email")}
+                />
+                <textarea
+                  name="message"
+                  onChange={e =>
+                    this.setState({ message: e.target.value.trim() })
+                  }
+                  required
+                  type="text"
+                  placeholder={t("contactpage.message")}
+                />
+                <input
+                  className="submit-btn"
+                  type="submit"
+                  value={t("contactpage.submit")}
+                />
+              </form>
             </div>
-        </div>
+          </div>
         );
+      }
     }
-}));
+  )
+);
