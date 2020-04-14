@@ -80,12 +80,12 @@ export default withAlert()(
         const { t } = this.props;
         return (
           <div className="container">
-            <span className="contact-form-title1">
+            <h2 className="contact-form-title1">
               {t("contactpage.title1")}
-            </span>
-            <span className="contact-form-title2">
+            </h2>
+            <h3 className="contact-form-title2">
               {t("contactpage.title2")}
-            </span>
+            </h3>
             <div className="contact-form-block">
               <img className="form-image" alt="form_img" src={form_img} />
               <form onSubmit={this.handleSubmit}>
