@@ -51,6 +51,21 @@ const teams = {
   }
 };
 
+const categories = {
+  Category1: {
+    name: "Hey",
+    photo: "/img/categories.jpg"
+  },
+  Category2: {
+    name: "Hey",
+    photo: "/img/categories.jpg"
+  },
+  Category3: {
+    name: "Hey",
+    photo: "/img/categories.jpg"
+  }
+};
+
 const mapState = state => ({
   user: state.auth.user
 });
@@ -126,6 +141,20 @@ export default connect(
             </p>
           );
         }
+      };
+
+      showCategories = categories => {
+        return Object.keys(categories).map(key => {
+          const category = categories[key];
+          return (
+            <li>
+              <div className="Category">
+                <img className="Category-image" src={category.photo} alt="" />
+                <p>{category.name}</p>
+              </div>
+            </li>
+          );
+        });
       };
 
       render() {
@@ -208,6 +237,9 @@ export default connect(
                 >
                   <div>
                     <ul>{this.showCards(teams, this.state.teamsShown)}</ul>
+                    <Link to="/teams" className="Link">
+                      <p>{t("profile.join")}</p>
+                    </Link>
                   </div>
                 </div>
                 <div
@@ -215,7 +247,9 @@ export default connect(
                     this.state.activeTab === "categories" ? " active" : ""
                   }`}
                 >
-                  456
+                  <div>
+                    <ul>{this.showCategories(categories)}</ul>
+                  </div>
                 </div>
               </div>
             </div>

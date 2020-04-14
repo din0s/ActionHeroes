@@ -1,7 +1,7 @@
 .Container {
   display: flex;
   flex-direction: row;
-  padding: 6rem 12rem;
+  padding: 4rem 8rem;
 
   .Bio-panel {
     display: flex;
@@ -11,6 +11,8 @@
 
     .Profile-photo {
       height: 15rem;
+      box-shadow: 1px 1px black;
+      border-radius: 0.5rem;
     }
 
     .Username {
@@ -26,7 +28,7 @@
       background-color: rgba($color: lightgray, $alpha: 0.1);
       border: 1px solid rgba($color: black, $alpha: 0.3);
       border-radius: 0.3rem;
-      box-shadow: 1px 1px black;
+      box-shadow: 0.5px 0.5px 0.5px 0.5px black;
       cursor: pointer;
       font-size: 1.2rem;
       margin-top: 1rem;
@@ -36,7 +38,7 @@
       width: 15rem;
 
       &:hover {
-        background-color: rgba($color: lightgray, $alpha: 0.3);
+        background-color: rgba($color: rgb(141, 108, 108), $alpha: 0.3);
       }
     }
   }
@@ -82,9 +84,10 @@
       .Actions,
       .Teams {
         > div {
-          border: 1px solid rgba($color: black, $alpha: 0.3);
+          border: 1px solid rgba($color: black, $alpha: 0.4);
           border-radius: 0.5rem;
           box-shadow: 0px 1px black;
+          background-color: rgb(247, 233, 236);
 
           &:not(:first-of-type) {
             margin-top: 1rem;
@@ -148,6 +151,48 @@
                     }
                   }
                 }
+              }
+            }
+          }
+
+          .Link {
+            text-decoration: none;
+            color: black;
+          }
+        }
+      }
+    }
+
+    .Categories {
+      > div {
+        border: 1px solid rgba($color: black, $alpha: 0.4);
+        border-radius: 0.5rem;
+        box-shadow: 0px 1px black;
+        max-width: 50rem;
+        background-color: rgb(247, 233, 236);
+
+        > ul {
+          list-style-type: none;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          padding: 0rem;
+
+          > li {
+            margin: 0.5rem;
+            padding: 1rem;
+            border: 1px solid rgba($color: black, $alpha: 0.3);
+            border-radius: 0.5rem;
+            box-shadow: 0px 1px black;
+            background-color: rgb(247, 241, 242);
+
+            .Category {
+              .Category-image {
+                width: 15rem;
+              }
+
+              > p {
+                font-size: 1.2rem;
               }
             }
           }
