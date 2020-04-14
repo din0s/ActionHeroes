@@ -167,13 +167,15 @@ export default connect(
           <div className="Container">
             <div className="Bio-panel">
               <img className="Profile-photo" src={photo} alt="Profile Avatar" />
-              <p className="Username">{username}</p>
-              <p className="Info">{info}</p>
-              <Link to="/user/profile/edit">
-                <button className="Edit-profile-button">
-                  {t("profile.edit")}
-                </button>
-              </Link>
+              <div>
+                <p className="Username">{username}</p>
+                <p className="Info">{info}</p>
+                <Link to="/user/profile/edit">
+                  <button className="Edit-profile-button">
+                    {t("profile.edit")}
+                  </button>
+                </Link>
+              </div>
             </div>
             <div className="Panel">
               <ul className="List">

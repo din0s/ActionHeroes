@@ -1,4 +1,5 @@
 .Container {
+  background-image: url("/img/sky.jpg");
   display: flex;
   flex-direction: row;
   padding: 4rem 8rem;
@@ -10,9 +11,9 @@
     width: 15rem;
 
     .Profile-photo {
-      height: 15rem;
-      box-shadow: 1px 1px black;
       border-radius: 0.5rem;
+      box-shadow: 1px 1px black;
+      height: 15rem;
     }
 
     .Username {
@@ -25,7 +26,7 @@
     }
 
     .Edit-profile-button {
-      background-color: rgba($color: lightgray, $alpha: 0.1);
+      background-color: rgba($color: white, $alpha: 0.3);
       border: 1px solid rgba($color: black, $alpha: 0.3);
       border-radius: 0.3rem;
       box-shadow: 0.5px 0.5px 0.5px 0.5px black;
@@ -38,14 +39,14 @@
       width: 15rem;
 
       &:hover {
-        background-color: rgba($color: rgb(141, 108, 108), $alpha: 0.3);
+        background-color: rgba($color: rgb(192, 180, 180), $alpha: 0.3);
       }
     }
   }
 
   .Panel {
-    width: 100%;
     margin-left: 5rem;
+    width: 100%;
 
     .List {
       border-bottom: 1px solid black;
@@ -84,10 +85,10 @@
       .Actions,
       .Teams {
         > div {
+          background-color: rgb(209, 206, 218);
           border: 1px solid rgba($color: black, $alpha: 0.4);
           border-radius: 0.5rem;
           box-shadow: 0px 1px black;
-          background-color: rgb(247, 233, 236);
 
           &:not(:first-of-type) {
             margin-top: 1rem;
@@ -117,6 +118,7 @@
 
             .Card-image {
               border-radius: 0.5rem;
+              height: 10rem;
               width: 10rem;
             }
 
@@ -131,14 +133,14 @@
               }
 
               .Card-categories {
+                align-items: center;
                 display: flex;
                 flex-direction: row;
-                align-items: center;
 
                 > ul {
-                  list-style-type: none;
                   display: flex;
                   flex-direction: row;
+                  list-style-type: none;
                   padding-left: 0.5rem;
 
                   > li {
@@ -156,8 +158,8 @@
           }
 
           .Link {
-            text-decoration: none;
             color: black;
+            text-decoration: none;
           }
         }
       }
@@ -165,34 +167,138 @@
 
     .Categories {
       > div {
+        background-color: rgb(209, 206, 218);
         border: 1px solid rgba($color: black, $alpha: 0.4);
         border-radius: 0.5rem;
         box-shadow: 0px 1px black;
         max-width: 50rem;
-        background-color: rgb(247, 233, 236);
 
         > ul {
-          list-style-type: none;
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
+          list-style-type: none;
           padding: 0rem;
 
           > li {
-            margin: 0.5rem;
-            padding: 1rem;
+            background-color: rgb(218, 215, 226);
             border: 1px solid rgba($color: black, $alpha: 0.3);
             border-radius: 0.5rem;
             box-shadow: 0px 1px black;
-            background-color: rgb(247, 241, 242);
+            margin: 0.5rem;
+            padding: 1rem;
 
             .Category {
               .Category-image {
-                width: 15rem;
+                height: 10rem;
+                width: 10rem;
               }
 
               > p {
                 font-size: 1.2rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 1024px) {
+  .Container {
+    padding: 4rem 2rem;
+  }
+}
+
+@media only screen and(max-width: 800px) {
+  .Container {
+    flex-direction: column;
+
+    .Bio-panel {
+      flex-direction: row;
+
+      > div {
+        margin: -1.75rem 2rem;
+      }
+    }
+
+    .Panel {
+      margin: 1.5rem 0rem;
+    }
+  }
+}
+
+@media only screen and(max-width: 360px) {
+  .Container {
+    .Bio-panel {
+      margin-left: -1rem;
+      flex-direction: column;
+
+      .Profile-photo {
+        width: 12rem;
+        height: 12rem;
+      }
+
+      > div {
+        margin: 0.5rem;
+
+        .Username {
+          font-size: 1.5rem;
+        }
+
+        .Edit-profile-button {
+          height: 2.5rem;
+          width: 8rem;
+        }
+      }
+    }
+
+    .Panel {
+      .List {
+        margin-left: -1rem;
+        width: 98%;
+        > li {
+          &:not(:first-of-type) {
+            margin-left: 2rem;
+          }
+        }
+      }
+    }
+
+    .Panel {
+      .Content {
+        .Actions,
+        .Teams {
+          > div {
+            margin-left: -1rem;
+
+            .Card {
+              flex-direction: column;
+
+              .Card-image {
+                height: 8rem;
+                width: 8rem;
+              }
+
+              .Card-body {
+                margin: 0rem;
+                margin-top: 1rem;
+              }
+            }
+          }
+        }
+      }
+
+      .Categories {
+        > div {
+          margin-left: -1rem;
+          > ul {
+            > li {
+              .Category {
+                .Category-image {
+                  width: 10rem;
+                }
               }
             }
           }
