@@ -45,17 +45,6 @@ const categoriesList = {
 export default withTranslation()(
   class LandingPage extends Component {
     render() {
-      // const [width, setWidth] = React.useState(window.innerWidth);
-
-      // const updateWidth= () => {
-      //   setWidth(window.innerWidth);
-      // };
-
-      // React.useEffect(() => {
-      //   window.addEventListener("resize", updateWidth);
-      //   return () => window.removeEventListener("resize", updateWidth);
-      // });
-
       const { t } = this.props;
       return (
         <div className="container">
@@ -136,7 +125,6 @@ export default withTranslation()(
 );
 
 function showCategories(categoriesList) {
-  // eslint-disable-next-line
   return Object.keys(categoriesList).map((key, index) => {
     if (index < 3) {
       return (
