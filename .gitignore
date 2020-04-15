@@ -21,3 +21,5 @@
 # used by deploy-node-app
 tmp/
 secrets/
+
+/.vscode

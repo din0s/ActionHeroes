@@ -134,46 +134,52 @@ export default withTranslation()(
     }
   }
 );
-//export default LandingPage;
 
 function showCategories(categoriesList) {
-  if (window.innerWidth <= 800) {
-    return Object.keys(categoriesList).map((key, index) => {
-      if (index < 3)
-        return (
-          <div className="card">
-            <div className="box">
-              <img className="boximg" src={categoriesList[key].image} />
-              <p className="category">{categoriesList[key].name}</p>
-            </div>
-            <p className="boxdesc">{categoriesList[key].desc}</p>
-          </div>
-        );
-    });
-  } else if (window.innerWidth <= 1024) {
-    return Object.keys(categoriesList).map((key, index) => {
-      if (index < 4)
-        return (
-          <div className="card">
-            <div className="box">
-              <img className="boximg" src={categoriesList[key].image} />
-              <p className="category">{categoriesList[key].name}</p>
-            </div>
-            <p className="boxdesc">{categoriesList[key].desc}</p>
-          </div>
-        );
-    });
-  } else {
-    return Object.keys(categoriesList).map(key => {
+  // eslint-disable-next-line
+  return Object.keys(categoriesList).map((key, index) => {
+    if (index < 3) {
       return (
         <div className="card">
           <div className="box">
-            <img className="boximg" src={categoriesList[key].image} />
+            <img
+              className="boximg"
+              alt="category_img"
+              src={categoriesList[key].image}
+            />
             <p className="category">{categoriesList[key].name}</p>
           </div>
           <p className="boxdesc">{categoriesList[key].desc}</p>
         </div>
       );
-    });
-  }
+    } else if (index < 4) {
+      return (
+        <div className="card card-4">
+          <div className="box">
+            <img
+              className="boximg"
+              alt="category_img"
+              src={categoriesList[key].image}
+            />
+            <p className="category">{categoriesList[key].name}</p>
+          </div>
+          <p className="boxdesc">{categoriesList[key].desc}</p>
+        </div>
+      );
+    } else if (index < 6) {
+      return (
+        <div className="card card-6">
+          <div className="box">
+            <img
+              className="boximg"
+              alt="category_img"
+              src={categoriesList[key].image}
+            />
+            <p className="category">{categoriesList[key].name}</p>
+          </div>
+          <p className="boxdesc">{categoriesList[key].desc}</p>
+        </div>
+      );
+    }
+  });
 }
