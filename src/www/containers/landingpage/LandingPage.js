@@ -168,6 +168,6 @@ function showCategories(categoriesList) {
           <p className="boxdesc">{categoriesList[key].desc}</p>
         </div>
       );
-    }
+    } else return null;
   });
 }
