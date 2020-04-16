@@ -1,32 +1,28 @@
 const mongo = require("mongoose");
-const User = require("../models/UserModel");
-const Category = require("../models/CategoryModel");
+const uniqueValidator = require("mongoose-unique-validator");
 
 const ActionSchema = new mongo.Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
   description: { type: String },
   categories: [{ type: mongo.Schema.Types.ObjectId, ref: "Category" }],
   location: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     coordinates: {
       type: [Number],
-      required: true
-    }
+      required: true,
+    },
   },
   date: { type: Date, required: true },
-  photo: { type: String },
+  photo: { data: Buffer, contentType: String },
   organizer: {
-    organizerId: {
-      type: mongo.Schema.Types.ObjectId,
-      required: true,
-      ref: "User"
-    },
-    isTeam: { type: Boolean, required: true }
+    userId: { type: mongo.Schema.Types.ObjectId, ref: "User" },
+    teamId: { type: mongo.Schema.Types.ObjectId, ref: "Team" },
   },
-  attendees: [{ type: mongo.Schema.Types.ObjectId, ref: "User" }]
+  attendees: [{ type: mongo.Schema.Types.ObjectId, ref: "User" }],
 });
 
+ActionSchema.plugin(uniqueValidator);
 module.exports = mongo.model("Action", ActionSchema);

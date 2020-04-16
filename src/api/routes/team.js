@@ -15,6 +15,13 @@ router.patch("/:team_id", checkAuth, checkOwner, TeamController.updateTeam);
 
 router.delete("/:team_id", checkAuth, checkOwner, TeamController.deleteTeam);
 
+router.put(
+  "/:team_id/photo",
+  checkAuth,
+  checkOwner,
+  TeamController.changePhoto
+);
+
 /* Members */
 
 router.patch(

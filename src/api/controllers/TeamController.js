@@ -1,42 +1,56 @@
 const Team = require("../models/TeamModel");
+const Category = require("../models/CategoryModel");
 
 module.exports = {
   addMembers: (req, res) => {},
 
   createTeam: (req, res) => {
-    const name = req.body.name;
+    const team = new Team();
+    const promises = [];
 
-    Team.find({ name })
-      .then(team => {
-        if (team.length == 1) {
-          return res.status(409).json({
-            message: "Name not available."
+    if (req.body.name) {
+      team[`name`] = req.body.name;
+    } else {
+      return res.status(400).json({ error: "Field `name` is required" });
+    }
+
+    team[`description`] = req.body.description || null;
+    team[`owner`] = req.userData.userId;
+
+    if (req.body.categories) {
+      const categories = req.body.categories;
+      promises.push(
+        Category.find({ name: { $in: categories } }).then((categories) => {
+          categories.forEach((category) => {
+            team[`categories`].push(category._id);
           });
-        }
+        })
+      );
+    }
 
-        team = new Team({
-          owner: req.userData.userId
-        });
+    Promise.all(promises).then(() => {
+      team
+        .save()
+        .then(() => {
+          return res.status(201).send(team);
+        })
+        .catch((err) => {
+          if (err.name == "ValidationError") {
+            if (err.errors.name.kind == "unique") {
+              return res.status(400).json({ error: "Team name not available" });
+            }
 
-        Team.schema.eachPath(path => {
-          if (req.body[path]) {
-            team[`${path}`] = req.body[path];
-          }
-        });
-
-        team
-          .save()
-          .then(() => res.status(201).send())
-          .catch(err => {
             console.error(`Error during team save():\n${err}`);
-            res.status(400).json(err);
-          });
-      })
-      .catch(err => {
-        console.error(`Error during team find():\n${err}`);
-        res.status(500).send();
-      });
+            return res.status(500).send();
+          }
+
+          console.error(`Error during team save():\n${err}`);
+          return res.status(500).send();
+        });
+    });
   },
+
+  changePhoto: (req, res) => {},
 
   deleteMembers: (req, res) => {},
 
@@ -44,5 +58,5 @@ module.exports = {
 
   search: (req, res) => {},
 
-  updateTeam: (req, res) => {}
+  updateTeam: (req, res) => {},
 };

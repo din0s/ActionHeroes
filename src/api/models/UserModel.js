@@ -1,31 +1,29 @@
 const mongo = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
-const Category = require("../models/CategoryModel");
-const Action = require("../models/ActionModel");
 
 const UserSchema = new mongo.Schema({
   email: {
     type: String,
     required: true,
     unique: true,
-    match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+    match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
   },
   username: { type: String, required: true, unique: true },
   hash: { type: String, required: true },
-  profilePhoto: { type: String },
+  profilePhoto: { data: Buffer, contentType: String },
   location: {
     type: {
       type: String,
-      enum: ["Point"]
+      enum: ["Point"],
     },
     coordinates: {
-      type: [Number]
-    }
+      type: [Number],
+    },
   },
   favoriteCategories: [{ type: mongo.Schema.Types.ObjectId, ref: "Category" }],
   language: { type: String },
   actionsAttended: [{ type: mongo.Schema.Types.ObjectId, ref: "Action" }],
-  actionsSaved: [{ type: mongo.Schema.Types.ObjectId, ref: "Action" }]
+  actionsSaved: [{ type: mongo.Schema.Types.ObjectId, ref: "Action" }],
 });
 
 UserSchema.plugin(uniqueValidator);
