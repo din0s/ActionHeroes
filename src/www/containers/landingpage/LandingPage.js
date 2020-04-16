@@ -13,33 +13,33 @@ const categoriesList = {
   Category1: {
     image: "./img/background.jpg",
     name: "Category1",
-    desc: "AAADescription Desc ription Descri ption Des c ription."
+    desc: "AAADescription Desc ription Descri ption Des c ription.",
   },
   Category2: {
     image: "./img/background.jpg",
     name: "Category2",
-    desc: "Description Desc ription Descri ption Des c ription."
+    desc: "Description Desc ription Descri ption Des c ription.",
   },
   Category3: {
     image: "./img/background.jpg",
     name: "Category3",
-    desc: "Description Desc ription Descri ption Des c ription."
+    desc: "Description Desc ription Descri ption Des c ription.",
   },
   Category4: {
     image: "./img/background.jpg",
     name: "Category4",
-    desc: "AAADescription Desc ription Descri ption Des c ription."
+    desc: "AAADescription Desc ription Descri ption Des c ription.",
   },
   Category5: {
     image: "./img/background.jpg",
     name: "Category5",
-    desc: "AAADescription Desc ription Descri ption Des c ription."
+    desc: "AAADescription Desc ription Descri ption Des c ription.",
   },
   Category6: {
     image: "./img/background.jpg",
     name: "Category6",
-    desc: "AAADescription Desc ription Descri ption Des c ription."
-  }
+    desc: "AAADescription Desc ription Descri ption Des c ription.",
+  },
 };
 
 export default withTranslation()(
