@@ -47,7 +47,7 @@ export default withTranslation()(
     render() {
       const { t } = this.props;
       return (
-        <div className="container">
+        <div className="lpcontainer">
           <Parallax
             className="parallax"
             bgImage={bgkidimg}
