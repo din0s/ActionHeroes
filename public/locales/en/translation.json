@@ -37,11 +37,22 @@
   "contactpage": {
     "title1": "Have any questions?",
     "title2": "We'd love to hear from you.",
-    "firstname":"Your First Name",
-    "lastname":"Your Last Name",
-    "email":"Your Email",
-    "message":"Your Message",
-    "submit":"Submit",
+    "firstname": "Your First Name",
+    "lastname": "Your Last Name",
+    "email": "Your Email",
+    "message": "Your Message",
+    "submit": "Submit",
     "thanks": "Thanks, we will get back to you soon!"
+  },
+  "landingpage": {
+    "catchphrase": "The more we give, the happier we feel.",
+    "desc": "Spending part of your time to help others is one of the best gifts you could give. Be a part of something bigger than yourself. Be a gift to the community. Volunteer today!",
+    "join": "Join Our Cause!",
+    "become": "Become an Action Hero",
+    "volunteer": "Volunteer",
+    "organize": "Organize",
+    "volunteerdesc": "Don't know where to start? Search for a variety of actions available in our site.",
+    "organizedesc": "Don't have the manpower? Host a voluntary event and we'll help you gather the human resources.",
+    "findactions": "You can find events & actions for:"
   }
 }

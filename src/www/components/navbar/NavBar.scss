@@ -3,12 +3,14 @@
 nav {
   align-items: center;
   background-color: white;
+  opacity: 0.95;
   border-bottom: 1px solid black;
   display: flex;
   flex-direction: row;
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 1 ;
 
   .Top {
     align-items: center;
