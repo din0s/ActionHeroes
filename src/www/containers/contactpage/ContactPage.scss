@@ -2,7 +2,7 @@
 
 $softBlack: rgba(
   $color: black,
-  $alpha: 0.1
+  $alpha: 0.1,
 );
 
 .container {
@@ -11,7 +11,7 @@ $softBlack: rgba(
   flex-direction: column;
   margin-top: 2vh;
   width: 100%;
-  background-image: url("/img/bg_contact.png");
+  background-image: url("/img/contact/background.png");
 
   form {
     display: flex;
@@ -24,7 +24,6 @@ $softBlack: rgba(
       border: 1px solid $softBlack;
       border-radius: 20px;
       box-shadow: 1px 1px $softBlack;
-      font-family: $globalFonts;
       font-size: 1.2rem;
       height: 2rem;
       margin-top: 1vh;
@@ -48,7 +47,6 @@ $softBlack: rgba(
       border-radius: 0.5rem;
       box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
       cursor: pointer;
-      font-family: $globalFonts;
       font-size: 1.5rem;
       height: 4rem;
       margin-bottom: 1rem;
@@ -73,9 +71,8 @@ $softBlack: rgba(
     margin-bottom: 5.8rem;
   }
 
-  .contact-form-title1{
+  .contact-form-title1 {
     color: black;
-    font-family: $globalFonts;
     font-size: 3.1rem;
     font-weight: normal;
     line-height: 1.2;
@@ -86,9 +83,8 @@ $softBlack: rgba(
     padding-top: 0.4rem;
   }
 
-  .contact-form-title2{
+  .contact-form-title2 {
     color: black;
-    font-family: $globalFonts;
     font-size: 2rem;
     font-weight: normal;
     line-height: 1.5;

@@ -12,12 +12,12 @@ import { withTranslation } from "react-i18next";
 
 class NavBar extends Component {
   state = {
-    hiddenMenu: true
+    hiddenMenu: true,
   };
 
   toggleMenu = async () => {
     this.setState({
-      hiddenMenu: !this.state.hiddenMenu
+      hiddenMenu: !this.state.hiddenMenu,
     });
   };
 
@@ -33,12 +33,12 @@ class NavBar extends Component {
       <nav>
         <span className="Top">
           <img
-            src="/img/hamburger.svg"
-            alt="Menu"
+            src="/img/icons/hamburger.svg"
+            alt="Hamburger Menu"
             className="Hamburger"
             onClick={this.toggleMenu}
           />
-          <Link to="/">
+          <Link to="/" onClick={this.hideMenu}>
             <img src="/img/logo.png" alt="Logo" className="Logo" />
           </Link>
         </span>
@@ -71,10 +71,10 @@ class NavBar extends Component {
   }
 }
 
-const mapping = state => {
+const mapping = (state) => {
   return {
     loggedIn: state.auth.loggedIn,
-    user: state.auth.user
+    user: state.auth.user,
   };
 };
 

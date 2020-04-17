@@ -1,16 +1,14 @@
 $grayHover: rgba(
   $color: gray,
-  $alpha: 0.05
+  $alpha: 0.2,
 );
 
 $grayHoverStrong: rgba(
   $color: gray,
-  $alpha: 0.1
+  $alpha: 0.4,
 );
 
 $blackTransparent: rgba(
   $color: black,
-  $alpha: 0.05
+  $alpha: 0.05,
 );
-
-$globalFonts: Poppins-Regular;

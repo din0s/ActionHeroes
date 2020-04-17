@@ -7,167 +7,108 @@ import { Parallax } from "react-parallax";
 import ScrollUpButton from "react-scroll-up-button";
 import { withTranslation } from "react-i18next";
 
-const bgkidimg = "/img/KidBackground.png";
-const innerimg = "./img/smallicon.svg";
-const categoriesList = {
-  Category1: {
-    image: "./img/background.jpg",
-    name: "Category1",
-    desc: "AAADescription Desc ription Descri ption Des c ription.",
-  },
-  Category2: {
-    image: "./img/background.jpg",
-    name: "Category2",
-    desc: "Description Desc ription Descri ption Des c ription.",
-  },
-  Category3: {
-    image: "./img/background.jpg",
-    name: "Category3",
-    desc: "Description Desc ription Descri ption Des c ription.",
-  },
-  Category4: {
-    image: "./img/background.jpg",
-    name: "Category4",
-    desc: "AAADescription Desc ription Descri ption Des c ription.",
-  },
-  Category5: {
-    image: "./img/background.jpg",
-    name: "Category5",
-    desc: "AAADescription Desc ription Descri ption Des c ription.",
-  },
-  Category6: {
-    image: "./img/background.jpg",
-    name: "Category6",
-    desc: "AAADescription Desc ription Descri ption Des c ription.",
-  },
-};
+const categoriesList = require("./categories.json");
 
 export default withTranslation()(
   class LandingPage extends Component {
+    showCategories = (categoriesList) => {
+      return Object.keys(categoriesList).map((key, index) => {
+        if (index >= 6) return null;
+
+        let cardModifier = "";
+        if (index >= 3) {
+          if (index < 4) {
+            cardModifier = " show-4";
+          } else {
+            cardModifier = " show-6";
+          }
+        }
+
+        return (
+          <div className={`Categories_card${cardModifier}`}>
+            <div className="Categories_card_title">
+              <img alt="Category icon" src={categoriesList[key].image} />
+              <h5>{categoriesList[key].name}</h5>
+            </div>
+            <p>{categoriesList[key].desc}</p>
+          </div>
+        );
+      });
+    };
+
     render() {
       const { t } = this.props;
       return (
-        <div className="lpcontainer">
-          <Parallax
-            className="parallax"
-            bgImage={bgkidimg}
-            bgImageAlt="Backgroundimage"
-            strength={500}
-          >
-            <div className="panel">
-              <img className="innerphoto" alt="Frontimage" src={innerimg} />
-              <div className="innertextcontainer">
-                <p className="catchphrase">{t("landingpage.catchphrase")}</p>
-                <p className="desc">{t("landingpage.desc")}</p>
-                <Link className="joinlink" to="/signup">
-                  <button class="joinbutton">{t("landingpage.join")}</button>
-                </Link>
-              </div>
-            </div>
-            <ScrollUpButton
-              ContainerClassName="scrollbutton"
-              AnimationDuration={1200}
-              EasingType="easeInOutCubic"
-              ShowAtPosition={150}
-            />
-          </Parallax>
-
-          <div className="secondpage">
-            <p className="phrase">{t("landingpage.become")}</p>
+        <div className="LandingPage">
+          <section className="Intro">
             <Parallax
-              blur={0.5}
-              className="parallaxbg"
-              bgImage={bgkidimg}
-              bgImageAlt="Backgroundimage"
+              blur={{ min: 0, max: 5 }}
+              className="Intro_parallax"
+              bgImage="/img/landing/parallax1.jpg"
+              bgImageAlt="Intro Parallax"
+              strength={250}
+            >
+              <div className="Intro_panel">
+                <span className="Intro_panel-top">
+                  <img alt="" src="/img/landing/intro_icon.svg" />
+                  <div>
+                    <h1>{t("landingpage.catchphrase")}</h1>
+                    <h2>{t("landingpage.desc")}</h2>
+                  </div>
+                </span>
+                <span className="Intro_panel-bot">
+                  <Link to="/signup">
+                    <button>{t("landingpage.join")}</button>
+                  </Link>
+                </span>
+              </div>
+            </Parallax>
+          </section>
+          <section className="Actions">
+            <h3>{t("landingpage.become")}</h3>
+            <Parallax
+              blur={5}
+              className="Actions_parallax"
+              bgImage="/img/landing/parallax2.jpg"
+              bgImageAlt="Actions Parallax"
               strength={150}
             >
-              <div className="panel">
-                <div className="card">
-                  <p className="boxphrase">{t("landingpage.volunteer")}</p>
-                  <img
-                    className="boximg"
-                    alt="volunteer"
-                    src={"./img/volunteer.svg"}
-                  />
-                  <p className="boxdesc">{t("landingpage.volunteerdesc")}</p>
+              <div className="Actions_panel">
+                <div className="Actions_card">
+                  <h4>{t("landingpage.volunteer")}</h4>
+                  <img alt="Volunteer" src={"/img/landing/volunteer.svg"} />
+                  <p>{t("landingpage.volunteerdesc")}</p>
                 </div>
-                <div className="card">
-                  <p className="boxphrase">{t("landingpage.organize")}</p>
-                  <img
-                    className="boximg"
-                    alt="organize"
-                    src={"./img/organizer.svg"}
-                  />
-                  <p className="boxdesc">{t("landingpage.organizedesc")}</p>
+                <div className="Actions_card">
+                  <h4>{t("landingpage.organize")}</h4>
+                  <img alt="Organizer" src={"/img/landing/organizer.svg"} />
+                  <p>{t("landingpage.organizedesc")}</p>
                 </div>
               </div>
             </Parallax>
-          </div>
-
-          <div className="thirdpage">
-            <p className="phrase">{t("landingpage.findactions")}</p>
+          </section>
+          <section className="Categories">
+            <h3>{t("landingpage.findactions")}</h3>
             <Parallax
-              blur={0.5}
-              className="parallaxbg"
-              bgImage={bgkidimg}
-              bgImageAlt="Backgroundimage"
+              blur={5}
+              className="Categories_parallax"
+              bgImage="/img/landing/parallax3.jpg"
+              bgImageAlt="Categories Parallax"
               strength={150}
             >
-              <div className="panel">
-                {(window.onresize = showCategories(categoriesList))}
+              <div className="Categories_panel">
+                {this.showCategories(categoriesList)}
               </div>
             </Parallax>
-          </div>
+          </section>
+          <ScrollUpButton
+            ContainerClassName="ScrollButton"
+            AnimationDuration={1200}
+            EasingType="easeInOutCubic"
+            ShowAtPosition={150}
+          />
         </div>
       );
     }
   }
 );
-
-function showCategories(categoriesList) {
-  return Object.keys(categoriesList).map((key, index) => {
-    if (index < 3) {
-      return (
-        <div className="card">
-          <div className="box">
-            <img
-              className="boximg"
-              alt="category_img"
-              src={categoriesList[key].image}
-            />
-            <p className="category">{categoriesList[key].name}</p>
-          </div>
-          <p className="boxdesc">{categoriesList[key].desc}</p>
-        </div>
-      );
-    } else if (index < 4) {
-      return (
-        <div className="card card-4">
-          <div className="box">
-            <img
-              className="boximg"
-              alt="category_img"
-              src={categoriesList[key].image}
-            />
-            <p className="category">{categoriesList[key].name}</p>
-          </div>
-          <p className="boxdesc">{categoriesList[key].desc}</p>
-        </div>
-      );
-    } else if (index < 6) {
-      return (
-        <div className="card card-6">
-          <div className="box">
-            <img
-              className="boximg"
-              alt="category_img"
-              src={categoriesList[key].image}
-            />
-            <p className="category">{categoriesList[key].name}</p>
-          </div>
-          <p className="boxdesc">{categoriesList[key].desc}</p>
-        </div>
-      );
-    } else return null;
-  });
-}

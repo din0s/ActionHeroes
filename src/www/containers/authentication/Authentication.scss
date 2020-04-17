@@ -1,21 +1,27 @@
 $softBlack: rgba(
   $color: black,
-  $alpha: 0.1
+  $alpha: 0.1,
 );
 
 .Auth-page {
-  background-color: rgba($color: peachpuff, $alpha: 0.1); // TODO: change to image
+  background-color: rgba(
+    $color: peachpuff,
+    $alpha: 0.1
+  ); // TODO: change to image
   display: flex;
   justify-content: center;
-  padding: 4rem;
+  padding: 2rem;
 
   .Auth-panel {
     align-items: center;
     background-color: white;
     border: 1px solid $softBlack;
     border-radius: 0.5rem;
+    box-shadow: 1px 1px 1rem $softBlack;
     display: flex;
     flex-direction: column;
+    margin: 10vh 0;
+    padding: 4rem 0;
     width: 50vw;
 
     .Auth-header {
@@ -23,6 +29,11 @@ $softBlack: rgba(
 
       > * {
         margin-bottom: 0.5rem;
+      }
+
+      > h2 {
+        font-size: 2.5rem;
+        margin-top: 0;
       }
     }
 
@@ -46,6 +57,8 @@ $softBlack: rgba(
 
     .Submit-button {
       cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1rem;
       transition: 0.1s ease-in-out;
       width: 6rem;
 
@@ -78,25 +91,31 @@ $softBlack: rgba(
 }
 
 @media only screen and (max-width: 800px) {
-  .Auth-page .Auth-panel {
-    width: 75vw;
+  .Auth-page {
+    padding: 1rem 0;
+
+    .Auth-panel {
+      margin: 5vh 0;
+      padding: 2rem 0;
+      width: 80vw;
+
+      .Auth-header > h2 {
+        font-size: 2rem;
+      }
+    }
   }
 }
 
 @media only screen and (max-width: 400px) {
-  .Auth-page {
-    padding: 4rem 0;
-    
-    .Auth-panel {
-      width: 99vw;
+  .Auth-page .Auth-panel {
+    width: 99vw;
 
-      .Alt-option {
-        flex-direction: column;
-        margin-bottom: 1rem;
-    
-        > p {
-          margin-bottom: 0;
-        }
+    .Alt-option {
+      flex-direction: column;
+      margin-bottom: 1rem;
+
+      > p {
+        margin-bottom: 0;
       }
     }
   }

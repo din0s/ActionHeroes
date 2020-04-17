@@ -7,7 +7,7 @@ import axios from "axios";
 import { withAlert } from "react-alert";
 import { withTranslation } from "react-i18next";
 
-const form_img = "/img/form_img.png"; //Photo by LinkedIn Sales Navigator on Unsplash
+const form_img = "/img/contact/form_img.png"; //Photo by LinkedIn Sales Navigator on Unsplash
 
 export default withAlert()(
   withTranslation()(
@@ -21,14 +21,14 @@ export default withAlert()(
         check_success: false,
         firstΝameHighlight: false,
         lastNameHighlight: false,
-        emailHighlight: false
+        emailHighlight: false,
       };
 
       clearHighlights = async () => {
         this.setState({
           firstNameHighlight: false,
           lastNameHighlight: false,
-          emailHighlight: false
+          emailHighlight: false,
         });
       };
 
@@ -48,13 +48,13 @@ export default withAlert()(
             firstName,
             lastName,
             email,
-            message
+            message,
           })
-          .then(res => this.handleResponse(res.data, target))
-          .catch(err => this.handleResponse(err.response.data, target));
+          .then((res) => this.handleResponse(res.data, target))
+          .catch((err) => this.handleResponse(err.response.data, target));
       };
 
-      handleSubmit = event => {
+      handleSubmit = (event) => {
         event.preventDefault();
 
         const { firstName, lastName, email, message } = this.state;
@@ -71,7 +71,7 @@ export default withAlert()(
           this.setState({
             firstΝameHighlight: firstName === "",
             lastNameHighlight: lastName === "",
-            emailHighlight: email === ""
+            emailHighlight: email === "",
           });
         }
       };
@@ -80,18 +80,14 @@ export default withAlert()(
         const { t } = this.props;
         return (
           <div className="container">
-            <h2 className="contact-form-title1">
-              {t("contactpage.title1")}
-            </h2>
-            <h3 className="contact-form-title2">
-              {t("contactpage.title2")}
-            </h3>
+            <h2 className="contact-form-title1">{t("contactpage.title1")}</h2>
+            <h3 className="contact-form-title2">{t("contactpage.title2")}</h3>
             <div className="contact-form-block">
               <img className="form-image" alt="form_img" src={form_img} />
               <form onSubmit={this.handleSubmit}>
                 <Input
                   name="firstname"
-                  onChange={e =>
+                  onChange={(e) =>
                     this.setState({ firstName: e.target.value.trim() })
                   }
                   shouldHighlight={this.state.firstΝameHighlight}
@@ -100,7 +96,7 @@ export default withAlert()(
                 />
                 <Input
                   name="lastname"
-                  onChange={e =>
+                  onChange={(e) =>
                     this.setState({ lastName: e.target.value.trim() })
                   }
                   shouldHighlight={this.state.lastNameHighlight}
@@ -109,7 +105,7 @@ export default withAlert()(
                 />
                 <Input
                   name="email"
-                  onChange={e =>
+                  onChange={(e) =>
                     this.setState({ email: e.target.value.trim() })
                   }
                   shouldHighlight={this.state.emailHighlight}
@@ -118,7 +114,7 @@ export default withAlert()(
                 />
                 <textarea
                   name="message"
-                  onChange={e =>
+                  onChange={(e) =>
                     this.setState({ message: e.target.value.trim() })
                   }
                   required

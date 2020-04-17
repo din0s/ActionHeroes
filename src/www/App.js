@@ -9,9 +9,9 @@ import { applyMiddleware, compose, createStore } from "redux";
 import AlertTemplate from "./components/alert/AlertTemplate";
 import ContactPage from "./containers/contactpage/ContactPage.jsx";
 import Footer from "./components/footer/Footer";
+import LandingPage from "./containers/landingpage/LandingPage";
 import Login from "./containers/authentication/Login.jsx";
 import NavBar from "./components/navbar/NavBar";
-import LandingPage from "./containers/landingpage/LandingPage";
 import { Provider } from "react-redux";
 import Signup from "./containers/authentication/Signup.jsx";
 import { createBrowserHistory } from "history";
@@ -56,7 +56,7 @@ export default class App extends Component {
                     <Route path="/login" children={<Login />} />
                     <Route path="/signup" children={<Signup />} />
                     <Route path="/contact" children={<ContactPage />} />
-                    <Route path="/" children={<LandingPage />} />
+                    <Route path="/" exact children={<LandingPage />} />
                   </Switch>
                 </main>
                 <Footer />

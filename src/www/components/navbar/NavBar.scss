@@ -4,13 +4,12 @@ nav {
   align-items: center;
   background-color: white;
   opacity: 0.95;
-  border-bottom: 1px solid black;
   display: flex;
   flex-direction: row;
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1 ;
+  z-index: 1;
 
   .Top {
     align-items: center;
@@ -54,7 +53,7 @@ nav {
         height: calc(4rem + 2px);
         padding: 0 1rem;
         text-decoration: none;
-        transition: 0.2s ease-in-out;
+        transition: 0.3s ease-in-out;
 
         &:hover {
           background-color: $grayHover;
