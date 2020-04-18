@@ -4,14 +4,16 @@
 
   .Intro {
     &_parallax {
-      min-height: 90vh;
-      padding-top: 10vh;
+      align-items: center;
+      display: flex;
+      min-height: 100vh;
     }
 
     &_panel {
       background-color: rgba($color: white, $alpha: 0.7);
       border-radius: 1rem;
-      margin: 6rem 10rem;
+      box-shadow: 0 0 30px 1px rgba($color: black, $alpha: 0.5);
+      margin: 0 8rem;
       padding: 4rem;
 
       &-top {
@@ -25,7 +27,7 @@
         }
 
         > div {
-          min-height: 40vh;
+          min-height: 30vh;
           text-align: left;
 
           > h1 {
@@ -69,7 +71,7 @@
       font-weight: normal;
       margin-bottom: 3rem;
       margin-top: 4rem;
-      padding: 0 2rem;
+      padding: 0 1rem;
     }
 
     &_parallax {
@@ -85,8 +87,9 @@
     }
 
     &_card {
-      background-color: rgba($color: white, $alpha: 0.7);
+      background-color: rgba($color: white, $alpha: 0.8);
       border-radius: 1rem;
+      box-shadow: 0 0 30px 1px black;
       height: 25rem;
       margin: 4vh 2vw;
       padding: 1rem;
@@ -151,14 +154,21 @@
 }
 
 @media only screen and(max-width: 1377px) {
-  .LandingPage .show-6 {
-    display: none;
-  }
-}
+  .LandingPage {
+    .Intro {
+      &_parallax {
+        min-height: unset;
+      }
 
-@media only screen and(max-width: 1200px) {
-  .LandingPage .Intro_panel {
-    margin: 6rem;
+      &_panel {
+        margin: 6rem;
+        margin-top: 8rem;
+      }
+    }
+
+    .show-6 {
+      display: none;
+    }
   }
 }
 
@@ -183,7 +193,8 @@
 
 @media only screen and(max-width: 800px) {
   .LandingPage .Intro_panel {
-    margin: 2rem;
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
 
     &-top > div {
       > h1 {
@@ -204,7 +215,8 @@
 @media only screen and(max-width: 440px) {
   .LandingPage {
     .Intro_panel {
-      padding: 1.5rem;
+      margin-bottom: 3rem;
+      padding: 2.5rem;
 
       &-top > div {
         > h1 {
