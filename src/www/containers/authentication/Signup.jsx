@@ -8,13 +8,13 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 
-const mapState = state => ({
-  error: state.auth.error
+const mapState = (state) => ({
+  error: state.auth.error,
 });
 
 const mapDispatch = {
   signup,
-  clearErrors
+  clearErrors,
 };
 
 export default connect(
@@ -32,7 +32,7 @@ export default connect(
         usernameHighlight: false,
         emailHighlight: false,
         passwordHighlight: false,
-        passwordConfirmHighlight: false
+        passwordConfirmHighlight: false,
       };
 
       componentDidMount() {
@@ -44,7 +44,7 @@ export default connect(
           usernameHighlight: false,
           emailHighlight: false,
           passwordHighlight: false,
-          passwordConfirmHighlight: false
+          passwordConfirmHighlight: false,
         });
       };
 
@@ -52,7 +52,7 @@ export default connect(
         this.setState({ mismatch: pass !== confirm });
       };
 
-      setPassword = async e => {
+      setPassword = async (e) => {
         const password = e.target.value.trim();
         const { passwordConfirm } = this.state;
         this.setState({ password });
@@ -61,14 +61,14 @@ export default connect(
         }
       };
 
-      setPasswordConfirm = async e => {
+      setPasswordConfirm = async (e) => {
         const { password } = this.state;
         const passwordConfirm = e.target.value.trim();
         this.setState({ passwordConfirm });
         this.checkPassword(password, passwordConfirm);
       };
 
-      submit = async event => {
+      submit = async (event) => {
         event.preventDefault();
         this.props.clearErrors();
         const { username, email, password, passwordConfirm } = this.state;
@@ -86,7 +86,7 @@ export default connect(
             usernameHighlight: username === "",
             emailHighlight: email === "",
             passwordHighlight: password === "",
-            passwordConfirmHighlight: passwordConfirm === ""
+            passwordConfirmHighlight: passwordConfirm === "",
           });
         }
       };
@@ -95,7 +95,12 @@ export default connect(
         const { t } = this.props;
         return (
           <div className="Auth-page">
-            <form method="post" action="/auth/signup" className="Auth-panel">
+            <form
+              method="post"
+              action="/auth/signup"
+              className="Auth-panel"
+              onSubmit={this.submit}
+            >
               <div className="Auth-header">
                 <h2 children={t("auth.signup.greeting")} />
                 <p className="Auth-error" children={this.props.error} />
@@ -106,7 +111,7 @@ export default connect(
                 placeholder={t("auth.username")}
                 class="Username-field"
                 shouldHighlight={this.state.usernameHighlight}
-                onChange={e =>
+                onChange={(e) =>
                   this.setState({ username: e.target.value.trim() })
                 }
               />
@@ -116,7 +121,9 @@ export default connect(
                 placeholder={t("auth.email")}
                 class="Email-field"
                 shouldHighlight={this.state.emailHighlight}
-                onChange={e => this.setState({ email: e.target.value.trim() })}
+                onChange={(e) =>
+                  this.setState({ email: e.target.value.trim() })
+                }
               />
               <Input
                 type="password"
@@ -144,7 +151,6 @@ export default connect(
                 type="submit"
                 className="Submit-button"
                 value={t("auth.signup.action")}
-                onClick={this.submit}
               />
               <span className="Alt-option">
                 <p children={t("auth.signup.alt-call")} />

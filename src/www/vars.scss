@@ -1,9 +1,14 @@
 $grayHover: rgba(
   $color: gray,
-  $alpha: 0.2,
+  $alpha: 0.1,
 );
 
 $grayHoverStrong: rgba(
+  $color: gray,
+  $alpha: 0.2,
+);
+
+$grayTransparent: rgba(
   $color: gray,
   $alpha: 0.4,
 );
@@ -11,4 +16,9 @@ $grayHoverStrong: rgba(
 $blackTransparent: rgba(
   $color: black,
   $alpha: 0.05,
+);
+
+$softBlack: rgba(
+  $color: black,
+  $alpha: 0.1,
 );

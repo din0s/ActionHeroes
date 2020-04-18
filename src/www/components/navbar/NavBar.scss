@@ -61,6 +61,7 @@ nav {
 
         &.active {
           background-color: $grayHover;
+          border-bottom: 1px solid blue;
 
           &:hover {
             background-color: $grayHoverStrong;
@@ -128,6 +129,10 @@ nav {
         > li {
           width: 100vw;
         }
+      }
+
+      .Pages .Page-link > a.active {
+        border-bottom: none;
       }
 
       .Pages .Page-link > a,

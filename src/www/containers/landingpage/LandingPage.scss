@@ -11,7 +11,7 @@
     &_panel {
       background-color: rgba($color: white, $alpha: 0.7);
       border-radius: 1rem;
-      margin: 6rem;
+      margin: 6rem 10rem;
       padding: 4rem;
 
       &-top {
@@ -151,6 +151,12 @@
 @media only screen and(max-width: 1377px) {
   .LandingPage .show-6 {
     display: none;
+  }
+}
+
+@media only screen and(max-width: 1200px) {
+  .LandingPage .Intro_panel {
+    margin: 6rem;
   }
 }
 

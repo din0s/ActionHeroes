@@ -8,13 +8,13 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 
-const mapState = state => ({
-  error: state.auth.error
+const mapState = (state) => ({
+  error: state.auth.error,
 });
 
 const mapDispatch = {
   login,
-  clearErrors
+  clearErrors,
 };
 
 export default connect(
@@ -27,7 +27,7 @@ export default connect(
         email: "",
         password: "",
         emailHighlight: false,
-        passwordHighlight: false
+        passwordHighlight: false,
       };
 
       componentDidMount() {
@@ -38,7 +38,7 @@ export default connect(
         this.setState({ emailHighlight: false, passwordHighlight: false });
       };
 
-      submit = async event => {
+      submit = async (event) => {
         event.preventDefault();
         this.props.clearErrors();
         const { email, password } = this.state;
@@ -48,7 +48,7 @@ export default connect(
         } else {
           this.setState({
             emailHighlight: email === "",
-            passwordHighlight: password === ""
+            passwordHighlight: password === "",
           });
         }
       };
@@ -57,7 +57,12 @@ export default connect(
         const { t } = this.props;
         return (
           <div className="Auth-page">
-            <form method="post" action="/auth/login" className="Auth-panel">
+            <form
+              method="post"
+              action="/auth/login"
+              className="Auth-panel"
+              onSubmit={this.submit}
+            >
               <div className="Auth-header">
                 <h2 children={t("auth.login.greeting")} />
                 <p className="Auth-error" children={this.props.error} />
@@ -68,7 +73,9 @@ export default connect(
                 placeholder={t("auth.email")}
                 class="Email-field"
                 shouldHighlight={this.state.emailHighlight}
-                onChange={e => this.setState({ email: e.target.value.trim() })}
+                onChange={(e) =>
+                  this.setState({ email: e.target.value.trim() })
+                }
               />
               <Input
                 type="password"
@@ -76,7 +83,7 @@ export default connect(
                 placeholder={t("auth.password")}
                 class="Password-field"
                 shouldHighlight={this.state.passwordHighlight}
-                onChange={e =>
+                onChange={(e) =>
                   this.setState({ password: e.target.value.trim() })
                 }
               />
@@ -84,7 +91,6 @@ export default connect(
                 type="submit"
                 className="Submit-button"
                 value={t("auth.login.action")}
-                onClick={this.submit}
               />
               <span className="Alt-option">
                 <p children={t("auth.login.alt-call")} />
