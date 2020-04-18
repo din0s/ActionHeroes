@@ -79,12 +79,16 @@ export default withAlert()(
       render() {
         const { t } = this.props;
         return (
-          <div className="container">
-            <h2 className="contact-form-title1">{t("contactpage.title1")}</h2>
-            <h3 className="contact-form-title2">{t("contactpage.title2")}</h3>
-            <div className="contact-form-block">
-              <img className="form-image" alt="form_img" src={form_img} />
-              <form onSubmit={this.handleSubmit}>
+          <div className="ContactPage">
+            <h2>{t("contactpage.title1")}</h2>
+            <h3>{t("contactpage.title2")}</h3>
+            <div className="ContactPage_block">
+              <img alt="" src={form_img} />
+              <form
+                method="post"
+                action="/contact/submit"
+                onSubmit={this.handleSubmit}
+              >
                 <Input
                   name="firstname"
                   onChange={(e) =>
@@ -121,8 +125,9 @@ export default withAlert()(
                   type="text"
                   placeholder={t("contactpage.message")}
                 />
+
                 <input
-                  className="submit-btn"
+                  className="SubmitButton"
                   type="submit"
                   value={t("contactpage.submit")}
                 />
