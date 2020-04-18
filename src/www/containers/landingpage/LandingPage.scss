@@ -1,484 +1,245 @@
-.lpcontainer {
-  align-items: center;
-  //background-image: linear-gradient(  rgb(129, 129, 129) ,white);
-  font-family: "Times New Roman", Times, serif;
-  justify-content: center;
-  margin-bottom: 15vh;
+.LandingPage {
+  margin-bottom: 2rem;
   margin-top: -4rem;
 
-  .parallax {
-    align-items: center;
-    height: 90vh;
-    max-height: 50rem;
-    min-height: 32rem;
-    padding-top: 6rem;
-
-    .panel {
+  .Intro {
+    &_parallax {
       align-items: center;
+      display: flex;
+      min-height: 60rem;
+      justify-content: center;
+    }
+
+    &_panel {
       background-color: rgba($color: white, $alpha: 0.7);
       border-radius: 1rem;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      //margin: auto;
-      margin-left: 9vw;
-      margin-right: 9vw;
-      margin-top: 5vh;
-      max-height: 60vh;
-      //max-width: 120rem;
-      min-height: 26rem;
-      //min-width: 60rem;
-      padding-bottom: 2rem;
-      padding-top: 2rem;
+      box-shadow: 0 0 30px 1px rgba($color: black, $alpha: 0.5);
+      margin: 0 8rem;
+      padding: 4rem;
 
-      .innerphoto {
-        height: 10rem;
-        width: 10rem;
-        margin-left: 3vw;
-      }
+      &-top {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
 
-      .innertextcontainer {
-        margin-left: 3vw;
-        margin-right: 3vw;
-        margin-bottom: 3rem;
-        text-align: left;
-
-        .catchphrase {
-          font-size: 3.1rem;
+        > img {
+          max-height: 15rem;
+          padding-right: 4rem;
         }
 
-        .desc {
-          font-size: 1.8rem;
-          margin-left: 0.5rem;
-          margin-top: -0.5rem;
-        }
+        > div {
+          min-height: 30vh;
+          text-align: left;
 
-        .joinbutton {
-          background-color: rgb(16, 48, 136);
-          border: 2px solid rgba($color: black, $alpha: 0.3);
-          border-radius: 0.5rem;
-          color: white;
-          cursor: pointer;
-          font-size: 1.4rem;
-          margin-left: 25%;
-          margin-top: 2rem;
-          opacity: 0.9;
-          padding: 0.7rem 3rem;
-          transition: 0.5s;
+          > h1 {
+            font-size: 3rem;
+            margin-top: 0;
+          }
 
-          .joinlink {
-            color: white;
-            text-decoration: none;
+          > h2 {
+            font-size: 2rem;
+            font-weight: normal;
           }
         }
+      }
 
-        .joinbutton:hover {
-          opacity: 0.6;
-          transition: 0.5s;
+      &-bot button {
+        background-color: rgba($color: mediumblue, $alpha: 0.7);
+        border: 2px solid rgba($color: black, $alpha: 0.3);
+        border-radius: 0.5rem;
+        color: white;
+        cursor: pointer;
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        padding: 0.75rem 1.5rem;
+        transition: 0.2s ease-in-out;
+
+        &:hover {
+          background-color: rgba($color: blue, $alpha: 0.7);
         }
       }
-    }
-
-    .scrollbutton {
-      border-radius: 5px;
-      margin-bottom: -9px;
-      outline: none;
     }
   }
 
-  .secondpage {
-    .parallaxbg {
-      align-items: center;
-      border-radius: 0.5rem;
-      display: flex;
-      flex-direction: row;
-      height: 30rem;
-      justify-content: center;
-      margin-left: 10vw;
-      width: 80vw;
+  .Actions,
+  .Categories {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 
-      .panel {
-        align-items: center;
-        box-shadow: inset 0px 0px 30px 1px black;
-        display: flex;
-        flex-direction: row;
-        height: 30rem;
-        justify-content: center;
-        padding-left: 4vw;
-        width: 85vw;
-
-        .card {
-          align-items: center;
-          background-color: rgba($color: white, $alpha: 0.7);
-          border-radius: 1rem;
-          height: 21rem;
-          margin-right: 4vw;
-          padding-left: 1rem;
-          padding-right: 1rem;
-          width: 21rem;
-
-          .boxdesc {
-            //font-size: calc(2vh + 0.5vw);
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-            margin-left: 0.1rem;
-            margin-right: 0.1rem;
-            margin-top: 0.5rem;
-          }
-
-          .boximg {
-            border: solid;
-            border-color: rgba($color: black, $alpha: 0.5);
-            border-radius: 160px;
-            border-width: 2px;
-            height: 8.5rem;
-            width: 8.5rem;
-          }
-
-          .boxphrase {
-            //font-size: calc(3.5vh + 1vw);
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            margin-top: 0.5rem;
-          }
-        }
-      }
+    > h3 {
+      font-size: 2rem;
+      font-weight: normal;
+      margin-bottom: 3rem;
+      margin-top: 4rem;
+      padding: 0 1rem;
     }
 
-    .phrase {
-      //font-size: calc(4vh + 1vw);
-      font-size: 2.8rem;
-      margin-bottom: 4rem;
-      margin-left: 1vh;
-      margin-top: 4rem;
+    &_parallax {
+      border-radius: 0.5rem;
+      width: 80vw;
+    }
+
+    &_panel {
+      box-shadow: inset 0 0 30px 1px black;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    &_card {
+      background-color: rgba($color: white, $alpha: 0.8);
+      border-radius: 1rem;
+      box-shadow: 0 0 30px 1px black;
+      height: 25rem;
+      margin: 4vh 2vw;
+      padding: 1rem;
+      max-width: 20rem;
+
+      > h4 {
+        font-size: 2rem;
+        font-weight: normal;
+        margin: 0;
+        margin-bottom: 2rem;
+        text-decoration: underline;
+      }
+
+      > img {
+        border: 2px solid rgba($color: black, $alpha: 0.5);
+        border-radius: 50%;
+        height: 8.5rem;
+        margin-bottom: 1rem;
+      }
+
+      > p {
+        font-size: 1.5rem;
+      }
     }
   }
 
-  .thirdpage {
-    .parallaxbg {
-      align-items: center;
-      border-radius: 0.5rem;
-      display: flex;
-      flex-direction: row;
-      height: 30rem;
-      justify-content: center;
-      margin: auto;
-      width: 80vw;
+  .Categories {
+    &_panel {
+      flex-wrap: wrap;
+    }
 
-      .panel {
+    &_card {
+      max-height: 17.5rem;
+      max-width: 17.5rem;
+
+      &_title {
         align-items: center;
-        box-shadow: inset 0px 0px 30px 1px black;
+        border-bottom: 1px solid rgba($color: black, $alpha: 0.3);
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
-        height: 30rem; //same as parallaxbg height
-        justify-content: center;
-        margin: 0 1 rem;
-        width: 85vw;
+        justify-content: space-evenly;
 
-        .card {
-          align-items: center;
-          background-color: rgba($color: white, $alpha: 0.7);
-          border-radius: 1rem;
-          height: 10.5rem;
-          margin-left: 1vw;
-          margin-right: 1vw;
-          // max-height: 12vw;
-          // min-height: 10vw;
-          width: 23vw;
-
-          .box {
-            align-items: center;
-            border-bottom: solid;
-            display: flex;
-            flex-direction: row;
-            //justify-content: center;
-
-            .boximg {
-              border: solid;
-              border-color: rgba($color: black, $alpha: 0.5);
-              border-width: 2px;
-              //height: calc(4vh + 1vw);
-              height: 3rem;
-              margin: 0.8rem;
-              //width: calc(4vh + 1vw);
-              width: 3rem;
-            }
-
-            .category {
-              //font-size: calc(1vh + 1vw);
-              font-size: 1.7rem;
-              margin-bottom: 0.5rem;
-              margin-top: 0.5rem;
-            }
-          }
-
-          .boxdesc {
-            //font-size: calc(1.5vh + 0.8vw);
-            font-size: 1.3rem;
-            margin: 0.5rem;
-          }
+        > img {
+          border: 1px solid black;
+          margin: 1rem 0;
+          max-height: 3rem;
         }
 
-        .card.card-4 {
-        }
-
-        .card.card-6 {
+        > h5 {
+          font-size: 1.5rem;
+          font-weight: normal;
+          margin: 0;
         }
       }
     }
+  }
 
-    .phrase {
-      float: left;
-      //font-size: calc(3.5vh + 1vw);
-      font-size: 2.3rem;
-      margin-bottom: 4rem;
-      margin-left: 15vw;
-      margin-top: 4rem;
+  .ScrollButton {
+    border-radius: 30%;
+    outline: none;
+  }
+}
+
+@media only screen and(max-width: 1680px) {
+  .LandingPage .Intro {
+    &_parallax {
+      min-height: unset;
     }
+
+    &_panel {
+      margin: 6rem;
+      margin-top: 8rem;
+    }
+  }
+}
+
+@media only screen and(max-width: 1377px) {
+  .LandingPage .show-6 {
+    display: none;
   }
 }
 
 @media only screen and(max-width: 1024px) {
-  .lpcontainer {
-    .parallax {
+  .LandingPage {
+    .Intro_panel-top > img {
+      display: none;
+    }
+
+    .Actions_panel {
       align-items: center;
-      padding-top: 6rem;
-
-      .panel {
-        .innertextcontainer {
-          .catchphrase {
-            font-size: 2.6rem;
-          }
-
-          .desc {
-            font-size: 1.6rem;
-          }
-
-          .joinbutton {
-            margin-left: 0%;
-            margin-top: 1rem;
-            padding: 0.6rem 2.6rem;
-          }
-        }
-      }
-    }
-
-    .secondpage {
-      .parallaxbg {
-        .panel {
-          padding-left: 2vw;
-          .card {
-            height: 20rem;
-            margin-right: 2vw;
-            width: 16rem;
-
-            .boxdesc {
-              font-size: 1.3rem;
-            }
-
-            .boximg {
-              height: 7rem;
-              width: 7rem;
-            }
-
-            .boxphrase {
-              font-size: 2rem;
-            }
-          }
-        }
-      }
-    }
-
-    .thirdpage {
-      .parallaxbg {
-        .panel {
-          .card {
-            height: 9.5rem;
-            margin-left: 3vw;
-            margin-right: 3vw;
-            width: 30vw;
-
-            .box {
-              .boximg {
-                height: 2.5rem;
-                width: 2.5rem;
-              }
-
-              .category {
-                font-size: 1.6rem;
-              }
-            }
-
-            .boxdesc {
-              font-size: 1.2rem;
-            }
-          }
-
-          .card.card-4 {
-          }
-
-          .card.card-6 {
-            display: none;
-          }
-        }
-      }
-
-      .phrase {
-        float: none;
-        margin-left: 0vw;
-      }
+      flex-direction: column;
     }
   }
 }
 
+@media only screen and(max-width: 867px) {
+  .LandingPage .show-4 {
+    display: none;
+  }
+}
+
 @media only screen and(max-width: 800px) {
-  .lpcontainer {
-    min-width: 17rem;
-    .parallax {
-      padding-top: 3rem;
-      min-width: 16rem;
-      .panel {
-        //display: block;
-        height: 34rem;
-        margin-top: 8vh;
-        max-height: 70vh;
-        min-height: 26rem;
-        min-width: 16rem;
+  .LandingPage .Intro_panel {
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
 
-        .innerphoto {
-          display: none;
+    &-top > div {
+      > h1 {
+        font-size: 2.25rem;
+      }
+
+      > h2 {
+        font-size: 1.75rem;
+      }
+    }
+
+    &-bot button {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+@media only screen and(max-width: 440px) {
+  .LandingPage {
+    .Intro_panel {
+      margin-bottom: 3rem;
+      padding: 2.5rem;
+
+      &-top > div {
+        > h1 {
+          font-size: 1.75rem;
         }
 
-        .innertextcontainer {
-          margin-left: 1rem;
-          margin-right: 1rem;
-          // margin-top: -6vh;
-          margin-bottom: 3rem;
-          text-align: center;
-
-          .catchphrase {
-            font-size: 2.1rem;
-          }
-
-          .desc {
-            font-size: 1.2rem;
-            margin-left: 0px;
-            margin-top: 3vh;
-          }
-
-          .joinbutton {
-            font-size: 0.9rem;
-            margin-top: 3vh;
-            padding: 0.7rem 2.1rem;
-          }
+        > h2 {
+          font-size: 1.5rem;
         }
       }
     }
 
-    .secondpage {
-      .parallaxbg {
-        height: 40rem;
-        min-width: 16rem;
-
-        .panel {
-          flex-direction: column;
-          height: 40rem;
-          justify-content: center;
-          margin-left: 0rem;
-          min-width: 16rem;
-          padding-bottom: 2rem;
-
-          .card {
-            height: 19rem;
-            max-width: 16rem;
-            margin-top: 2rem;
-            min-width: 13rem;
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-            width: 40vw;
-
-            .boxdesc {
-              font-size: 1.3rem;
-            }
-
-            .boximg {
-              height: 5rem;
-              width: 5rem;
-            }
-
-            .boxphrase {
-              font-size: 1.8rem;
-
-              margin-top: 1rem;
-            }
-          }
-        }
-      }
-
-      .phrase {
-        font-size: 2rem;
+    .Actions,
+    .Categories {
+      &_parallax {
+        border-radius: 0;
+        width: 100vw;
       }
     }
 
-    .thirdpage {
-      .parallaxbg {
-        height: 45rem;
-        padding-top: 2.5rem;
-        min-width: 16rem;
-
-        .panel {
-          display: flex;
-          height: 47.5rem;
-          min-width: 16rem;
-          padding-top: 2.5rem;
-
-          .card {
-            height: 12rem;
-            max-width: 20rem;
-            margin-bottom: 5vh;
-            margin-left: 1.5vh;
-            margin-right: 1.5vh;
-            margin-top: -5vh;
-            min-height: 0rem;
-            width: 50vw;
-            min-width: 13rem;
-
-            .box {
-              .boximg {
-                height: 3.5rem;
-                margin: 0.7rem;
-                width: 3.5rem;
-              }
-
-              .category {
-                font-size: 1.7rem;
-                margin-bottom: 1rem;
-                margin-top: 1rem;
-              }
-            }
-
-            .boxdesc {
-              font-size: 1.4rem;
-              margin: 1rem;
-            }
-          }
-
-          .card.card-4 {
-            display: none;
-          }
-
-          .card.card-6 {
-            display: none;
-          }
-        }
-      }
-
-      .phrase {
-        float: none;
-        font-size: 2rem;
-        margin-left: 1vw;
-      }
+    .Actions_card {
+      height: 25rem;
     }
   }
 }

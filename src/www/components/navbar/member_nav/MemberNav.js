@@ -17,12 +17,12 @@ export default connect(
   withTranslation()(
     class MemberNav extends Component {
       state = {
-        hiddenOptions: true
+        hiddenOptions: true,
       };
 
       toggleOptions = async () => {
         this.setState({
-          hiddenOptions: !this.state.hiddenOptions
+          hiddenOptions: !this.state.hiddenOptions,
         });
       };
 
@@ -41,7 +41,7 @@ export default connect(
       }
 
       // https://stackoverflow.com/a/45323523/7412859
-      onClickOut = event => {
+      onClickOut = (event) => {
         const domNode = ReactDOM.findDOMNode(this);
 
         if (!domNode || !domNode.contains(event.target)) {
@@ -56,7 +56,7 @@ export default connect(
           <div className="User-info">
             <p className="User-greet" onClick={this.toggleOptions}>
               {`${t("nav.user.greet")}, ${user.username}`}
-          <img className="Arrow" src="/img/arrow.svg" alt="Arrow" />
+              <img className="Arrow" src="/img/icons/arrow.svg" alt="Arrow" />
             </p>
 
             <ul

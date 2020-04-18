@@ -10,7 +10,7 @@
     margin: 0;
     text-decoration: underline;
     transition: 0.1s ease-in-out;
-    
+
     .Arrow {
       height: 0.5rem;
       margin-left: 0.5rem;
@@ -23,12 +23,12 @@
 
   .User-options {
     background-color: white;
-    border: 1px solid black;
+    border-top: 1px solid rgba($color: black, $alpha: 0.3);
     list-style-type: none;
     margin: 0;
     padding: 0;
     position: fixed;
-    top: calc(4rem + 2px);
+    top: calc(4rem + 3px);
 
     > li {
       cursor: pointer;

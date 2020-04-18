@@ -7,17 +7,17 @@ import i18next from "i18next";
 
 const languages = {
   el: { flag: "🇬🇷", name: "Ελληνικά" },
-  en: { flag: "🇬🇧", name: "English" }
+  en: { flag: "🇬🇧", name: "English" },
 };
 
 export default class LanguageSelector extends Component {
   state = {
-    hideDropdown: true
+    hideDropdown: true,
   };
 
   toggleDropdown = async () => {
     this.setState({
-      hideDropdown: !this.state.hideDropdown
+      hideDropdown: !this.state.hideDropdown,
     });
   };
 
@@ -27,7 +27,7 @@ export default class LanguageSelector extends Component {
     }
   };
 
-  changeLang = async lang => {
+  changeLang = async (lang) => {
     if (i18next.language !== lang) {
       i18next.changeLanguage(lang);
     }
@@ -43,7 +43,7 @@ export default class LanguageSelector extends Component {
   }
 
   // https://stackoverflow.com/a/45323523/7412859
-  onClickOut = event => {
+  onClickOut = (event) => {
     const domNode = ReactDOM.findDOMNode(this);
 
     if (!domNode || !domNode.contains(event.target)) {
@@ -57,10 +57,10 @@ export default class LanguageSelector extends Component {
       <div className="Lang-selector">
         <span className="Picker" onClick={this.toggleDropdown}>
           <span className="Flag" children={currFlag.name} />
-          <img className="Arrow" src="/img/arrow.svg" alt="Arrow" />
+          <img className="Arrow" src="/img/icons/arrow.svg" alt="Arrow" />
         </span>
         <ul className={`Dropdown${this.state.hideDropdown ? " hidden" : ""}`}>
-          {Object.entries(languages).map(k => {
+          {Object.entries(languages).map((k) => {
             const flag = k[1].flag;
             const lang = k[1].name;
 
