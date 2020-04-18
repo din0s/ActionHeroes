@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
-import "./UserProfile.scss";
 import { Link } from "react-router-dom";
+import "./UserProfile.scss";
 
 // user.actionsAttended
 const actionsAttended = {
@@ -11,29 +11,29 @@ const actionsAttended = {
     description:
       "Description Description Description Description Description Description",
     categories: [{ name: "ABC" }, { name: "BCD" }],
-    photo: "/img/profilePhoto.jpg"
+    photo: "/img/profilePhoto.jpg",
   },
   Action2: {
     name: "ABCDE",
     description:
       "Description Description Description Description Description Description",
     categories: [{ name: "ABC" }, { name: "BCD" }],
-    photo: "/img/profilePhoto.jpg"
+    photo: "/img/profilePhoto.jpg",
   },
   Action3: {
     name: "ABCDE",
     description:
       "Description Description Description Description Description Description",
     categories: [{ name: "ABC" }, { name: "BCD" }],
-    photo: "/img/profilePhoto.jpg"
+    photo: "/img/profilePhoto.jpg",
   },
   Action4: {
     name: "ABCDE",
     description:
       "Description Description Description Description Description Description",
     categories: [{ name: "ABC" }, { name: "BCD" }],
-    photo: "/img/profilePhoto.jpg"
-  }
+    photo: "/img/profilePhoto.jpg",
+  },
 };
 
 const teams = {
@@ -41,33 +41,33 @@ const teams = {
     name: "ABCDE",
     description: "Description Description Description Description Description",
     categories: [{ name: "ABC" }, { name: "BCD" }],
-    photo: "/img/teams.jpg"
+    photo: "/img/teams.jpg",
   },
   Team2: {
     name: "ABCDE",
     description: "Description Description Description Description Description",
     categories: [{ name: "ABC" }, { name: "BCD" }],
-    photo: "/img/teams.jpg"
-  }
+    photo: "/img/teams.jpg",
+  },
 };
 
 const categories = {
   Category1: {
     name: "Hey",
-    photo: "/img/categories.jpg"
+    photo: "/img/categories.jpg",
   },
   Category2: {
     name: "Hey",
-    photo: "/img/categories.jpg"
+    photo: "/img/categories.jpg",
   },
   Category3: {
     name: "Hey",
-    photo: "/img/categories.jpg"
-  }
+    photo: "/img/categories.jpg",
+  },
 };
 
-const mapState = state => ({
-  user: state.auth.user
+const mapState = (state) => ({
+  user: state.auth.user,
 });
 
 export default connect(
@@ -79,8 +79,9 @@ export default connect(
       state = {
         activeTab: "actions",
         attendedShown: 3,
+        editMode: "off",
         organizedShown: 3,
-        teamsShown: 3
+        teamsShown: 3,
       };
 
       showCards = (cards, count) => {
@@ -102,7 +103,7 @@ export default connect(
                   <div className="Card-categories">
                     <h4>{t("profile.categories")}:</h4>
                     <ul>
-                      {Object.keys(card.categories).map(cKey => {
+                      {Object.keys(card.categories).map((cKey) => {
                         const category = card.categories[cKey];
                         return <li>{category.name}</li>;
                       })}
@@ -143,8 +144,8 @@ export default connect(
         }
       };
 
-      showCategories = categories => {
-        return Object.keys(categories).map(key => {
+      showCategories = (categories) => {
+        return Object.keys(categories).map((key) => {
           const category = categories[key];
           return (
             <li>
@@ -157,24 +158,99 @@ export default connect(
         });
       };
 
+      showBio = (initialBio) => {
+        const { user, t } = this.props;
+        if (this.state.editMode === "on") {
+          return (
+            <div>
+              {/*TODO: should send request to server */}
+              <textarea
+                className="Edit-bio-input"
+                defaultValue={initialBio}
+                onChange={(e) => (user.bio = e.target.value)}
+                type="text"
+              />
+              <button
+                className="Save-button"
+                onClick={() => {
+                  this.setState({ editMode: "off" });
+                }}
+              >
+                {t("profile.save")}
+              </button>
+              <button
+                className="Cancel-button"
+                onClick={() => {
+                  user.bio = initialBio;
+                  this.setState({ editMode: "off" });
+                }}
+              >
+                {t("profile.cancel")}
+              </button>
+            </div>
+          );
+        } else return <p>{initialBio}</p>;
+      };
+
+      showProfilePhoto = (photo) => {
+        if (this.state.editMode === "on") {
+          return (
+            <div>
+              <img className="Photo" src={photo} alt="Profile Avatar" />
+              <button className="Edit-photo-button">
+                <img
+                  className="Edit-photo-icon"
+                  src={"/img/pencil-edit-button.png"}
+                  alt="Edit profile icon"
+                />
+              </button>
+            </div>
+          );
+        } else {
+          return (
+            <img className="Profile-photo" src={photo} alt="Profile Avatar" />
+          );
+        }
+      };
+
       render() {
         const { t, user } = this.props;
         const { username, profilePhoto, bio } = user;
         const photo = profilePhoto || "/img/profilePhoto.jpg";
-        const info = bio || "Bio bio bio bio bio bio bio";
+        const info =
+          bio ||
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
+            "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
         return (
           <div className="Container">
             <div className="Bio-panel">
-              <img className="Profile-photo" src={photo} alt="Profile Avatar" />
+              <div
+                className={`Profile-photo${
+                  this.state.editMode === "on" ? "-edit" : ""
+                }`}
+              >
+                {this.showProfilePhoto(photo)}
+              </div>
               <div>
                 <p className="Username">{username}</p>
-                <p className="Info">{info}</p>
-                <Link to="/user/profile/edit">
-                  <button className="Edit-profile-button">
-                    {t("profile.edit")}
-                  </button>
-                </Link>
+                <div
+                  className={`Info${
+                    this.state.editMode === "on" ? "-edit" : ""
+                  }`}
+                >
+                  {this.showBio(info)}
+                </div>
+                <button
+                  className={`Edit-profile-button-${this.state.editMode}`}
+                  onClick={() =>
+                    this.setState({
+                      editMode: this.state.editMode === "on" ? "off" : "on",
+                    })
+                  }
+                >
+                  {t("profile.edit")}
+                </button>
               </div>
             </div>
             <div className="Panel">

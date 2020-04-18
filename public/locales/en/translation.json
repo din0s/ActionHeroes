@@ -39,10 +39,12 @@
   },
   "profile": {
     "attended": "Attended",
+    "cancel": "Cancel",
     "categories": "Categories",
     "edit": "Edit Profile",
     "join": "Join more teams here!",
     "organized": "Organized",
+    "save": "Save",
     "show-more": "Show more...",
     "show-less": "Show less..."
   },

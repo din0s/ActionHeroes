@@ -14,6 +14,30 @@
       border-radius: 0.5rem;
       box-shadow: 1px 1px black;
       height: 15rem;
+
+      &-edit {
+        > div {
+          width: 100%;
+        }
+
+        .Photo {
+          border-radius: 0.5rem;
+          box-shadow: 1px 1px black;
+          height: 15rem;
+        }
+
+        .Edit-photo-button {
+          background-color: white;
+          padding: 0.5rem;
+          border: none;
+          cursor: pointer;
+          border-radius: 5px;
+
+          > img {
+            height: 1rem;
+          }
+        }
+      }
     }
 
     .Username {
@@ -23,23 +47,60 @@
     .Info {
       font-size: 1rem;
       margin-top: -0.5rem;
+      max-width: 15rem;
+      overflow-wrap: break-word;
+
+      &-edit {
+        .Edit-bio-input {
+          resize: none;
+          height: 5rem;
+          border-radius: 0.3rem;
+          width: 100%;
+        }
+
+        .Save-button,
+        .Cancel-button {
+          background-color: rgba($color: white, $alpha: 0.3);
+          border: 1px solid rgba($color: black, $alpha: 0.3);
+          border-radius: 0.3rem;
+          box-shadow: 0.5px 0.5px 0.5px 0.5px black;
+          cursor: pointer;
+          font-size: 1rem;
+          margin-top: 0.5rem;
+          margin-right: 0.5rem;
+          outline: none;
+          padding: 0.2rem;
+          transition: 0.1s ease-in-out;
+          width: 5rem;
+
+          &:hover {
+            background-color: rgba($color: rgb(192, 180, 180), $alpha: 0.3);
+          }
+        }
+      }
     }
 
     .Edit-profile-button {
-      background-color: rgba($color: white, $alpha: 0.3);
-      border: 1px solid rgba($color: black, $alpha: 0.3);
-      border-radius: 0.3rem;
-      box-shadow: 0.5px 0.5px 0.5px 0.5px black;
-      cursor: pointer;
-      font-size: 1.2rem;
-      margin-top: 1rem;
-      outline: none;
-      padding: 0.5rem;
-      transition: 0.1s ease-in-out;
-      width: 15rem;
+      &-off {
+        background-color: rgba($color: white, $alpha: 0.3);
+        border: 1px solid rgba($color: black, $alpha: 0.3);
+        border-radius: 0.3rem;
+        box-shadow: 0.5px 0.5px 0.5px 0.5px black;
+        cursor: pointer;
+        font-size: 1.2rem;
+        margin-top: 1rem;
+        outline: none;
+        padding: 0.5rem;
+        transition: 0.1s ease-in-out;
+        width: 15rem;
 
-      &:hover {
-        background-color: rgba($color: rgb(192, 180, 180), $alpha: 0.3);
+        &:hover {
+          background-color: rgba($color: rgb(192, 180, 180), $alpha: 0.3);
+        }
+      }
+
+      &-on {
+        display: none;
       }
     }
   }
@@ -221,15 +282,39 @@
       > div {
         margin: -1.75rem 2rem;
       }
+
+      .Profile-photo {
+        width: 10rem;
+        height: 10rem;
+
+        &-edit {
+          .Photo {
+            width: 10rem;
+            height: 10rem;
+          }
+        }
+      }
+
+      .Username {
+        margin-top: -0.4rem;
+      }
+
+      .Info {
+        &-edit {
+          .Edit-bio-input {
+            width: max-content;
+          }
+        }
+      }
     }
 
     .Panel {
-      margin: 1.5rem 0rem;
+      margin: 2.5rem 0rem;
     }
   }
 }
 
-@media only screen and(max-width: 360px) {
+@media only screen and(max-width: 550px) {
   .Container {
     .Bio-panel {
       margin-left: -1rem;
@@ -238,6 +323,17 @@
       .Profile-photo {
         width: 12rem;
         height: 12rem;
+
+        &-edit {
+          .Photo {
+            width: 12rem;
+            height: 12rem;
+          }
+
+          .Edit-photo-button {
+            padding: 0.6rem;
+          }
+        }
       }
 
       > div {
