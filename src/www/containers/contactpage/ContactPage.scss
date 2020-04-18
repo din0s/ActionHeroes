@@ -3,6 +3,8 @@
 .ContactPage {
   align-items: center;
   background-image: url("/img/contact/background.png");
+  background-repeat: repeat-y;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   padding: 2.75rem 0;
