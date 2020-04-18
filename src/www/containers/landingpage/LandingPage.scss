@@ -154,22 +154,22 @@
   }
 }
 
+@media only screen and(max-width: 1680px) {
+  .LandingPage .Intro {
+    &_parallax {
+      min-height: unset;
+    }
+
+    &_panel {
+      margin: 6rem;
+      margin-top: 8rem;
+    }
+  }
+}
+
 @media only screen and(max-width: 1377px) {
-  .LandingPage {
-    .Intro {
-      &_parallax {
-        min-height: unset;
-      }
-
-      &_panel {
-        margin: 6rem;
-        margin-top: 8rem;
-      }
-    }
-
-    .show-6 {
-      display: none;
-    }
+  .LandingPage .show-6 {
+    display: none;
   }
 }
 
