@@ -1,0 +1,14 @@
+{
+  "Team1": {
+    "name": "ABCDE",
+    "description": "Description Description Description Description Description",
+    "categories": [{ "name": "ABC" }, { "name": "BCD" }],
+    "photo": "/img/profile/teams.jpg"
+  },
+  "Team2": {
+    "name": "ABCDE",
+    "description": "Description Description Description Description Description",
+    "categories": [{ "name": "ABC" }, { "name": "BCD" }],
+    "photo": "/img/profile/teams.jpg"
+  }
+}

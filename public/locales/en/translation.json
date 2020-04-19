@@ -38,12 +38,14 @@
     }
   },
   "profile": {
-    "attended": "Attended",
+    "add-bio": "Let us know more about you here!",
+    "attended": "Actions you have attended",
     "cancel": "Cancel",
     "categories": "Categories",
     "edit": "Edit Profile",
+    "edit-avatar": "Edit avatar",
     "join": "Join more teams here!",
-    "organized": "Organized",
+    "organized": "Actions you have organized",
     "save": "Save",
     "show-more": "Show more...",
     "show-less": "Show less..."

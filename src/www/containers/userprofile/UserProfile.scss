@@ -1,5 +1,5 @@
-.Container {
-  background-image: url("/img/sky.jpg");
+.Profile-page {
+  background-image: url("/img/profile/sky.jpg");
   display: flex;
   flex-direction: row;
   padding: 4rem 8rem;
@@ -15,32 +15,32 @@
       box-shadow: 1px 1px black;
       height: 15rem;
 
-      &-edit {
-        > div {
-          width: 100%;
-        }
+      .Edit-photo-button {
+        display: none;
+      }
 
+      &-edit {
+        .Edit-photo-button {
+          background-color: rgba($color: white, $alpha: 0.6);
+          padding: 0.5rem;
+          border: none;
+          cursor: pointer;
+          border-radius: 5px;
+        }
+      }
+
+      &,
+      &-edit {
         .Photo {
           border-radius: 0.5rem;
           box-shadow: 1px 1px black;
           height: 15rem;
         }
-
-        .Edit-photo-button {
-          background-color: white;
-          padding: 0.5rem;
-          border: none;
-          cursor: pointer;
-          border-radius: 5px;
-
-          > img {
-            height: 1rem;
-          }
-        }
       }
     }
 
     .Username {
+      font-weight: bold;
       font-size: 1.5rem;
     }
 
@@ -52,54 +52,63 @@
 
       &-edit {
         .Edit-bio-input {
+          display: flex;
           resize: none;
           height: 5rem;
           border-radius: 0.3rem;
-          width: 100%;
+          width: 98%;
         }
 
         .Save-button,
         .Cancel-button {
-          background-color: rgba($color: white, $alpha: 0.3);
+          align-items: center;
+          background-color: rgba($color: white, $alpha: 0.6);
           border: 1px solid rgba($color: black, $alpha: 0.3);
           border-radius: 0.3rem;
           box-shadow: 0.5px 0.5px 0.5px 0.5px black;
           cursor: pointer;
+          display: flex;
+          flex-direction: column;
           font-size: 1rem;
           margin-top: 0.5rem;
-          margin-right: 0.5rem;
           outline: none;
           padding: 0.2rem;
-          transition: 0.1s ease-in-out;
-          width: 5rem;
+          transition: 0.15s ease-in-out;
+          width: 100%;
+        }
 
+        .Save-button {
           &:hover {
-            background-color: rgba($color: rgb(192, 180, 180), $alpha: 0.3);
+            background-color: rgba($color: lightgray, $alpha: 0.6);
+          }
+        }
+
+        .Cancel-button {
+          &:hover {
+            background-color: rgba($color: #ff0000, $alpha: 0.8);
           }
         }
       }
     }
 
     .Edit-profile-button {
-      &-off {
-        background-color: rgba($color: white, $alpha: 0.3);
-        border: 1px solid rgba($color: black, $alpha: 0.3);
-        border-radius: 0.3rem;
-        box-shadow: 0.5px 0.5px 0.5px 0.5px black;
-        cursor: pointer;
-        font-size: 1.2rem;
-        margin-top: 1rem;
-        outline: none;
-        padding: 0.5rem;
-        transition: 0.1s ease-in-out;
-        width: 15rem;
+      background-color: rgba($color: white, $alpha: 0.6);
+      border: 1px solid rgba($color: black, $alpha: 0.3);
+      border-radius: 0.3rem;
+      box-shadow: 0.5px 0.5px 0.5px 0.5px black;
+      cursor: pointer;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      outline: none;
+      padding: 0.5rem;
+      transition: 0.15s ease-in-out;
+      width: 15rem;
 
-        &:hover {
-          background-color: rgba($color: rgb(192, 180, 180), $alpha: 0.3);
-        }
+      &:hover {
+        background-color: rgba($color: lightgray, $alpha: 0.6);
       }
 
-      &-on {
+      &-edit {
         display: none;
       }
     }
@@ -132,6 +141,7 @@
 
         &.Active-tab {
           border-bottom: 2px solid red;
+          font-weight: bold;
         }
       }
     }
@@ -146,22 +156,28 @@
       .Actions,
       .Teams {
         > div {
-          background-color: rgb(209, 206, 218);
+          background-color: rgba($color: white, $alpha: 0.3);
           border: 1px solid rgba($color: black, $alpha: 0.4);
           border-radius: 0.5rem;
-          box-shadow: 0px 1px black;
+          box-shadow: 0 0 5px 1px rgba($color: black, $alpha: 0.2);
+          display: flex;
+          flex-direction: column;
+          padding: 0rem 2rem;
 
           &:not(:first-of-type) {
             margin-top: 1rem;
           }
 
           > h3 {
-            margin-left: 1rem;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            margin-top: 2rem;
             text-align: left;
           }
 
           > ul {
             list-style-type: none;
+            padding: 0;
             text-align: left;
 
             > li:not(:first-of-type) {
@@ -170,7 +186,11 @@
           }
 
           > p {
+            align-self: center;
             cursor: pointer;
+            padding: 0rem;
+            text-decoration-line: underline;
+            width: fit-content;
           }
 
           .Card {
@@ -219,46 +239,11 @@
           }
 
           .Link {
+            align-self: center;
+            cursor: pointer;
+            padding: 0rem;
+            width: fit-content;
             color: black;
-            text-decoration: none;
-          }
-        }
-      }
-    }
-
-    .Categories {
-      > div {
-        background-color: rgb(209, 206, 218);
-        border: 1px solid rgba($color: black, $alpha: 0.4);
-        border-radius: 0.5rem;
-        box-shadow: 0px 1px black;
-        max-width: 50rem;
-
-        > ul {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          list-style-type: none;
-          padding: 0rem;
-
-          > li {
-            background-color: rgb(218, 215, 226);
-            border: 1px solid rgba($color: black, $alpha: 0.3);
-            border-radius: 0.5rem;
-            box-shadow: 0px 1px black;
-            margin: 0.5rem;
-            padding: 1rem;
-
-            .Category {
-              .Category-image {
-                height: 10rem;
-                width: 10rem;
-              }
-
-              > p {
-                font-size: 1.2rem;
-              }
-            }
           }
         }
       }
@@ -267,44 +252,30 @@
 }
 
 @media only screen and(max-width: 1024px) {
-  .Container {
+  .Profile-page {
     padding: 4rem 2rem;
   }
 }
 
 @media only screen and(max-width: 800px) {
-  .Container {
+  .Profile-page {
     flex-direction: column;
 
     .Bio-panel {
       flex-direction: row;
 
       > div {
-        margin: -1.75rem 2rem;
+        margin: -1rem 2rem;
+        margin-left: 0.2rem;
       }
 
-      .Profile-photo {
-        width: 10rem;
+      .Photo {
+        width: 15rem;
         height: 10rem;
-
-        &-edit {
-          .Photo {
-            width: 10rem;
-            height: 10rem;
-          }
-        }
       }
 
       .Username {
         margin-top: -0.4rem;
-      }
-
-      .Info {
-        &-edit {
-          .Edit-bio-input {
-            width: max-content;
-          }
-        }
       }
     }
 
@@ -315,24 +286,14 @@
 }
 
 @media only screen and(max-width: 550px) {
-  .Container {
+  .Profile-page {
     .Bio-panel {
       margin-left: -1rem;
       flex-direction: column;
 
-      .Profile-photo {
-        width: 12rem;
-        height: 12rem;
-
-        &-edit {
-          .Photo {
-            width: 12rem;
-            height: 12rem;
-          }
-
-          .Edit-photo-button {
-            padding: 0.6rem;
-          }
+      .Photo {
+        .Edit-photo-button {
+          padding: 0.6rem;
         }
       }
 
@@ -345,7 +306,6 @@
 
         .Edit-profile-button {
           height: 2.5rem;
-          width: 8rem;
         }
       }
     }
@@ -380,21 +340,6 @@
               .Card-body {
                 margin: 0rem;
                 margin-top: 1rem;
-              }
-            }
-          }
-        }
-      }
-
-      .Categories {
-        > div {
-          margin-left: -1rem;
-          > ul {
-            > li {
-              .Category {
-                .Category-image {
-                  width: 10rem;
-                }
               }
             }
           }

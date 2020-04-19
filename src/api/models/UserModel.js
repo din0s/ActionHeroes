@@ -1,6 +1,5 @@
 const mongo = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
-const Team = require("../models/TeamModel");
 
 const UserSchema = new mongo.Schema({
   email: {
