@@ -16,7 +16,7 @@ const ActionSchema = new mongo.Schema({
     },
   },
   date: { type: Date, required: true },
-  dateCreated: { type: Date },
+  dateCreated: { type: Date, default: Date.now },
   photo: { data: Buffer, contentType: String },
   organizer: {
     userId: { type: mongo.Schema.Types.ObjectId, ref: "User" },

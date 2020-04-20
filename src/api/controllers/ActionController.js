@@ -25,7 +25,6 @@ module.exports = {
       return res.status(400).json({ error: "Field `date` is required" });
     }
 
-    action[`dateCreated`] = new Date();
     action[`description`] = req.body.description;
 
     if (req.body.categories) {

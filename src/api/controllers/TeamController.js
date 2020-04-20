@@ -16,7 +16,6 @@ module.exports = {
 
     team[`description`] = req.body.description;
     team[`owner`] = req.userData.userId;
-    team[`dateCreated`] = new Date();
 
     if (req.body.categories) {
       const categories = req.body.categories;
