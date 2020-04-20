@@ -8,6 +8,7 @@ const TeamSchema = new mongo.Schema({
   owner: { type: mongo.Schema.Types.ObjectId, required: true, ref: "User" },
   members: [{ type: mongo.Schema.Types.ObjectId, ref: "User" }],
   categories: [{ type: mongo.Schema.Types.ObjectId, ref: "Category" }],
+  dateCreated: { type: Date },
 });
 
 TeamSchema.plugin(uniqueValidator);

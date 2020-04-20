@@ -3,22 +3,22 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/UserModel");
 
-const generateToken = user =>
+const generateToken = (user) =>
   jwt.sign(
     // payload
     {
       userId: user._id,
-      email: user.email
+      email: user.email,
     },
     // secret
     process.env.TOKEN_SECRET_KEY,
     // options
     {
-      expiresIn: process.env.TOKEN_LIFE
+      expiresIn: process.env.TOKEN_LIFE,
     }
   );
 
-const sanitizeUser = user => {
+const sanitizeUser = (user) => {
   user = user.toJSON();
   user._id = undefined;
   user.hash = undefined;
@@ -26,23 +26,25 @@ const sanitizeUser = user => {
   return user;
 };
 
-const authResponse = user => ({
+const authResponse = (user) => ({
   jwt: generateToken(user),
-  user: sanitizeUser(user)
+  user: sanitizeUser(user),
 });
 
 module.exports = {
   changePassword: (req, res) => {},
 
+  changePhoto: (req, res) => {},
+
   getProfile: (req, res) => {
     if (req.params.user_id === req.userData.userId) {
       User.findOne({ _id: req.params.user_id })
         .exec()
-        .then(user => {
+        .then((user) => {
           user = sanitizeUser(user);
           res.status(200).json({ user });
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(`Error during user find():\n${err}`);
           res.status(500).send();
         });
@@ -60,10 +62,10 @@ module.exports = {
     const password = req.body.password;
 
     User.findOne({ email })
-      .then(user => {
+      .then((user) => {
         if (!user) {
           return res.status(401).json({
-            error: "Invalid credentials"
+            error: "Invalid credentials",
           });
         }
 
@@ -77,12 +79,12 @@ module.exports = {
             res.status(200).json(authResponse(user));
           } else {
             res.status(401).json({
-              error: "Invalid credentials"
+              error: "Invalid credentials",
             });
           }
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(`Error during login find():\n${err}`);
         res.status(500).send();
       });
@@ -96,20 +98,20 @@ module.exports = {
     bcrypt.hash(password, 10, (err, hash) => {
       if (err) {
         return res.status(400).json({
-          error: "Invalid request"
+          error: "Invalid request",
         });
       }
 
       const user = new User({
         email,
         username,
-        hash
+        hash,
       });
 
       user
         .save()
         .then(() => res.status(201).json(authResponse(user)))
-        .catch(err => {
+        .catch((err) => {
           if (err.name === "ValidationError") {
             if (err.errors.email) {
               if (err.errors.email.kind === "regexp") {
@@ -134,5 +136,5 @@ module.exports = {
     });
   },
 
-  updateProfile: (req, res) => {}
+  updateProfile: (req, res) => {},
 };

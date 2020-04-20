@@ -14,16 +14,15 @@ module.exports = {
       return res.status(400).json({ error: "Field `name` is required" });
     }
 
-    team[`description`] = req.body.description || null;
+    team[`description`] = req.body.description;
     team[`owner`] = req.userData.userId;
+    team[`dateCreated`] = new Date();
 
     if (req.body.categories) {
       const categories = req.body.categories;
       promises.push(
         Category.find({ name: { $in: categories } }).then((categories) => {
-          categories.forEach((category) => {
-            team[`categories`].push(category._id);
-          });
+          team[`categories`] = categories.map((c) => c._id);
         })
       );
     }
@@ -32,6 +31,7 @@ module.exports = {
       team
         .save()
         .then(() => {
+          team.__v = undefined;
           return res.status(201).send(team);
         })
         .catch((err) => {

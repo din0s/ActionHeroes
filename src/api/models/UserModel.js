@@ -24,6 +24,8 @@ const UserSchema = new mongo.Schema({
   language: { type: String },
   actionsAttended: [{ type: mongo.Schema.Types.ObjectId, ref: "Action" }],
   actionsSaved: [{ type: mongo.Schema.Types.ObjectId, ref: "Action" }],
+  teamsJoined: [{ type: mongo.Schema.Types.ObjectId, ref: "Team" }],
+  teamsOwned: [{ type: mongo.Schema.Types.ObjectId, ref: "Team" }],
 });
 
 UserSchema.plugin(uniqueValidator);

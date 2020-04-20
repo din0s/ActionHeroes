@@ -15,6 +15,6 @@ router.get("/:user_id/profile", checkAuth, UserController.getProfile);
 
 router.patch("/me/change_password", checkAuth, UserController.changePassword);
 
-router.put("/me/photo", checkAuth, UserController.changeProfilePhoto);
+router.put("/me/photo", checkAuth, UserController.changePhoto);
 
 module.exports = router;
