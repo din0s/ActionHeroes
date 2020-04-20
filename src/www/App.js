@@ -6,6 +6,7 @@ import React, { Component, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import { applyMiddleware, compose, createStore } from "redux";
 
+import ActionsPage from "./containers/actionspage/ActionsPage.jsx";
 import AlertTemplate from "./components/alert/AlertTemplate";
 import ContactPage from "./containers/contactpage/ContactPage.jsx";
 import Footer from "./components/footer/Footer";
@@ -61,6 +62,7 @@ export default class App extends Component {
                     <Route path="/contact" children={<ContactPage />} />
                     <Route path="/profile" children={<UserProfile />} />
                     <Route path="/" exact children={<LandingPage />} />
+                    <Route path="/actions" children={<ActionsPage />} />
                   </Switch>
                 </main>
                 <Footer />
