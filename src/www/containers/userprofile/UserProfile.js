@@ -1,8 +1,10 @@
-import React, { Component } from "react";
-import { withTranslation } from "react-i18next";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import "./UserProfile.scss";
+
+import React, { Component } from "react";
+
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { withTranslation } from "react-i18next";
 
 const minCardsShown = 3;
 
@@ -31,6 +33,7 @@ export default connect(
           list: actionsOrganized,
           shown: 3,
         },
+        bio: "",
         editMode: false,
         teamsShown: 3,
       };
@@ -43,23 +46,21 @@ export default connect(
             return null;
           }
           return (
-            <li>
-              <span className="Card">
-                <img className="Card-image" src={card.photo} alt="" />
-                <div className="Card-body">
-                  <h4>{card.name}</h4>
-                  <p>{card.description}</p>
-                  <div className="Card-categories">
-                    <h4>{t("profile.categories")}:</h4>
-                    <ul>
-                      {Object.keys(card.categories).map((cKey) => {
-                        const category = card.categories[cKey];
-                        return <li>{category.name}</li>;
-                      })}
-                    </ul>
-                  </div>
+            <li className="Card">
+              <img src={card.photo} alt="" />
+              <div className="Card_body">
+                <h4>{card.name}</h4>
+                <p>{card.description}</p>
+                <div className="Card_categories">
+                  <h4>{t("profile.categories")}:</h4>
+                  <ul>
+                    {Object.keys(card.categories).map((cKey) => {
+                      const category = card.categories[cKey];
+                      return <li>{category.name}</li>;
+                    })}
+                  </ul>
                 </div>
-              </span>
+              </div>
             </li>
           );
         });
@@ -99,46 +100,30 @@ export default connect(
         }
       };
 
-      showCategories = (categories) => {
-        return Object.keys(categories).map((key) => {
-          const category = categories[key];
-          return (
-            <li>
-              <div className="Category">
-                <img className="Category-image" src={category.photo} alt="" />
-                <p>{category.name}</p>
-              </div>
-            </li>
-          );
-        });
-      };
-
-      showBio = (initialBio) => {
-        const { user, t } = this.props;
+      showBio = () => {
+        const { t, user } = this.props;
         if (this.state.editMode) {
           return (
             <div>
               {/*TODO: should send request to server */}
               <textarea
-                className="Edit-bio-input"
-                defaultValue={initialBio}
-                onChange={(e) => {
-                  user.bio = e.target.value.trim();
-                }}
+                placeholder={t("profile.add-bio")}
+                defaultValue={user.bio}
+                onChange={(e) => this.setState({ bio: e.target.value.trim() })}
                 type="text"
               />
               <button
-                className="Save-button"
+                className="UserPanel_btn-save"
                 onClick={() => {
+                  user.bio = this.state.bio;
                   this.setState({ editMode: false });
                 }}
               >
                 {t("profile.save")}
               </button>
               <button
-                className="Cancel-button"
+                className="UserPanel_btn-cancel"
                 onClick={() => {
-                  user.bio = initialBio;
                   this.setState({ editMode: false });
                 }}
               >
@@ -146,40 +131,38 @@ export default connect(
               </button>
             </div>
           );
-        } else return <p>{initialBio}</p>;
-      };
-
-      showProfilePhoto = (photo) => {
-        const { t } = this.props;
-        return (
-          <div className={`Profile-photo${this.state.editMode ? "-edit" : ""}`}>
-            <img className="Photo" src={photo} alt="Profile Avatar" />
-            <button className="Edit-photo-button">
-              {t("profile.edit-avatar")}
-            </button>
-          </div>
-        );
+        } else {
+          return <p>{user.bio || t("profile.add-bio")}</p>;
+        }
       };
 
       render() {
         const { t, user } = this.props;
-        const { username, profilePhoto, bio } = user;
+        const { username, profilePhoto } = user;
         const photo = profilePhoto || "/img/profile/profilePhoto.jpg";
-        const info = bio || t("profile.add-bio");
 
         return (
-          <div className="Profile-page">
-            <div className="Bio-panel">
-              {this.showProfilePhoto(photo)}
-              <div>
-                <p className="Username">{username}</p>
-                <div className={`Info${this.state.editMode ? "-edit" : ""}`}>
-                  {this.showBio(info)}
-                </div>
+          <div className="ProfilePage">
+            <div className="UserPanel">
+              <div
+                className={`UserPanel_avatarDiv${
+                  this.state.editMode ? "-edit" : ""
+                }`}
+              >
+                <img src={photo} alt="Avatar" />
+                <button className="UserPanel_btn-file">
+                  {t("profile.edit-avatar")}
+                </button>
+              </div>
+              <div
+                className={`UserPanel_infoDiv${
+                  this.state.editMode ? "-edit" : ""
+                }`}
+              >
+                <h2>{username}</h2>
+                {this.showBio()}
                 <button
-                  className={`Edit-profile-button${
-                    this.state.editMode ? "-edit" : ""
-                  }`}
+                  className="UserPanel_btn-edit"
                   onClick={() =>
                     this.setState({
                       editMode: !this.state.editMode,
@@ -190,32 +173,28 @@ export default connect(
                 </button>
               </div>
             </div>
-            <div className="Panel">
-              <ul className="List">
+            <div className="Container">
+              <ul className="Container_tabs">
                 <li
-                  className={
-                    this.state.activeTab === "actions" ? "Active-tab" : ""
-                  }
+                  className={this.state.activeTab === "actions" ? "active" : ""}
                   onClick={() => this.setState({ activeTab: "actions" })}
                 >
                   {t("actions")}
                 </li>
                 <li
-                  className={
-                    this.state.activeTab === "teams" ? "Active-tab" : ""
-                  }
+                  className={this.state.activeTab === "teams" ? "active" : ""}
                   onClick={() => this.setState({ activeTab: "teams" })}
                 >
                   {t("teams")}
                 </li>
               </ul>
-              <div className="Content">
+              <div className="Container_content">
                 <div
-                  className={`Actions${
+                  className={
                     this.state.activeTab === "actions" ? " active" : ""
-                  }`}
+                  }
                 >
-                  <div>
+                  <section>
                     <h3>{t("profile.attended")}</h3>
                     <ul>
                       {this.showCards(
@@ -224,8 +203,8 @@ export default connect(
                       )}
                     </ul>
                     {this.expandActions("actionsAttended")}
-                  </div>
-                  <div>
+                  </section>
+                  <section>
                     <h3>{t("profile.organized")}</h3>
                     <ul>
                       {this.showCards(
@@ -234,19 +213,17 @@ export default connect(
                       )}
                     </ul>
                     {this.expandActions("actionsOrganized")}
-                  </div>
+                  </section>
                 </div>
                 <div
-                  className={`Teams${
-                    this.state.activeTab === "teams" ? " active" : ""
-                  }`}
+                  className={this.state.activeTab === "teams" ? " active" : ""}
                 >
-                  <div>
+                  <section>
                     <ul>{this.showCards(teams, this.state.teamsShown)}</ul>
-                    <Link to="/teams" className="Link">
+                    <Link to="/teams">
                       <p>{t("profile.join")}</p>
                     </Link>
-                  </div>
+                  </section>
                 </div>
               </div>
             </div>
