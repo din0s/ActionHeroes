@@ -31,7 +31,7 @@ export default connect(
           list: actionsOrganized,
           shown: 3,
         },
-        edcountitMode: "off",
+        editMode: false,
         teamsShown: 3,
       };
 
@@ -122,7 +122,9 @@ export default connect(
               <textarea
                 className="Edit-bio-input"
                 defaultValue={initialBio}
-                onChange={(e) => (user.bio = e.target.value)}
+                onChange={(e) => {
+                  user.bio = e.target.value.trim();
+                }}
                 type="text"
               />
               <button
@@ -150,7 +152,7 @@ export default connect(
       showProfilePhoto = (photo) => {
         const { t } = this.props;
         return (
-          <div>
+          <div className={`Profile-photo${this.state.editMode ? "-edit" : ""}`}>
             <img className="Photo" src={photo} alt="Profile Avatar" />
             <button className="Edit-photo-button">
               {t("profile.edit-avatar")}
@@ -168,11 +170,7 @@ export default connect(
         return (
           <div className="Profile-page">
             <div className="Bio-panel">
-              <div
-                className={`Profile-photo${this.state.editMode ? "-edit" : ""}`}
-              >
-                {this.showProfilePhoto(photo)}
-              </div>
+              {this.showProfilePhoto(photo)}
               <div>
                 <p className="Username">{username}</p>
                 <div className={`Info${this.state.editMode ? "-edit" : ""}`}>
@@ -184,7 +182,7 @@ export default connect(
                   }`}
                   onClick={() =>
                     this.setState({
-                      editMode: this.state.editMode ? false : true,
+                      editMode: !this.state.editMode,
                     })
                   }
                 >

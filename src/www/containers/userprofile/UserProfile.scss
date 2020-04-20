@@ -22,10 +22,11 @@
       &-edit {
         .Edit-photo-button {
           background-color: rgba($color: white, $alpha: 0.6);
-          padding: 0.5rem;
           border: none;
-          cursor: pointer;
           border-radius: 5px;
+          cursor: pointer;
+          padding: 0.5rem;
+          width: 100%;
         }
       }
 
@@ -40,8 +41,9 @@
     }
 
     .Username {
-      font-weight: bold;
       font-size: 1.5rem;
+      font-weight: bold;
+      overflow-wrap: break-word;
     }
 
     .Info {
@@ -52,10 +54,10 @@
 
       &-edit {
         .Edit-bio-input {
-          display: flex;
-          resize: none;
-          height: 5rem;
           border-radius: 0.3rem;
+          display: flex;
+          height: 5rem;
+          resize: none;
           width: 98%;
         }
 
@@ -79,13 +81,13 @@
 
         .Save-button {
           &:hover {
-            background-color: rgba($color: lightgray, $alpha: 0.6);
+            background-color: rgba($color: limegreen, $alpha: 0.6);
           }
         }
 
         .Cancel-button {
           &:hover {
-            background-color: rgba($color: #ff0000, $alpha: 0.8);
+            background-color: rgba($color: red, $alpha: 0.6);
           }
         }
       }
@@ -121,6 +123,7 @@
     .List {
       border-bottom: 1px solid black;
       display: flex;
+      font-size: 1.25rem;
       flex-direction: row;
       list-style-type: none;
       margin: 0;
@@ -188,6 +191,7 @@
           > p {
             align-self: center;
             cursor: pointer;
+            overflow-wrap: break-word;
             padding: 0rem;
             text-decoration-line: underline;
             width: fit-content;
@@ -208,6 +212,7 @@
               flex-direction: column;
               justify-content: space-between;
               margin: 0.75rem 1.5rem;
+              overflow-wrap: break-word;
 
               h4 {
                 margin: 0;
@@ -240,10 +245,10 @@
 
           .Link {
             align-self: center;
+            color: black;
             cursor: pointer;
             padding: 0rem;
             width: fit-content;
-            color: black;
           }
         }
       }
@@ -251,13 +256,13 @@
   }
 }
 
-@media only screen and(max-width: 1024px) {
+@media only screen and(max-width: 1275px) {
   .Profile-page {
     padding: 4rem 2rem;
   }
 }
 
-@media only screen and(max-width: 800px) {
+@media only screen and(max-width: 920px) {
   .Profile-page {
     flex-direction: column;
 
@@ -270,12 +275,20 @@
       }
 
       .Photo {
-        width: 15rem;
         height: 10rem;
+        width: 15rem;
       }
 
       .Username {
         margin-top: -0.4rem;
+      }
+
+      .Info {
+        &-edit {
+          .Edit-bio-input {
+            width: 15rem;
+          }
+        }
       }
     }
 
@@ -285,15 +298,28 @@
   }
 }
 
-@media only screen and(max-width: 550px) {
+@media only screen and(max-width: 570px) {
   .Profile-page {
     .Bio-panel {
+      flex-direction: row;
       margin-left: -1rem;
-      flex-direction: column;
 
-      .Photo {
-        .Edit-photo-button {
-          padding: 0.6rem;
+      .Profile-photo {
+        height: 8rem;
+        width: 8rem;
+
+        &,
+        &-edit {
+          .Photo {
+            height: 8rem;
+            width: 8rem;
+          }
+        }
+
+        &-edit {
+          .Edit-photo-button {
+            padding: 0.5rem;
+          }
         }
       }
 
@@ -301,17 +327,31 @@
         margin: 0.5rem;
 
         .Username {
-          font-size: 1.5rem;
+          font-size: 1rem;
+        }
+
+        .Info {
+          font-size: 0.8rem;
+
+          &-edit {
+            .Edit-bio-input {
+              font-size: 0.8rem;
+              width: 10rem;
+            }
+          }
         }
 
         .Edit-profile-button {
-          height: 2.5rem;
+          font-size: 0.9rem;
+          height: 2rem;
+          width: 8rem;
         }
       }
     }
 
     .Panel {
       .List {
+        font-size: 1rem;
         margin-left: -1rem;
         width: 98%;
         > li {
@@ -328,6 +368,10 @@
         .Teams {
           > div {
             margin-left: -1rem;
+
+            > h3 {
+              font-size: 1rem;
+            }
 
             .Card {
               flex-direction: column;
