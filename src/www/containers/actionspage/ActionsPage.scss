@@ -1,169 +1,86 @@
 @import "../../vars.scss";
 
 .ActionsPage {
-  padding: 4rem;
-  padding-top: 3rem;
+  background-color: rgba($color: wheat, $alpha: 0.25);
   display: flex;
   flex-direction: row;
-  margin-left: 5rem;
+  margin: 0;
+  padding: 4rem;
 
-  &_sidePanel {
-    text-align: start;
-    position: fixed;
-    padding: 1rem;
+  &_content {
+    justify-content: center;
+    margin: 0 2rem;
+    padding: 2rem 0;
 
-    .filter_panel_title > h2 {
-      font-size: 2rem;
-      margin-bottom: 2.5rem;
-    }
+    .SearchBar {
+      margin-bottom: 2rem;
 
-    .filter_panel {
-      .checkbox_container {
-        border-bottom-width: thin;
-        border-bottom-style: solid;
-        border-bottom-color: $softBlack;
-        width: 10rem;
-      }
-
-      > div {
-        .container {
-          display: block;
-          position: relative;
-          padding-left: 30px;
-          margin-bottom: 10px;
-          cursor: pointer;
-          font-size: 1.2rem;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-          user-select: none;
-
-          &:hover {
-            color: rgb(96, 175, 233);
-          }
-
-          input {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-            height: 0;
-            width: 0;
-          }
-
-          .checkmark {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 20px;
-            width: 20px;
-            background-color: #eee;
-            border: 1px solid $softBlack;
-
-            &:after {
-              content: "";
-              position: absolute;
-              display: none;
-            }
-          }
-
-          &:hover input ~ .checkmark {
-            background-color: #ccc;
-            transition: 0.2s ease-in-out;
-          }
-
-          input:checked ~ .checkmark {
-            background-color: rgb(96, 175, 233);
-          }
-
-          input:checked ~ .checkmark:after {
-            display: block;
-          }
-
-          .checkmark:after {
-            left: 7px;
-            top: 3px;
-            width: 3px;
-            height: 8px;
-            border: solid white;
-            border-width: 0 3px 3px 0;
-            -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
-          }
-        }
-      }
-
-      > h3 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        margin-top: 1.8rem;
-      }
-    }
-  }
-
-  &_mainPanel {
-    text-align: start;
-    width: 100%;
-    margin-left: 20rem;
-
-    > div {
-      align-items: center;
-      .SearchBar {
-        > input {
-          width: 50vw;
-        }
+      > input {
+        background-color: white;
+        box-shadow: 0 0 5px 1px rgba($color: black, $alpha: 0.25);
+        width: 60vw;
       }
     }
 
-    .Cards_panel {
+    &_actions {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+      justify-content: center;
+      padding-left: 0;
+
       > li {
-        border: 1px solid $softBlack;
-        box-shadow: 0 15px 20px $softBlack;
+        background-color: rgba($color: royalblue, $alpha: 0.3);
+        box-shadow: 0 0 10px 1px rgba($color: black, $alpha: 0.15);
         border-radius: 0.5rem;
         list-style: none;
         flex-direction: row;
         display: flex;
-        margin-bottom: 2rem;
-        width: 50vw;
+        width: 70vw;
         margin-top: 2rem;
         margin-left: 1.5rem;
-        background-color: $softBlack;
+        height: 15.2rem;
 
-        .pic {
-          border-radius: 0.5rem;
-          width: 20rem;
+        overflow: hidden;
+
+        > a {
           height: 15rem;
+
+          > img {
+            border-top-left-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+            height: 15.2rem;
+          }
         }
 
-        .action_pic {
-          border-radius: 0.5rem;
-          width: 20rem;
-          height: 15rem;
-        }
-
-        .details {
-          margin-left: 2rem;
+        > div {
+          margin-left: 1rem;
+          text-align: start;
 
           > a {
             color: black;
+            display: contents;
+            margin: 0;
             text-decoration: none;
-            display: inline-block;
 
             &:hover {
               color: rgb(96, 175, 233);
               text-decoration: underline;
             }
-          }
 
-          .action_title {
             > h3 {
-              word-break: break-word;
+              display: flex;
+              font-size: 2rem;
+              margin-bottom: 0.2rem;
+              margin-right: 0.8rem;
             }
           }
 
-          > h5 {
-            word-break: break-word;
+          .desc {
             margin-right: 1rem;
+            > p {
+              font-size: 1rem;
+            }
           }
         }
       }
@@ -171,21 +88,55 @@
   }
 }
 
-@media only screen and(max-width: 1024px) {
+@media only screen and(max-width: 1180px) {
   .ActionsPage {
-    &_mainPanel {
-      .SearchBar {
-        display: block;
-      }
+    justify-content: center;
+    &_filter {
+      //display: none;
+    }
+
+    &_content {
+      border-left: none;
     }
   }
 }
 
-@media only screen and(max-width: 650px) {
+@media only screen and(max-width: 970px) {
   .ActionsPage {
-    &_mainPanel {
-      .SearchBar {
-        display: none;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    &_content {
+      &_actions {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        justify-content: center;
+        padding-left: 0;
+        width: 100%;
+
+        > li {
+          background-color: rgba($color: royalblue, $alpha: 0.3);
+          box-shadow: 0 0 10px 1px rgba($color: black, $alpha: 0.15);
+          border-radius: 0.5rem;
+          list-style: none;
+          flex-direction: column;
+          display: flex;
+          margin-bottom: 2rem;
+          width: 20rem;
+          margin-top: 2rem;
+          margin-left: 1.5rem;
+          height: 39.7rem;
+
+          > a {
+            display: contents;
+
+            > img {
+              height: 15rem;
+              border-top-left-radius: 0.5rem;
+              border-top-right-radius: 0.5rem;
+            }
+          }
+        }
       }
     }
   }

@@ -2,42 +2,59 @@ import "./ActionsPage.scss";
 
 import React, { Component } from "react";
 
+import FilterList from "../../components/filterlist/FilterList";
 import SearchBar from "../../components/searchbar/SearchBar";
 import { withTranslation } from "react-i18next";
 
 const cardList = require("./cards.json");
-const categoriesList = require("./categories.json");
-const teamsList = require("./teams.json")
 
 export default withTranslation()(
-  class ContactPage extends Component {
-    showCards = (cardList) => {
-      return Object.keys(cardList).map((key, index) => {
+  class ActionsPage extends Component {
+    state = {
+      selectedCategories: [],
+    };
+
+    showCards = (cardList, t) => {
+      const action_link = "/signup";
+      const location_link = "https://goo.gl/maps/JYnmWrgsEzot3Dn86";
+      return Object.keys(cardList).map((key) => {
         return (
           <li>
-            <a className="action_pic" href="/signup">
-              <img className="pic" alt="Card icon" src={cardList[key].image} />
+            <a href={action_link}>
+              <img alt="Card icon" src={cardList[key].image} />
             </a>
-            <div className="details">
-              <a className="action_title" href="/signup">
+            <div>
+              <a href = {action_link}>
                 <h3>{cardList[key].name}</h3>
               </a>
-              <h5>{cardList[key].desc}</h5>
+              <div>
+                <span>{cardList[key].date}</span>
+              </div>
+              <a href={location_link} target="_blank" rel="noopener noreferrer">
+                <span>{cardList[key].location}</span>
+              </a>
+              <div className="desc"><p>{cardList[key].desc}</p></div>
             </div>
           </li>
         );
       });
     };
 
-    showFilters = (filtersList) => {
-      return Object.keys(filtersList).map((key, index) => {
-        return (
-          <label className="container">
-            {filtersList[key].name}
-            <input type="checkbox" />
-            <span className="checkmark"></span>
-          </label>
-        );
+    onCheckbox = (event, category) => {
+      if (event.target.checked) {
+        const categories = this.state.selectedCategories.concat(category);
+        this.setState({ selectedCategories: categories });
+      } else {
+        this.removeCategory(category);
+      }
+    };
+
+    removeCategory = (category) => {
+      const filtered = this.state.selectedCategories.filter(
+        (c) => c !== category
+      );
+      this.setState({
+        selectedCategories: filtered,
       });
     };
 
@@ -45,28 +62,24 @@ export default withTranslation()(
       const { t } = this.props;
       return (
         <div className="ActionsPage">
-          <div className="ActionsPage_sidePanel">
-            <div className="filter_panel_title">
-              <h2>{t("actionspage.filters")}</h2>
-            </div>
-            <div className="filter_panel">
-              <div className="checkbox_container">
-                <h3>{t("actionspage.categories")}</h3>
-                {this.showFilters(categoriesList)}
-              </div>
-              <div className="checkbox_container">
-                <h3>{t("actionspage.teams")}</h3>
-                {this.showFilters(teamsList)}
-              </div>
-            </div>
+          <div className="ActionsPage_filter">
+            <FilterList
+              categories={{
+                a: { name: "Education" },
+                b: { name: "Environment" },
+                c: { name: "Poverty" },
+              }}
+              selected={this.state.selectedCategories}
+              onCheckbox={this.onCheckbox}
+              onClear={() => this.setState({ selectedCategories: [] })}
+              onRemove={this.removeCategory}
+            />
           </div>
-          <div className="ActionsPage_mainPanel">
-            <div>
-              <SearchBar />
-            </div>
-            <div className="Cards_panel">
-              {this.showCards(cardList)}
-              </div>
+          <div className="ActionsPage_content">
+            <SearchBar />
+            <ul className="ActionsPage_content_actions">
+              {this.showCards(cardList, t)}
+            </ul>
           </div>
         </div>
       );

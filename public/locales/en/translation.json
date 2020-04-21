@@ -80,6 +80,7 @@
   "actionspage": {
     "filters": "Filters",
     "categories":"Categories",
-    "teams": "Teams"
+    "teams": "Teams",
+    "readmore": "Read More"
   }
 }

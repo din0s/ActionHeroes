@@ -80,6 +80,7 @@
   "actionspage": {
     "filters": "Φίλτρα",
     "categories":"Κατηγορίες",
-    "teams": "Ομάδες"
+    "teams": "Ομάδες",
+    "readmore": "Διαβάστε περισσότερα"
   }
 }
