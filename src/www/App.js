@@ -9,13 +9,14 @@ import { applyMiddleware, compose, createStore } from "redux";
 import AlertTemplate from "./components/alert/AlertTemplate";
 import ContactPage from "./containers/contactpage/ContactPage.jsx";
 import Footer from "./components/footer/Footer";
-import LandingPage from "./containers/landingpage/LandingPage";
+import LandingPage from "./containers/landingpage/LandingPage.jsx";
 import Login from "./containers/authentication/Login.jsx";
 import NavBar from "./components/navbar/NavBar";
 import UserProfile from "./containers/userprofile/UserProfile";
 import { Provider } from "react-redux";
 import Signup from "./containers/authentication/Signup.jsx";
 import TeamsPage from "./containers/teamspage/TeamsPage.jsx";
+import TeamProfile from "./containers/teamprofile/TeamProfile.jsx";
 import { createBrowserHistory } from "history";
 import { createRootReducer } from "./reducers";
 import { handshake } from "./actions/auth";
@@ -61,6 +62,7 @@ export default class App extends Component {
                     <Route path="/contact" children={<ContactPage />} />
                     <Route path="/profile" children={<UserProfile />} />
                     <Route path="/" exact children={<LandingPage />} />
+                    <Route path="/teams/id" children={<TeamProfile />} />
                   </Switch>
                 </main>
                 <Footer />

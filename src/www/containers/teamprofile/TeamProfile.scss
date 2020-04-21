@@ -1,0 +1,126 @@
+.TeamProfile {
+  background-color: rgb(234, 237, 245);
+  padding: 2rem 13vw;
+  margin: auto;
+
+  .TopPanel {
+    background-color: rgba($color: white, $alpha: 0.7);
+    //border-radius: 1rem;
+    //box-shadow: 0 0 30px 1px rgba($color: black, $alpha: 0.3);
+    border: 1px solid rgba($color: black, $alpha: 0.3);
+    padding: 2rem;
+    //width: 80vw;
+    &_info {
+      display: flex;
+      flex-direction: row;
+
+      > img {
+        height: 13rem;
+        border-radius: 160px;
+        border: 1px solid rgba($color: black, $alpha: 0.3);
+        border-width: 1px;
+        margin-right: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      > div {
+        text-align: left;
+
+        > h1 {
+          font-size: 2.4rem;
+          margin-top: 0;
+          margin-bottom: 1.5rem;
+        }
+
+        > h2 {
+          font-size: 1.2rem; //max 400 characters?
+          font-weight: normal;
+        }
+      }
+    }
+
+    &_button button {
+      background-color: rgba($color: mediumblue, $alpha: 0.7);
+      border: 1px solid rgba($color: black, $alpha: 0.3);
+      //border-radius: 0.5rem;
+      color: white;
+      cursor: pointer;
+      margin-top: 0.8rem;
+      font-size: 1.2rem;
+      padding: 0.6rem 5rem;
+      transition: 0.2s ease-in-out;
+
+      &:hover {
+        background-color: rgba($color: blue, $alpha: 0.7);
+      }
+    }
+  }
+
+  .BottomPanel {
+    display: flex;
+    .LeftSide {
+      width: 20rem;
+      max-height: 10rem;
+      background-color: rgba($color: white, $alpha: 0.7);
+      box-shadow: 0 0 30px 10px rgba($color: white, $alpha: 0.3);
+      border: 1px solid rgba($color: black, $alpha: 0.3);
+      padding: 1rem;
+      justify-content: center;
+      margin-top: 1rem;
+
+      &_info {
+        > h1 {
+          margin: 0.5rem;
+          font-size: 1.1rem;
+        }
+        > hr {
+          margin: 1rem 3rem;
+          opacity: 0.3;
+        }
+      }
+      &_categories {
+      }
+    }
+
+    .RightSide {
+      width: 100%;
+      text-align: left;
+      background-color: rgba($color: white, $alpha: 0.7);
+      box-shadow: 0 0 30px 10px rgba($color: white, $alpha: 0.3);
+      border: 1px solid rgba($color: black, $alpha: 0.3);
+      padding: 1rem 2rem;
+      margin-top: 1rem;
+      margin-left: 1rem;
+      align-self: flex-start;
+
+      &_events {
+        > h1 {
+          margin-top: 0;
+          font-size: 1.8rem;
+        }
+
+        &_past {
+        }
+
+        &_upcoming {
+          padding: 1rem;
+          border: 1px solid rgba($color: black, $alpha: 0.3);
+          > img {
+            border: 1px solid rgba($color: black, $alpha: 0.3);
+            height: 10rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 867px) {
+}
+
+@media only screen and(max-width: 800px) {
+}
+
+@media only screen and(max-width: 440px) {
+}
