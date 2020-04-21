@@ -12,8 +12,8 @@ export default ({ categories, selected, onCheckbox, onClear, onRemove }) => {
     <div className="FilterList">
       <div className="FilterList_display">
         <span>
-          <h2>{t("filters")}</h2>
-          <p onClick={onClear}>{t("clear")}</p>
+          <h2>{t("filterlist.filters")}</h2>
+          <p onClick={onClear}>{t("filterlist.clear")}</p>
         </span>
         <ul>
           {selected.map((c) => (
@@ -25,7 +25,7 @@ export default ({ categories, selected, onCheckbox, onClear, onRemove }) => {
         </ul>
       </div>
       <div className="FilterList_menu">
-        <h4>{t("categories")}</h4>
+        <h4>{t("filterlist.categories")}</h4>
         {Object.keys(categories).map((c) => {
           const category = categories[c];
           const name = category.name;
