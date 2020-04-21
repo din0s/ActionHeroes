@@ -2,15 +2,26 @@ import "./TeamsPage.scss";
 
 import React, { Component } from "react";
 
+import FilterList from "../../components/filterlist/FilterList";
 import SearchBar from "../../components/searchbar/SearchBar";
 import { withTranslation } from "react-i18next";
 
+const categories = require("./categories.json");
 const teams = require("./teams.json");
 
 export default withTranslation()(
   class TeamsPage extends Component {
     state = {
-      selectedCategories: ["a", "b", "b", "b", "b"],
+      selectedCategories: [],
+    };
+
+    onCheckbox = (event, category) => {
+      if (event.target.checked) {
+        const categories = this.state.selectedCategories.concat(category);
+        this.setState({ selectedCategories: categories });
+      } else {
+        this.removeCategory(category);
+      }
     };
 
     removeCategory = (category) => {
@@ -23,38 +34,23 @@ export default withTranslation()(
     };
 
     render() {
-      const { t } = this.props;
+      // const { t } = this.props;
       return (
         <div className="TeamsPage">
-          <div className="TeamsPage_filters">
-            <div className="TeamsPage_filters_list">
-              <span>
-                <h2>{t("filters")}</h2>
-                <p onClick={() => this.setState({ selectedCategories: [] })}>
-                  {t("clear")}
-                </p>
-              </span>
-              <ul>
-                {this.state.selectedCategories.map((c) => (
-                  <li>
-                    <p children={c} />
-                    <p onClick={() => this.removeCategory(c)} children="x" />
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="FilterMenu">
-              <h4>{t("categories")}</h4>
-              {"WIP" /* TODO: make a reusable component for this */}
-            </div>
-          </div>
+          <FilterList
+            categories={categories}
+            selected={this.state.selectedCategories}
+            onCheckbox={this.onCheckbox}
+            onClear={() => this.setState({ selectedCategories: [] })}
+            onRemove={this.removeCategory}
+          />
           <div className="TeamsPage_content">
             <SearchBar action="/teams" />
             <ul className="TeamsPage_content_teams">
-              {Object.keys(teams).map((t) => {
-                const team = teams[t];
+              {Object.keys(teams).map((tm) => {
+                const team = teams[tm];
                 return (
-                  <li>
+                  <li key={tm}>
                     <img src={team.logo} alt="Team Logo" />
                     <h3>{team.name}</h3>
                     <p>{team.description}</p>
