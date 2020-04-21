@@ -67,17 +67,19 @@ export default withTranslation()(
       // const { t } = this.props;
       return (
         <div className="TeamsPage">
-          <FilterList
-            categories={categories}
-            selected={this.state.selectedCategories}
-            onCheckbox={this.onCheckbox}
-            onClear={() => this.setState({ selectedCategories: [] })}
-            onRemove={this.removeCategory}
-          />
-          <div className="TeamsPage_content">
-            <SearchBar action="/teams" />
-            <ul className="TeamsPage_content_teams">{this.showTeams()}</ul>
-          </div>
+          <SearchBar action="/teams" />
+          <span>
+            <FilterList
+              categories={categories}
+              selected={this.state.selectedCategories}
+              onCheckbox={this.onCheckbox}
+              onClear={() => this.setState({ selectedCategories: [] })}
+              onRemove={this.removeCategory}
+            />
+            <div className="TeamsPage_content">
+              <ul className="TeamsPage_content_teams">{this.showTeams()}</ul>
+            </div>
+          </span>
         </div>
       );
     }

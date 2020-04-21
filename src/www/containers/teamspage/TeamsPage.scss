@@ -1,26 +1,26 @@
 .TeamsPage {
   background-color: rgba($color: wheat, $alpha: 0.25);
-  display: flex;
-  flex-direction: row;
   margin: 0;
-  padding: 4rem;
+  padding: 2rem 4rem;
+
+  .SearchBar {
+    margin-bottom: 2rem;
+
+    > input {
+      background-color: white;
+      box-shadow: 0 0 5px 1px rgba($color: black, $alpha: 0.25);
+      height: 1.5rem;
+      width: 80%;
+    }
+  }
+
+  > span {
+    display: flex;
+    flex-direction: row;
+  }
 
   &_content {
-    border-left: 1px solid rgba($color: black, $alpha: 0.5);
-    margin: 0 2rem;
-    padding: 2rem 0;
     width: 100%;
-
-    .SearchBar {
-      margin-bottom: 2rem;
-
-      > input {
-        background-color: white;
-        box-shadow: 0 0 5px 1px rgba($color: black, $alpha: 0.25);
-        min-width: 24rem;
-        width: 40vw;
-      }
-    }
 
     &_teams {
       display: flex;
@@ -28,6 +28,7 @@
       flex-wrap: wrap;
       list-style: none;
       justify-content: center;
+      margin: 0;
       padding-left: 0;
 
       > li {
@@ -35,7 +36,7 @@
         border-radius: 0.5rem;
         box-shadow: 0 0 10px 1px rgba($color: black, $alpha: 0.15);
         height: 20rem;
-        margin-top: calc(2rem + 64px) !important;
+        margin-top: calc(1rem + 64px) !important;
         min-width: 15rem;
         padding: 1rem;
         width: 15vw;
@@ -65,32 +66,30 @@
   .TeamsPage {
     padding: 2rem;
 
-    &_content {
-      &_teams {
-        > li {
+    &_content_teams {
+      > li {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 15rem;
+        margin: 1.5rem !important;
+        min-width: 25rem;
+        width: 40vw;
+
+        span {
           align-items: center;
           display: flex;
-          flex-direction: column;
-          height: 15rem;
-          margin: 3rem 2rem !important;
-          min-width: 25rem;
-          width: 40vw;
+          flex-direction: row;
+          justify-content: center;
+        }
 
-          span {
-            align-items: center;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-          }
+        img {
+          height: 64px;
+          margin-top: -8px;
+        }
 
-          img {
-            height: 64px;
-            margin-top: -8px;
-          }
-
-          h3 {
-            margin: 0 1rem;
-          }
+        h3 {
+          margin: 0 1rem;
         }
       }
     }
@@ -98,4 +97,18 @@
 }
 
 @media only screen and(max-width: 800px) {
+  .TeamsPage {
+    > span {
+      flex-direction: column;
+    }
+
+    &_content {
+      border-left: none;
+      margin: 0;
+
+      &_teams > li {
+        min-width: 75vw;
+      }
+    }
+  }
 }
