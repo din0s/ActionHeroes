@@ -3,7 +3,8 @@
   "filterlist": {
     "filters": "Φίλτρα",
     "clear": "Εκκαθάριση",
-    "categories": "Κατηγορίες"
+    "categories": "Κατηγορίες",
+    "none": "Κανένα."
   },
   "nav": {
     "actions": "Δράσεις",

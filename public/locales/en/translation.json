@@ -3,7 +3,8 @@
   "filterlist": {
     "filters": "Filters",
     "clear": "Clear",
-    "categories": "Categories"
+    "categories": "Categories",
+    "none": "None."
   },
   "nav": {
     "actions": "Actions",
