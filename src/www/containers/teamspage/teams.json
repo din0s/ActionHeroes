@@ -1,0 +1,32 @@
+{
+  "team1": {
+    "name": "My Team named ABCD",
+    "description": "Lorem ipsum ajhsadjgadihbkzjusaxcz",
+    "logo": "/img/teams/team.png",
+    "categories": ["a", "b", "c", "d"]
+  },
+  "team2": {
+    "name": "My Team named ABCD",
+    "description": "Lorem ipsum ajhsadjgadihbkzjusaxcz",
+    "logo": "/img/teams/team.png",
+    "categories": ["a", "b", "c", "d"]
+  },
+  "team3": {
+    "name": "My Team named ABCD",
+    "description": "Lorem ipsum ajhsadjgadihbkzjusaxcz",
+    "logo": "/img/teams/team.png",
+    "categories": ["a", "b", "c", "d"]
+  },
+  "team4": {
+    "name": "My Team named ABCD",
+    "description": "Lorem ipsum ajhsadjgadihbkzjusaxcz",
+    "logo": "/img/teams/team.png",
+    "categories": ["a", "b", "c", "d"]
+  },
+  "team5": {
+    "name": "My Team named ABCD",
+    "description": "Lorem ipsum ajhsadjgadihbkzjusaxcz",
+    "logo": "/img/teams/team.png",
+    "categories": ["a", "b", "c", "d"]
+  }
+}
