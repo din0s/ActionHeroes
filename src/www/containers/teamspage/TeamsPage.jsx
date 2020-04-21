@@ -53,8 +53,10 @@ export default withTranslation()(
           const team = teams[tm];
           return (
             <li key={tm}>
-              <img src={team.logo} alt="Team Logo" />
-              <h3>{team.name}</h3>
+              <span>
+                <img src={team.logo} alt="Team Logo" />
+                <h3>{team.name}</h3>
+              </span>
               <p>{team.description}</p>
             </li>
           );
