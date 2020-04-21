@@ -1,5 +1,10 @@
 {
   "search": "Αναζήτηση...",
+  "filterlist": {
+    "filters": "Φίλτρα",
+    "clear": "Εκκαθάριση",
+    "categories": "Κατηγορίες"
+  },
   "nav": {
     "actions": "Δράσεις",
     "teams": "Ομάδες",
