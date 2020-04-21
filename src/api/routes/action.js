@@ -27,6 +27,13 @@ router.delete(
   ActionController.cancelAction
 );
 
+router.put(
+  "/:action_id/photo",
+  checkAuth,
+  checkPermissions,
+  ActionController.changePhoto
+);
+
 /* Admin */
 
 router.post(
