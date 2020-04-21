@@ -151,8 +151,10 @@
 @media only screen and(max-width: 800px) {
   .FilterList {
     align-self: center;
+    border-right: none;
     flex-direction: column-reverse;
     max-width: unset;
+    padding-right: 0;
 
     &_display > span > h2 {
       font-size: 1.5rem;
