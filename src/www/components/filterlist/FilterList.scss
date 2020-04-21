@@ -1,0 +1,140 @@
+@import "../../vars.scss";
+
+.FilterList {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  max-width: 15rem;
+  min-width: 12.5rem;
+
+  &_display {
+    width: 100%;
+
+    > span {
+      align-items: baseline;
+      border-bottom: 1px solid rgba($color: black, $alpha: 0.5);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-bottom: 0.5rem;
+
+      > * {
+        margin: 0;
+      }
+
+      > h2 {
+        font-size: 1.75rem;
+      }
+
+      > p {
+        cursor: pointer;
+        color: royalblue;
+        padding-left: 1rem;
+        text-decoration: underline;
+      }
+    }
+
+    > ul {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      list-style: none;
+      margin: 0;
+      padding-left: 0;
+
+      > li {
+        background-color: white;
+        border: 1px solid royalblue;
+        border-radius: 0.5rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+        min-width: 2rem;
+        padding: 0.25rem 0.5rem;
+        padding-left: 0.75rem;
+
+        &:not(:last-of-type) {
+          margin-right: 0.5rem;
+        }
+
+        > p {
+          margin: 0;
+
+          &:last-of-type {
+            cursor: pointer;
+            color: darkred;
+            padding-left: 0.25rem;
+          }
+        }
+      }
+    }
+  }
+
+  &_menu {
+    > h4 {
+      font-size: 1.25rem;
+    }
+
+    > label {
+      display: block;
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      user-select: none;
+
+      &:hover {
+        color: lightskyblue;
+      }
+
+      input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: rgba($color: white, $alpha: 0.75);
+        border: 1px solid $softBlack;
+
+        &:after {
+          content: "";
+          position: absolute;
+          display: none;
+        }
+      }
+
+      &:hover input ~ .checkmark {
+        background-color: rgba($color: white, $alpha: 0.25);
+        transition: 0.2s ease-in-out;
+      }
+
+      input:checked ~ .checkmark {
+        background-color: lightskyblue;
+      }
+
+      input:checked ~ .checkmark:after {
+        display: block;
+      }
+
+      .checkmark:after {
+        left: 7px;
+        top: 3px;
+        width: 3px;
+        height: 8px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
