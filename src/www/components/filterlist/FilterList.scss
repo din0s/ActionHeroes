@@ -2,10 +2,13 @@
 
 .FilterList {
   align-items: flex-start;
+  border-right: 1px solid rgba($color: black, $alpha: 0.5);
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
   max-width: 15rem;
   min-width: 12.5rem;
+  padding-right: 2rem;
 
   &_display {
     width: 100%;
@@ -40,15 +43,21 @@
       flex-wrap: wrap;
       list-style: none;
       margin: 0;
+      min-height: 5rem;
       padding-left: 0;
 
+      > p {
+        margin: 0.75rem;
+      }
+
       > li {
-        background-color: white;
-        border: 1px solid royalblue;
+        background-color: rgba($color: white, $alpha: 0.6);
+        border: 1px solid rgba($color: royalblue, $alpha: 0.6);
         border-radius: 0.5rem;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        height: fit-content;
         margin-top: 0.5rem;
         min-width: 2rem;
         padding: 0.25rem 0.5rem;
@@ -76,7 +85,7 @@
       font-size: 1.25rem;
     }
 
-    > label {
+    label {
       display: block;
       position: relative;
       padding-left: 30px;
@@ -134,6 +143,40 @@
         border: solid white;
         border-width: 0 3px 3px 0;
         transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 800px) {
+  .FilterList {
+    align-self: center;
+    border-right: none;
+    flex-direction: column-reverse;
+    max-width: unset;
+    padding-right: 0;
+
+    &_display > span > h2 {
+      font-size: 1.5rem;
+    }
+
+    &_menu {
+      margin-bottom: 2rem;
+
+      > h4 {
+        font-size: 1.5rem;
+        margin-top: 0;
+      }
+
+      > div {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-left: -0.5rem;
+
+        > label {
+          margin-left: 0.5rem;
+        }
       }
     }
   }
