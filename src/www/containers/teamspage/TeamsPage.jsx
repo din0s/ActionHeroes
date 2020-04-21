@@ -33,6 +33,34 @@ export default withTranslation()(
       });
     };
 
+    showTeams = () => {
+      return Object.keys(teams)
+        .filter((tm) => {
+          const selected = this.state.selectedCategories;
+          if (selected.length === 0) {
+            return true;
+          }
+
+          const categories = teams[tm].categories;
+          return selected.every((sc) =>
+            Object.keys(categories).find((c) => {
+              const category = categories[c];
+              return sc === category;
+            })
+          );
+        })
+        .map((tm) => {
+          const team = teams[tm];
+          return (
+            <li key={tm}>
+              <img src={team.logo} alt="Team Logo" />
+              <h3>{team.name}</h3>
+              <p>{team.description}</p>
+            </li>
+          );
+        });
+    };
+
     render() {
       // const { t } = this.props;
       return (
@@ -46,18 +74,7 @@ export default withTranslation()(
           />
           <div className="TeamsPage_content">
             <SearchBar action="/teams" />
-            <ul className="TeamsPage_content_teams">
-              {Object.keys(teams).map((tm) => {
-                const team = teams[tm];
-                return (
-                  <li key={tm}>
-                    <img src={team.logo} alt="Team Logo" />
-                    <h3>{team.name}</h3>
-                    <p>{team.description}</p>
-                  </li>
-                );
-              })}
-            </ul>
+            <ul className="TeamsPage_content_teams">{this.showTeams()}</ul>
           </div>
         </div>
       );

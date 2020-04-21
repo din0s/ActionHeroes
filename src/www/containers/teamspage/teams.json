@@ -1,32 +1,32 @@
 {
   "team1": {
-    "name": "My Team named ABCD",
+    "name": "My Health Team",
     "description": "Lorem ipsum ajhsadjgadihbkzjusaxcz",
     "logo": "/img/teams/team.png",
-    "categories": ["a", "b", "c", "d"]
+    "categories": ["Health"]
   },
   "team2": {
-    "name": "My Team named ABCD",
+    "name": "My Nature & Students Team",
     "description": "Lorem ipsum ajhsadjgadihbkzjusaxcz",
     "logo": "/img/teams/team.png",
-    "categories": ["a", "b", "c", "d"]
+    "categories": ["Nature", "Students"]
   },
   "team3": {
-    "name": "My Team named ABCD",
+    "name": "My Something Team",
     "description": "Lorem ipsum ajhsadjgadihbkzjusaxcz",
     "logo": "/img/teams/team.png",
-    "categories": ["a", "b", "c", "d"]
+    "categories": ["Something"]
   },
   "team4": {
-    "name": "My Team named ABCD",
+    "name": "My Health & Nature Team",
     "description": "Lorem ipsum ajhsadjgadihbkzjusaxcz",
     "logo": "/img/teams/team.png",
-    "categories": ["a", "b", "c", "d"]
+    "categories": ["Health", "Nature"]
   },
   "team5": {
-    "name": "My Team named ABCD",
+    "name": "My Boring Team",
     "description": "Lorem ipsum ajhsadjgadihbkzjusaxcz",
     "logo": "/img/teams/team.png",
-    "categories": ["a", "b", "c", "d"]
+    "categories": []
   }
 }
