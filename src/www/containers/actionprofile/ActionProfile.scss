@@ -1,0 +1,103 @@
+.ActionProfile {
+  .ActionHeader {
+    &_parallax {
+      align-items: center;
+      display: flex;
+      min-height: 30rem;
+      justify-content: center;
+    }
+
+    &_infoDiv {
+      background-color: rgba($color: lightgray, $alpha: 0.9);
+      border-radius: 1rem;
+      display: flex;
+      min-width: 45rem;
+      max-width: 60rem;
+      padding: 0.5rem;
+
+      > img {
+        border-radius: 1rem;
+        width: 12rem;
+      }
+
+      > div {
+        padding-left: 1rem;
+        text-align: left;
+
+        > p {
+          margin-top: 3rem;
+        }
+
+        > button {
+          background-color: rgba($color: white, $alpha: 0.6);
+          border: none;
+          border-radius: 0.3rem;
+          box-shadow: 1px 1px 1px 1px rgba($color: white, $alpha: 0.3);
+          cursor: pointer;
+          font-size: 1rem;
+          margin-top: 1rem;
+          outline: none;
+          padding: 0.2rem;
+          transition: 0.15s ease-in-out;
+          width: 45%;
+
+          &:hover {
+            background-color: rgba($color: white, $alpha: 0.8);
+          }
+
+          &:not(:first-of-type) {
+            margin-left: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  .ActionDetails {
+    padding: 0 12rem;
+    text-align: left;
+
+    > h3 {
+      text-decoration: underline;
+    }
+
+    &_categories {
+      border-top: 1px solid black;
+      display: flex;
+      flex-direction: row;
+
+      > ul {
+        display: flex;
+        flex-wrap: wrap;
+        list-style-type: none;
+
+        > li {
+          background-color: rgba($color: burlywood, $alpha: 0.3);
+          border: 1px solid rgba($color: black, $alpha: 0.3);
+          border-radius: 0.2rem;
+          cursor: pointer;
+          padding: 0.25rem;
+          margin-top: 0.2rem;
+
+          &:not(:last-of-type) {
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 800px) {
+  .ActionProfile {
+    .ActionHeader {
+      &_infoDiv {
+        min-width: 30rem;
+      }
+    }
+
+    .ActionDetails {
+      padding: 1rem 5rem;
+    }
+  }
+}

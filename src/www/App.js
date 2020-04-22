@@ -12,6 +12,7 @@ import ContactPage from "./containers/contactpage/ContactPage.jsx";
 import Footer from "./components/footer/Footer";
 import LandingPage from "./containers/landingpage/LandingPage.jsx";
 import Login from "./containers/authentication/Login.jsx";
+import ActionInfo from "./containers/actionprofile/ActionProfile";
 import NavBar from "./components/navbar/NavBar";
 import UserProfile from "./containers/userprofile/UserProfile";
 import { Provider } from "react-redux";
@@ -63,6 +64,7 @@ export default class App extends Component {
                     <Route path="/teams" children={<TeamsPage />} />
                     <Route path="/contact" children={<ContactPage />} />
                     <Route path="/profile" children={<UserProfile />} />
+                    <Route path="/actions/id" children={<ActionInfo />} />
                     <Route path="/actions" children={<ActionsPage />} />
                     <Route path="/" exact children={<LandingPage />} />
                   </Switch>
