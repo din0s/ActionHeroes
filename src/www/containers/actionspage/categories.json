@@ -1,0 +1,18 @@
+{
+    "Category1": {
+      "image": "/img/teams/team.png",
+      "name": "Nature"
+    },
+    "Category2": {
+      "image": "/img/teams/team.png",
+      "name": "Health"
+    },
+    "Category3": {
+      "image": "/img/teams/team.png",
+      "name": "Students"
+    },
+    "Category4": {
+      "image": "/img/teams/team.png",
+      "name": "Something"
+    }
+}

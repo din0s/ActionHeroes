@@ -6,7 +6,8 @@ import FilterList from "../../components/filterlist/FilterList";
 import SearchBar from "../../components/searchbar/SearchBar";
 import { withTranslation } from "react-i18next";
 
-const cardList = require("./cards.json");
+const actions = require("./actions.json");
+const categories = require("./categories.json");
 
 export default withTranslation()(
   class ActionsPage extends Component {
@@ -14,30 +15,52 @@ export default withTranslation()(
       selectedCategories: [],
     };
 
-    showCards = (cardList, t) => {
-      const action_link = "/signup";
-      const location_link = "https://goo.gl/maps/JYnmWrgsEzot3Dn86";
-      return Object.keys(cardList).map((key) => {
-        return (
-          <li>
-            <a href={action_link}>
-              <img alt="Card icon" src={cardList[key].image} />
-            </a>
-            <div>
-              <a href = {action_link}>
-                <h3>{cardList[key].name}</h3>
+    showActions = () => {
+      return Object.keys(actions)
+        .filter((ac) => {
+          const selected = this.state.selectedCategories;
+          if (selected.length === 0) {
+            return true;
+          }
+
+          const categories = actions[ac].categories;
+          return selected.every((sc) =>
+            Object.keys(categories).find((c) => {
+              const category = categories[c];
+              return sc === category;
+            })
+          );
+        })
+        .map((ac) => {
+          const action = actions[ac];
+          const action_link = "/signup";
+          const location_link = "https://goo.gl/maps/JYnmWrgsEzot3Dn86";
+          return (
+            <li key={ac}>
+              <a href={action_link}>
+                <img alt="Card icon" src={action.image} />
               </a>
               <div>
-                <span>{cardList[key].date}</span>
+                <a href={action_link}>
+                  <h3>{action.name}</h3>
+                </a>
+                <div>
+                  <span>{action.date}</span>
+                </div>
+                <a
+                  href={location_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>{action.location}</span>
+                </a>
+                <div className="desc">
+                  <p>{action.desc}</p>
+                </div>
               </div>
-              <a href={location_link} target="_blank" rel="noopener noreferrer">
-                <span>{cardList[key].location}</span>
-              </a>
-              <div className="desc"><p>{cardList[key].desc}</p></div>
-            </div>
-          </li>
-        );
-      });
+            </li>
+          );
+        });
     };
 
     onCheckbox = (event, category) => {
@@ -62,25 +85,21 @@ export default withTranslation()(
       const { t } = this.props;
       return (
         <div className="ActionsPage">
-          <div className="ActionsPage_filter">
+          <SearchBar action="/actions" />
+          <span>
             <FilterList
-              categories={{
-                a: { name: "Education" },
-                b: { name: "Environment" },
-                c: { name: "Poverty" },
-              }}
+              categories={categories}
               selected={this.state.selectedCategories}
               onCheckbox={this.onCheckbox}
               onClear={() => this.setState({ selectedCategories: [] })}
               onRemove={this.removeCategory}
             />
-          </div>
-          <div className="ActionsPage_content">
-            <SearchBar />
-            <ul className="ActionsPage_content_actions">
-              {this.showCards(cardList, t)}
-            </ul>
-          </div>
+            <div className="ActionsPage_content">
+              <ul className="ActionsPage_content_actions">
+                {this.showActions()}
+              </ul>
+            </div>
+          </span>
         </div>
       );
     }
