@@ -61,6 +61,11 @@
       text-decoration: underline;
     }
 
+    &_map {
+      color: blue;
+      font-size: 1rem;
+    }
+
     &_categories {
       border-top: 1px solid black;
       display: flex;

@@ -7,6 +7,7 @@ import { withTranslation } from "react-i18next";
 import { Parallax } from "react-parallax";
 
 const action = require("./action.json");
+const coordinates = action.location.coordinates;
 
 export default connect(
   undefined,
@@ -52,8 +53,8 @@ export default connect(
                       }
                       children={
                         this.state.saved
-                          ? t("actioninfo.save")
-                          : t("actioninfo.unsave")
+                          ? t("actioninfo.unsave")
+                          : t("actioninfo.save")
                       }
                     />
                     <button
@@ -62,8 +63,8 @@ export default connect(
                       }
                       children={
                         this.state.toAttend
-                          ? t("actioninfo.attend")
-                          : t("actioninfo.cancel")
+                          ? t("actioninfo.cancel")
+                          : t("actioninfo.attend")
                       }
                     />
                   </div>
@@ -73,13 +74,25 @@ export default connect(
             <div className="ActionDetails">
               <h3>{t("actioninfo.about")}</h3>
               <p>{action.location.name}</p>
-              <p>View on map</p>
+              <p
+                className="ActionDetails_map"
+                onClick={() => {
+                  window.open(
+                    "https://maps.google.com?q=" +
+                      `${coordinates[0]}` +
+                      "," +
+                      `${coordinates[1]}`
+                  );
+                }}
+              >
+                {"📍" + t("actioninfo.map")}
+              </p>
               <p>{action.description}</p>
               <div className="ActionDetails_categories">
                 <h3>{t("actioninfo.tags")}</h3>
                 <ul>
                   {Object.keys(action.categories).map((cKey) => {
-                    return <li>{action.categories[cKey]}</li>;
+                    return <li>{action.categories[cKey].name}</li>;
                   })}
                 </ul>
               </div>
