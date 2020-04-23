@@ -19,5 +19,6 @@
       "name": "ACM AUTH Student Chapter",
       "photo": "/img/actionprofile/acm.jpg"
     }
-  }
+  },
+  "attendees": [{ "name": "Τάδε1" }, { "name": "Τάδε2" }, { "name": "Τάδε3" }]
 }

@@ -56,6 +56,7 @@
   "actioninfo": {
     "about": "About this event",
     "attend": "Attend",
+    "attendees": " people are interested for this action",
     "cancel": "Cancel",
     "date": {
       "day": {

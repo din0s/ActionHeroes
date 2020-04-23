@@ -59,17 +59,31 @@
   }
 
   .ActionDetails {
-    padding: 0 12rem;
+    padding: 0 10rem;
     text-align: left;
 
     > h3 {
       text-decoration: underline;
     }
 
-    &_infoDiv {
+    &_panel {
       display: flex;
       flex-direction: row;
-      padding-bottom: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    &_infoDiv {
+      border: 0.5px solid rgba($color: black, $alpha: 0.3);
+      border-radius: 0.5rem;
+      box-shadow: 1px 1px 1px 1px rgba($color: black, $alpha: 0.3);
+      display: flex;
+      flex-direction: row;
+      padding: 0 0.6rem;
+      margin-right: 1rem;
+
+      > span {
+        display: none;
+      }
 
       &_map {
         color: blue;
@@ -78,51 +92,62 @@
         width: fit-content;
       }
 
-      &_organizer {
-        background-color: rgba($color: burlywood, $alpha: 0.15);
-        border: 0.5px solid rgb(77, 43, 43);
-        border-radius: 0.5rem;
-        box-shadow: 1px 1px 1px 1px rgba($color: black, $alpha: 0.3);
-        height: fit-content;
-        min-width: 12rem;
-        padding: 0.3rem;
-        text-align: center;
-        width: fit-content;
+      .Attendees {
+        padding-top: 1rem;
+      }
 
-        > img {
-          max-height: 7rem;
-          object-fit: cover;
-        }
+      &_categories {
+        display: flex;
+        flex-direction: row;
 
-        > p {
-          overflow-wrap: break-word;
+        > ul {
+          display: flex;
+          flex-wrap: wrap;
+          list-style-type: none;
+
+          > li {
+            background-color: rgba($color: burlywood, $alpha: 0.3);
+            border: 1px solid rgba($color: black, $alpha: 0.3);
+            border-radius: 0.2rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            margin-top: 0.3rem;
+
+            &:not(:last-of-type) {
+              margin-right: 0.5rem;
+            }
+          }
         }
       }
     }
 
-    &_categories {
-      border-top: 1px solid black;
-      display: flex;
-      flex-direction: row;
+    &_organizerDiv {
+      background-color: rgba($color: burlywood, $alpha: 0.15);
+      border: 0.5px solid rgba($color: black, $alpha: 0.3);
+      border-radius: 0.5rem;
+      box-shadow: 1px 1px 1px 1px rgba($color: black, $alpha: 0.3);
+      min-width: 12rem;
+      padding: 0.3rem;
+      text-align: center;
+      height: fit-content;
+      width: fit-content;
 
-      > ul {
-        display: flex;
-        flex-wrap: wrap;
-        list-style-type: none;
-
-        > li {
-          background-color: rgba($color: burlywood, $alpha: 0.3);
-          border: 1px solid rgba($color: black, $alpha: 0.3);
-          border-radius: 0.2rem;
-          cursor: pointer;
-          padding: 0.25rem;
-          margin-top: 0.2rem;
-
-          &:not(:last-of-type) {
-            margin-right: 0.5rem;
-          }
-        }
+      > img {
+        max-height: 7rem;
+        object-fit: cover;
       }
+
+      > p {
+        overflow-wrap: break-word;
+      }
+    }
+  }
+}
+
+@media only screen and(max-width:940px) {
+  .ActionProfile {
+    .ActionDetails {
+      padding: 0 4rem;
     }
   }
 }
@@ -142,12 +167,20 @@
     }
 
     .ActionDetails {
-      padding: 0 5rem;
+      &_infoDiv_categories {
+        > h3 {
+          display: none;
+        }
+
+        > ul {
+          padding-inline-start: 0rem;
+        }
+      }
     }
   }
 }
 
-@media only screen and(max-width:550px) {
+@media only screen and(max-width:680px) {
   .ActionProfile {
     .ActionHeader {
       &_infoDiv {
@@ -162,22 +195,30 @@
     .ActionDetails {
       padding: 0 2rem;
 
+      &_panel {
+        flex-direction: column;
+      }
+
       &_infoDiv {
         flex-direction: column;
 
-        &_organizer {
-          align-self: center;
-          width: fit-content;
-
-          > h3,
-          > p {
-            font-size: 0.8rem;
-          }
-
-          > img {
-            max-height: 4rem;
-          }
+        > span {
+          display: inline;
         }
+
+        &_location {
+          padding-top: 1.2rem;
+          margin-top: 0rem;
+          border-top: 1px solid rgba($color: black, $alpha: 0.3);
+        }
+
+        &_map {
+          padding-bottom: 1rem;
+        }
+      }
+
+      &_organizerDiv {
+        display: none;
       }
     }
   }

@@ -81,37 +81,48 @@ export default connect(
             </div>
             <div className="ActionDetails">
               <h3>{t("actioninfo.about")}</h3>
-              <div className="ActionDetails_infoDiv">
-                <div>
-                  <p>{action.location.name}</p>
-                  <p
-                    className="ActionDetails_infoDiv_map"
-                    onClick={() => {
-                      window.open(
-                        "https://maps.google.com?q=" +
-                          `${coordinates[0]}` +
-                          "," +
-                          `${coordinates[1]}`
-                      );
-                    }}
-                  >
-                    {"📍" + t("actioninfo.map")}
-                  </p>
-                  <p>{action.description}</p>
+              <div className="ActionDetails_panel">
+                <div className="ActionDetails_infoDiv">
+                  <span>
+                    <h3>{t("actioninfo.organizer")}</h3>
+                    <p> {organizer}</p>
+                  </span>
+                  <div>
+                    <p className="ActionDetails_infoDiv_location">
+                      {action.location.name}
+                    </p>
+                    <p
+                      className="ActionDetails_infoDiv_map"
+                      onClick={() => {
+                        window.open(
+                          "https://maps.google.com?q=" +
+                            `${coordinates[0]}` +
+                            "," +
+                            `${coordinates[1]}`
+                        );
+                      }}
+                    >
+                      {"📍" + t("actioninfo.map")}
+                    </p>
+                    <p>{action.description}</p>
+                    <p className="Attendees">
+                      {action.attendees.length + t("actioninfo.attendees")}
+                    </p>
+                    <div className="ActionDetails_infoDiv_categories">
+                      <h3>{t("actioninfo.tags")}</h3>
+                      <ul>
+                        {Object.keys(action.categories).map((cKey) => {
+                          return <li>{action.categories[cKey].name}</li>;
+                        })}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-                <div className="ActionDetails_infoDiv_organizer">
+                <div className="ActionDetails_organizerDiv">
                   <img src={organizerPhoto} alt="Organizer"></img>
                   <h3>{t("actioninfo.organizer")}</h3>
                   <p> {organizer}</p>
                 </div>
-              </div>
-              <div className="ActionDetails_categories">
-                <h3>{t("actioninfo.tags")}</h3>
-                <ul>
-                  {Object.keys(action.categories).map((cKey) => {
-                    return <li>{action.categories[cKey].name}</li>;
-                  })}
-                </ul>
               </div>
             </div>
           </div>
