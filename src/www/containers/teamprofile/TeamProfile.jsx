@@ -3,8 +3,9 @@ import "./TeamProfile.scss";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
+import ActionCard from "../../components/actioncard/ActionCard";
 
-const categoriesList = require("./teamobject.json");
+const team = require("./teamobject.json");
 
 export default withTranslation()(
   class LandingPage extends Component {
@@ -21,12 +22,8 @@ export default withTranslation()(
                   The Chapter's mission is to inform its members and students of
                   Aristotle University of Thessaloniki (AUTh) about the latest
                   cutting-edge achievements in Computer Science and Engineering,
-                  to promote research in undergraduate and graduate level, to
-                  motivate students participate in international research and
-                  programming competitions representing AUTh, to provide
-                  information about local events and conferences and to create a
-                  group of dedicated people who are interested to explore all
-                  possibilities of computer science.
+                  to create a group of dedicated people who are interested to
+                  explore all possibilities of computer science.
                 </h2>
               </div>
             </span>
@@ -46,14 +43,23 @@ export default withTranslation()(
                 <h1>September 14th 2019</h1>
               </div>
 
-              <div className="LeftSide_categories"></div>
+              <div className="LeftSide_categories">
+                <h1>Relevant Categories:</h1>
+                <ul>
+                  {Object.keys(team.categories).map((cKey) => {
+                    return <li>{team.categories[cKey].name}</li>;
+                  })}
+                </ul>
+              </div>
             </div>
             <div className="RightSide">
               <div className="RightSide_events">
                 <h1>Upcoming Events:</h1>
-                <div className="RightSide_events_upcoming">
-                  <img src="/img/teaminfo/acm.jpg" />
-                </div>
+                <ActionCard />
+                <ActionCard />
+                <h1>Past Events:</h1>
+                <ActionCard />
+                <ActionCard />
               </div>
             </div>
           </section>

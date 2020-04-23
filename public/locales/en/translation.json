@@ -76,5 +76,8 @@
     "volunteerdesc": "Don't know where to start? Search for a variety of actions available in our site.",
     "organizedesc": "Don't have the manpower? Host a voluntary event and we'll help you gather the human resources.",
     "findactions": "You can find events & actions for:"
+  },
+  "actioncard": {
+    "categories": "Categories"
   }
 }

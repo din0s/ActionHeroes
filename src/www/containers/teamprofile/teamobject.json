@@ -1,32 +1,13 @@
 {
-  "Category1": {
-    "image": "/img/landing/category.jpg",
-    "name": "Category1",
-    "desc": "AAADescription Desc ription Descri ption Des c ription."
-  },
-  "Category2": {
-    "image": "/img/landing/category.jpg",
-    "name": "Category2",
-    "desc": "Description Desc ription Descri ption Des c ription."
-  },
-  "Category3": {
-    "image": "/img/landing/category.jpg",
-    "name": "Category3",
-    "desc": "Description Desc ription Descri ption Des c ription."
-  },
-  "Category4": {
-    "image": "/img/landing/category.jpg",
-    "name": "Category4",
-    "desc": "AAADescription Desc ription Descri ption Des c ription."
-  },
-  "Category5": {
-    "image": "/img/landing/category.jpg",
-    "name": "Category5",
-    "desc": "AAADescription Desc ription Descri ption Des c ription."
-  },
-  "Category6": {
-    "image": "/img/landing/category.jpg",
-    "name": "Category6",
-    "desc": "AAADescription Desc ription Descri ption Des c ription."
-  }
+  "name": "ACM AUTH Student Chapter",
+  "description": "Description Description Description Description Description Description Description Description Description",
+  "categories": [
+    { "name": "Nature" },
+    { "name": "Children" },
+    { "name": "Animals" },
+    { "name": "Seniors" },
+    { "name": "Environment" },
+    { "name": "Women" }
+  ],
+  "photo": "/img/landing/parallax1.jpg"
 }

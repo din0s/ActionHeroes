@@ -1,0 +1,12 @@
+{
+  "name": "Local Hack Day",
+  "description": "Description Description Description Description Description Description Description Description Description Description Description Description",
+  "categories": [
+    { "name": "ASSBC" },
+    { "name": "BVVSSCD" },
+    { "name": "BCDASASA" },
+    { "name": "DDDSSSDD" },
+    { "name": "BCDDSSSSDD" }
+  ],
+  "photo": "/img/landing/parallax1.jpg"
+}
