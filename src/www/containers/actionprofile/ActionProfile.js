@@ -39,8 +39,9 @@ export default connect(
                 blur={{ min: 0, max: 5 }}
                 className="ActionHeader_parallax"
                 bgImage={action.photo}
+                bgClassName="ActionHeader_parallaxPhoto"
                 bgImageAlt="Parallax"
-                strength={250}
+                strength={300}
               >
                 <div className="ActionHeader_infoDiv">
                   <img src={action.photo} alt="" />
@@ -73,21 +74,23 @@ export default connect(
             </div>
             <div className="ActionDetails">
               <h3>{t("actioninfo.about")}</h3>
-              <p>{action.location.name}</p>
-              <p
-                className="ActionDetails_map"
-                onClick={() => {
-                  window.open(
-                    "https://maps.google.com?q=" +
-                      `${coordinates[0]}` +
-                      "," +
-                      `${coordinates[1]}`
-                  );
-                }}
-              >
-                {"📍" + t("actioninfo.map")}
-              </p>
-              <p>{action.description}</p>
+              <div className="ActionDetails_info">
+                <p>{action.location.name}</p>
+                <p
+                  className="ActionDetails_map"
+                  onClick={() => {
+                    window.open(
+                      "https://maps.google.com?q=" +
+                        `${coordinates[0]}` +
+                        "," +
+                        `${coordinates[1]}`
+                    );
+                  }}
+                >
+                  {"📍" + t("actioninfo.map")}
+                </p>
+                <p>{action.description}</p>
+              </div>
               <div className="ActionDetails_categories">
                 <h3>{t("actioninfo.tags")}</h3>
                 <ul>

@@ -3,8 +3,12 @@
     &_parallax {
       align-items: center;
       display: flex;
-      min-height: 30rem;
+      min-height: 25rem;
       justify-content: center;
+
+      &Photo {
+        margin-top: 2.5rem;
+      }
     }
 
     &_infoDiv {
@@ -17,6 +21,7 @@
 
       > img {
         border-radius: 1rem;
+        object-fit: cover;
         width: 12rem;
       }
 
@@ -63,6 +68,7 @@
 
     &_map {
       color: blue;
+      cursor: pointer;
       font-size: 1rem;
     }
 
@@ -98,11 +104,35 @@
     .ActionHeader {
       &_infoDiv {
         min-width: 30rem;
+
+        > div {
+          > h1 {
+            font-size: 1.2rem;
+          }
+        }
       }
     }
 
     .ActionDetails {
-      padding: 1rem 5rem;
+      padding: 0 5rem;
+    }
+  }
+}
+
+@media only screen and(max-width:550px) {
+  .ActionProfile {
+    .ActionHeader {
+      &_infoDiv {
+        min-width: 20rem;
+
+        > img {
+          display: none;
+        }
+      }
+    }
+
+    .ActionDetails {
+      padding: 0 2rem;
     }
   }
 }
