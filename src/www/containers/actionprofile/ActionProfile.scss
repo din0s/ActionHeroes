@@ -66,10 +66,38 @@
       text-decoration: underline;
     }
 
-    &_map {
-      color: blue;
-      cursor: pointer;
-      font-size: 1rem;
+    &_infoDiv {
+      display: flex;
+      flex-direction: row;
+      padding-bottom: 0.5rem;
+
+      &_map {
+        color: blue;
+        cursor: pointer;
+        font-size: 1rem;
+        width: fit-content;
+      }
+
+      &_organizer {
+        background-color: rgba($color: burlywood, $alpha: 0.15);
+        border: 0.5px solid rgb(77, 43, 43);
+        border-radius: 0.5rem;
+        box-shadow: 1px 1px 1px 1px rgba($color: black, $alpha: 0.3);
+        height: fit-content;
+        min-width: 12rem;
+        padding: 0.3rem;
+        text-align: center;
+        width: fit-content;
+
+        > img {
+          max-height: 7rem;
+          object-fit: cover;
+        }
+
+        > p {
+          overflow-wrap: break-word;
+        }
+      }
     }
 
     &_categories {
@@ -133,6 +161,24 @@
 
     .ActionDetails {
       padding: 0 2rem;
+
+      &_infoDiv {
+        flex-direction: column;
+
+        &_organizer {
+          align-self: center;
+          width: fit-content;
+
+          > h3,
+          > p {
+            font-size: 0.8rem;
+          }
+
+          > img {
+            max-height: 4rem;
+          }
+        }
+      }
     }
   }
 }

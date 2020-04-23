@@ -14,5 +14,10 @@
   "date": "2020-03-15T08:30:00Z",
   "dateCreated": "20200212T223000Z",
   "photo": "/img/actionprofile/local-hack-day.jpg",
-  "organized": "ACM AUTH Student Chapter"
+  "organizer": {
+    "teamId": {
+      "name": "ACM AUTH Student Chapter",
+      "photo": "/img/actionprofile/acm.jpg"
+    }
+  }
 }

@@ -32,6 +32,13 @@ export default connect(
 
       render() {
         const { t } = this.props;
+        const organizer = action.organizer.userId
+          ? action.organizer.userId.name
+          : action.organizer.teamId.name;
+        const organizerPhoto = action.organizer.userId
+          ? action.organizer.userId.photo
+          : action.organizer.teamId.photo;
+
         return (
           <div className="ActionProfile">
             <div className="ActionHeader">
@@ -74,22 +81,29 @@ export default connect(
             </div>
             <div className="ActionDetails">
               <h3>{t("actioninfo.about")}</h3>
-              <div className="ActionDetails_info">
-                <p>{action.location.name}</p>
-                <p
-                  className="ActionDetails_map"
-                  onClick={() => {
-                    window.open(
-                      "https://maps.google.com?q=" +
-                        `${coordinates[0]}` +
-                        "," +
-                        `${coordinates[1]}`
-                    );
-                  }}
-                >
-                  {"📍" + t("actioninfo.map")}
-                </p>
-                <p>{action.description}</p>
+              <div className="ActionDetails_infoDiv">
+                <div>
+                  <p>{action.location.name}</p>
+                  <p
+                    className="ActionDetails_infoDiv_map"
+                    onClick={() => {
+                      window.open(
+                        "https://maps.google.com?q=" +
+                          `${coordinates[0]}` +
+                          "," +
+                          `${coordinates[1]}`
+                      );
+                    }}
+                  >
+                    {"📍" + t("actioninfo.map")}
+                  </p>
+                  <p>{action.description}</p>
+                </div>
+                <div className="ActionDetails_infoDiv_organizer">
+                  <img src={organizerPhoto} alt="Organizer"></img>
+                  <h3>{t("actioninfo.organizer")}</h3>
+                  <p> {organizer}</p>
+                </div>
               </div>
               <div className="ActionDetails_categories">
                 <h3>{t("actioninfo.tags")}</h3>
