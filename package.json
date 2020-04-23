@@ -19,6 +19,7 @@
     "morgan": "^1.10.0",
     "node-sass": "^4.13.1",
     "path": "^0.12.7",
+    "query-string": "^6.12.1",
     "react": "^16.8.6",
     "react-alert": "^7.0.0",
     "react-dom": "^16.8.6",
