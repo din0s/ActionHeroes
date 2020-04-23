@@ -3,6 +3,7 @@ import "./TeamsPage.scss";
 import React, { Component } from "react";
 
 import FilterList from "../../components/filterlist/FilterList";
+import Pagination from "../../components/pagination/Pagination";
 import SearchBar from "../../components/searchbar/SearchBar";
 import queryString from "query-string";
 import { withRouter } from "react-router-dom";
@@ -18,9 +19,9 @@ export default withRouter(
     };
 
     componentDidMount = () => {
-      const { q } = queryString.parse(this.props.location.search);
-      if (q) {
-        this.setState({ query: q.toLowerCase().trim() });
+      const { query } = queryString.parse(this.props.location.search);
+      if (query) {
+        this.setState({ query });
       }
     };
 
@@ -42,45 +43,16 @@ export default withRouter(
       });
     };
 
-    showTeams = () => {
-      const q = this.state.query;
-      return Object.keys(teams)
-        .filter((tm) => {
-          if (q === "") {
-            return true;
-          }
-          const team = teams[tm];
-          return (
-            team.name.toLowerCase().includes(q) ||
-            team.description.toLowerCase().includes(q)
-          );
-        })
-        .filter((tm) => {
-          const selected = this.state.selectedCategories;
-          if (selected.length === 0) {
-            return true;
-          }
-
-          const categories = teams[tm].categories;
-          return selected.every((sc) =>
-            Object.keys(categories).find((c) => {
-              const category = categories[c];
-              return sc === category;
-            })
-          );
-        })
-        .map((tm) => {
-          const team = teams[tm];
-          return (
-            <li key={tm}>
-              <span>
-                <img src={team.logo} alt="Team Logo" />
-                <h3>{team.name}</h3>
-              </span>
-              <p>{team.description}</p>
-            </li>
-          );
-        });
+    showTeam = (key, team) => {
+      return (
+        <li key={key}>
+          <span>
+            <img src={team.logo} alt="Team Logo" />
+            <h3>{team.name}</h3>
+          </span>
+          <p>{team.description}</p>
+        </li>
+      );
     };
 
     render() {
@@ -89,9 +61,7 @@ export default withRouter(
           <SearchBar
             action="/teams"
             value={this.state.query}
-            onChange={(e) =>
-              this.setState({ query: e.target.value.toLowerCase().trim() })
-            }
+            onChange={(e) => this.setState({ query: e.target.value })}
           />
           <span>
             <FilterList
@@ -101,9 +71,18 @@ export default withRouter(
               onClear={() => this.setState({ selectedCategories: [] })}
               onRemove={this.removeCategory}
             />
-            <div className="TeamsPage_content">
-              <ul className="TeamsPage_content_teams">{this.showTeams()}</ul>
-            </div>
+            <Pagination
+              baseName="TeamsPage_content"
+              collection={teams}
+              perPage={6}
+              query={this.state.query.toLowerCase().trim()}
+              mapFunc={this.showTeam}
+              searchFilter={(team, query) =>
+                team.name.toLowerCase().includes(query) ||
+                team.description.toLowerCase().includes(query)
+              }
+              selected={this.state.selectedCategories}
+            />
           </span>
         </div>
       );

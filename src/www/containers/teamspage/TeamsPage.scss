@@ -1,7 +1,7 @@
 .TeamsPage {
   background-color: rgba($color: wheat, $alpha: 0.25);
   margin: 0;
-  padding: 2rem 4rem;
+  padding: 2rem 3rem;
 
   .SearchBar {
     margin-bottom: 2rem;
@@ -22,7 +22,7 @@
   &_content {
     width: 100%;
 
-    &_teams {
+    &_list {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
@@ -35,15 +35,12 @@
         background-color: rgba($color: royalblue, $alpha: 0.3);
         border-radius: 0.5rem;
         box-shadow: 0 0 10px 1px rgba($color: black, $alpha: 0.15);
-        height: 20rem;
+        height: 25rem;
+        margin: 1rem;
         margin-top: calc(1rem + 64px) !important;
-        min-width: 15rem;
+        min-width: 20rem;
         padding: 1rem;
-        width: 15vw;
-
-        &:not(:last-of-type) {
-          margin: 1rem;
-        }
+        width: 17.5vw;
 
         img {
           margin-top: -64px;
@@ -66,7 +63,7 @@
   .TeamsPage {
     padding: 2rem;
 
-    &_content_teams {
+    &_content_list {
       > li {
         align-items: center;
         display: flex;
@@ -106,7 +103,7 @@
       border-left: none;
       margin: 0;
 
-      &_teams > li {
+      &_list > li {
         min-width: 75vw;
       }
     }
