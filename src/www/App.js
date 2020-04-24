@@ -57,7 +57,7 @@ export default class App extends Component {
                     <Route path="/login" children={<Login />} />
                     <Route path="/signup" children={<Signup />} />
                     <Route path="/contact" children={<ContactPage />} />
-                    <Route path="/user/profile" children={<UserProfile />} />
+                    <Route path="/profile" children={<UserProfile />} />
                     <Route path="/" exact children={<LandingPage />} />
                   </Switch>
                 </main>

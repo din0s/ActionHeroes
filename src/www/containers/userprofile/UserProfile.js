@@ -36,7 +36,8 @@ export default connect(
         },
         bio: "",
         editMode: false,
-        teamsShown: 3,
+        teamsOwnedShown: 3,
+        teamsMemberShown: 3,
       };
 
       showCards = (cards, count) => {
@@ -224,7 +225,14 @@ export default connect(
                   className={this.state.activeTab === "teams" ? " active" : ""}
                 >
                   <section>
-                    <ul>{this.showCards(teams, this.state.teamsShown)}</ul>
+                    <h3>{t("profile.teams-owned")}</h3>
+                    <ul>{this.showCards(teams, this.state.teamsOwnedShown)}</ul>
+                  </section>
+                  <section>
+                    <h3>{t("profile.teams-member")}</h3>
+                    <ul>
+                      {this.showCards(teams, this.state.teamsMemberShown)}
+                    </ul>
                     <Link to="/teams">
                       <p>{t("profile.join")}</p>
                     </Link>

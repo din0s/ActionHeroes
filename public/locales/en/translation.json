@@ -48,7 +48,9 @@
     "organized": "Actions you have organized",
     "save": "Save",
     "show-more": "Show more...",
-    "show-less": "Show less..."
+    "show-less": "Show less...",
+    "teams-owned": "Teams you own",
+    "teams-member": "Teams you follow"
   },
   "footer": {
     "icons": "Icons from {{site}}"
