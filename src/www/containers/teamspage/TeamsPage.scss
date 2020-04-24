@@ -52,7 +52,11 @@
         }
 
         p {
-          word-wrap: break-all;
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 14;
         }
       }
     }
@@ -87,6 +91,10 @@
 
         h3 {
           margin: 0 1rem;
+        }
+
+        p {
+          -webkit-line-clamp: 8;
         }
       }
     }

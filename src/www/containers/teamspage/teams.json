@@ -1,32 +1,44 @@
 {
   "team1": {
     "name": "My Health Team",
-    "description": "Lorem ipsum ajhsadjgadihbkzjusaxcz",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vulputate eget lorem non suscipit. In dapibus commodo ligula, vitae malesuada tellus. Donec semper ante quis nunc pretium, et pellentesque arcu dapibus. Sed rutrum risus diam, nec tristique magna auctor vitae. Aliquam ac lacinia turpis. Fusce consectetur, urna id laoreet volutpat, nisi nisl posuere dui, sit amet placerat nibh tortor non nibh. Vivamus imperdiet, arcu ac vestibulum finibus, nunc diam ultricies magna, eget consequat metus enim in leo.",
     "logo": "/img/teams/team.png",
     "categories": ["Health"]
   },
   "team2": {
     "name": "My Nature & Students Team",
-    "description": "Lorem ipsum ajhsadjgadihbkzjusaxcz",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in elit bibendum metus feugiat semper eget quis ante. In lacinia sem euismod, finibus mauris ut, sollicitudin orci. Quisque in ante nisi. Sed tempor mattis aliquam. Sed accumsan diam at placerat sodales. Class aptent taciti sociosqu ad litora torquent per conubia.",
     "logo": "/img/teams/team.png",
     "categories": ["Nature", "Students"]
   },
   "team3": {
     "name": "My Something Team",
-    "description": "Lorem ipsum ajhsadjgadihbkzjusaxcz",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vehicula non eros nec tincidunt. Duis ac lacus efficitur, semper velit vel, rhoncus magna. Aliquam pretium quam eget orci placerat, id rhoncus libero vehicula. Fusce a mauris ac ipsum viverra feugiat. Suspendisse efficitur, lorem id sodales tincidunt, lorem dui vehicula mi, vel porta metus leo ac felis. Nunc id ante in nunc scelerisque elementum. Pellentesque vitae suscipit quam. Sed consectetur.",
     "logo": "/img/teams/team.png",
     "categories": ["Something"]
   },
   "team4": {
     "name": "My Health & Nature Team",
-    "description": "Lorem ipsum ajhsadjgadihbkzjusaxcz",
+    "description": "Nulla mollis auctor eros. Fusce sagittis, justo at imperdiet laoreet, nunc lacus lacinia neque, id pellentesque purus ante pretium nisi. Donec diam purus, interdum at tempus ut, pretium eu enim. Quisque bibendum tellus metus, ut lacinia massa fringilla ornare. Nullam in ultricies enim. Cras interdum sagittis neque sit amet ullamcorper. In gravida libero nec ipsum vulputate, eget ultricies nisi cursus. Nunc non mollis libero. Aenean id fringilla massa. Vestibulum iaculis lacus vitae purus bibendum viverra. Praesent commodo luctus nulla, eu fermentum quam malesuada nec. Donec et lorem quam. Vivamus eget velit sed orci iaculis scelerisque. Mauris bibendum, libero nec rhoncus porttitor, mi lectus viverra lorem, sed interdum felis ligula luctus est.",
     "logo": "/img/teams/team.png",
     "categories": ["Health", "Nature"]
   },
   "team5": {
     "name": "My Boring Team",
-    "description": "Lorem ipsum ajhsadjgadihbkzjusaxcz",
+    "description": "Lorem ipsum anean at fringilla risus. Sed id elit eget purus porta tempus vel et dui. Morbi mattis interdum enim, et lobortis arcu aliquam eget. Cras nec purus interdum, elementum nulla ac, viverra arcu. Cras interdum metus vel efficitur blandit. Maecenas urna arcu, varius.",
     "logo": "/img/teams/team.png",
     "categories": []
+  },
+  "team6": {
+    "name": "My final Team",
+    "description": "Suspendisse dapibus nulla at leo facilisis sollicitudin. Suspendisse ultrices vulputate mauris vitae mollis. Cras non ligula luctus, ultricies erat non, iaculis nulla. Nam at justo at erat volutpat volutpat sed sed sem. Praesent vitae faucibus massa. Nunc ac commodo neque, sit amet dignissim mauris. Vestibulum non mollis ex, at vulputate est. Sed tristique arcu tellus.",
+    "logo": "/img/teams/team.png",
+    "categories": ["Health", "Something"]
+  },
+  "team7": {
+    "name": "Another Team",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum a lorem sit amet euismod. Cras fringilla fringilla viverra. Sed eu nunc arcu. In accumsan euismod ante. Mauris tincidunt sem sit amet erat tincidunt pretium. In nec consectetur nibh, at pellentesque libero. Nam sollicitudin faucibus nisi at condimentum. Sed at orci euismod turpis tempus lobortis.",
+    "logo": "/img/teams/team.png",
+    "categories": ["Nature"]
   }
 }
