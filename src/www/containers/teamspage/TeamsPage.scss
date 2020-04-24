@@ -1,0 +1,123 @@
+.TeamsPage {
+  background-color: rgba($color: wheat, $alpha: 0.25);
+  margin: 0;
+  padding: 2rem 3rem;
+
+  .SearchBar {
+    margin-bottom: 2rem;
+
+    > input {
+      background-color: white;
+      box-shadow: 0 0 5px 1px rgba($color: black, $alpha: 0.25);
+      height: 1.5rem;
+      width: 80%;
+    }
+  }
+
+  > span {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &_content {
+    width: 100%;
+
+    &_list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      list-style: none;
+      justify-content: center;
+      margin: 0;
+      padding-left: 0;
+
+      > p {
+        padding-top: 3rem;
+      }
+
+      > li {
+        background-color: rgba($color: royalblue, $alpha: 0.3);
+        border-radius: 0.5rem;
+        box-shadow: 0 0 10px 1px rgba($color: black, $alpha: 0.15);
+        height: 25rem;
+        margin: 1rem;
+        margin-top: calc(1rem + 64px) !important;
+        min-width: 20rem;
+        padding: 1rem;
+        width: 17.5vw;
+
+        img {
+          margin-top: -64px;
+          height: 128px;
+        }
+
+        h3 {
+          overflow-wrap: break-word;
+        }
+
+        p {
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 14;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 1360px) {
+  .TeamsPage {
+    padding: 2rem;
+
+    &_content_list {
+      > li {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 15rem;
+        margin: 1.5rem !important;
+        min-width: 25rem;
+        width: 40vw;
+
+        span {
+          align-items: center;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+        }
+
+        img {
+          height: 64px;
+          margin-top: -8px;
+        }
+
+        h3 {
+          margin: 0 1rem;
+        }
+
+        p {
+          -webkit-line-clamp: 8;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 800px) {
+  .TeamsPage {
+    > span {
+      flex-direction: column;
+    }
+
+    &_content {
+      border-left: none;
+      margin: 0;
+
+      &_list > li {
+        min-width: 75vw;
+      }
+    }
+  }
+}

@@ -43,7 +43,7 @@ class NavBar extends Component {
           </Link>
         </span>
         <div className={`Menu${this.state.hiddenMenu ? " Menu-hidden" : ""}`}>
-          <SearchBar />
+          <SearchBar action="/search" />
           <ul className="Pages" onClick={this.hideMenu}>
             <li className="Page-link">
               <NavLink to="/actions" children={t("nav.actions")} />
