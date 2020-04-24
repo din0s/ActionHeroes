@@ -3,6 +3,7 @@ import "./Pagination.scss";
 import React, { useState } from "react";
 
 import Pagination from "material-ui-flat-pagination";
+import { useTranslation } from "react-i18next";
 
 export default ({
   baseName,
@@ -13,6 +14,7 @@ export default ({
   searchFilter,
   selected,
 }) => {
+  const { t } = useTranslation();
   const [offset, setOffset] = useState(0);
 
   const filtered = Object.keys(collection)
@@ -38,9 +40,15 @@ export default ({
       );
     });
 
+  const contentLength = Object.keys(filtered).length;
+  if (offset !== 0 && contentLength <= offset) {
+    setOffset(0);
+  }
+
   return (
     <div className={baseName}>
       <ul className={`${baseName}_list`}>
+        {contentLength === 0 && <p children={t("noresults")} />}
         {filtered.slice(offset, offset + perPage).map((key) => {
           return mapFunc(key, collection[key]);
         })}
@@ -49,7 +57,7 @@ export default ({
         className="Pagination"
         limit={perPage}
         offset={offset}
-        total={Object.keys(filtered).length}
+        total={contentLength}
         onClick={(_, o) => setOffset(o)}
         disableRipple={true}
       />

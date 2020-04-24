@@ -31,6 +31,10 @@
       margin: 0;
       padding-left: 0;
 
+      > p {
+        padding-top: 3rem;
+      }
+
       > li {
         background-color: rgba($color: royalblue, $alpha: 0.3);
         border-radius: 0.5rem;
