@@ -16,6 +16,8 @@ export default ({
 }) => {
   const { t } = useTranslation();
   const [offset, setOffset] = useState(0);
+  const [prevQuery, setPrevQuery] = useState("");
+  const [prevSelected, setPrevSelected] = useState([]);
 
   const filtered = Object.keys(collection)
     .filter((key) => {
@@ -41,8 +43,13 @@ export default ({
     });
 
   const contentLength = Object.keys(filtered).length;
-  if (offset !== 0 && contentLength <= offset) {
+  if (prevQuery !== query) {
     setOffset(0);
+    setPrevQuery(query);
+  }
+  if (prevSelected !== selected) {
+    setOffset(0);
+    setPrevSelected(selected);
   }
 
   return (
