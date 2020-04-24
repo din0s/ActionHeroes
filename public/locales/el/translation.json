@@ -108,6 +108,18 @@
   "categories": {
     "environment": "Περιβάλλον",
     "animals": "Ζώα",
-    "children": "Παιδιά"
+    "children": "Παιδιά",
+    "seniors": "Ηλικιωμένοι",
+    "women": "Γυναίκες"
+  },
+  "teaminfo": {
+    "members": "Μέλη",
+    "categories": "Σχετικές Κατηγορίες",
+    "actions": "Δράσεις",
+    "createdon": "Δημιουργήθηκε στις",
+    "follow": "Ακουλούθησε",
+    "unfollow": "Ακολουθείτε",
+    "upcoming": "Επόμενες Δράσεις",
+    "past": "Προηγούμενες Δράσεις"
   }
 }

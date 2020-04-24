@@ -1,0 +1,24 @@
+{
+  "name": "ACM AUTH Student Chapter",
+  "description": "The Chapter's mission is to inform its members and students of Aristotle University of Thessaloniki (AUTh) about the latest cutting-edge achievements in Computer Science and Engineering and to create a group of dedicated people who are interested to explore all possibilities of computer science.",
+  "categories": [
+    { "name": "children" },
+    { "name": "animals" },
+    { "name": "seniors" },
+    { "name": "environment" },
+    { "name": "women" }
+  ],
+  "dateCreated": "2020-03-15T08:30:00Z",
+  "followers": [
+    { "name": "Τάδε1" },
+    { "name": "Τάδε2" },
+    { "name": "Τάδε3" },
+    { "name": "Τάδε4" }
+  ],
+  "photo": "/img/landing/parallax1.jpg",
+  "actionList": {
+    "action1": {},
+    "action2": {},
+    "action3": {}
+  }
+}

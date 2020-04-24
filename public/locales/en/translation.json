@@ -108,6 +108,18 @@
   "categories": {
     "environment": "Environment",
     "animals": "Animals",
-    "children": "Children"
+    "children": "Children",
+    "seniors": "Seniors",
+    "women": "Women"
+  },
+  "teaminfo": {
+    "members": "Members",
+    "categories": "Relevant Categories",
+    "actions": "Actions",
+    "createdon": "Created on",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "upcoming": "Upcoming Activities",
+    "past": "Past Activities"
   }
 }
