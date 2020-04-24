@@ -1,11 +1,12 @@
 .Card {
   border-radius: 0.5rem;
-  background-image: linear-gradient(to bottom right, rgb(223, 223, 223), white);
+  background-image: linear-gradient(to bottom right, rgb(233, 233, 233), white);
   border: 1px solid rgba($color: black, $alpha: 0.3);
   display: flex;
   flex-direction: row;
   padding: 1.5rem 1rem;
   width: calc(100% - 2rem); //100% - padding left&right
+  align-items: center;
 
   > img {
     // align-self: center;
@@ -24,24 +25,36 @@
     //margin: 0.5rem 1.5rem;
     flex-direction: column;
     justify-content: space-between;
-    display: flex;
+    //display: flex;
+    //height: 11rem;
 
     > h1 {
       font-size: 1.4rem;
       margin: 0;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      display: -webkit-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     > h2 {
       font-size: 0.7rem;
       font-weight: bold;
-      margin: 0;
+      margin-bottom: 1rem;
+      margin-top: 0.3rem;
     }
     > h3 {
       font-size: 0.8rem;
       font-weight: bold;
-      margin: 0;
+      margin-bottom: 0.5rem;
     }
 
     > p {
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      display: -webkit-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
       margin: 0;
       font-size: 0.8rem;
     }
@@ -49,10 +62,9 @@
 
   &_categories {
     flex-direction: row;
-    //display: flex;
     > h1 {
       font-size: 0.8rem;
-      margin: 0.5rem 0;
+      margin-top: 1rem;
     }
 
     > ul {
