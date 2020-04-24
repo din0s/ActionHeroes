@@ -1,50 +1,82 @@
 {
   "Action1": {
-    "image": "/img/actions/lime.jpg",
+    "logo": "/img/actions/lime.jpg",
     "name": "Programming 101: Hello World And What To Do",
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget lacus nulla. Pellentesque bibendum id ante lacinia dictum. Donec mi lorem, bibendum at neque at, efficitur efficitur urna. Phasellus porta dolor ligula, ut tempus felis ornare et. Vivamus finibus maximus venenatis. Curabitur viverra neque quis turpis commodo porttitor convallis eget lectus. Aenean viverra eu turpis et tristique. Morbi imperdiet ut enim ac dapibus. Nulla mattis odio et ligula iaculis posuere. Integer hendrerit orci ac velit facilisis molestie. Phasellus facilisis feugiat laoreet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget lacus nulla. Pellentesque bibendum id ante lacinia dictum. Donec mi lorem, bibendum at neque at, efficitur efficitur urna. Phasellus porta dolor ligula, ut tempus felis ornare et. Vivamus finibus maximus venenatis. Curabitur viverra neque quis turpis commodo porttitor convallis eget lectus. Aenean viverra eu turpis et tristique. Morbi imperdiet ut enim ac dapibus. Nulla mattis odio et ligula iaculis posuere. Integer hendrerit orci ac velit facilisis molestie. Phasellus facilisis feugiat laoreet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
     "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
     "location": "New York, Central Park",
-    "categories": ["Health"]
+    "categories": ["Students"]
   },
   "Action2": {
-    "image": "/img/actions/lime.jpg",
-    "name": "Action No2",
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "logo": "/img/actions/lime.jpg",
+    "name": "Harry Potter Reading",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
     "location": "New York, Central Park",
-    "categories": ["Nature", "Health"]
+    "categories": ["Students"]
   },
   "Action3": {
-    "image": "/img/actions/lime.jpg",
-    "name": "Action No3",
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "logo": "/img/actions/lime.jpg",
+    "name": "Brainstorming",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
     "location": "New York, Central Park",
     "categories": ["Students"]
   },
   "Action4": {
-    "image": "/img/actions/lime.jpg",
+    "logo": "/img/actions/lime.jpg",
     "name": "Action No4",
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
     "location": "New York, Central Park",
     "categories": ["Something"]
   },
   "Action5": {
-    "image": "/img/actions/lime.jpg",
-    "name": "Action No5",
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "logo": "/img/actions/lime.jpg",
+    "name": "Levitate",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
     "location": "New York, Central Park",
     "categories": ["Students", "Nature"]
   },
   "Action6": {
-    "image": "/img/actions/lime.jpg",
+    "logo": "/img/actions/lime.jpg",
     "name": "Action No6",
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
+    "location": "New York, Central Park",
+    "categories": ["Health","Something"]
+  },
+  "Action7": {
+    "logo": "/img/actions/lime.jpg",
+    "name": "Yoga Classes",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
     "location": "New York, Central Park",
     "categories": ["Something"]
+  },
+  "Action8": {
+    "logo": "/img/actions/lime.jpg",
+    "name": "Action No8",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
+    "location": "New York, Central Park",
+    "categories": ["Students"]
+  },
+  "Action9": {
+    "logo": "/img/actions/lime.jpg",
+    "name": "Action No9",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
+    "location": "New York, Central Park",
+    "categories": ["Something", "Nature"]
+  },
+  "Action10": {
+    "logo": "/img/actions/lime.jpg",
+    "name": "Learn how to breathe",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
+    "location": "New York, Central Park",
+    "categories": ["Health"]
   }
 }

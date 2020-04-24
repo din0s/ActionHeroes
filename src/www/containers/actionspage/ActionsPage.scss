@@ -3,7 +3,7 @@
 .ActionsPage {
   background-color: rgba($color: wheat, $alpha: 0.25);
   margin: 0;
-  padding: 2rem 4rem;
+  padding: 2rem 3rem;
 
   .SearchBar {
     margin-bottom: 2rem;
@@ -24,34 +24,34 @@
   &_content {
     width: 100%;
 
-    &_actions {
+    &_list {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      list-style: none;
       justify-content: center;
+      list-style: none;
       margin: 0;
       padding-left: 0;
 
       > li {
         background-color: rgba($color: royalblue, $alpha: 0.3);
-        box-shadow: 0 0 10px 1px rgba($color: black, $alpha: 0.15);
         border-radius: 0.5rem;
-        list-style: none;
-        flex-direction: row;
+        box-shadow: 0 0 10px 1px rgba($color: black, $alpha: 0.15);
         display: flex;
-        width: 70vw;
-        margin-top: 2rem;
+        flex-direction: row;
+        height: 15rem;
+        list-style: none;
         margin-left: 1.5rem;
-        height: 15.2rem;
+        margin-top: 2rem;
+        width: 70vw;
 
         > a {
           height: 15rem;
 
           > img {
-            border-top-left-radius: 0.5rem;
             border-bottom-left-radius: 0.5rem;
-            height: 15.2rem;
+            border-top-left-radius: 0.5rem;
+            height: 15rem;
           }
         }
 
@@ -71,27 +71,26 @@
             }
 
             > h3 {
-              display: flex;
-              font-size: 2rem;
-              margin-bottom: 0.2rem;
-              margin-right: 0.8rem;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              display: -webkit-inline-box;
               overflow: hidden;
               text-overflow: ellipsis;
-              display: -webkit-box;
-              -webkit-line-clamp: 1;
-              -webkit-box-orient: vertical;
+              font-size: 1.5rem;
+              margin-bottom: 0.2rem;
+              margin-right: 0.8rem;
             }
           }
 
-          .desc {
+          .description {
             margin-right: 1rem;
             > p {
-              font-size: 1rem;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 3;
+              display: -webkit-box;
               overflow: hidden;
               text-overflow: ellipsis;
-              display: -webkit-box;
-              -webkit-line-clamp: 3;
-              -webkit-box-orient: vertical;
+              font-size: 1rem;
             }
           }
         }
@@ -103,62 +102,39 @@
 @media only screen and(max-width: 1360px) {
   .ActionsPage {
     padding: 2rem;
-
-    &_content_teams {
-      > li {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        height: 15rem;
-        margin: 1.5rem !important;
-        min-width: 25rem;
-        width: 40vw;
-
-        span {
-          align-items: center;
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-        }
-      }
-    }
-  }
-}
-
-@media only screen and(max-width: 1150px) {
-  .ActionsPage {
-    
     &_content {
-      &_actions {
+      &_list {
         display: flex;
         flex-wrap: wrap;
-        list-style: none;
         justify-content: center;
-        padding-left: 0;
+        list-style: none;
+        padding-left: 1rem;
+        padding-top: 2rem;
         width: 100%;
 
         > li {
           background-color: rgba($color: royalblue, $alpha: 0.3);
-          box-shadow: 0 0 10px 1px rgba($color: black, $alpha: 0.15);
           border-radius: 0.5rem;
-          list-style: none;
-          flex-direction: column;
+          box-shadow: 0 0 10px 1px rgba($color: black, $alpha: 0.15);
           display: flex;
-          margin-bottom: 2rem;
-          width: 20rem;
-          margin-top: 0rem;
-          margin-left: 0.5rem;
-          margin-bottom: 1rem;
-          margin-right: 0.5rem;
+          flex-direction: column;
           height: 30rem;
+          list-style: none;
+          margin-bottom: 1rem;
+          margin-bottom: 2rem;
+          margin-left: 0.5rem;
+          margin-right: 0.5rem;
+          margin-top: 0rem;
+          width: 100%;
 
           > a {
             display: contents;
 
             > img {
-              height: 15rem;
               border-top-left-radius: 0.5rem;
               border-top-right-radius: 0.5rem;
+              border-bottom-left-radius: 0rem;
+              object-fit: cover;
             }
           }
         }
@@ -176,6 +152,27 @@
     &_content {
       border-left: none;
       margin: 0;
+      &_list{
+        padding-left: 0rem;
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 400px) {
+  .ActionsPage {
+    > span {
+      flex-direction: column;
+    }
+
+    &_content {
+      &_list {
+        > li {
+          > a > img {
+            height: 10rem;
+          }
+        }
+      }
     }
   }
 }

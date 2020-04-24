@@ -3,64 +3,26 @@ import "./ActionsPage.scss";
 import React, { Component } from "react";
 
 import FilterList from "../../components/filterlist/FilterList";
+import Pagination from "../../components/pagination/Pagination";
 import SearchBar from "../../components/searchbar/SearchBar";
-import { withTranslation } from "react-i18next";
+import queryString from "query-string";
+import { withRouter } from "react-router-dom";
 
 const actions = require("./actions.json");
 const categories = require("./categories.json");
 
-export default withTranslation()(
+export default withRouter(
   class ActionsPage extends Component {
     state = {
       selectedCategories: [],
+      query: "",
     };
 
-    showActions = () => {
-      return Object.keys(actions)
-        .filter((ac) => {
-          const selected = this.state.selectedCategories;
-          if (selected.length === 0) {
-            return true;
-          }
-
-          const categories = actions[ac].categories;
-          return selected.every((sc) =>
-            Object.keys(categories).find((c) => {
-              const category = categories[c];
-              return sc === category;
-            })
-          );
-        })
-        .map((ac) => {
-          const action = actions[ac];
-          const action_link = "/signup";
-          const location_link = "https://goo.gl/maps/JYnmWrgsEzot3Dn86";
-          return (
-            <li key={ac}>
-              <a href={action_link}>
-                <img alt="Card icon" src={action.image} />
-              </a>
-              <div>
-                <a href={action_link}>
-                  <h3>{action.name}</h3>
-                </a>
-                <div>
-                  <span>{action.date}</span>
-                </div>
-                <a
-                  href={location_link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span>{action.location}</span>
-                </a>
-                <div className="desc">
-                  <p>{action.desc}</p>
-                </div>
-              </div>
-            </li>
-          );
-        });
+    componentDidMount = () => {
+      const { query } = queryString.parse(this.props.location.search);
+      if (query) {
+        this.setState({ query });
+      }
     };
 
     onCheckbox = (event, category) => {
@@ -81,11 +43,45 @@ export default withTranslation()(
       });
     };
 
+    showActions = (key, action) => {
+      const action_link = "/signup";
+      const location_link = "https://goo.gl/maps/JYnmWrgsEzot3Dn86";
+      return (
+        <li key={key}>
+        <a href={action_link}>
+          <img alt="Card icon" src={action.logo} />
+        </a>
+        <div>
+          <a href={action_link}>
+            <h3>{action.name}</h3>
+          </a>
+          <div>
+            <span>{action.date}</span>
+          </div>
+          <a
+            href={location_link}
+            target="_blank"
+            rel="noopener noreferrer"
+            SameSite="None"
+          >
+            <span>{action.location}</span>
+          </a>
+          <div className="description">
+            <p>{action.description}</p>
+          </div>
+        </div>
+      </li>
+      );
+    };
+
     render() {
-      const { t } = this.props;
       return (
         <div className="ActionsPage">
-          <SearchBar action="/actions" />
+          <SearchBar
+            action="/actions"
+            value={this.state.query}
+            onChange={(e) => this.setState({ query: e.target.value })}
+          />
           <span>
             <FilterList
               categories={categories}
@@ -94,11 +90,18 @@ export default withTranslation()(
               onClear={() => this.setState({ selectedCategories: [] })}
               onRemove={this.removeCategory}
             />
-            <div className="ActionsPage_content">
-              <ul className="ActionsPage_content_actions">
-                {this.showActions()}
-              </ul>
-            </div>
+            <Pagination
+              baseName="ActionsPage_content"
+              collection={actions}
+              perPage={4}
+              query={this.state.query.toLowerCase().trim()}
+              mapFunc={this.showActions}
+              searchFilter={(actions, query) =>
+                actions.name.toLowerCase().includes(query) ||
+                actions.description.toLowerCase().includes(query)
+              }
+              selected={this.state.selectedCategories}
+            />
           </span>
         </div>
       );
