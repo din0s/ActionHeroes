@@ -162,6 +162,7 @@
 
 @media only screen and(max-width: 1180px) {
   .TeamProfile {
+    padding: 2rem 12vw;
     .TopPanel {
       &_info {
         > img {
@@ -223,19 +224,65 @@
 
       .RightSide {
         width: calc(100% - 18rem);
-        text-align: left;
-        background-color: rgba($color: white, $alpha: 0.7);
-        box-shadow: 0 0 30px 10px rgba($color: white, $alpha: 0.3);
-        border: 1px solid rgba($color: black, $alpha: 0.3);
-        padding: 0rem 2rem 1rem 2rem;
-        margin-top: 1rem;
-        margin-left: 1rem;
-        align-self: flex-start;
 
         &_events {
           > h1 {
-            //margin-top: 1;
+            font-size: 1.4rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 1024px) {
+  .TeamProfile {
+    .TopPanel {
+      &_info {
+        > img {
+          height: 8rem;
+        }
+
+        > div {
+          text-align: left;
+
+          > h1 {
             font-size: 1.8rem;
+            margin-bottom: 0;
+          }
+
+          > h2 {
+            font-size: 1rem; //max 400 characters
+          }
+        }
+      }
+
+      &_followbutton {
+        margin-top: 0.4rem;
+        font-size: 1rem;
+        height: 2rem;
+        width: 11rem;
+      }
+
+      &_unfollowbutton {
+        margin-top: 0.4rem;
+        font-size: 1rem;
+        height: 2rem;
+        width: 11rem;
+      }
+    }
+    .BottomPanel {
+      .LeftSide {
+        display: none;
+      }
+
+      .RightSide {
+        width: calc(100%);
+        margin-left: 0;
+
+        &_events {
+          > h1 {
+            font-size: 1.2rem;
           }
         }
       }
@@ -244,7 +291,60 @@
 }
 
 @media only screen and(max-width: 800px) {
+  .TeamProfile {
+    padding: 2rem 2vw;
+    .TopPanel {
+      &_info {
+        > img {
+          height: 6rem;
+        }
+
+        > div {
+          text-align: left;
+
+          > h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0;
+          }
+
+          > h2 {
+            font-size: 0.9rem; //max 400 characters
+          }
+        }
+      }
+
+      &_followbutton {
+        margin-top: 0.4rem;
+        font-size: 0.9rem;
+        height: 1.8rem;
+        width: 10rem;
+      }
+
+      &_unfollowbutton {
+        margin-top: 0.4rem;
+        font-size: 0.9rem;
+        height: 1.8rem;
+        width: 10rem;
+      }
+    }
+    .BottomPanel {
+      .LeftSide {
+        display: none;
+      }
+
+      .RightSide {
+        width: calc(100%);
+        margin-left: 0;
+
+        &_events {
+          > h1 {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
 }
 
-@media only screen and(max-width: 440px) {
+@media only screen and(max-width: 550px) {
 }

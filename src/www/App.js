@@ -58,11 +58,11 @@ export default class App extends Component {
                   <Switch>
                     <Route path="/login" children={<Login />} />
                     <Route path="/signup" children={<Signup />} />
+                    <Route path="/teams/id" children={<TeamProfile />} />
                     <Route path="/teams" children={<TeamsPage />} />
                     <Route path="/contact" children={<ContactPage />} />
                     <Route path="/profile" children={<UserProfile />} />
                     <Route path="/" exact children={<LandingPage />} />
-                    <Route path="/teams/id" children={<TeamProfile />} />
                   </Switch>
                 </main>
                 <Footer />
