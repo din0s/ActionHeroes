@@ -28,6 +28,17 @@
       > div {
         text-align: left;
 
+        > img {
+          display: none;
+          height: 4rem;
+          border-radius: 160px;
+          border: 1px solid rgba($color: black, $alpha: 0.3);
+          border-width: 1px;
+          margin-right: 2rem;
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+        }
+
         > h1 {
           font-size: 2.4rem;
           margin-top: 0;
@@ -39,6 +50,12 @@
           font-weight: normal;
         }
       }
+    }
+
+    > h3 {
+      display: none;
+      font-size: 1.2rem; //max 400 characters
+      font-weight: normal;
     }
 
     &_followbutton {
@@ -74,6 +91,42 @@
 
       &:hover {
         background-color: rgba($color: blue, $alpha: 0.1);
+      }
+    }
+  }
+
+  .MidPanel {
+    display: none;
+    &_info {
+      > h1 {
+      }
+      > hr {
+      }
+    }
+    &_categories {
+      > h1 {
+      }
+      > ul {
+        > li {
+        }
+      }
+    }
+    &_both {
+      &_center {
+        > h1 {
+        }
+        > p {
+        }
+      }
+      > h1 {
+      }
+      > hr {
+      }
+      > h2 {
+      }
+      > ul {
+        > li {
+        }
       }
     }
   }
@@ -271,6 +324,60 @@
         width: 11rem;
       }
     }
+    .MidPanel {
+      display: flex;
+      justify-content: center;
+
+      &_info {
+        border-radius: 0.5rem;
+        width: calc(50% - 0.5rem);
+        background-color: rgba($color: white, $alpha: 0.7);
+        box-shadow: 0 0 30px 10px rgba($color: white, $alpha: 0.3);
+        border: 1px solid rgba($color: black, $alpha: 0.3);
+        padding: 0.5rem;
+        margin-top: 1rem;
+        margin-right: 1rem;
+        > h1 {
+          margin: 0.5rem;
+          font-size: 1rem;
+        }
+        > hr {
+          margin: 1rem 3rem;
+          opacity: 0.3;
+        }
+      }
+      &_categories {
+        width: calc(50% - 0.5rem);
+        border-radius: 0.5rem;
+        background-color: rgba($color: white, $alpha: 0.7);
+        box-shadow: 0 0 30px 10px rgba($color: white, $alpha: 0.3);
+        border: 1px solid rgba($color: black, $alpha: 0.3);
+        padding: 0.5rem;
+        margin-top: 1rem;
+
+        > h1 {
+          margin: 0.5rem;
+          font-size: 1rem;
+        }
+        > ul {
+          justify-content: center;
+          display: flex;
+          flex-wrap: wrap;
+          list-style-type: none;
+          padding: 0;
+
+          > li {
+            font-size: 0.9rem;
+            background-color: rgba($color: burlywood, $alpha: 0.3);
+            font-weight: bold;
+            border: 1px solid rgba($color: black, $alpha: 0.3);
+            border-radius: 0.2rem;
+            padding: 0.2rem;
+            margin: 0.5rem 0.2rem;
+          }
+        }
+      }
+    }
     .BottomPanel {
       .LeftSide {
         display: none;
@@ -327,6 +434,24 @@
         width: 10rem;
       }
     }
+    .MidPanel {
+      &_info {
+        > h1 {
+          font-size: 0.9rem;
+        }
+      }
+      &_categories {
+        > h1 {
+          font-size: 0.9rem;
+        }
+        > ul {
+          > li {
+            font-size: 0.8rem;
+            margin: 0.4rem 0.2rem;
+          }
+        }
+      }
+    }
     .BottomPanel {
       .LeftSide {
         display: none;
@@ -346,5 +471,108 @@
   }
 }
 
-@media only screen and(max-width: 550px) {
+@media only screen and(max-width: 560px) {
+  .TeamProfile {
+    padding: 2rem 0rem;
+    .TopPanel {
+      &_info {
+        > img {
+          display: none;
+        }
+
+        > div {
+          display: flex;
+          text-align: left;
+          align-items: center;
+
+          > img {
+            height: 3.5rem;
+            display: block;
+            margin: 0rem 1rem;
+          }
+
+          > h1 {
+            font-size: 1.3rem;
+            margin: 0;
+          }
+
+          > h2 {
+            display: none;
+            font-size: 0.9rem; //max 400 characters
+          }
+        }
+      }
+      > h3 {
+        text-align: left;
+        display: flex;
+        font-size: 0.9rem; //max 400 characters
+      }
+
+      &_followbutton {
+        margin-top: 0.4rem;
+        font-size: 0.9rem;
+        height: 1.8rem;
+        width: 10rem;
+      }
+
+      &_unfollowbutton {
+        margin-top: 0.4rem;
+        font-size: 0.9rem;
+        height: 1.8rem;
+        width: 10rem;
+      }
+    }
+    .MidPanel {
+      &_info {
+        > h1 {
+          font-size: 0.9rem;
+        }
+      }
+      &_categories {
+        > h1 {
+          font-size: 0.9rem;
+        }
+        > ul {
+          > li {
+            font-size: 0.8rem;
+            margin: 0.4rem 0.2rem;
+          }
+        }
+      }
+      &_both {
+        &_center {
+          > h1 {
+          }
+          > p {
+          }
+        }
+        > h1 {
+        }
+        > hr {
+        }
+        > h2 {
+        }
+        > ul {
+          > li {
+          }
+        }
+      }
+    }
+    .BottomPanel {
+      .LeftSide {
+        display: none;
+      }
+
+      .RightSide {
+        width: calc(100%);
+        margin-left: 0;
+
+        &_events {
+          > h1 {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
 }

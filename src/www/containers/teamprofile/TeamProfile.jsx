@@ -30,10 +30,12 @@ export default withTranslation()(
             <span className="TopPanel_info">
               <img alt="Team Logo" src="/img/teaminfo/acm.jpg" />
               <div>
+                <img alt="Team Logo" src="/img/teaminfo/acm.jpg" />
                 <h1>{team.name}</h1>
                 <h2>{team.description}</h2>
               </div>
             </span>
+            <h3>{team.description}</h3>
             {!this.state.followed && (
               <button
                 className="TopPanel_followbutton"
@@ -58,6 +60,32 @@ export default withTranslation()(
                 children={t("teaminfo.unfollow")}
               />
             )}
+          </section>
+          <section className="MidPanel">
+            <div className="MidPanel_info">
+              <h1>
+                {t("teaminfo.members")}: {this.state.totalmembers}
+              </h1>
+              <h1>
+                {t("teaminfo.actions")}: {Object.keys(team.actionList).length}
+              </h1>
+              <hr />
+              <h1>{t("teaminfo.createdon")}:</h1>
+              <h1>{this.parseDate(team.dateCreated)}</h1>
+            </div>
+
+            <div className="MidPanel_categories">
+              <h1>{t("teaminfo.categories")}:</h1>
+              <ul>
+                {Object.keys(team.categories).map((cKey) => {
+                  return (
+                    <li>{`${t(
+                      "categories." + team.categories[cKey].name
+                    )}`}</li>
+                  );
+                })}
+              </ul>
+            </div>
           </section>
           <section className="BottomPanel">
             <div className="LeftSide">
