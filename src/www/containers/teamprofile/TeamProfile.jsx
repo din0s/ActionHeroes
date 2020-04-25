@@ -86,6 +86,31 @@ export default withTranslation()(
                 })}
               </ul>
             </div>
+            <div className="MidPanel_both">
+              <div className="MidPanel_both_center">
+                <h1>
+                  {t("teaminfo.members")}: {this.state.totalmembers}
+                </h1>
+                <p> </p>
+                <h1>
+                  {t("teaminfo.actions")}: {Object.keys(team.actionList).length}
+                </h1>
+              </div>
+              <h1>
+                {t("teaminfo.createdon")}: {this.parseDate(team.dateCreated)}
+              </h1>
+              <hr />
+              <h1>{t("teaminfo.categories")}:</h1>
+              <ul>
+                {Object.keys(team.categories).map((cKey) => {
+                  return (
+                    <li>{`${t(
+                      "categories." + team.categories[cKey].name
+                    )}`}</li>
+                  );
+                })}
+              </ul>
+            </div>
           </section>
           <section className="BottomPanel">
             <div className="LeftSide">
