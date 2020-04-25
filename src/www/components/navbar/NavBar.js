@@ -46,10 +46,10 @@ class NavBar extends Component {
           <SearchBar action="/search" />
           <ul className="Pages" onClick={this.hideMenu}>
             <li className="Page-link">
-              <NavLink to="/actions" children={t("nav.actions")} />
+              <NavLink to="/actions" children={t("actions")} />
             </li>
             <li className="Page-link">
-              <NavLink to="/teams" children={t("nav.teams")} />
+              <NavLink to="/teams" children={t("teams")} />
             </li>
             <li className="Page-link">
               <NavLink to="/contact" children={t("nav.contact")} />

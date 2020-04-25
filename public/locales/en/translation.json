@@ -1,4 +1,5 @@
 {
+  "actions": "Actions",
   "search": "Search...",
   "noresults": "No results.",
   "filterlist": {
@@ -7,9 +8,8 @@
     "categories": "Categories",
     "none": "None."
   },
+  "teams": "Teams",
   "nav": {
-    "actions": "Actions",
-    "teams": "Teams",
     "contact": "Contact",
     "login": "Login",
     "signup": "Sign Up",
@@ -37,6 +37,21 @@
       "alt-call": "Already have an account?",
       "mismatch": "Your passwords don't match!"
     }
+  },
+  "profile": {
+    "add-bio": "Let us know more about you!",
+    "attended": "Actions you have attended",
+    "cancel": "Cancel",
+    "categories": "Categories",
+    "edit": "Edit Profile",
+    "edit-avatar": "Edit avatar",
+    "join": "Join more teams here!",
+    "organized": "Actions you have organized",
+    "save": "Save",
+    "show-more": "Show more...",
+    "show-less": "Show less...",
+    "teams-owned": "Teams you own",
+    "teams-member": "Teams you follow"
   },
   "footer": {
     "icons": "Icons from {{site}}"

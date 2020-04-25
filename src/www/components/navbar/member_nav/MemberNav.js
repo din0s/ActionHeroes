@@ -66,7 +66,7 @@ export default connect(
               onClick={this.hideOptions}
             >
               <li className="Page-link">
-                <NavLink to="/user/profile" children={t("nav.user.profile")} />
+                <NavLink to="/profile" children={t("nav.user.profile")} />
               </li>
               <li className="Page-link">
                 <NavLink to="/user/preferences" children={t("nav.user.pref")} />

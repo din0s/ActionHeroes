@@ -11,6 +11,7 @@ const UserSchema = new mongo.Schema({
   username: { type: String, required: true, unique: true },
   hash: { type: String, required: true },
   profilePhoto: { data: Buffer, contentType: String },
+  bio: { type: String },
   location: {
     type: {
       type: String,
