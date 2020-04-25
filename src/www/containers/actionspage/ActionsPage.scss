@@ -202,7 +202,6 @@
       &_list {
         display: flex;
         flex-wrap: wrap;
-        height: 22.5rem;
         justify-content: center;
         list-style: none;
         padding-left: 0rem;
@@ -215,7 +214,7 @@
           box-shadow: 0 0 10px 1px rgba($color: black, $alpha: 0.15);
           display: flex;
           flex-direction: column;
-          height: fit-content;
+          height: 22.5rem;
           list-style: none;
           margin-bottom: 1rem;
           margin-bottom: 2rem;
