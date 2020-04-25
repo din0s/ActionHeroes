@@ -84,8 +84,11 @@ export default connect(
               <div className="ActionDetails_panel">
                 <div className="ActionDetails_infoDiv">
                   <span>
-                    <h3>{t("actioninfo.organizer")}</h3>
-                    <p> {organizer}</p>
+                    <img src={organizerPhoto} alt="Organizer"></img>
+                    <div>
+                      <h3> {organizer}</h3>
+                      <p>{t("actioninfo.organizer")}</p>
+                    </div>
                   </span>
                   <div>
                     <p className="ActionDetails_infoDiv_location">
@@ -102,7 +105,7 @@ export default connect(
                         );
                       }}
                     >
-                      {"📍" + t("actioninfo.map")}
+                      {"📍  " + t("actioninfo.map")}
                     </p>
                     <p>{action.description}</p>
                     <p className="Attendees">

@@ -17,7 +17,7 @@
       display: flex;
       min-width: 45rem;
       max-width: 60rem;
-      padding: 0.5rem;
+      padding: 0.8rem;
 
       > img {
         border-radius: 1rem;
@@ -28,6 +28,7 @@
       > div {
         padding-left: 1rem;
         text-align: left;
+        width: 100%;
 
         > p {
           margin-top: 3rem;
@@ -44,7 +45,7 @@
           outline: none;
           padding: 0.2rem;
           transition: 0.15s ease-in-out;
-          width: 45%;
+          width: 40%;
 
           &:hover {
             background-color: rgba($color: white, $alpha: 0.8);
@@ -75,7 +76,7 @@
     &_infoDiv {
       border: 0.5px solid rgba($color: black, $alpha: 0.3);
       border-radius: 0.5rem;
-      box-shadow: 1px 1px 1px 1px rgba($color: black, $alpha: 0.3);
+      box-shadow: 1px 1px rgba($color: black, $alpha: 0.3);
       display: flex;
       flex-direction: row;
       padding: 0 0.6rem;
@@ -125,7 +126,7 @@
       background-color: rgba($color: burlywood, $alpha: 0.15);
       border: 0.5px solid rgba($color: black, $alpha: 0.3);
       border-radius: 0.5rem;
-      box-shadow: 1px 1px 1px 1px rgba($color: black, $alpha: 0.3);
+      box-shadow: 1px 1px rgba($color: black, $alpha: 0.3);
       min-width: 12rem;
       padding: 0.3rem;
       text-align: center;
@@ -203,7 +204,20 @@
         flex-direction: column;
 
         > span {
-          display: inline;
+          display: flex;
+          flex-direction: row;
+
+          > img {
+            padding: 1.5rem;
+            object-fit: cover;
+            height: 4rem;
+          }
+
+          > div {
+            padding-right: 0.6rem;
+            text-align: left;
+            width: 100%;
+          }
         }
 
         &_location {
