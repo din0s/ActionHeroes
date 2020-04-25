@@ -3,8 +3,8 @@
     &_parallax {
       align-items: center;
       display: flex;
-      min-height: 25rem;
       justify-content: center;
+      min-height: 25rem;
 
       &Photo {
         margin-top: 2.5rem;
@@ -13,14 +13,15 @@
 
     &_infoDiv {
       background-color: rgba($color: lightgray, $alpha: 0.9);
-      border-radius: 1rem;
+      border-radius: 0.5rem;
       display: flex;
-      min-width: 45rem;
       max-width: 60rem;
-      padding: 0.8rem;
+      min-height: 10rem;
+      min-width: 40rem;
+      padding: 1rem;
 
       > img {
-        border-radius: 1rem;
+        border-radius: 0.5rem;
         object-fit: cover;
         width: 12rem;
       }
@@ -30,8 +31,12 @@
         text-align: left;
         width: 100%;
 
+        h1 {
+          margin: 0.5rem 0;
+        }
+
         > p {
-          margin-top: 3rem;
+          margin: 0.5rem 0;
         }
 
         > button {
@@ -41,11 +46,11 @@
           box-shadow: 1px 1px 1px 1px rgba($color: white, $alpha: 0.3);
           cursor: pointer;
           font-size: 1rem;
-          margin-top: 1rem;
+          margin-top: 3rem;
           outline: none;
-          padding: 0.2rem;
+          padding: 0.3rem;
           transition: 0.15s ease-in-out;
-          width: 40%;
+          width: 30%;
 
           &:hover {
             background-color: rgba($color: white, $alpha: 0.8);
@@ -60,7 +65,7 @@
   }
 
   .ActionDetails {
-    padding: 0 10rem;
+    padding: 0 20rem;
     text-align: left;
 
     > h3 {
@@ -79,8 +84,8 @@
       box-shadow: 1px 1px rgba($color: black, $alpha: 0.3);
       display: flex;
       flex-direction: row;
-      padding: 0 0.6rem;
       margin-right: 1rem;
+      padding: 0 0.6rem;
 
       > span {
         display: none;
@@ -94,12 +99,17 @@
       }
 
       .Attendees {
+        font-weight: bold;
         padding-top: 1rem;
       }
 
       &_categories {
         display: flex;
         flex-direction: row;
+
+        > h3 {
+          padding-top: 0.3rem;
+        }
 
         > ul {
           display: flex;
@@ -127,10 +137,10 @@
       border: 0.5px solid rgba($color: black, $alpha: 0.3);
       border-radius: 0.5rem;
       box-shadow: 1px 1px rgba($color: black, $alpha: 0.3);
+      height: fit-content;
       min-width: 12rem;
       padding: 0.3rem;
       text-align: center;
-      height: fit-content;
       width: fit-content;
 
       > img {
@@ -141,6 +151,14 @@
       > p {
         overflow-wrap: break-word;
       }
+    }
+  }
+}
+
+@media only screen and(max-width:1600px) {
+  .ActionProfile {
+    .ActionDetails {
+      padding: 0 10rem;
     }
   }
 }
@@ -202,15 +220,17 @@
 
       &_infoDiv {
         flex-direction: column;
+        margin-right: 0;
 
         > span {
           display: flex;
           flex-direction: row;
 
           > img {
-            padding: 1.5rem;
-            object-fit: cover;
             height: 4rem;
+            object-fit: cover;
+            padding: 1.5rem;
+            padding-left: 0.6rem;
           }
 
           > div {
@@ -221,9 +241,9 @@
         }
 
         &_location {
-          padding-top: 1.2rem;
-          margin-top: 0rem;
           border-top: 1px solid rgba($color: black, $alpha: 0.3);
+          margin-top: 0rem;
+          padding-top: 1.2rem;
         }
 
         &_map {
