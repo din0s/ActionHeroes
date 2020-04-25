@@ -48,29 +48,32 @@ export default withRouter(
       const location_link = "https://goo.gl/maps/JYnmWrgsEzot3Dn86";
       return (
         <li key={key}>
-        <a href={action_link}>
-          <img alt="Card icon" src={action.logo} />
-        </a>
-        <div>
           <a href={action_link}>
-            <h3>{action.name}</h3>
+            <img alt="Card icon" src={action.logo} />
           </a>
           <div>
-            <span>{action.date}</span>
+            <a href={action_link}>
+              <h3>{action.name}</h3>
+            </a>
+            <div className="date">
+              <span>{action.date}</span>
+            </div>
+            <a
+              href={location_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              SameSite="None"
+            >
+              <span>{action.location}</span>
+            </a>
+            <div className="description">
+              <p>{action.description}</p>
+            </div>
           </div>
-          <a
-            href={location_link}
-            target="_blank"
-            rel="noopener noreferrer"
-            SameSite="None"
-          >
-            <span>{action.location}</span>
-          </a>
-          <div className="description">
+          <div className="hidden_desc">
             <p>{action.description}</p>
           </div>
-        </div>
-      </li>
+        </li>
       );
     };
 

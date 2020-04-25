@@ -45,6 +45,10 @@
         margin-top: 2rem;
         width: 70vw;
 
+        > .hidden_desc {
+          display: none;
+        }
+
         > a {
           height: 15rem;
 
@@ -82,8 +86,24 @@
             }
           }
 
+          > div > span {
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          > a > span {
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
           .description {
             margin-right: 1rem;
+
             > p {
               -webkit-box-orient: vertical;
               -webkit-line-clamp: 3;
@@ -113,12 +133,9 @@
         width: 100%;
 
         > li {
-          background-color: rgba($color: royalblue, $alpha: 0.3);
-          border-radius: 0.5rem;
-          box-shadow: 0 0 10px 1px rgba($color: black, $alpha: 0.15);
           display: flex;
+          height: fit-content;
           flex-direction: column;
-          height: 30rem;
           list-style: none;
           margin-bottom: 1rem;
           margin-bottom: 2rem;
@@ -127,14 +144,46 @@
           margin-top: 0rem;
           width: 100%;
 
+          > .hidden_desc {
+            display: block;
+            margin-top: 2rem;
+            > p {
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 3;
+              display: -webkit-box;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              font-size: 1rem;
+            }
+          }
+
+          > div {
+            height: 6.5rem;
+            > a > h3 {
+              margin-left: 13rem;
+            }
+            > div > span {
+              margin-top: 0.5rem;
+              margin-left: 13rem;
+            }
+            > a > span {
+              margin-left: 13rem;
+            }
+            .description {
+              display: none;
+            }
+          }
+
           > a {
             display: contents;
 
             > img {
-              border-top-left-radius: 0.5rem;
-              border-top-right-radius: 0.5rem;
-              border-bottom-left-radius: 0rem;
-              object-fit: cover;
+              position: absolute;
+              border-radius: 0.5rem;
+              margin: 1rem;
+              height: 8rem;
+              width: 12rem;
+              object-fit: contain;
             }
           }
         }
@@ -148,12 +197,70 @@
     > span {
       flex-direction: column;
     }
-
+    padding: 2rem;
     &_content {
       border-left: none;
       margin: 0;
-      &_list{
+      &_list {
         padding-left: 0rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        list-style: none;
+        padding-left: 1rem;
+        padding-top: 2rem;
+        width: 100%;
+
+        > li {
+          background-color: rgba($color: royalblue, $alpha: 0.3);
+          border-radius: 0.5rem;
+          box-shadow: 0 0 10px 1px rgba($color: black, $alpha: 0.15);
+          display: flex;
+          flex-direction: column;
+          height: fit-content;
+          list-style: none;
+          margin-bottom: 1rem;
+          margin-bottom: 2rem;
+          margin-left: 0.5rem;
+          margin-right: 0.5rem;
+          margin-top: 0rem;
+          width: 100%;
+
+          > .hidden_desc {
+            display: none;
+          }
+
+          > div {
+            height: fit-content;
+            > a > h3 {
+              margin-left: 0rem;
+            }
+            > div > span {
+              //margin-top: 0.5rem;
+              margin-left: 0rem;
+            }
+            > a > span {
+              margin-left: 0rem;
+            }
+            .description {
+              display: block;
+            }
+          }
+          > a {
+            display: contents;
+
+            > img {
+              position: relative;
+              border-top-left-radius: 0.5rem;
+              border-top-right-radius: 0.5rem;
+              border-bottom-left-radius: 0rem;
+              object-fit: cover;
+              width: 100%;
+              margin: 0rem;
+              height: 10rem;
+            }
+          }
+        }
       }
     }
   }
