@@ -96,7 +96,7 @@ export default withRouter(
             <Pagination
               baseName="ActionsPage_content"
               collection={actions}
-              perPage={4}
+              perPage={6}
               query={this.state.query.toLowerCase().trim()}
               mapFunc={this.showActions}
               searchFilter={(actions, query) =>
