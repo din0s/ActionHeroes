@@ -1,14 +1,14 @@
 import "./TeamProfile.scss";
 
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import ActionCard from "../../components/actioncard/ActionCard";
 
 const team = require("./team.json");
 
 export default withTranslation()(
-  class LandingPage extends Component {
+  class TeamProfile extends Component {
     state = {
       followed: false,
       totalmembers: team.followers.length,
@@ -17,7 +17,6 @@ export default withTranslation()(
     parseDate = (date) => {
       const { t } = this.props;
       const d = new Date(date);
-      const day = t("actioncard.date.day." + d.getDay());
       const month = t("actioncard.date.month." + d.getMonth());
 
       return `${d.getDate()} ${month} ${d.getFullYear()}`;

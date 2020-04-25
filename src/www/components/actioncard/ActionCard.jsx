@@ -23,12 +23,18 @@ export default withTranslation()(
         <li className="Card">
           <img src={action.photo} alt="" />
           <div className="Card_body">
-            <h1>{action.name}</h1>
-            <h2>
-              📍 {action.location.name} • {this.parseDate(action.date)}
-            </h2>
-            {/* <h3>{action.organizer.teamId.name}</h3> */}
-            <p>{action.description}</p>
+            <img src={action.photo} alt="" />
+            <div className="Card_body_container">
+              <h1>{action.name}</h1>
+              <h2>
+                <span role="img" aria-label="pinpoint">
+                  📍
+                </span>
+                {" " + action.location.name} • {this.parseDate(action.date)}
+              </h2>
+              {/* <h3>{action.organizer.teamId.name}</h3> */}
+              <p>{action.description}</p>
+            </div>
             <div className="Card_categories">
               <h1>{t("actioncard.categories")}:</h1>
               <ul>
@@ -41,6 +47,9 @@ export default withTranslation()(
                 })}
               </ul>
             </div>
+          </div>
+          <div className="Card_hiddenDesc">
+            <p>{action.description}</p>
           </div>
         </li>
       );

@@ -13,12 +13,14 @@
     { "name": "Τάδε1" },
     { "name": "Τάδε2" },
     { "name": "Τάδε3" },
-    { "name": "Τάδε4" }
+    { "name": "Τάδε4" },
+    { "name": "Τάδε5" }
   ],
   "photo": "/img/landing/parallax1.jpg",
   "actionList": {
     "action1": {},
     "action2": {},
-    "action3": {}
+    "action3": {},
+    "action4": {}
   }
 }
