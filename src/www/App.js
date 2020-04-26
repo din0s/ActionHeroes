@@ -61,8 +61,8 @@ export default class App extends Component {
                     <Route path="/teams" children={<TeamsPage />} />
                     <Route path="/contact" children={<ContactPage />} />
                     <Route path="/profile" children={<UserProfile />} />
-                    <Route path="/" exact children={<LandingPage />} />
                     <Route path="/actions" children={<ActionsPage />} />
+                    <Route path="/" exact children={<LandingPage />} />
                   </Switch>
                 </main>
                 <Footer />
