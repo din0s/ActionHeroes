@@ -1,0 +1,82 @@
+{
+  "Action1": {
+    "logo": "/img/actions/lime.jpg",
+    "name": "Student Αction",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget lacus nulla. Pellentesque bibendum id ante lacinia dictum. Donec mi lorem, bibendum at neque at, efficitur efficitur urna. Phasellus porta dolor ligula, ut tempus felis ornare et. Vivamus finibus maximus venenatis. Curabitur viverra neque quis turpis commodo porttitor convallis eget lectus. Aenean viverra eu turpis et tristique. Morbi imperdiet ut enim ac dapibus. Nulla mattis odio et ligula iaculis posuere. Integer hendrerit orci ac velit facilisis molestie. Phasellus facilisis feugiat laoreet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+    "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
+    "location": "New York, Central Park",
+    "categories": ["Students"]
+  },
+  "Action2": {
+    "logo": "/img/actions/lime.jpg",
+    "name": "Student and Health Action",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
+    "location": "New York, Central Park",
+    "categories": ["Students", "Health"]
+  },
+  "Action3": {
+    "logo": "/img/actions/lime.jpg",
+    "name": "Nature and Health Action",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
+    "location": "New York, Central Park",
+    "categories": ["Nature", "Health"]
+  },
+  "Action4": {
+    "logo": "/img/actions/lime.jpg",
+    "name": "Something Action",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
+    "location": "New York, Central Park",
+    "categories": ["Something"]
+  },
+  "Action5": {
+    "logo": "/img/actions/lime.jpg",
+    "name": "Student and Nature Action",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
+    "location": "New York, Central Park",
+    "categories": ["Students", "Nature"]
+  },
+  "Action6": {
+    "logo": "/img/actions/lime.jpg",
+    "name": "Health and Something Action",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
+    "location": "New York, Central Park",
+    "categories": ["Health","Something"]
+  },
+  "Action7": {
+    "logo": "/img/actions/lime.jpg",
+    "name": "Something Action 2",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
+    "location": "New York, Central Park",
+    "categories": ["Something"]
+  },
+  "Action8": {
+    "logo": "/img/actions/lime.jpg",
+    "name": "Student and Something Action",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
+    "location": "New York, Central Park",
+    "categories": ["Students", "Something"]
+  },
+  "Action9": {
+    "logo": "/img/actions/lime.jpg",
+    "name": "Something and Nature Action",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
+    "location": "New York, Central Park",
+    "categories": ["Something", "Nature"]
+  },
+  "Action10": {
+    "logo": "/img/actions/lime.jpg",
+    "name": "Health Action",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "date": "Tuesday, August 21, 2020 6:00pm to 7:30pm",
+    "location": "New York, Central Park",
+    "categories": ["Health"]
+  }
+}

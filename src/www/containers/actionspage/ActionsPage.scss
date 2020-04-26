@@ -1,0 +1,287 @@
+.ActionsPage {
+  background-color: rgba($color: wheat, $alpha: 0.25);
+  margin: 0;
+  padding: 2rem 3rem;
+
+  .SearchBar {
+    margin-bottom: 2rem;
+
+    > input {
+      background-color: white;
+      box-shadow: 0 0 5px 1px rgba($color: black, $alpha: 0.25);
+      height: 1.5rem;
+      width: 80%;
+    }
+  }
+
+  > span {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &_content {
+    width: 100%;
+
+    &_list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      list-style: none;
+      margin: 0;
+      padding-left: 0;
+
+      > li {
+        background-color: rgba($color: royalblue, $alpha: 0.3);
+        border-radius: 0.5rem;
+        box-shadow: 0 0 10px 1px rgba($color: black, $alpha: 0.15);
+        display: flex;
+        flex-direction: row;
+        height: 15rem;
+        list-style: none;
+        margin-left: 1.5rem;
+        margin-top: 2rem;
+        width: 70vw;
+
+        > .hidden_desc {
+          display: none;
+        }
+
+        > a {
+          height: 15rem;
+
+          > img {
+            border-bottom-left-radius: 0.5rem;
+            border-top-left-radius: 0.5rem;
+            height: 15rem;
+          }
+        }
+
+        > div {
+          margin-left: 1rem;
+          text-align: start;
+
+          > a {
+            color: black;
+            display: contents;
+            margin: 0;
+            text-decoration: none;
+
+            &:hover {
+              color: rgb(96, 175, 233);
+              text-decoration: underline;
+            }
+
+            > h3 {
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              display: -webkit-inline-box;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              font-size: 1.5rem;
+              margin-bottom: 0.2rem;
+              margin-right: 0.8rem;
+              padding-right: 1rem;
+            }
+          }
+
+          > div > span {
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-right: 1rem;
+          }
+          > a > span {
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-right: 1rem;
+            width: fit-content;
+          }
+
+          .description {
+            margin-right: 1rem;
+
+            > p {
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 3;
+              display: -webkit-box;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 1360px) {
+  .ActionsPage {
+    padding: 2rem;
+    &_content {
+      &_list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        list-style: none;
+        padding-left: 1rem;
+        padding-top: 2rem;
+        width: 100%;
+
+        > li {
+          display: flex;
+          height: fit-content;
+          flex-direction: column;
+          list-style: none;
+          margin-bottom: 1rem;
+          margin-bottom: 2rem;
+          margin-left: 0.5rem;
+          margin-right: 0.5rem;
+          margin-top: 0rem;
+          width: 100%;
+
+          > .hidden_desc {
+            display: block;
+            margin-top: 2rem;
+            > p {
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 3;
+              display: -webkit-box;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              font-size: 1rem;
+              padding-right: 1rem;
+            }
+          }
+
+          > div {
+            height: 6.5rem;
+            > a > h3 {
+              margin-left: 13rem;
+            }
+            > div > span {
+              margin-top: 0.5rem;
+              margin-left: 13rem;
+            }
+            > a > span {
+              margin-left: 13rem;
+            }
+            .description {
+              display: none;
+            }
+          }
+
+          > a {
+            display: contents;
+
+            > img {
+              border-radius: 0.5rem;
+              height: 8rem;
+              margin: 1rem;
+              object-fit: contain;
+              position: absolute;
+              width: 12rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 800px) {
+  .ActionsPage {
+    > span {
+      flex-direction: column;
+    }
+    padding: 2rem;
+    &_content {
+      border-left: none;
+      margin: 0;
+      &_list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        list-style: none;
+        padding-left: 0rem;
+        padding-top: 2rem;
+        width: 100%;
+
+        > li {
+          background-color: rgba($color: royalblue, $alpha: 0.3);
+          border-radius: 0.5rem;
+          box-shadow: 0 0 10px 1px rgba($color: black, $alpha: 0.15);
+          display: flex;
+          flex-direction: column;
+          height: 22.5rem;
+          list-style: none;
+          margin-bottom: 1rem;
+          margin-bottom: 2rem;
+          margin-left: 0.5rem;
+          margin-right: 0.5rem;
+          margin-top: 0rem;
+          width: 100%;
+
+          > .hidden_desc {
+            display: none;
+          }
+
+          > div {
+            height: fit-content;
+            > a > h3 {
+              margin-left: 0rem;
+            }
+            > div > span {
+              margin-left: 0rem;
+            }
+            > a > span {
+              margin-left: 0rem;
+            }
+            .description {
+              display: block;
+            }
+          }
+          > a {
+            display: contents;
+
+            > img {
+              border-bottom-left-radius: 0rem;
+              border-bottom-right-radius: 0rem;
+              border-top-left-radius: 0.5rem;
+              border-top-right-radius: 0.5rem;
+              height: 10rem;
+              margin: 0rem;
+              object-fit: cover;
+              position: relative;
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 400px) {
+  .ActionsPage {
+    > span {
+      flex-direction: column;
+    }
+
+    &_content {
+      &_list {
+        > li {
+          > a > img {
+            height: 10rem;
+          }
+        }
+      }
+    }
+  }
+}
