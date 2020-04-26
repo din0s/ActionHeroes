@@ -9,7 +9,7 @@
     "name": "ACM AUTH Student Chapter",
     "description": "ACM AUTH Student Chapter is the official student chapter of the ACM in the Aristotle University of Thessaloniki and it is based at the School of Informatics. The team was first established in 2008 with an aim to encourage students to get involved in computer science, inform them about the latest accomplishments of technology, promote research on both undergraduate and postgraduate level, and create a team of people that are interested in exploring the broad field of computer science. The past few years we have organized a variety of events such as workshops, hackathons and talks that take place in the university and around the city of Thessaloniki.",
     "logo": "/img/teams/acm.png",
-    "categories": ["Education & Literacy", "Computers & Technology"]
+    "categories": ["Education & Literacy", "Τechnology"]
   },
   "team3": {
     "name": "WWF",
@@ -45,6 +45,6 @@
     "name": "NASA",
     "description": "The National Aeronautics and Space Administration (NASA) is an independent agency of the United States Federal Government responsible for the civilian space program, as well as aeronautics and aerospace research.",
     "logo": "/img/teams/nasa.png",
-    "categories": ["Computers & Technology", "Science"]
+    "categories": ["Technology", "Science"]
   }
 }

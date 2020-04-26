@@ -9,39 +9,39 @@
     "name": "Community"
   },
   "Category4": {
-    "name": "Computers & Technology"
-  },
-  "Category5": {
     "name": "Education & Literacy"
   },
-  "Category6": {
+  "Category5": {
     "name": "Emergency & Safety"
   },
-  "Category7": {
+  "Category6": {
     "name": "Employment"
   },
-  "Category8": {
+  "Category7": {
     "name": "Health & Medicine"
   },
-  "Category9": {
+  "Category8": {
     "name": "Homeless & Housing"
   },
-  "Category10": {
+  "Category9": {
     "name": "Nature"
   },
-  "Category11": {
+  "Category10": {
     "name": "Poverty"
   },
-  "Category12": {
+  "Category11": {
     "name": "Science"
   },
-  "Category13": {
+  "Category12": {
     "name": "Seniors"
   },
-  "Category14": {
+  "Category13": {
     "name": "Special Needs"
   },
-  "Category15": {
+  "Category14": {
     "name": "Sports & Recreation"
+  },
+  "Category15": {
+    "name": "Technology"
   }
 }
