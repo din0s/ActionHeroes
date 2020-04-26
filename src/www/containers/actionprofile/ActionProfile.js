@@ -116,8 +116,8 @@ export default withTranslation()(
               </div>
               <div className="ActionDetails_organizerDiv">
                 <img src={organizerPhoto} alt="Organizer"></img>
-                <h3>{t("actioninfo.organizer")}</h3>
-                <p> {organizer}</p>
+                <h3> {organizer}</h3>
+                <p>{t("actioninfo.organizer")}</p>
               </div>
             </div>
           </div>
