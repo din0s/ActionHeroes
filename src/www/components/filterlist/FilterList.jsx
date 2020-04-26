@@ -38,7 +38,7 @@ export default ({ categories, selected, onCheckbox, onClear, onRemove }) => {
             const name = category.name;
             return (
               <label key={c}>
-                {name}
+                {t(`categories.${category.name.toLowerCase()}`)}
                 <input
                   type="checkbox"
                   checked={isChecked(name, selected)}

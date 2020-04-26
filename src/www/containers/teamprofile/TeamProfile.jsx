@@ -3,10 +3,8 @@ import "./TeamProfile.scss";
 import React, { Component } from "react";
 
 import ActionCard from "../../components/actioncard/ActionCard";
+import { parseDate } from "../../date";
 import { withTranslation } from "react-i18next";
-
-//import { Link } from "react-router-dom";
-
 
 const team = require("./team.json");
 
@@ -17,13 +15,6 @@ export default withTranslation()(
       totalmembers: team.followers.length,
     };
 
-    parseDate = (date) => {
-      const { t } = this.props;
-      const d = new Date(date);
-      const month = t("date.month." + d.getMonth());
-
-      return `${d.getDate()} ${month} ${d.getFullYear()}`;
-    };
     render() {
       const { t } = this.props;
       return (
@@ -73,18 +64,15 @@ export default withTranslation()(
               </h1>
               <hr />
               <h1>{t("teaminfo.createdon")}:</h1>
-              <h1>{this.parseDate(team.dateCreated)}</h1>
+              <h1>{parseDate(team.dateCreated, this.props)}</h1>
             </div>
 
             <div className="MidPanel_categories">
               <h1>{t("teaminfo.categories")}:</h1>
               <ul>
                 {Object.keys(team.categories).map((cKey) => {
-                  return (
-                    <li key={cKey}>{`${t(
-                      "categories." + team.categories[cKey].name
-                    )}`}</li>
-                  );
+                  const category = team.categories[cKey].name;
+                  return <li key={cKey}>{t(`categories.${category}`)}</li>;
                 })}
               </ul>
             </div>
@@ -99,7 +87,8 @@ export default withTranslation()(
                 </h1>
               </div>
               <h1>
-                {t("teaminfo.createdon")}: {this.parseDate(team.dateCreated)}
+                {t("teaminfo.createdon")}:{" "}
+                {parseDate(team.dateCreated, this.props)}
               </h1>
               <hr />
               <h1>{t("teaminfo.categories")}:</h1>
@@ -125,7 +114,7 @@ export default withTranslation()(
                 </h1>
                 <hr />
                 <h1>{t("teaminfo.createdon")}:</h1>
-                <h1>{this.parseDate(team.dateCreated)}</h1>
+                <h1>{parseDate(team.dateCreated, this.props)}</h1>
               </div>
 
               <div className="LeftSide_categories">

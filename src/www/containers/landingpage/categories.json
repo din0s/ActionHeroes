@@ -1,7 +1,7 @@
 {
   "Category1": {
     "image": "/img/landing/children.svg",
-    "name": "youth"
+    "name": "children"
   },
   "Category2": {
     "image": "/img/landing/animals.svg",
@@ -13,7 +13,7 @@
   },
   "Category4": {
     "image": "/img/landing/education.svg",
-    "name": "education"
+    "name": "education & literacy"
   },
   "Category5": {
     "image": "/img/landing/homeless.svg",

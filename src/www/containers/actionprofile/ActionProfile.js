@@ -3,6 +3,7 @@ import "./ActionProfile.scss";
 import React, { Component } from "react";
 
 import { Parallax } from "react-parallax";
+import { parseDate } from "../../date";
 import { withTranslation } from "react-i18next";
 
 const action = require("./action.json");
@@ -13,16 +14,6 @@ export default withTranslation()(
     state = {
       saved: false,
       toAttend: false,
-    };
-
-    parseDate = (date) => {
-      const { t } = this.props;
-      const d = new Date(date);
-      const day = t("date.day." + d.getDay());
-      const month = t("date.month." + d.getMonth());
-
-      return `${day}, ${d.getDate()} ${month} ${d.getFullYear()}, 
-        ${d.getUTCHours()}:${d.getUTCMinutes()}`;
     };
 
     render() {
@@ -49,7 +40,7 @@ export default withTranslation()(
                 <img src={action.photo} alt="" />
                 <div>
                   <h1>{action.name}</h1>
-                  <p>{this.parseDate(action.date)}</p>
+                  <p>{parseDate(action.date, this.props)}</p>
                   <button
                     onClick={() => this.setState({ saved: !this.state.saved })}
                     children={
@@ -108,8 +99,11 @@ export default withTranslation()(
                     <h3>{t("actioninfo.tags")}</h3>
                     <ul>
                       {Object.keys(action.categories).map((cKey) => {
+                        const category = action.categories[
+                          cKey
+                        ].name.toLowerCase();
                         return (
-                          <li key={cKey}>{action.categories[cKey].name}</li>
+                          <li key={cKey}>{t(`categories.${category}`)}</li>
                         );
                       })}
                     </ul>

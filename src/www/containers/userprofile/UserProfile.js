@@ -49,7 +49,7 @@ export default connect(
             return null;
           }
           return (
-            <li className="Card">
+            <li key={key} className="Card">
               <a href={link}>
                 <img src={card.photo} alt="" />
               </a>
@@ -62,8 +62,8 @@ export default connect(
                   <h4>{t("profile.categories")}:</h4>
                   <ul>
                     {Object.keys(card.categories).map((cKey) => {
-                      const category = card.categories[cKey];
-                      return <li>{category.name}</li>;
+                      const category = card.categories[cKey].name.toLowerCase();
+                      return <li key={cKey}>{t(`categories.${category}`)}</li>;
                     })}
                   </ul>
                 </div>

@@ -117,16 +117,28 @@
     "categories": "Κατηγορίες"
   },
   "categories": {
-    "environment": "Περιβάλλον",
     "animals": "Ζώα",
     "children": "Παιδιά",
+    "community": "Κοινωνία",
+    "education & literacy": "Εκπαίδευση",
+    "emergency & safety": "Επείγοντα και ασφάλεια",
+    "employment": "Εργασία",
+    "environment": "Περιβάλλον",
+    "health & medicine": "Υγεία",
+    "programming": "Προγραμματισμός",
+    "poverty": "Φτώχεια",
     "seniors": "Ηλικιωμένοι",
-    "women": "Γυναίκες",
     "nature": "Φύση",
     "homeless": "Άστεγοι",
     "education": "Εκπαίδευση",
     "hunger": "Τρόφιμα",
-    "youth": "Παιδιά"
+    "youth": "Παιδιά",
+    "science": "Επιστήμες",
+    "special needs": "Ειδικές ανάγκες",
+    "sports & recreation": "Άθληση",
+    "students": "Φοιτητές",
+    "technology": "Τεχνολογία",
+    "women": "Γυναίκες"
   },
   "teaminfo": {
     "members": "Μέλη",

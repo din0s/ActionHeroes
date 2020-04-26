@@ -2,7 +2,10 @@
   "Team1": {
     "name": "ACM AUTH Student Chapter",
     "description": "ACM AUTH Student Chapter is the official student chapter of the ACM in the Aristotle University of Thessaloniki and it is based at the School of Informatics. The team was first established in 2008 with an aim to encourage students to get involved in computer science, inform them about the latest accomplishments of technology, promote research on both undergraduate and postgraduate level, and create a team of people that are interested in exploring the broad field of computer science. The past few years we have organized a variety of events such as workshops, hackathons and talks that take place in the university and around the city of Thessaloniki.",
-    "categories": [{ "name": "Education & Literacy" }, { "name": "Τechnology" }],
+    "categories": [
+      { "name": "Education & Literacy" },
+      { "name": "Technology" }
+    ],
     "photo": "/img/fakedata/acm.png"
   },
   "Team2": {
