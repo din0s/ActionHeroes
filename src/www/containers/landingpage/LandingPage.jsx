@@ -25,7 +25,7 @@ export default withTranslation()(
         }
 
         return (
-          <div className={`Categories_card${cardModifier}`}>
+          <div key={key} className={`Categories_card${cardModifier}`}>
             <div className="Categories_card_title">
               <img alt="Category icon" src={categoriesList[key].image} />
               <h5>{categoriesList[key].name}</h5>

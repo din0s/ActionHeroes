@@ -1,6 +1,7 @@
 import "./ActionCard.scss";
 
 import React, { Component } from "react";
+
 import { withTranslation } from "react-i18next";
 
 const action = require("./action.json");
@@ -40,7 +41,7 @@ export default withTranslation()(
               <ul>
                 {Object.keys(action.categories).map((cKey) => {
                   return (
-                    <li>{`${t(
+                    <li key={cKey}>{`${t(
                       "categories." + action.categories[cKey].name
                     )}`}</li>
                   );

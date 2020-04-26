@@ -2,8 +2,8 @@ import "./ActionProfile.scss";
 
 import React, { Component } from "react";
 
-import { withTranslation } from "react-i18next";
 import { Parallax } from "react-parallax";
+import { withTranslation } from "react-i18next";
 
 const action = require("./action.json");
 const coordinates = action.location.coordinates;
@@ -108,7 +108,9 @@ export default withTranslation()(
                     <h3>{t("actioninfo.tags")}</h3>
                     <ul>
                       {Object.keys(action.categories).map((cKey) => {
-                        return <li>{action.categories[cKey].name}</li>;
+                        return (
+                          <li key={cKey}>{action.categories[cKey].name}</li>
+                        );
                       })}
                     </ul>
                   </div>
