@@ -18,8 +18,8 @@ export default withTranslation()(
     parseDate = (date) => {
       const { t } = this.props;
       const d = new Date(date);
-      const day = t("actioninfo.date.day." + d.getDay());
-      const month = t("actioninfo.date.month." + d.getMonth());
+      const day = t("date.day." + d.getDay());
+      const month = t("date.month." + d.getMonth());
 
       return `${day}, ${d.getDate()} ${month} ${d.getFullYear()}, 
         ${d.getUTCHours()}:${d.getUTCMinutes()}`;
