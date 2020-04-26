@@ -65,7 +65,7 @@
     "unsave": "Unsave"
   },
   "footer": {
-    "icons": "Icons from {{site}}"
+    "icons": "Icons from {{site}} and images from {{site2}}"
   },
   "contactpage": {
     "title1": "Have any questions?",
