@@ -106,6 +106,7 @@ export default connect(
                 <p className="Auth-error" children={this.props.error} />
               </div>
               <Input
+                autoComplete="username"
                 type="text"
                 name="username"
                 placeholder={t("auth.username")}
@@ -116,6 +117,7 @@ export default connect(
                 }
               />
               <Input
+                autoComplete="email"
                 type="email"
                 name="email"
                 placeholder={t("auth.email")}
@@ -126,6 +128,7 @@ export default connect(
                 }
               />
               <Input
+                autoComplete="new-password"
                 type="password"
                 name="password"
                 placeholder={t("auth.password")}
@@ -134,6 +137,7 @@ export default connect(
                 onChange={this.setPassword}
               />
               <Input
+                autoComplete="new-password"
                 type="password"
                 name="confirm_password"
                 placeholder={t("auth.confirm_password")}

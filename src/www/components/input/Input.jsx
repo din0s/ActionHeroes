@@ -5,7 +5,7 @@ import React, { Component } from "react";
 export default class Input extends Component {
   state = {
     highlight: false,
-    acceptHints: true
+    acceptHints: true,
   };
 
   componentDidUpdate() {
@@ -15,7 +15,7 @@ export default class Input extends Component {
   }
 
   // https://stackoverflow.com/a/41406907
-  input = async event => {
+  input = async (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
       const form = event.target.form;
@@ -28,7 +28,7 @@ export default class Input extends Component {
     }
   };
 
-  validate = async event => {
+  validate = async (event) => {
     if (event.target.value === "") {
       this.setState({ highlight: true });
     }
@@ -43,12 +43,13 @@ export default class Input extends Component {
         className={`${this.props.class}${
           this.state.highlight ? " highlight" : ""
         }`}
-        onChange={event => {
+        onChange={(event) => {
           this.props.onChange(event);
           this.setState({ highlight: false });
         }}
         onKeyPress={this.input}
         onBlur={this.validate}
+        autoComplete={this.props.autoComplete}
       />
     );
   }

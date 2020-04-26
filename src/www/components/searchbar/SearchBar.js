@@ -9,7 +9,7 @@ export default ({ action, value, onChange }) => {
     <form action={action} method="get" className="SearchBar">
       <input
         type="text"
-        name="q"
+        name="query"
         placeholder={t("search")}
         defaultValue={value}
         onChange={onChange}

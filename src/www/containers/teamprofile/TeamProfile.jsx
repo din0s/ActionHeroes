@@ -1,9 +1,10 @@
 import "./TeamProfile.scss";
 
 import React, { Component } from "react";
+
+import ActionCard from "../../components/actioncard/ActionCard";
 //import { Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
-import ActionCard from "../../components/actioncard/ActionCard";
 
 const team = require("./team.json");
 
@@ -78,7 +79,7 @@ export default withTranslation()(
               <ul>
                 {Object.keys(team.categories).map((cKey) => {
                   return (
-                    <li>{`${t(
+                    <li key={cKey}>{`${t(
                       "categories." + team.categories[cKey].name
                     )}`}</li>
                   );
@@ -103,7 +104,7 @@ export default withTranslation()(
               <ul>
                 {Object.keys(team.categories).map((cKey) => {
                   return (
-                    <li>{`${t(
+                    <li key={cKey}>{`${t(
                       "categories." + team.categories[cKey].name
                     )}`}</li>
                   );
@@ -130,7 +131,7 @@ export default withTranslation()(
                 <ul>
                   {Object.keys(team.categories).map((cKey) => {
                     return (
-                      <li>{`${t(
+                      <li key={cKey}>{`${t(
                         "categories." + team.categories[cKey].name
                       )}`}</li>
                     );
