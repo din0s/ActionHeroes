@@ -9,7 +9,9 @@ export default function Footer() {
     <footer>
       <hr className="Divider" />
       <p>&copy; ActionHeroes 2020</p>
-      <p>{t("footer.icons", { site: "flaticon.com" })}</p>
+      <p>
+        {t("footer.icons", { site: "flaticon.com", site2: "unsplash.com" })}
+      </p>
     </footer>
   );
 }
