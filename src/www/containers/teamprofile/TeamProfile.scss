@@ -1,0 +1,573 @@
+.TeamProfile {
+  background-color: rgb(234, 237, 245);
+  margin: auto;
+  padding: 2rem 13vw;
+
+  .TopPanel {
+    background-color: rgba($color: white, $alpha: 0.7);
+    border-radius: 0.5rem;
+    border: 1px solid rgba($color: black, $alpha: 0.3);
+    padding: 2rem;
+    &_info {
+      display: flex;
+      flex-direction: row;
+
+      > img {
+        border-radius: 160px;
+        border-width: 1px;
+        border: 1px solid rgba($color: black, $alpha: 0.3);
+        height: 13rem;
+        margin-bottom: 1rem;
+        margin-right: 2rem;
+        margin-top: 1rem;
+      }
+
+      > div {
+        text-align: left;
+
+        > img {
+          border-radius: 160px;
+          border-width: 1px;
+          border: 1px solid rgba($color: black, $alpha: 0.3);
+          display: none;
+          height: 4rem;
+          margin-bottom: 1rem;
+          margin-right: 2rem;
+          margin-top: 1rem;
+        }
+
+        > h1 {
+          font-size: 2.4rem;
+          margin-bottom: 1.5rem;
+          margin-top: 0;
+        }
+
+        > h2 {
+          font-size: 1.2rem; //max 400 characters
+          font-weight: normal;
+        }
+      }
+    }
+
+    > h3 {
+      display: none;
+      font-size: 1.2rem; //max 400 characters
+      font-weight: normal;
+    }
+
+    &_followbutton {
+      background-color: rgba($color: mediumblue, $alpha: 0.7);
+      border-radius: 0.2rem;
+      border: 1px solid rgba($color: black, $alpha: 0.3);
+      color: white;
+      cursor: pointer;
+      font-size: 1.2rem;
+      height: 2.7rem;
+      margin-top: 0.8rem;
+      transition: 0.2s ease-in-out;
+      width: 15rem;
+
+      &:hover {
+        background-color: rgba($color: blue, $alpha: 0.6);
+      }
+    }
+
+    &_unfollowbutton {
+      background-color: white;
+      border-radius: 0.2rem;
+      border: 1px solid rgba($color: black, $alpha: 0.3);
+      color: black;
+      cursor: pointer;
+      font-size: 1.2rem;
+      height: 2.7rem;
+      margin-top: 0.8rem;
+      transition: 0.2s ease-in-out;
+      width: 15rem;
+
+      &:hover {
+        background-color: rgba($color: blue, $alpha: 0.1);
+      }
+    }
+  }
+
+  .MidPanel {
+    display: none;
+
+    &_both {
+      display: none;
+    }
+  }
+
+  .BottomPanel {
+    display: flex;
+
+    .LeftSide {
+      &_info {
+        background-color: rgba($color: white, $alpha: 0.7);
+        border-radius: 0.5rem;
+        border: 1px solid rgba($color: black, $alpha: 0.3);
+        box-shadow: 0 0 30px 10px rgba($color: white, $alpha: 0.3);
+        justify-content: center;
+        margin-top: 1rem;
+        padding: 1rem;
+        width: 15rem;
+
+        > h1 {
+          font-size: 1.2rem;
+          margin: 0.5rem;
+        }
+        > hr {
+          margin: 1rem 3rem;
+          opacity: 0.3;
+        }
+      }
+      &_categories {
+        background-color: rgba($color: white, $alpha: 0.7);
+        border-radius: 0.5rem;
+        border: 1px solid rgba($color: black, $alpha: 0.3);
+        box-shadow: 0 0 30px 10px rgba($color: white, $alpha: 0.3);
+        flex-direction: column;
+        margin-top: 1rem;
+        padding: 1rem;
+        width: 15rem;
+
+        > h1 {
+          font-size: 1.2rem;
+          margin: 0.5rem;
+        }
+        > ul {
+          flex-wrap: wrap;
+          justify-content: center;
+          list-style-type: none;
+          padding: 0;
+
+          > li {
+            background-color: rgba($color: burlywood, $alpha: 0.3);
+            border-radius: 0.2rem;
+            border: 1px solid rgba($color: black, $alpha: 0.3);
+            font-size: 1rem;
+            font-weight: bold;
+            margin: 0.5rem 2.8rem;
+            padding: 0.25rem;
+          }
+        }
+      }
+    }
+
+    .RightSide {
+      align-self: flex-start;
+      background-color: rgba($color: white, $alpha: 0.7);
+      border-radius: 0.5rem;
+      border: 1px solid rgba($color: black, $alpha: 0.3);
+      box-shadow: 0 0 30px 10px rgba($color: white, $alpha: 0.3);
+      margin-left: 1rem;
+      margin-top: 1rem;
+      padding: 0rem 2rem 1rem 2rem;
+      text-align: left;
+      width: calc(100% - 22rem);
+
+      &_events {
+        > h1 {
+          font-size: 1.8rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 1180px) {
+  .TeamProfile {
+    padding: 2rem 12vw;
+    .TopPanel {
+      &_info {
+        > img {
+          height: 9rem;
+        }
+
+        > div {
+          text-align: left;
+
+          > h1 {
+            font-size: 2rem;
+          }
+
+          > h2 {
+            font-size: 1.1rem; //max 400 characters
+          }
+        }
+      }
+
+      &_followbutton {
+        font-size: 1.1rem;
+        height: 2.3rem;
+        margin-top: 0.4rem;
+        width: 12rem;
+      }
+
+      &_unfollowbutton {
+        font-size: 1.1rem;
+        height: 2.3rem;
+        margin-top: 0.4rem;
+        width: 12rem;
+      }
+    }
+    .BottomPanel {
+      .LeftSide {
+        &_info {
+          width: 11rem;
+
+          > h1 {
+            font-size: 1rem;
+            margin: 0.3rem;
+          }
+        }
+        &_categories {
+          width: 11rem;
+          > h1 {
+            font-size: 1rem;
+            margin: 0.3em;
+          }
+          > ul {
+            > li {
+              font-size: 0.8rem;
+              font-weight: bold;
+              margin: 0.5rem 2.8rem;
+            }
+          }
+        }
+      }
+
+      .RightSide {
+        width: calc(100% - 18rem);
+
+        &_events {
+          > h1 {
+            font-size: 1.4rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 1024px) {
+  .TeamProfile {
+    .TopPanel {
+      &_info {
+        > img {
+          height: 8rem;
+        }
+
+        > div {
+          text-align: left;
+
+          > h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0;
+          }
+
+          > h2 {
+            font-size: 1rem; //max 400 characters
+          }
+        }
+      }
+
+      &_followbutton {
+        font-size: 1rem;
+        height: 2rem;
+        margin-top: 0.4rem;
+        width: 11rem;
+      }
+
+      &_unfollowbutton {
+        font-size: 1rem;
+        height: 2rem;
+        margin-top: 0.4rem;
+        width: 11rem;
+      }
+    }
+    .MidPanel {
+      display: flex;
+      justify-content: center;
+
+      &_info {
+        background-color: rgba($color: white, $alpha: 0.7);
+        border-radius: 0.5rem;
+        border: 1px solid rgba($color: black, $alpha: 0.3);
+        box-shadow: 0 0 30px 10px rgba($color: white, $alpha: 0.3);
+        margin-right: 1rem;
+        margin-top: 1rem;
+        padding: 0.5rem;
+        width: calc(50% - 0.5rem);
+        > h1 {
+          font-size: 1rem;
+          margin: 0.5rem;
+        }
+        > hr {
+          margin: 1rem 3rem;
+          opacity: 0.3;
+        }
+      }
+      &_categories {
+        background-color: rgba($color: white, $alpha: 0.7);
+        border-radius: 0.5rem;
+        border: 1px solid rgba($color: black, $alpha: 0.3);
+        box-shadow: 0 0 30px 10px rgba($color: white, $alpha: 0.3);
+        margin-top: 1rem;
+        padding: 0.5rem;
+        width: calc(50% - 0.5rem);
+
+        > h1 {
+          font-size: 1rem;
+          margin: 0.5rem;
+        }
+        > ul {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          list-style-type: none;
+          padding: 0;
+
+          > li {
+            background-color: rgba($color: burlywood, $alpha: 0.3);
+            border-radius: 0.2rem;
+            border: 1px solid rgba($color: black, $alpha: 0.3);
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin: 0.5rem 0.2rem;
+            padding: 0.2rem;
+          }
+        }
+      }
+    }
+    .BottomPanel {
+      .LeftSide {
+        display: none;
+      }
+
+      .RightSide {
+        margin-left: 0;
+        width: calc(100%);
+
+        &_events {
+          > h1 {
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 800px) {
+  .TeamProfile {
+    padding: 2rem 2vw;
+    .TopPanel {
+      &_info {
+        > img {
+          height: 6rem;
+        }
+
+        > div {
+          text-align: left;
+
+          > h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0;
+          }
+
+          > h2 {
+            font-size: 0.9rem; //max 400 characters
+          }
+        }
+      }
+
+      &_followbutton {
+        font-size: 0.9rem;
+        height: 1.8rem;
+        margin-top: 0.4rem;
+        width: 10rem;
+      }
+
+      &_unfollowbutton {
+        font-size: 0.9rem;
+        height: 1.8rem;
+        margin-top: 0.4rem;
+        width: 10rem;
+      }
+    }
+    .MidPanel {
+      &_info {
+        > h1 {
+          font-size: 0.9rem;
+        }
+      }
+      &_categories {
+        > h1 {
+          font-size: 0.9rem;
+        }
+        > ul {
+          > li {
+            font-size: 0.8rem;
+            margin: 0.4rem 0.2rem;
+          }
+        }
+      }
+    }
+    .BottomPanel {
+      .LeftSide {
+        display: none;
+      }
+
+      .RightSide {
+        margin-left: 0;
+        width: calc(100%);
+
+        &_events {
+          > h1 {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 560px) {
+  .TeamProfile {
+    padding: 2rem 1vw;
+    .TopPanel {
+      &_info {
+        > img {
+          display: none;
+        }
+
+        > div {
+          align-items: center;
+          display: flex;
+          text-align: left;
+
+          > img {
+            display: block;
+            height: 4rem;
+            margin: 0rem 1rem;
+          }
+
+          > h1 {
+            font-size: 1.3rem;
+            margin: 0;
+          }
+
+          > h2 {
+            display: none;
+            font-size: 0.9rem; //max 400 characters
+          }
+        }
+      }
+      > h3 {
+        display: flex;
+        font-size: 0.9rem; //max 400 characters
+        text-align: left;
+      }
+
+      &_followbutton {
+        font-size: 0.9rem;
+        height: 1.8rem;
+        margin-top: 0.4rem;
+        width: 10rem;
+      }
+
+      &_unfollowbutton {
+        font-size: 0.9rem;
+        height: 1.8rem;
+        margin-top: 0.4rem;
+        width: 10rem;
+      }
+    }
+    .MidPanel {
+      &_info {
+        display: none;
+        > h1 {
+          font-size: 0.9rem;
+        }
+      }
+      &_categories {
+        display: none;
+        > h1 {
+          font-size: 0.9rem;
+        }
+        > ul {
+          > li {
+            font-size: 0.8rem;
+            margin: 0.4rem 0.2rem;
+          }
+        }
+      }
+      &_both {
+        background-color: rgba($color: white, $alpha: 0.7);
+        border-radius: 0.5rem;
+        border: 1px solid rgba($color: black, $alpha: 0.3);
+        box-shadow: 0 0 30px 10px rgba($color: white, $alpha: 0.3);
+        display: block;
+        margin-top: 1rem;
+        padding: 0.5rem;
+        width: 100%;
+        &_center {
+          display: flex;
+          justify-content: center;
+          margin-top: 0.4rem;
+          > h1 {
+            font-size: 0.9rem;
+            margin: 0;
+          }
+          > p {
+            margin: 0;
+            padding: 0rem 1rem;
+          }
+        }
+        > h1 {
+          font-size: 0.9rem;
+          margin: 0.4rem;
+        }
+        > hr {
+          margin: 1rem 3rem;
+          opacity: 0.3;
+        }
+        > ul {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          list-style-type: none;
+          margin: 0.4rem;
+          padding: 0;
+          > li {
+            background-color: rgba($color: burlywood, $alpha: 0.3);
+            border-radius: 0.2rem;
+            border: 1px solid rgba($color: black, $alpha: 0.3);
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin: 0.4rem 0.2rem;
+            padding: 0.2rem;
+          }
+        }
+      }
+    }
+    .BottomPanel {
+      .LeftSide {
+        display: none;
+      }
+
+      .RightSide {
+        padding: 0rem 1rem 1rem 1rem;
+        // margin-left: 0;
+        width: calc(100% - 2rem);
+
+        &_events {
+          > h1 {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}

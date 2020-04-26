@@ -1,0 +1,23 @@
+{
+  "name": "Local Hack Day: Build",
+  "description": "Το ACM AUTH Student Chapter, σε συνεργασία με το Τμήμα Πληροφορικής ΑΠΘ, διοργανώνει για δεύτερη συνεχόμενη χρονιά το hackathon Local Hack Day: Build της Major League Hacking.",
+  "categories": [
+    { "name": "environment" },
+    { "name": "children" },
+    { "name": "animals" }
+  ],
+  "location": {
+    "name": "Εθνικής Αντίστασης 16, Καλαμαριά",
+    "coordinates": [40.588034, 22.960819]
+  },
+  "date": "2020-03-15T08:30:00Z",
+  "dateCreated": "20200212T223000Z",
+  "photo": "/img/landing/parallax1.jpg",
+  "organizer": {
+    "teamId": {
+      "name": "ACM AUTH Student Chapter",
+      "photo": "/img/actionprofile/acm.jpg"
+    }
+  },
+  "attendees": [{ "name": "Τάδε1" }, { "name": "Τάδε2" }, { "name": "Τάδε3" }]
+}
