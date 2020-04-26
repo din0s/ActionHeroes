@@ -58,12 +58,7 @@ export default withRouter(
             <div className="date">
               <span>{action.date}</span>
             </div>
-            <a
-              href={location_link}
-              target="_blank"
-              rel="noopener noreferrer"
-              SameSite="None"
-            >
+            <a href={location_link} target="_blank" rel="noopener noreferrer">
               <span>{action.location}</span>
             </a>
             <div className="description">
