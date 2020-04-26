@@ -47,12 +47,19 @@
         width: 17.5vw;
 
         img {
+          cursor: pointer;
           margin-top: -64px;
           height: 128px;
         }
 
         h3 {
+          cursor: pointer;
           overflow-wrap: break-word;
+
+          &:hover {
+            color: rgb(96, 175, 233);
+            text-decoration: underline;
+          }
         }
 
         p {

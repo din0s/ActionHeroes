@@ -1,32 +1,32 @@
 {
   "Category1": {
-    "image": "/img/landing/category.jpg",
-    "name": "Category1",
-    "desc": "AAADescription Desc ription Descri ption Des c ription."
+    "image": "/img/landing/animals.png",
+    "name": "Animals",
+    "desc": "Anything is paw-sible."
   },
   "Category2": {
-    "image": "/img/landing/category.jpg",
-    "name": "Category2",
-    "desc": "Description Desc ription Descri ption Des c ription."
+    "image": "/img/landing/children.png",
+    "name": "Children & Youth",
+    "desc": "Donut Worry Be Happy."
   },
   "Category3": {
-    "image": "/img/landing/category.jpg",
-    "name": "Category3",
-    "desc": "Description Desc ription Descri ption Des c ription."
+    "image": "/img/landing/science.png",
+    "name": "Science",
+    "desc": "I make science puns PERIODICALLY"
   },
   "Category4": {
-    "image": "/img/landing/category.jpg",
-    "name": "Category4",
-    "desc": "AAADescription Desc ription Descri ption Des c ription."
+    "image": "/img/landing/computers.png",
+    "name": "Computers & Technology",
+    "desc": "What’s the best way to learn about computers? Bit by bit."
   },
   "Category5": {
-    "image": "/img/landing/category.jpg",
-    "name": "Category5",
-    "desc": "AAADescription Desc ription Descri ption Des c ription."
+    "image": "/img/landing/education.png",
+    "name": "Education & Literacy",
+    "desc": "What I if told you, you read the top line wrong."
   },
   "Category6": {
-    "image": "/img/landing/category.jpg",
-    "name": "Category6",
-    "desc": "AAADescription Desc ription Descri ption Des c ription."
+    "image": "/img/landing/nature.png",
+    "name": "Nature",
+    "desc": "Why do trees have so many friends? They branch out."
   }
 }
