@@ -17,7 +17,7 @@ export default withTranslation()(
     parseDate = (date) => {
       const { t } = this.props;
       const d = new Date(date);
-      const month = t("actioncard.date.month." + d.getMonth());
+      const month = t("date.month." + d.getMonth());
 
       return `${d.getDate()} ${month} ${d.getFullYear()}`;
     };

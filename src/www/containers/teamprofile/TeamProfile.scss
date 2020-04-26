@@ -92,38 +92,9 @@
 
   .MidPanel {
     display: none;
-    &_info {
-      > h1 {
-      }
-      > hr {
-      }
-    }
-    &_categories {
-      > h1 {
-      }
-      > ul {
-        > li {
-        }
-      }
-    }
+
     &_both {
       display: none;
-      &_center {
-        > h1 {
-        }
-        > p {
-        }
-      }
-      > h1 {
-      }
-      > hr {
-      }
-      > h2 {
-      }
-      > ul {
-        > li {
-        }
-      }
     }
   }
 
@@ -587,8 +558,9 @@
       }
 
       .RightSide {
-        margin-left: 0;
-        width: calc(100% - 4rem);
+        padding: 0rem 1rem 1rem 1rem;
+        // margin-left: 0;
+        width: calc(100% - 2rem);
 
         &_events {
           > h1 {
