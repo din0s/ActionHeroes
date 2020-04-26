@@ -53,6 +53,17 @@
     "teams-owned": "Teams you own",
     "teams-member": "Teams you follow"
   },
+  "actioninfo": {
+    "about": "About this action",
+    "attend": "Attend",
+    "attendees": " people are interested in this action!",
+    "cancel": "Cancel",
+    "map": "View on map",
+    "organizer": "Organizer",
+    "save": "Save",
+    "tags": "Τags:",
+    "unsave": "Unsave"
+  },
   "footer": {
     "icons": "Icons from {{site}}"
   },
