@@ -46,15 +46,22 @@
         padding: 1rem;
         width: 17.5vw;
 
+        a {
+          color: black;
+          display: contents;
+          text-decoration: none;
+        }
+
         img {
-          cursor: pointer;
           margin-top: -64px;
           height: 128px;
         }
 
         h3 {
-          cursor: pointer;
+          margin-left: auto;
+          margin-right: auto;
           overflow-wrap: break-word;
+          width: fit-content;
 
           &:hover {
             color: rgb(96, 175, 233);

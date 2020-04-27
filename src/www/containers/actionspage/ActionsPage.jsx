@@ -44,7 +44,7 @@ export default withRouter(
     };
 
     showActions = (key, action) => {
-      const action_link = "";
+      const action_link = "/actions/id";
       const location_link = "https://www.google.com/maps";
       return (
         <li key={key}>
