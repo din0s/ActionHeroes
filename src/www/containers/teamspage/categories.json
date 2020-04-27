@@ -1,18 +1,50 @@
 {
   "Category1": {
-    "image": "/img/teams/team.png",
-    "name": "Nature"
+    "name": "Animals"
   },
   "Category2": {
-    "image": "/img/teams/team.png",
-    "name": "Health"
+    "name": "Children & Youth"
   },
   "Category3": {
-    "image": "/img/teams/team.png",
-    "name": "Students"
+    "name": "Community"
   },
   "Category4": {
-    "image": "/img/teams/team.png",
-    "name": "Something"
+    "name": "Education & Literacy"
+  },
+  "Category5": {
+    "name": "Emergency & Safety"
+  },
+  "Category6": {
+    "name": "Employment"
+  },
+  "Category7": {
+    "name": "Health & Medicine"
+  },
+  "Category8": {
+    "name": "Hunger"
+  },
+  "Category9": {
+    "name": "Homeless"
+  },
+  "Category10": {
+    "name": "Nature"
+  },
+  "Category11": {
+    "name": "Poverty"
+  },
+  "Category12": {
+    "name": "Science"
+  },
+  "Category13": {
+    "name": "Seniors"
+  },
+  "Category14": {
+    "name": "Special Needs"
+  },
+  "Category15": {
+    "name": "Sports & Recreation"
+  },
+  "Category16": {
+    "name": "Technology"
   }
 }

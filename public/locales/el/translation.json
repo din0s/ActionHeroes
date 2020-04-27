@@ -121,7 +121,12 @@
     "animals": "Ζώα",
     "children": "Παιδιά",
     "seniors": "Ηλικιωμένοι",
-    "women": "Γυναίκες"
+    "women": "Γυναίκες",
+    "nature": "Φύση",
+    "homeless": "Άστεγοι",
+    "education": "Εκπαίδευση",
+    "hunger": "Τρόφιμα",
+    "youth": "Παιδιά"
   },
   "teaminfo": {
     "members": "Μέλη",

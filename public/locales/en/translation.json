@@ -121,7 +121,12 @@
     "animals": "Animals",
     "children": "Children",
     "seniors": "Seniors",
-    "women": "Women"
+    "women": "Women",
+    "nature": "Nature",
+    "homeless": "Homeless",
+    "education": "Education & Literacy",
+    "hunger": "Hunger",
+    "youth": "Children & Youth"
   },
   "teaminfo": {
     "members": "Members",

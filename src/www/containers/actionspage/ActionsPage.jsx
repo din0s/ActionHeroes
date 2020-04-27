@@ -44,8 +44,8 @@ export default withRouter(
     };
 
     showActions = (key, action) => {
-      const action_link = "/signup";
-      const location_link = "https://goo.gl/maps/JYnmWrgsEzot3Dn86";
+      const action_link = "/actions/id";
+      const location_link = "https://www.google.com/maps";
       return (
         <li key={key}>
           <a href={action_link}>

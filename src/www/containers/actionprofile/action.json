@@ -13,11 +13,11 @@
   },
   "date": "2020-03-15T08:30:00Z",
   "dateCreated": "2020-02-12T22:30:00Z",
-  "photo": "/img/actionprofile/local-hack-day.jpg",
+  "photo": "/img/fakedata/local-hack-day.jpg",
   "organizer": {
     "teamId": {
       "name": "ACM AUTH Student Chapter",
-      "photo": "/img/actionprofile/acm.jpg"
+      "photo": "/img/fakedata/acm.png"
     }
   },
   "attendees": [{ "name": "Τάδε1" }, { "name": "Τάδε2" }, { "name": "Τάδε3" }]

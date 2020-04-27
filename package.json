@@ -29,6 +29,7 @@
     "react-parallax": "^3.0.3",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
+    "react-router-scroll-top": "^0.2.1",
     "react-scripts": "^3.4.0",
     "react-scroll-up-button": "^1.6.4",
     "react-spring": "^8.0.27",

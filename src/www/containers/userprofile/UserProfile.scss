@@ -37,7 +37,6 @@
 
         > img {
           border-radius: 0.5rem;
-          box-shadow: 1px 1px black;
           max-width: 15rem;
         }
 
@@ -159,11 +158,13 @@
           .Card {
             display: flex;
             flex-direction: row;
+            height: 15rem;
 
-            > img {
+            > a > img {
               // align-self: center;
               border-radius: 0.5rem;
               height: 10rem;
+              object-fit: cover;
               width: 10rem;
             }
 
@@ -175,8 +176,28 @@
               margin-bottom: 1rem;
               overflow-wrap: break-word;
 
-              > h4 {
+              > a {
+                color: black;
+                display: contents;
                 margin: 0;
+                text-decoration: none;
+
+                > h4 {
+                  margin: 0;
+
+                  &:hover {
+                    color: rgb(96, 175, 233);
+                    text-decoration: underline;
+                  }
+                }
+              }
+
+              > p {
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 5;
+                display: -webkit-box;
+                overflow: hidden;
+                text-overflow: ellipsis;
               }
             }
 
@@ -318,7 +339,7 @@
           flex-direction: column;
           margin: 0 !important;
 
-          > img {
+          > a > img {
             display: none;
           }
 

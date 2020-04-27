@@ -44,11 +44,16 @@ export default withRouter(
     };
 
     showTeam = (key, team) => {
+      const team_link = "/teams/id";
       return (
         <li key={key}>
           <span>
-            <img src={team.logo} alt="Team Logo" />
-            <h3>{team.name}</h3>
+            <a href={team_link}>
+              <img src={team.logo} alt="Team Logo" />
+            </a>
+            <a href={team_link}>
+              <h3>{team.name}</h3>
+            </a>
           </span>
           <p>{team.description}</p>
         </li>

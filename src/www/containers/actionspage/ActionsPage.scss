@@ -54,6 +54,7 @@
             border-bottom-left-radius: 0.5rem;
             border-top-left-radius: 0.5rem;
             height: 15rem;
+            width: 20.5rem;
           }
         }
 
@@ -67,11 +68,6 @@
             margin: 0;
             text-decoration: none;
 
-            &:hover {
-              color: rgb(96, 175, 233);
-              text-decoration: underline;
-            }
-
             > h3 {
               -webkit-box-orient: vertical;
               -webkit-line-clamp: 2;
@@ -82,6 +78,11 @@
               margin-bottom: 0.2rem;
               margin-right: 0.8rem;
               padding-right: 1rem;
+
+              &:hover {
+                color: rgb(96, 175, 233);
+                text-decoration: underline;
+              }
             }
           }
 
@@ -101,6 +102,11 @@
             text-overflow: ellipsis;
             padding-right: 1rem;
             width: fit-content;
+
+            &:hover {
+              color: rgb(96, 175, 233);
+              text-decoration: underline;
+            }
           }
 
           .description {
@@ -219,7 +225,7 @@
           box-shadow: 0 0 10px 1px rgba($color: black, $alpha: 0.15);
           display: flex;
           flex-direction: column;
-          height: 22.5rem;
+          height: 23.5rem;
           list-style: none;
           margin-bottom: 1rem;
           margin-bottom: 2rem;

@@ -23,14 +23,14 @@ export default withTranslation()(
             cardModifier = " show-6";
           }
         }
-
+        const { t } = this.props;
         return (
           <div key={key} className={`Categories_card${cardModifier}`}>
             <div className="Categories_card_title">
-              <img alt="Category icon" src={categoriesList[key].image} />
-              <h5>{categoriesList[key].name}</h5>
+              <h5>{`${t("categories." + categoriesList[key].name)}`}</h5>
             </div>
-            <p>{categoriesList[key].desc}</p>
+            <img alt="Category icon" src={categoriesList[key].image} />
+            {/* <p>{categoriesList[key].desc}</p> */}
           </div>
         );
       });

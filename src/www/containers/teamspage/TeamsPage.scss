@@ -1,5 +1,5 @@
 .TeamsPage {
-  background-color: rgba($color: wheat, $alpha: 0.25);
+  background-color: #eaedf5;
   margin: 0;
   padding: 2rem 3rem;
 
@@ -46,13 +46,27 @@
         padding: 1rem;
         width: 17.5vw;
 
+        a {
+          color: black;
+          display: contents;
+          text-decoration: none;
+        }
+
         img {
           margin-top: -64px;
           height: 128px;
         }
 
         h3 {
+          margin-left: auto;
+          margin-right: auto;
           overflow-wrap: break-word;
+          width: fit-content;
+
+          &:hover {
+            color: rgb(96, 175, 233);
+            text-decoration: underline;
+          }
         }
 
         p {
@@ -60,7 +74,7 @@
           overflow: hidden;
           text-overflow: ellipsis;
           -webkit-box-orient: vertical;
-          -webkit-line-clamp: 14;
+          -webkit-line-clamp: 10;
         }
       }
     }

@@ -1,17 +1,18 @@
 import "./UserProfile.scss";
 
+import { Link, Redirect } from "react-router-dom";
 import React, { Component } from "react";
 
-import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 
 const minCardsShown = 3;
 
 // user.actionsAttended
-const actionsAttended = require("./actions.json");
-const actionsOrganized = require("./actions.json");
-const teams = require("./teams.json");
+const actionsAttended = require("./actionsAttended.json");
+const actionsOrganized = require("./actionsOrganized.json");
+const teamsOwned = require("./teamsOwned.json");
+const teamsFollow = require("./teamsFollow.json");
 
 const mapState = (state) => ({
   user: state.auth.user,
@@ -40,7 +41,7 @@ export default connect(
         teamsMemberShown: 3,
       };
 
-      showCards = (cards, count) => {
+      showCards = (cards, count, link) => {
         const { t } = this.props;
         return Object.keys(cards).map((key, index) => {
           const card = cards[key];
@@ -49,9 +50,13 @@ export default connect(
           }
           return (
             <li className="Card">
-              <img src={card.photo} alt="" />
+              <a href={link}>
+                <img src={card.photo} alt="" />
+              </a>
               <div className="Card_body">
-                <h4>{card.name}</h4>
+                <a href={link}>
+                  <h4>{card.name}</h4>
+                </a>
                 <p>{card.description}</p>
                 <div className="Card_categories">
                   <h4>{t("profile.categories")}:</h4>
@@ -145,7 +150,9 @@ export default connect(
 
         const { t, user } = this.props;
         const { username, profilePhoto } = user;
-        const photo = profilePhoto || "/img/profile/profilePhoto.jpg";
+        const photo = profilePhoto || "/img/fakedata/profilePhoto.png";
+        const action_link = "/actions/id";
+        const team_link = "/teams/id";
 
         return (
           <div className="ProfilePage">
@@ -205,7 +212,8 @@ export default connect(
                     <ul>
                       {this.showCards(
                         actionsAttended,
-                        this.state.actionsAttended.shown
+                        this.state.actionsAttended.shown,
+                        action_link
                       )}
                     </ul>
                     {this.expandActions("actionsAttended")}
@@ -214,8 +222,9 @@ export default connect(
                     <h3>{t("profile.organized")}</h3>
                     <ul>
                       {this.showCards(
-                        actionsAttended,
-                        this.state.actionsOrganized.shown
+                        actionsOrganized,
+                        this.state.actionsOrganized.shown,
+                        action_link
                       )}
                     </ul>
                     {this.expandActions("actionsOrganized")}
@@ -226,12 +235,22 @@ export default connect(
                 >
                   <section>
                     <h3>{t("profile.teams-owned")}</h3>
-                    <ul>{this.showCards(teams, this.state.teamsOwnedShown)}</ul>
+                    <ul>
+                      {this.showCards(
+                        teamsOwned,
+                        this.state.teamsOwnedShown,
+                        team_link
+                      )}
+                    </ul>
                   </section>
                   <section>
                     <h3>{t("profile.teams-member")}</h3>
                     <ul>
-                      {this.showCards(teams, this.state.teamsMemberShown)}
+                      {this.showCards(
+                        teamsFollow,
+                        this.state.teamsMemberShown,
+                        team_link
+                      )}
                     </ul>
                     <Link to="/teams">
                       <p>{t("profile.join")}</p>
