@@ -2,22 +2,13 @@ import "./ActionCard.scss";
 
 import React, { Component } from "react";
 
+import { parseDate } from "../../date";
 import { withTranslation } from "react-i18next";
 
 const action = require("./action.json");
 
 export default withTranslation()(
   class ActionCard extends Component {
-    parseDate = (date) => {
-      const { t } = this.props;
-      const d = new Date(date);
-      const day = t("date.day." + d.getDay());
-      const month = t("date.month." + d.getMonth());
-
-      return `${day}, ${d.getDate()} ${month} ${d.getFullYear()}, 
-      ${d.getUTCHours()}:${d.getUTCMinutes()}`;
-    };
-
     render() {
       const { t } = this.props;
       return (
@@ -31,7 +22,7 @@ export default withTranslation()(
                 <span role="img" aria-label="pinpoint">
                   📍
                 </span>
-                {" " + action.location.name} • {this.parseDate(action.date)}
+                {" " + action.location.name} • {parseDate(action.date, t)}
               </h2>
               {/* <h3>{action.organizer.teamId.name}</h3> */}
               <p>{action.description}</p>

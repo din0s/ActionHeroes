@@ -40,7 +40,7 @@ export default withTranslation()(
                 <img src={action.photo} alt="" />
                 <div>
                   <h1>{action.name}</h1>
-                  <p>{parseDate(action.date, this.props)}</p>
+                  <p>{parseDate(action.date, t)}</p>
                   <button
                     onClick={() => this.setState({ saved: !this.state.saved })}
                     children={

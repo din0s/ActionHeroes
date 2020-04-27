@@ -1,5 +1,4 @@
-export function parseDate(date, props) {
-  const { t } = props;
+export function parseDate(date, t) {
   const d = new Date(date);
   const day = t("date.day." + d.getDay());
   const month = t("date.month." + d.getMonth());

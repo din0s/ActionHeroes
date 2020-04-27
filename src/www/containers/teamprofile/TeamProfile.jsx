@@ -64,7 +64,7 @@ export default withTranslation()(
               </h1>
               <hr />
               <h1>{t("teaminfo.createdon")}:</h1>
-              <h1>{parseDate(team.dateCreated, this.props)}</h1>
+              <h1>{parseDate(team.dateCreated, t)}</h1>
             </div>
 
             <div className="MidPanel_categories">
@@ -87,8 +87,7 @@ export default withTranslation()(
                 </h1>
               </div>
               <h1>
-                {t("teaminfo.createdon")}:{" "}
-                {parseDate(team.dateCreated, this.props)}
+                {t("teaminfo.createdon")}: {parseDate(team.dateCreated, t)}
               </h1>
               <hr />
               <h1>{t("teaminfo.categories")}:</h1>
@@ -114,7 +113,7 @@ export default withTranslation()(
                 </h1>
                 <hr />
                 <h1>{t("teaminfo.createdon")}:</h1>
-                <h1>{parseDate(team.dateCreated, this.props)}</h1>
+                <h1>{parseDate(team.dateCreated, t)}</h1>
               </div>
 
               <div className="LeftSide_categories">
