@@ -1,0 +1,36 @@
+{
+  "Action1": {
+    "name": "Community Yoga Sunset Valley",
+    "description": "Join us at SFC Farmers' Market Sunset Valley for a good cause. Work the booth (hand out materials), assist with mindfulness crafts. Or guest teach a class!",
+    "categories": [{ "name": "Nature" }, { "name": "Sports & Recreation" }],
+    "photo": "/img/fakedata/vega.jpg"
+  },
+  "Action2": {
+    "name": "Volunteer for AVANCE Graduation",
+    "description": "AVANCE-Austin serve at-risk families through it's dual-generational Parent-Child Education Program. We will be celebrating the graudation of the famlies, with chidren ages 0-3 years old, from our intensive nine month program which is focused on developing parent-child relationships through parenting classes and childhood development education. Families will be receiving a special diploma during AVANCE's graduation ceremony that is conducted in Spanish.",
+    "categories": [
+      { "name": "Children & Youth" },
+      { "name": "Education & Literacy" },
+      { "name": "Poverty" }
+    ],
+    "photo": "/img/fakedata/Koloda.jpg"
+  },
+  "Action3": {
+    "name": "Share your knowledge with a small business owner",
+    "description": "Your professional skills can help small businesses grow and create jobs. Volunteer as a mentor on MicroMentor.org and make a meaningful connection with a business owner. Mentors join, search for entrepreneurs to assist online, and once connected, serve as a coach and trusted guide. This volunteer opportunity is extremely flexible - you set the schedule and the expectations with your mentee. Meanwhile, our support staff is by your side every step of the way to help you succeed as a mentor. Some entrepreneurs need a sounding board or general industry advice, while others are looking for targeted technical advising. Put your business skills to good use and help a small business owner today.",
+    "categories": [
+      { "name": "Education & Literacy" },
+      { "name": "Employment" }
+    ],
+    "photo": "/img/fakedata/Wisz.jpg"
+  },
+  "Action4": {
+    "name": "Immediate Need: Can You Sew Face Masks?",
+    "description": "Use your skills to sew face masks for LSS staff and volunteers providing care and services throughout the state. Invite friends and family as well! This critical need will help protect against sneezes and coughs and increase our ability to safeguard people we support, employees, volunteers and community. View all of the information about the project including drop-off and mail-in locations at www.lssmn.org/sewmasks. Find other opportunities at lssmn.org/helpneighbors. Thank you for your kindness and generosity!",
+    "categories": [
+      { "name": "Emergency & Safety" },
+      { "name": "Health & Medicine" }
+    ],
+    "photo": "/img/fakedata/Davidova.jpg"
+  }
+}

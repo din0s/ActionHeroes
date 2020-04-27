@@ -2,49 +2,49 @@
   "team1": {
     "name": "Harry Potter Club",
     "description": "Take your place in the magical universe of Harry Potter and Fantastic Beasts - whether you’ve been with us since J.K. Rowling first introduced us to the Boy Who Lived in 1997, or you’ve only recently been bewitched by a Niffler, everyone’s welcome and it’s free to join. This is a fan club like no other.",
-    "logo": "/img/teams/harry_potter.png",
+    "logo": "/img/fakedata/harry_potter.png",
     "categories": ["Education & Literacy"]
   },
   "team2": {
     "name": "ACM AUTH Student Chapter",
     "description": "ACM AUTH Student Chapter is the official student chapter of the ACM in the Aristotle University of Thessaloniki and it is based at the School of Informatics. The team was first established in 2008 with an aim to encourage students to get involved in computer science, inform them about the latest accomplishments of technology, promote research on both undergraduate and postgraduate level, and create a team of people that are interested in exploring the broad field of computer science. The past few years we have organized a variety of events such as workshops, hackathons and talks that take place in the university and around the city of Thessaloniki.",
-    "logo": "/img/teams/acm.png",
+    "logo": "/img/fakedata/acm.png",
     "categories": ["Education & Literacy", "Τechnology"]
   },
   "team3": {
     "name": "WWF",
     "description": "Our mission is to conserve nature and reduce the most pressing threats to the diversity of life on Earth.",
-    "logo": "/img/teams/wwf.png",
+    "logo": "/img/fakedata/wwf.png",
     "categories": ["Animals", "Nature"]
   },
   "team4": {
     "name": "iGEM",
     "description": "The iGEM Foundation is an independent, non-profit organization dedicated to the advancement of synthetic biology, education and competition, and the development of an open community and collaboration. This is done by fostering an open, cooperative community and friendly competition.",
-    "logo": "/img/teams/igem.png",
+    "logo": "/img/fakedata/igem.png",
     "categories": ["Education & Literacy", "Health & Medicine", "Science"]
   },
   "team5": {
     "name": "UNICEF",
     "description": "UNICEF works in over 190 countries and territories to save children’s lives, to defend their rights, and to help them fulfil their potential, from early childhood through adolescence. And we never give up.",
-    "logo": "/img/teams/unicef.png",
+    "logo": "/img/fakedata/unicef.png",
     "categories": ["Children & Youth", "Community"]
   },
   "team6": {
     "name": "Το Χαμόγελο του Παιδιού",
     "description": "«Το Χαμόγελο του Παιδιού» ιδρύθηκε το 1995 από τον 10χρονο Ανδρέα Γιαννόπουλο, ο οποίος λίγο πριν φύγει από τη ζωή εξέφρασε στο ημερολόγιό του την επιθυμία να δημιουργηθεί ένας σύλλογος για να έχουν όλα τα παιδιά όσα ο ίδιος είχε απλόχερα: αγάπη, στοργή, ενδιαφέρον, σεβασμό. Το όνειρο του 10χρονου Ανδρέα έγινε πραγματικότητα και σήμερα ο Οργανισμός «Το Χαμόγελο του Παιδιού», έχοντας αναγνωριστεί διεθνώς, με όραμα: το Χαμόγελο κάθε παιδιού, υλοποιεί πανελλαδικά, 365 ημέρες το χρόνο, 24 ώρες την ημέρα, αποτελεσματικές και άμεσες δράσεις για την πρόληψη και αντιμετώπιση συγκεκριμένων φαινομένων που απειλούν τα παιδιά. Μέχρι σήμερα «Το Χαμόγελο του Παιδιού» έχει στηρίξει περισσότερα από 1.200.000 παιδιά και τις οικογένειές τους. Παιδιά θύματα κάθε μορφής Βίας, Παιδιά θύματα Εξαφάνισης, Παιδιά με προβλήματα Υγείας, Παιδιά που βρίσκονται ή απειλούνται να βρεθούν σε κατάσταση φτώχειας, έχουν βρει λύση. Ο Οργανισμός στελεχώνεται από εξειδικευμένο επιστημονικό προσωπικό με την πολύτιμη υποστήριξη εθελοντών, ενώ στηρίζεται στους πολίτες και τις εταιρείες, οι οποίοι εμπιστευόμενοι το έργο του, το στηρίζουν έμπρακτα μέσω δωρεών και χορηγιών. Τα οικονομικά στοιχεία, τα οποία και δημοσιοποιούνται, ελέγχονται από το Διεθνές Σώμα Ορκωτών Ελεγκτών Ernst and Young.",
-    "logo": "/img/teams/kids_smile.png",
+    "logo": "/img/fakedata/kids_smile.png",
     "categories": ["Children & Youth"]
   },
   "team7": {
     "name": "Ίδρυμα Σταύρος Νιάρχος",
     "description": "Το Κέντρο Πολιτισμού Ίδρυμα Σταύρος Νιάρχος είναι κέντρο πολιτισμού και εκδηλώσεων συνολικής έκτασης 210.000 μ², το οποίο περιλαμβάνει τις κτιριακές εγκαταστάσεις της Εθνικής Βιβλιοθήκης της Ελλάδος και της Εθνικής Λυρικής Σκηνής καθώς και πάρκο αστικού τύπου και άλλες μικρότερες εγκαταστάσεις. Το Ίδρυμα Σταύρος Νιάρχος έκανε δωρεά 630.000.000 ευρώ και η συνολική του αξία εκτιμάται γύρω στα 3.000.000.000 ευρώ. Το οικοδόμημα και το πάρκο βρίσκονται στον Φαληρικό όρμο, υπαγόμενο διοικητικά στο Δήμο Καλλιθέας. Το κέντρο έχει λάβει πληθώρα διακρίσεων και επαίνων τόσο για το φιλανθρωπικό του έργο και τις εκδηλώσεις που λαμβάνουν χώρα σε αυτό όσο και για την αρχιτεκτονική του που θεωρείται πρωτοπόρα σε όλο τον κόσμο.",
-    "logo": "/img/teams/snf.png",
+    "logo": "/img/fakedata/snf.png",
     "categories": ["Community", "Employment"]
   },
   "team8": {
     "name": "NASA",
     "description": "The National Aeronautics and Space Administration (NASA) is an independent agency of the United States Federal Government responsible for the civilian space program, as well as aeronautics and aerospace research.",
-    "logo": "/img/teams/nasa.png",
+    "logo": "/img/fakedata/nasa.png",
     "categories": ["Technology", "Science"]
   }
 }

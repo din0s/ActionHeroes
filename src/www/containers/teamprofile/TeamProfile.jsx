@@ -3,8 +3,10 @@ import "./TeamProfile.scss";
 import React, { Component } from "react";
 
 import ActionCard from "../../components/actioncard/ActionCard";
-//import { Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
+
+//import { Link } from "react-router-dom";
+
 
 const team = require("./team.json");
 
@@ -28,9 +30,9 @@ export default withTranslation()(
         <div className="TeamProfile">
           <section className="TopPanel">
             <span className="TopPanel_info">
-              <img alt="Team Logo" src="/img/teaminfo/acm.jpg" />
+              <img alt="Team Logo" src="/img/fakedata/acm.png" />
               <div>
-                <img alt="Team Logo" src="/img/teaminfo/acm.jpg" />
+                <img alt="Team Logo" src="/img/fakedata/acm.png" />
                 <h1>{team.name}</h1>
                 <h2>{team.description}</h2>
               </div>
