@@ -1,32 +1,26 @@
 {
   "Category1": {
-    "image": "/img/landing/animals.png",
-    "name": "Animals",
-    "desc": "Anything is paw-sible."
+    "image": "/img/landing/children.svg",
+    "name": "youth"
   },
   "Category2": {
-    "image": "/img/landing/children.png",
-    "name": "Children & Youth",
-    "desc": "Donut Worry Be Happy."
+    "image": "/img/landing/animals.svg",
+    "name": "animals"
   },
   "Category3": {
-    "image": "/img/landing/science.png",
-    "name": "Science",
-    "desc": "I make science puns PERIODICALLY"
+    "image": "/img/landing/bread.svg",
+    "name": "hunger"
   },
   "Category4": {
-    "image": "/img/landing/computers.png",
-    "name": "Computers & Technology",
-    "desc": "What’s the best way to learn about computers? Bit by bit."
+    "image": "/img/landing/education.svg",
+    "name": "education"
   },
   "Category5": {
-    "image": "/img/landing/education.png",
-    "name": "Education & Literacy",
-    "desc": "What I if told you, you read the top line wrong."
+    "image": "/img/landing/homeless.svg",
+    "name": "homeless"
   },
   "Category6": {
-    "image": "/img/landing/nature.png",
-    "name": "Nature",
-    "desc": "Why do trees have so many friends? They branch out."
+    "image": "/img/landing/nature.svg",
+    "name": "nature"
   }
 }
