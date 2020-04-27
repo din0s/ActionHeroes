@@ -17,7 +17,7 @@
   "organizer": {
     "teamId": {
       "name": "ACM AUTH Student Chapter",
-      "photo": "/img/actionprofile/acm.jpg"
+      "photo": "/img/actionprofile/acm.png"
     }
   },
   "attendees": [{ "name": "Τάδε1" }, { "name": "Τάδε2" }, { "name": "Τάδε3" }]
