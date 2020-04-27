@@ -184,6 +184,7 @@
 
                 > h4 {
                   margin: 0;
+                  width: fit-content;
 
                   &:hover {
                     color: rgb(96, 175, 233);
@@ -337,7 +338,7 @@
         .Card {
           border-bottom: 1px solid rgba($color: black, $alpha: 0.3);
           flex-direction: column;
-          margin: 0 !important;
+          margin: 1rem 0 !important;
 
           > a > img {
             display: none;
