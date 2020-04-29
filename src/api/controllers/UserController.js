@@ -61,6 +61,14 @@ module.exports = {
     const email = req.body.email;
     const password = req.body.password;
 
+    if (!req.body.email) {
+      return res.status(400).json({ error: "Field `email` is required" });
+    }
+
+    if (!req.body.password) {
+      return res.status(400).json({ error: "Field `password` is required" });
+    }
+
     User.findOne({ email })
       .then((user) => {
         if (!user) {
@@ -76,9 +84,9 @@ module.exports = {
           }
 
           if (success) {
-            res.status(200).json(authResponse(user));
+            return res.status(200).json(authResponse(user));
           } else {
-            res.status(401).json({
+            return res.status(401).json({
               error: "Invalid credentials",
             });
           }
@@ -86,7 +94,7 @@ module.exports = {
       })
       .catch((err) => {
         console.error(`Error during login find():\n${err}`);
-        res.status(500).send();
+        return res.status(500).send();
       });
   },
 
@@ -94,6 +102,10 @@ module.exports = {
     const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
+
+    if (!req.body.password) {
+      return res.status(400).json({ error: "Field `password` is required" });
+    }
 
     bcrypt.hash(password, 10, (err, hash) => {
       if (err) {
@@ -115,22 +127,32 @@ module.exports = {
           if (err.name === "ValidationError") {
             if (err.errors.email) {
               if (err.errors.email.kind === "regexp") {
-                res.status(400).json({ error: "Invalid email address" });
+                return res.status(400).json({ error: "Invalid email address" });
               } else if (err.errors.email.kind === "unique") {
-                res.status(400).json({ error: "Email already exists" });
+                return res.status(400).json({ error: "Email already exists" });
+              } else if (err.errors.email.kind === "required") {
+                return res
+                  .status(400)
+                  .json({ error: "Field `email` is required" });
               }
             }
 
             if (err.errors.username) {
               if (err.errors.username.kind === "unique") {
-                res.status(400).json({ error: "Username already exists" });
+                return res
+                  .status(400)
+                  .json({ error: "Username already exists" });
+              } else if (err.errors.username.kind === "required") {
+                return res
+                  .status(400)
+                  .json({ error: "Field `username` is required" });
               }
             }
             console.error(err);
-            res.status(500).send();
+            return res.status(500).send();
           } else {
             console.error(`Error during user save():\n${err}`);
-            res.status(500).json(err);
+            return res.status(500).json();
           }
         });
     });
