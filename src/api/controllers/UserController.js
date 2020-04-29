@@ -42,14 +42,14 @@ module.exports = {
         .exec()
         .then((user) => {
           user = sanitizeUser(user);
-          res.status(200).json({ user });
+          return res.status(200).json({ user });
         })
         .catch((err) => {
           console.error(`Error during user find():\n${err}`);
-          res.status(500).send();
+          return res.status(500).send();
         });
     } else {
-      res.status(401).send();
+      return res.status(401).send();
     }
   },
 
