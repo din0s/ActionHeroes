@@ -65,11 +65,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Routes
-app.use("/actions", actionRoutes);
-app.use("/auth", authRoutes);
-app.use("/teams", teamRoutes);
-app.use("/users", userRoutes);
-app.use("/contact", contactRoutes);
+app.use("/api/actions", actionRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/teams", teamRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/contact", contactRoutes);
 
 if (process.env.NODE_ENV == "production") {
   // Serve static content in build directory

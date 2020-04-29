@@ -1,7 +1,7 @@
 import axios from "axios";
 import { push } from "connected-react-router";
 
-const setToken = token => {
+const setToken = (token) => {
   if (token) {
     localStorage.setItem("token", token);
   } else {
@@ -16,13 +16,13 @@ const handleResponse = (dispatch, data) => {
     console.log(data.error);
     dispatch({
       type: "ERROR",
-      error: data.error
+      error: data.error,
     });
   } else {
     setToken(data.jwt);
     dispatch({
       type: "AUTH",
-      user: data.user
+      user: data.user,
     });
     dispatch(push("/"));
   }
@@ -31,14 +31,14 @@ const handleResponse = (dispatch, data) => {
 setToken(localStorage.getItem("token"));
 
 export const handshake = () => {
-  return dispatch => {
+  return (dispatch) => {
     if (localStorage.getItem("token")) {
       return axios
-        .get("/users/me/profile")
-        .then(res => {
+        .get("/api/users/me/profile")
+        .then((res) => {
           dispatch({
             type: "AUTH",
-            user: res.data.user
+            user: res.data.user,
           });
         })
         .catch(() => localStorage.removeItem("token"));
@@ -47,32 +47,32 @@ export const handshake = () => {
 };
 
 export const signup = (username, email, password) => {
-  return dispatch => {
+  return (dispatch) => {
     return axios
-      .post("/auth/signup", {
+      .post("/api/auth/signup", {
         username,
         email,
-        password
+        password,
       })
-      .then(res => handleResponse(dispatch, res.data))
-      .catch(err => handleResponse(dispatch, err.response.data));
+      .then((res) => handleResponse(dispatch, res.data))
+      .catch((err) => handleResponse(dispatch, err.response.data));
   };
 };
 
 export const login = (email, password) => {
-  return dispatch => {
+  return (dispatch) => {
     return axios
-      .post("/auth/login", {
+      .post("/api/auth/login", {
         email,
-        password
+        password,
       })
-      .then(res => handleResponse(dispatch, res.data))
-      .catch(err => handleResponse(dispatch, err.response.data));
+      .then((res) => handleResponse(dispatch, res.data))
+      .catch((err) => handleResponse(dispatch, err.response.data));
   };
 };
 
 export const logout = () => {
-  return dispatch => {
+  return (dispatch) => {
     setToken(undefined);
     dispatch({ type: "DEAUTH" });
     dispatch(push("/"));

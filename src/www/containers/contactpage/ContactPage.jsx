@@ -44,7 +44,7 @@ export default withAlert()(
 
       contact = (firstName, lastName, email, message, target) => {
         axios
-          .post("/contact/submit", {
+          .post("/api/contact/submit", {
             firstName,
             lastName,
             email,
