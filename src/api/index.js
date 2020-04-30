@@ -50,15 +50,26 @@ var accessLogStream = rfs.createStream("access.log", {
   path: path.join(process.cwd(), "log"),
 });
 
+const unwantedLogs = ["/static", "/img", "/locales"];
+
 // Logging to file
 app.use(
   morgan("[:date[web]] :ip :method :url :status :body", {
     stream: accessLogStream,
+    skip: (req, res) => {
+      return unwantedLogs.some((word) => req.url.startsWith(word));
+    },
   })
 );
 
 // Logging to console
-app.use(morgan("[:date[web]] :ip :method :url :status  :body"));
+app.use(
+  morgan("[:date[web]] :ip :method :url :status  :body", {
+    skip: (req, res) => {
+      return unwantedLogs.some((word) => req.url.startsWith(word));
+    },
+  })
+);
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
