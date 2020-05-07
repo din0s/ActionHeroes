@@ -50,26 +50,37 @@ var accessLogStream = rfs.createStream("access.log", {
   path: path.join(process.cwd(), "log"),
 });
 
+const unwantedLogs = ["/static", "/img", "/locales"];
+
 // Logging to file
 app.use(
   morgan("[:date[web]] :ip :method :url :status :body", {
     stream: accessLogStream,
+    skip: (req, res) => {
+      return unwantedLogs.some((word) => req.url.startsWith(word));
+    },
   })
 );
 
 // Logging to console
-app.use(morgan("[:date[web]] :ip :method :url :status  :body"));
+app.use(
+  morgan("[:date[web]] :ip :method :url :status  :body", {
+    skip: (req, res) => {
+      return unwantedLogs.some((word) => req.url.startsWith(word));
+    },
+  })
+);
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Routes
-app.use("/actions", actionRoutes);
-app.use("/auth", authRoutes);
-app.use("/teams", teamRoutes);
-app.use("/users", userRoutes);
-app.use("/contact", contactRoutes);
+app.use("/api/actions", actionRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/teams", teamRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/contact", contactRoutes);
 
 if (process.env.NODE_ENV == "production") {
   // Serve static content in build directory
