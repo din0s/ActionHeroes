@@ -1,16 +1,69 @@
+@import "../../vars.scss";
+
 .TeamsPage {
   background-color: #eaedf5;
   margin: 0;
   padding: 2rem 3rem;
 
-  .SearchBar {
-    margin-bottom: 2rem;
+  > div {
+    display: flex;
+    flex-direction: row;
 
-    > input {
-      background-color: white;
-      box-shadow: 0 0 5px 1px rgba($color: black, $alpha: 0.25);
-      height: 1.5rem;
-      width: 80%;
+    > button {
+      background-color: rgba($color: rgb(221, 191, 191), $alpha: 0.1);
+      border: 1px solid rgba($color: black, $alpha: 0.25);
+      border-radius: 0.6rem;
+      cursor: pointer;
+      outline: none;
+      padding: 0.5rem;
+      width: 12%;
+    }
+
+    .popup-content {
+      border-radius: 1rem;
+      max-width: 40rem;
+
+      > form {
+        display: flex;
+        flex-direction: column;
+        margin: 1.5rem 3rem;
+
+        > input {
+          height: 1.5rem;
+        }
+
+        > textarea {
+          height: 5rem;
+        }
+
+        > input,
+        textarea {
+          border: 1px solid $softBlack;
+          border-radius: 0.6rem;
+          box-shadow: 1px 1px $softBlack;
+          margin-bottom: 1rem;
+        }
+
+        .SubmitButton {
+          align-self: center;
+          cursor: pointer;
+          height: 2rem;
+          margin: 0rem;
+          outline: none;
+          width: 10rem;
+        }
+      }
+    }
+
+    .SearchBar {
+      width: 100%;
+
+      > input {
+        background-color: white;
+        box-shadow: 0 0 5px 1px rgba($color: black, $alpha: 0.25);
+        height: 1.5rem;
+        width: 90%;
+      }
     }
   }
 

@@ -33,6 +33,7 @@
     "react-scripts": "^3.4.0",
     "react-scroll-up-button": "^1.6.4",
     "react-spring": "^8.0.27",
+    "reactjs-popup": "^1.5.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "rotating-file-stream": "^2.0.2"

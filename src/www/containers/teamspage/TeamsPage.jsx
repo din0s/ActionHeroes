@@ -1,6 +1,11 @@
 import "./TeamsPage.scss";
 
 import React, { Component } from "react";
+import Popup from "reactjs-popup";
+import Input from "../../components/input/Input";
+import { withAlert } from "react-alert";
+import axios from "axios";
+import { withTranslation } from "react-i18next";
 
 import FilterList from "../../components/filterlist/FilterList";
 import Pagination from "../../components/pagination/Pagination";
@@ -12,85 +17,170 @@ const categories = require("./categories.json");
 const teams = require("./teams.json");
 
 export default withRouter(
-  class TeamsPage extends Component {
-    state = {
-      selectedCategories: [],
-      query: "",
-    };
+  withAlert()(
+    withTranslation()(
+      class TeamsPage extends Component {
+        state = {
+          selectedCategories: [],
+          query: "",
+          teamName: "",
+          description: "",
+          teamNameHighlight: false,
+        };
 
-    componentDidMount = () => {
-      const { query } = queryString.parse(this.props.location.search);
-      if (query) {
-        this.setState({ query });
+        createTeam = (name, description) => {
+          axios
+            .post("/api/teams/create", {
+              name,
+              description,
+            })
+            .then((res) => this.handleResponse(res.data))
+            .catch((err) => this.handleResponse(err.response.data));
+        };
+
+        componentDidMount = () => {
+          const { query } = queryString.parse(this.props.location.search);
+          if (query) {
+            this.setState({ query });
+          }
+        };
+
+        handleResponse = (data) => {
+          const { t, alert } = this.props;
+          if (data.error) {
+            if (data.error.includes("Team name")) {
+              alert.error(t("createteam.nameerror"));
+            } else if (data.error.includes("Authentication")) {
+              alert.error(t("createteam.authentication"));
+            }
+          } else {
+            alert.success(t("createteam.created"));
+          }
+        };
+
+        handleSubmit = (event) => {
+          event.preventDefault();
+
+          const { teamName, description } = this.state;
+
+          if (teamName !== "" && description !== "") {
+            this.setState({
+              teamNameHighlight: false,
+            });
+            this.createTeam(teamName, description);
+          } else {
+            this.setState({
+              teamΝameHighlight: true,
+            });
+          }
+        };
+
+        onCheckbox = (event, category) => {
+          if (event.target.checked) {
+            const categories = this.state.selectedCategories.concat(category);
+            this.setState({ selectedCategories: categories });
+          } else {
+            this.removeCategory(category);
+          }
+        };
+
+        removeCategory = (category) => {
+          const filtered = this.state.selectedCategories.filter(
+            (c) => c !== category
+          );
+          this.setState({
+            selectedCategories: filtered,
+          });
+        };
+
+        showTeam = (key, team) => {
+          const team_link = "/teams/id";
+          return (
+            <li key={key}>
+              <span>
+                <a href={team_link}>
+                  <img src={team.logo} alt="Team Logo" />
+                </a>
+                <a href={team_link}>
+                  <h3>{team.name}</h3>
+                </a>
+              </span>
+              <p>{team.description}</p>
+            </li>
+          );
+        };
+
+        render() {
+          const { t } = this.props;
+          return (
+            <div className="TeamsPage">
+              <div>
+                <SearchBar
+                  action="/teams"
+                  value={this.state.query}
+                  onChange={(e) => this.setState({ query: e.target.value })}
+                />
+                <Popup
+                  trigger={<button>{t("createteam.createteam")}</button>}
+                  modal
+                >
+                  <h2>{t("createteam.createteam")}</h2>
+                  <form
+                    method="post"
+                    action="api/teams/create"
+                    onSubmit={this.handleSubmit}
+                  >
+                    <Input
+                      name="teamName"
+                      onChange={(e) =>
+                        this.setState({ teamName: e.target.value.trim() })
+                      }
+                      shouldHighlight={this.state.teamNameHighlight}
+                      type="text"
+                      placeholder={t("createteam.teamname")}
+                    ></Input>
+                    <textarea
+                      name="description"
+                      onChange={(e) =>
+                        this.setState({ description: e.target.value.trim() })
+                      }
+                      required
+                      type="text"
+                      placeholder={t("createteam.description")}
+                    ></textarea>
+                    <input
+                      className="SubmitButton"
+                      type="submit"
+                      value={t("submit")}
+                    />
+                  </form>
+                </Popup>
+              </div>
+              <span>
+                <FilterList
+                  categories={categories}
+                  selected={this.state.selectedCategories}
+                  onCheckbox={this.onCheckbox}
+                  onClear={() => this.setState({ selectedCategories: [] })}
+                  onRemove={this.removeCategory}
+                />
+                <Pagination
+                  baseName="TeamsPage_content"
+                  collection={teams}
+                  perPage={6}
+                  query={this.state.query.toLowerCase().trim()}
+                  mapFunc={this.showTeam}
+                  searchFilter={(team, query) =>
+                    team.name.toLowerCase().includes(query) ||
+                    team.description.toLowerCase().includes(query)
+                  }
+                  selected={this.state.selectedCategories}
+                />
+              </span>
+            </div>
+          );
+        }
       }
-    };
-
-    onCheckbox = (event, category) => {
-      if (event.target.checked) {
-        const categories = this.state.selectedCategories.concat(category);
-        this.setState({ selectedCategories: categories });
-      } else {
-        this.removeCategory(category);
-      }
-    };
-
-    removeCategory = (category) => {
-      const filtered = this.state.selectedCategories.filter(
-        (c) => c !== category
-      );
-      this.setState({
-        selectedCategories: filtered,
-      });
-    };
-
-    showTeam = (key, team) => {
-      const team_link = "/teams/id";
-      return (
-        <li key={key}>
-          <span>
-            <a href={team_link}>
-              <img src={team.logo} alt="Team Logo" />
-            </a>
-            <a href={team_link}>
-              <h3>{team.name}</h3>
-            </a>
-          </span>
-          <p>{team.description}</p>
-        </li>
-      );
-    };
-
-    render() {
-      return (
-        <div className="TeamsPage">
-          <SearchBar
-            action="/teams"
-            value={this.state.query}
-            onChange={(e) => this.setState({ query: e.target.value })}
-          />
-          <span>
-            <FilterList
-              categories={categories}
-              selected={this.state.selectedCategories}
-              onCheckbox={this.onCheckbox}
-              onClear={() => this.setState({ selectedCategories: [] })}
-              onRemove={this.removeCategory}
-            />
-            <Pagination
-              baseName="TeamsPage_content"
-              collection={teams}
-              perPage={6}
-              query={this.state.query.toLowerCase().trim()}
-              mapFunc={this.showTeam}
-              searchFilter={(team, query) =>
-                team.name.toLowerCase().includes(query) ||
-                team.description.toLowerCase().includes(query)
-              }
-              selected={this.state.selectedCategories}
-            />
-          </span>
-        </div>
-      );
-    }
-  }
+    )
+  )
 );
