@@ -10,6 +10,7 @@ import ActionInfo from "./containers/actionprofile/ActionProfile";
 import ActionsPage from "./containers/actionspage/ActionsPage.jsx";
 import AlertTemplate from "./components/alert/AlertTemplate";
 import ContactPage from "./containers/contactpage/ContactPage.jsx";
+import Dashboard from "./containers/dashboard/Dashboard";
 import Footer from "./components/footer/Footer";
 import LandingPage from "./containers/landingpage/LandingPage.jsx";
 import Login from "./containers/authentication/Login.jsx";
@@ -68,7 +69,7 @@ export default class App extends Component {
                       <Route path="/profile" children={<UserProfile />} />
                       <Route path="/actions/id" children={<ActionInfo />} />
                       <Route path="/actions" children={<ActionsPage />} />
-                      <Route path="/" exact children={<LandingPage />} />
+                      <Route path="/" exact children={<Dashboard />} />
                     </Switch>
                   </main>
                   <Footer />

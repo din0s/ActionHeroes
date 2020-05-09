@@ -77,6 +77,18 @@
     "message": "Your Message",
     "thanks": "Thanks, we will get back to you soon!"
   },
+  "dashboard": {
+    "next": "Your next actions",
+    "recommend": "Recommended actions for you",
+    "teams": "Your teams",
+    "saved": "Saved actions",
+    "members": "Members",
+    "recent": "Recent action",
+    "nonext": "No next actions",
+    "norecommend": "No recommended actions",
+    "noteam": "No selected team",
+    "nosaved": "No saved actions"
+  },
   "landingpage": {
     "catchphrase": "The more we give, the happier we feel.",
     "desc": "Spending part of your time to help others is one of the best gifts you could give. Be a part of something bigger than yourself. Be a gift to the community. Volunteer today!",
