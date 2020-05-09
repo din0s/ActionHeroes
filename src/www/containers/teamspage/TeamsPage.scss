@@ -44,7 +44,27 @@
           margin-bottom: 1rem;
         }
 
-        .SubmitButton {
+        > div {
+          margin-bottom: 1rem;
+
+          > p {
+            text-align: left;
+          }
+
+          > div {
+            text-align: left;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            height: 10rem;
+
+            > label {
+              margin-bottom: 0.2rem;
+            }
+          }
+        }
+
+        > .SubmitButton {
           align-self: center;
           cursor: pointer;
           height: 2rem;

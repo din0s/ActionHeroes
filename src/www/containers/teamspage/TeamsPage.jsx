@@ -26,13 +26,15 @@ export default withRouter(
           teamName: "",
           description: "",
           teamNameHighlight: false,
+          teamCategories: [],
         };
 
-        createTeam = (name, description) => {
+        createTeam = (name, description, categories) => {
           axios
             .post("/api/teams/create", {
               name,
               description,
+              categories,
             })
             .then((res) => this.handleResponse(res.data))
             .catch((err) => this.handleResponse(err.response.data));
@@ -60,14 +62,13 @@ export default withRouter(
 
         handleSubmit = (event) => {
           event.preventDefault();
-
-          const { teamName, description } = this.state;
+          const { teamName, description, teamCategories } = this.state;
 
           if (teamName !== "" && description !== "") {
             this.setState({
               teamNameHighlight: false,
             });
-            this.createTeam(teamName, description);
+            this.createTeam(teamName, description, teamCategories);
           } else {
             this.setState({
               teamΝameHighlight: true,
@@ -148,6 +149,40 @@ export default withRouter(
                       type="text"
                       placeholder={t("createteam.description")}
                     ></textarea>
+                    <div>
+                      <p>{t("filterlist.categories")}</p>
+                      <div>
+                        {Object.keys(categories).map((c) => {
+                          const category = categories[c];
+                          return (
+                            <label key={c}>
+                              {t(`categories.${category.name.toLowerCase()}`)}
+                              <input
+                                type="checkbox"
+                                onChange={(event) => {
+                                  if (event.target.checked) {
+                                    const categories = this.state.teamCategories.concat(
+                                      category.name
+                                    );
+                                    this.setState({
+                                      teamCategories: categories,
+                                    });
+                                  } else {
+                                    const filtered = this.state.teamCategories.filter(
+                                      (c) => c !== category.name
+                                    );
+
+                                    this.setState({
+                                      teamCategories: filtered,
+                                    });
+                                  }
+                                }}
+                              />
+                            </label>
+                          );
+                        })}
+                      </div>
+                    </div>
                     <input
                       className="SubmitButton"
                       type="submit"
