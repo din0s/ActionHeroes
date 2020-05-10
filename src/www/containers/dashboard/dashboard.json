@@ -5,6 +5,18 @@
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tristique erat eu faucibus. Vivamus mollis ultricies dolor, sed sagittis nulla fringilla eleifend. Donec dapibus odio ac nibh auctor pellentesque. Curabitur malesuada lacus eget dolor ornare placerat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer facilisis nulla ut tortor vehicula congue vitae ut lorem. In hac habitasse platea dictumst. Mauris hendrerit imperdiet ex quis faucibus. Phasellus semper tellus luctus porttitor lacinia. Quisque odio ex, dapibus non mattis a, consectetur sed velit. Fusce placerat erat a leo ornare, in maximus eros malesuada. Fusce interdum turpis urna, at porta enim aliquam vel.",
       "date": "2020-06-15T08:30:00Z",
       "photo": "/img/teaminfo/hackathon.jpg"
+    },
+    {
+      "name": "The title of the event",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tristique erat eu faucibus. Vivamus mollis ultricies dolor, sed sagittis nulla fringilla eleifend. Donec dapibus odio ac nibh auctor pellentesque. Curabitur malesuada lacus eget dolor ornare placerat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer facilisis nulla ut tortor vehicula congue vitae ut lorem. In hac habitasse platea dictumst. Mauris hendrerit imperdiet ex quis faucibus. Phasellus semper tellus luctus porttitor lacinia. Quisque odio ex, dapibus non mattis a, consectetur sed velit. Fusce placerat erat a leo ornare, in maximus eros malesuada. Fusce interdum turpis urna, at porta enim aliquam vel.",
+      "date": "2020-06-15T08:30:00Z",
+      "photo": "/img/teaminfo/hackathon.jpg"
+    },
+    {
+      "name": "The title of the event",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tristique erat eu faucibus. Vivamus mollis ultricies dolor, sed sagittis nulla fringilla eleifend. Donec dapibus odio ac nibh auctor pellentesque. Curabitur malesuada lacus eget dolor ornare placerat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer facilisis nulla ut tortor vehicula congue vitae ut lorem. In hac habitasse platea dictumst. Mauris hendrerit imperdiet ex quis faucibus. Phasellus semper tellus luctus porttitor lacinia. Quisque odio ex, dapibus non mattis a, consectetur sed velit. Fusce placerat erat a leo ornare, in maximus eros malesuada. Fusce interdum turpis urna, at porta enim aliquam vel.",
+      "date": "2020-06-15T08:30:00Z",
+      "photo": "/img/teaminfo/hackathon.jpg"
     }
   ],
   "recommend": [
@@ -12,6 +24,13 @@
       "name": "The title of the event",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tristique erat eu faucibus. Vivamus mollis ultricies dolor, sed sagittis nulla fringilla eleifend. Donec dapibus odio ac nibh auctor pellentesque. Curabitur malesuada lacus eget dolor ornare placerat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer facilisis nulla ut tortor vehicula congue vitae ut lorem. In hac habitasse platea dictumst. Mauris hendrerit imperdiet ex quis faucibus. Phasellus semper tellus luctus porttitor lacinia. Quisque odio ex, dapibus non mattis a, consectetur sed velit. Fusce placerat erat a leo ornare, in maximus eros malesuada. Fusce interdum turpis urna, at porta enim aliquam vel.",
       "date": "2020-06-15T08:30:00Z",
+      "photo": "/img/teaminfo/hackathon.jpg",
+      "attendees": 12
+    },
+    {
+      "name": "My other fun event",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus tristique erat eu faucibus. Vivamus mollis ultricies dolor, sed sagittis nulla fringilla eleifend. Donec dapibus odio ac nibh auctor pellentesque. Curabitur malesuada lacus eget dolor ornare placerat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer facilisis nulla ut tortor vehicula congue vitae ut lorem. In hac habitasse platea dictumst. Mauris hendrerit imperdiet ex quis faucibus. Phasellus semper tellus luctus porttitor lacinia. Quisque odio ex, dapibus non mattis a, consectetur sed velit. Fusce placerat erat a leo ornare, in maximus eros malesuada. Fusce interdum turpis urna, at porta enim aliquam vel.",
+      "date": "2021-01-15T08:30:00Z",
       "photo": "/img/teaminfo/hackathon.jpg",
       "attendees": 43
     }

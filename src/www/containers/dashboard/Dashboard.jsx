@@ -1,12 +1,18 @@
+import "./Dashboard.scss";
+
 import React, { Component } from "react";
 
 import ActionCard from "../../components/actioncard/ActionCard";
+import { Link } from "react-router-dom";
 import Pagination from "material-ui-flat-pagination";
-import Select from "react-select";
+import Selector from "../../components/selector/Selector";
 import { parseDate } from "../../date";
 import { withTranslation } from "react-i18next";
 
 const jsonFile = require("./dashboard.json");
+const r_page = 5;
+
+const Value = ({ innerProps }) => <div {...innerProps}>Hi</div>;
 
 export default withTranslation()(
   class Dashboard extends Component {
@@ -22,13 +28,15 @@ export default withTranslation()(
           return (
             <li key={index}>
               <h5>{parseDate(action.date, t)}</h5>
-              <div>
-                <div>
-                  <img src={action.photo} alt="" />
-                  <h4>{action.name}</h4>
+              <Link to="/actions/id">
+                <div className="NextCard">
+                  <span>
+                    <img src={action.photo} alt="" />
+                    <h4 className="clamped">{action.name}</h4>
+                  </span>
+                  <p className="clamped">{action.description}</p>
                 </div>
-                <p>{action.description}</p>
-              </div>
+              </Link>
             </li>
           );
         });
@@ -39,8 +47,9 @@ export default withTranslation()(
 
     showRecommend = () => {
       const { t } = this.props;
+      const o = this.state.r_offset;
       if (jsonFile.recommend.length !== 0) {
-        return jsonFile.recommend.map((action) => {
+        return jsonFile.recommend.slice(o, o + r_page).map((action) => {
           return <ActionCard />;
         });
       } else {
@@ -57,7 +66,9 @@ export default withTranslation()(
             <span className="TeamCard-top">
               <img src={team.photo} alt="" />
               <div>
-                <h4>{team.name}</h4>
+                <Link to="/teams/id">
+                  <h4 className="clamped">{team.name}</h4>
+                </Link>
                 <p>
                   {t("dashboard.members")}: {team.members}
                 </p>
@@ -65,10 +76,12 @@ export default withTranslation()(
             </span>
             <span className="TeamCard-bot">
               <h5>{t("dashboard.recent")}</h5>
-              <div>
-                <h4>{team.recent.name}</h4>
-                <p>{parseDate(team.recent.date, t)}</p>
-              </div>
+              <Link to="/actions/id">
+                <div>
+                  <h4>{team.recent.name}</h4>
+                  <p>{parseDate(team.recent.date, t)}</p>
+                </div>
+              </Link>
             </span>
           </div>
         );
@@ -83,8 +96,10 @@ export default withTranslation()(
         return jsonFile.saved.map((action, index) => {
           return (
             <li key={index}>
-              <img src={action.photo} alt="" />
-              <h4>{action.name}</h4>
+              <Link to="/actions/id">
+                <img src={action.photo} alt="" />
+                <h4>{action.name}</h4>
+              </Link>
             </li>
           );
         });
@@ -104,20 +119,20 @@ export default withTranslation()(
             </div>
             <div className="Dashboard_main_recommend">
               <h2>{t("dashboard.recommend")}</h2>
+              <ul>{this.showRecommend()}</ul>
               <Pagination
-                limit={5}
+                limit={r_page}
                 offset={this.state.r_offset}
                 total={jsonFile.recommend.length}
-                onClick={(_, o) => this.setState({ offset: o })}
+                onClick={(_, o) => this.setState({ r_offset: o })}
                 disableRipple={true}
               />
-              <ul>{this.showRecommend()}</ul>
             </div>
           </div>
           <div className="Dashboard_side">
             <div className="Dashboard_side_teams">
-              <h3>{t("dashboard.teams")}</h3>
-              <Select
+              <Selector
+                value={<h3>{t("dashboard.teams")}</h3>}
                 onChange={(opt) => this.setState({ t_select: opt.value })}
                 options={jsonFile.teams.map((t) => ({
                   value: t,
@@ -126,10 +141,10 @@ export default withTranslation()(
               />
               {this.showTeamCard()}
             </div>
-          </div>
-          <div className="Dashboard_side_saved">
-            <h3>{t("dashboard.saved")}</h3>
-            <ul>{this.showSavedActions()}</ul>
+            <div className="Dashboard_side_saved">
+              <h3>{t("dashboard.saved")}</h3>
+              <ul>{this.showSavedActions()}</ul>
+            </div>
           </div>
         </div>
       );
