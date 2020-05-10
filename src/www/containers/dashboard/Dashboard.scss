@@ -110,6 +110,10 @@
   &_side {
     max-width: 20vw;
 
+    p {
+      margin-bottom: 0;
+    }
+
     > div {
       background-color: rgba($color: white, $alpha: 0.5);
       border: 1px solid $blackTransparent;
@@ -185,11 +189,15 @@
           border-radius: 0.25rem;
           box-shadow: 0 0 5px 2px $blackTransparent;
           cursor: pointer;
-          padding: 0 1rem;
+          padding: 1rem;
           transition: 0.25s ease-in-out;
 
           &:hover {
             box-shadow: 0 0 5px 2px $softBlack;
+          }
+
+          > h4 {
+            margin-top: 0;
           }
         }
       }
