@@ -12,8 +12,6 @@ import { withTranslation } from "react-i18next";
 const jsonFile = require("./dashboard.json");
 const r_page = 5;
 
-const Value = ({ innerProps }) => <div {...innerProps}>Hi</div>;
-
 export default withTranslation()(
   class Dashboard extends Component {
     state = {
