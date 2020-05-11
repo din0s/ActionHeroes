@@ -154,13 +154,21 @@
     "personal_settings": "Personal Settings",
     "profile": "Profile",
     "security": "Security",
-    "update": "Update Settings",
+    "username": "Username",
+    "bio": "Bio",
+    "favourite_categories": "Favourite Categories",
+    "location": "Location",
     "email": "Email",
+    "update": {
+      "profile": "Update Profile",
+      "security": "Update Settings"
+    },
     "password": {
       "change": "Change Password",
       "old": "Old Password",
       "new": "New Password",
-      "confirm_new": "Confirm New Password"
+      "confirm_new": "Confirm New Password",
+      "mismatch": "Your passwords don't match!"
     }
   }
 }
