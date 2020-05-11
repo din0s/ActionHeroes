@@ -149,5 +149,18 @@
     "unfollow": "Following",
     "upcoming": "Upcoming Actions",
     "past": "Past Actions"
+  },
+  "settings": {
+    "personal_settings": "Personal Settings",
+    "profile": "Profile",
+    "security": "Security",
+    "update": "Update Settings",
+    "email": "Email",
+    "password": {
+      "change": "Change Password",
+      "old": "Old Password",
+      "new": "New Password",
+      "confirm_new": "Confirm New Password"
+    }
   }
 }
