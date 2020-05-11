@@ -16,6 +16,7 @@ import Login from "./containers/authentication/Login.jsx";
 import NavBar from "./components/navbar/NavBar";
 import { Provider } from "react-redux";
 import ScrollToTop from "react-router-scroll-top";
+import SettingsPage from "./containers/settingspage/SettingsPage.jsx";
 import Signup from "./containers/authentication/Signup.jsx";
 import TeamProfile from "./containers/teamprofile/TeamProfile.jsx";
 import TeamsPage from "./containers/teamspage/TeamsPage.jsx";
@@ -68,6 +69,7 @@ export default class App extends Component {
                       <Route path="/profile" children={<UserProfile />} />
                       <Route path="/actions/id" children={<ActionInfo />} />
                       <Route path="/actions" children={<ActionsPage />} />
+                      <Route path="/settings" children={<SettingsPage />} />
                       <Route path="/" exact children={<LandingPage />} />
                     </Switch>
                   </main>

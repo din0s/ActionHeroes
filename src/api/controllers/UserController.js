@@ -54,7 +54,7 @@ module.exports = {
   },
 
   getSelfProfile: (req, res) => {
-    res.redirect(`/users/${req.userData.userId}/profile`);
+    res.redirect(`/api/users/${req.userData.userId}/profile`);
   },
 
   login: (req, res) => {
