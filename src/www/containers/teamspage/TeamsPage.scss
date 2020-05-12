@@ -24,9 +24,14 @@
       max-width: 40rem;
 
       .scrollarea {
-        height: 32rem;
+        height: 37rem;
 
         .scrollarea-content {
+          > p {
+            color: red;
+            margin: 0rem;
+          }
+
           > form {
             display: flex;
             flex-direction: column;
@@ -46,6 +51,7 @@
               border-radius: 0.6rem;
               box-shadow: 1px 1px $softBlack;
               margin-bottom: 1rem;
+              outline: none;
             }
 
             > div {
