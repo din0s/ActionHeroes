@@ -155,7 +155,7 @@
     "profile": "Profile",
     "security": "Security",
     "username": "Username",
-    "bio": "Bio",
+    "bio": "Let us know more about you!",
     "favourite_categories": "Favourite Categories",
     "location": "Location",
     "email": "Email",
@@ -169,6 +169,10 @@
       "new": "New Password",
       "confirm_new": "Confirm New Password",
       "mismatch": "Your passwords don't match!"
+    },
+    "photo": {
+      "upload": "Upload",
+      "remove": "Remove"
     }
   }
 }
