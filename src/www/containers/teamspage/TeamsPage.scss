@@ -23,122 +23,136 @@
       border-radius: 1rem;
       max-width: 40rem;
 
-      > form {
-        display: flex;
-        flex-direction: column;
-        margin: 1rem 3rem;
+      .scrollarea {
+        height: 32rem;
 
-        > input {
-          height: 1.5rem;
-        }
+        .scrollarea-content {
+          > form {
+            display: flex;
+            flex-direction: column;
+            margin: 1rem 3rem;
 
-        > textarea {
-          height: 5rem;
-        }
+            > input {
+              height: 1.5rem;
+            }
 
-        > input,
-        textarea {
-          border: 1px solid $softBlack;
-          border-radius: 0.6rem;
-          box-shadow: 1px 1px $softBlack;
-          margin-bottom: 1rem;
-        }
+            > textarea {
+              height: 5rem;
+            }
 
-        > div {
-          margin-bottom: 1rem;
+            > input,
+            textarea {
+              border: 1px solid $softBlack;
+              border-radius: 0.6rem;
+              box-shadow: 1px 1px $softBlack;
+              margin-bottom: 1rem;
+            }
 
-          > p {
-            font-weight: bold;
-            text-align: left;
-            margin: 0.5rem 0;
-          }
+            > div {
+              margin-bottom: 1rem;
 
-          .scrollarea {
-            height: 8rem;
+              > p {
+                font-weight: bold;
+                text-align: left;
+                margin: 0.5rem 0;
+              }
 
-            .scrollarea-content {
-              display: flex;
-              flex-wrap: wrap;
-              text-align: left;
-              flex-direction: column;
+              .scrollarea {
+                height: 8rem;
 
-              > label {
-                display: block;
-                position: relative;
-                padding-left: 40px;
-                margin-bottom: 0.3rem;
-                cursor: pointer;
-                font-size: 1rem;
-                user-select: none;
-                text-align: start;
+                .scrollarea-content {
+                  display: flex;
+                  flex-wrap: wrap;
+                  text-align: left;
+                  flex-direction: column;
 
-                &:hover {
-                  color: lightskyblue;
-                }
+                  > label {
+                    display: block;
+                    position: relative;
+                    padding-left: 40px;
+                    margin-bottom: 0.3rem;
+                    cursor: pointer;
+                    font-size: 1rem;
+                    user-select: none;
+                    text-align: start;
 
-                input {
-                  position: absolute;
-                  opacity: 0;
-                  cursor: pointer;
-                  height: 0;
-                  width: 0;
-                }
+                    &:hover {
+                      color: lightskyblue;
+                    }
 
-                .checkmark {
-                  position: absolute;
-                  top: 0;
-                  left: 5px;
-                  height: 20px;
-                  width: 20px;
-                  background-color: rgba($color: white, $alpha: 0.75);
-                  border: 1px solid $softBlack;
+                    input {
+                      position: absolute;
+                      opacity: 0;
+                      cursor: pointer;
+                      height: 0;
+                      width: 0;
+                    }
 
-                  &:after {
-                    content: "";
-                    position: absolute;
-                    display: none;
+                    .checkmark {
+                      position: absolute;
+                      top: 0;
+                      left: 5px;
+                      height: 20px;
+                      width: 20px;
+                      background-color: rgba($color: white, $alpha: 0.75);
+                      border: 1px solid $softBlack;
+
+                      &:after {
+                        content: "";
+                        position: absolute;
+                        display: none;
+                      }
+                    }
+                  }
+
+                  &:hover input ~ .checkmark {
+                    background-color: rgba($color: white, $alpha: 0.25);
+                    transition: 0.2s ease-in-out;
+                  }
+
+                  input:checked ~ .checkmark {
+                    background-color: lightskyblue;
+                  }
+
+                  input:checked ~ .checkmark:after {
+                    display: block;
+                  }
+
+                  .checkmark:after {
+                    left: 7px;
+                    top: 3px;
+                    width: 3px;
+                    height: 8px;
+                    border: solid white;
+                    border-width: 0 3px 3px 0;
+                    transform: rotate(45deg);
                   }
                 }
               }
 
-              &:hover input ~ .checkmark {
-                background-color: rgba($color: white, $alpha: 0.25);
-                transition: 0.2s ease-in-out;
-              }
+              .fileContainer {
+                margin: 0rem;
+                padding: 0rem;
 
-              input:checked ~ .checkmark {
-                background-color: lightskyblue;
-              }
-
-              input:checked ~ .checkmark:after {
-                display: block;
-              }
-
-              .checkmark:after {
-                left: 7px;
-                top: 3px;
-                width: 3px;
-                height: 8px;
-                border: solid white;
-                border-width: 0 3px 3px 0;
-                transform: rotate(45deg);
+                .deleteImage {
+                  background: lightskyblue;
+                  font-size: 20px;
+                  line-height: 23px;
+                  height: 20px;
+                  width: 20px;
+                }
               }
             }
-          }
 
-          .fileContainer {
-            margin: 0rem;
-            padding: 0rem;
+            .SubmitButton {
+              align-self: center;
+              cursor: pointer;
+              height: 2rem;
+              margin: 0rem;
+              outline: none;
+              width: 10rem;
+            }
           }
-        }
-
-        .SubmitButton {
-          align-self: center;
-          cursor: pointer;
-          height: 2rem;
-          margin: 0rem;
-          outline: none;
-          width: 10rem;
         }
       }
     }
