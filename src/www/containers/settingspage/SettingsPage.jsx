@@ -1,21 +1,21 @@
 import "./SettingsPage.scss";
 
+import { Link, Redirect } from "react-router-dom";
 import React, { Component } from "react";
 
-import { Redirect } from "react-router-dom";
+import Map from "../../components/map/Map";
 import Select from "react-select";
 import { connect } from "react-redux";
 import makeAnimated from "react-select/animated";
-import { render } from "react-dom";
 import { withTranslation } from "react-i18next";
 
 //const favoutite = require("./favourite.json");
 //const categories = require("./categories.json");
 
 const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
+  { value: "Category1", label: "Animals" },
+  { value: "Category3", label: "Children" },
+  { value: "Category2", label: "Community" },
 ];
 
 const animatedComponents = makeAnimated();
@@ -46,15 +46,15 @@ export default connect(
       };
 
       render() {
-        //console.log(this.props);
-        if (this.props.loggedIn) {
-          //return <Redirect to="login" />;
+        console.log(this.props);
+        if (!this.props.loggedIn) {
+          return null; //<Redirect to="login" />;
         }
 
         const { t, user } = this.props;
         const { username, profilePhoto } = user;
-        const photo = profilePhoto || "/img/fakedata/profilePhoto.png";
-        const { selectedOption } = this.state;
+        //const photo = profilePhoto || "/img/fakedata/profilePhoto.png";
+        //const { selectedOption } = this.state;
 
         return (
           <div className="SettingsPage">
@@ -117,14 +117,7 @@ export default connect(
                       }
                     />
                     <span>{t("settings.location")}</span>
-                    <textarea
-                      type="text"
-                      name="bio"
-                      className="Bio-field"
-                      onChange={(e) =>
-                        this.setState({ message: e.target.value.trim() })
-                      }
-                    />
+                    <Map />
                     <input
                       type="submit"
                       className="Submit-button"
@@ -132,7 +125,21 @@ export default connect(
                     />
                   </form>
                 </div>
-                <div className="photo">hello</div>
+                <div className="photo">
+                  <img src="/img/fakedata/profilePhoto.png" alt="Avatar" />
+                  <span className="buttons">
+                    <input
+                      type="submit"
+                      className="Upload-button"
+                      value={t("settings.photo.upload")}
+                    />
+                    <input
+                      type="submit"
+                      className="Remove-button"
+                      value={t("settings.photo.remove")}
+                    />
+                  </span>
+                </div>
               </div>
               <div
                 className={this.state.activeTab === "security" ? " active" : ""}

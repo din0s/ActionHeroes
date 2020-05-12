@@ -149,5 +149,30 @@
     "unfollow": "Ακολουθείτε",
     "upcoming": "Επόμενες Δράσεις",
     "past": "Προηγούμενες Δράσεις"
+  },
+  "settings": {
+    "personal_settings": "Προσωπικές Ρυθμίσεις",
+    "profile": "Προφίλ",
+    "security": "Ασφάλεια",
+    "username": "Όνομα Χρήστη",
+    "bio": "Γράψε κάτι για εσένα!",
+    "favourite_categories": "Αγαπημένες Κατηγορίες",
+    "location": "Τοποθεσία",
+    "email": "Email",
+    "update": {
+      "profile": "Ενημέρωση Προφίλ",
+      "security": "Ενημέρωση Ρυθμίσεων Ασφάλειας"
+    },
+    "password": {
+      "change": "Αλλαγή Κωδικού",
+      "old": "Παλιός Κωδικός",
+      "new": "Καινούργιος Κωδικός",
+      "confirm_new": "Eπιβεβαίωση Kωδικού",
+      "mismatch": "Your passwords don't match!"
+    },
+    "photo": {
+      "upload": "Ανέβασμα",
+      "remove": "Αφαίρεση"
+    }
   }
 }
