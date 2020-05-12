@@ -12,6 +12,8 @@ import Pagination from "../../components/pagination/Pagination";
 import SearchBar from "../../components/searchbar/SearchBar";
 import queryString from "query-string";
 import { withRouter } from "react-router-dom";
+import ScrollArea from "react-scrollbar";
+import ImageUploader from "react-images-upload";
 
 const categories = require("./categories.json");
 const teams = require("./teams.json");
@@ -27,14 +29,16 @@ export default withRouter(
           description: "",
           teamNameHighlight: false,
           teamCategories: [],
+          teamPicture: "",
         };
 
-        createTeam = (name, description, categories) => {
+        createTeam = (name, description, categories, photo) => {
           axios
             .post("/api/teams/create", {
               name,
               description,
               categories,
+              photo,
             })
             .then((res) => this.handleResponse(res.data))
             .catch((err) => this.handleResponse(err.response.data));
@@ -62,13 +66,18 @@ export default withRouter(
 
         handleSubmit = (event) => {
           event.preventDefault();
-          const { teamName, description, teamCategories } = this.state;
+          const {
+            teamName,
+            description,
+            teamCategories,
+            teamPicture,
+          } = this.state;
 
           if (teamName !== "" && description !== "") {
             this.setState({
               teamNameHighlight: false,
             });
-            this.createTeam(teamName, description, teamCategories);
+            this.createTeam(teamName, description, teamCategories, teamPicture);
           } else {
             this.setState({
               teamΝameHighlight: true,
@@ -151,7 +160,7 @@ export default withRouter(
                     ></textarea>
                     <div>
                       <p>{t("filterlist.categories")}</p>
-                      <div>
+                      <ScrollArea>
                         {Object.keys(categories).map((c) => {
                           const category = categories[c];
                           return (
@@ -178,11 +187,25 @@ export default withRouter(
                                   }
                                 }}
                               />
+                              <span className="checkmark"></span>
                             </label>
                           );
                         })}
-                      </div>
+                      </ScrollArea>
                     </div>
+                    <ImageUploader
+                      withIcon={true}
+                      buttonText="Choose image"
+                      onChange={(pic) => {
+                        this.setState({
+                          teamPicture: pic,
+                        });
+                      }}
+                      imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+                      maxFileSize={5242880}
+                      singleImage={true}
+                      withPreview={true}
+                    />
                     <input
                       className="SubmitButton"
                       type="submit"
