@@ -35,7 +35,32 @@ module.exports = {
       });
   },
 
-  addSavedAction: (req, res) => {},
+  addSavedAction: (req, res) => {
+    const userId = req.userData.userId;
+    const actionId = req.params.action_id;
+
+    Action.findById(actionId)
+      .then((action) => {
+        if (action) {
+          User.findOneAndUpdate(
+            { _id: userId },
+            { $addToSet: { actionsSaved: actionId } }
+          )
+            .then(() => {
+              return res.status(201).send();
+            })
+            .catch((err) => {
+              console.error(`Error during user find():\n${err}`);
+              return res.status(500).send();
+            });
+        } else {
+          return res.status(400).json({ error: "This action doesn't exist" });
+        }
+      })
+      .catch(() => {
+        return res.status(400).send({ error: "Invalid action id" });
+      });
+  },
 
   removeAttendant: (req, res) => {},
 
