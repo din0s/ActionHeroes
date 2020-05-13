@@ -1,6 +1,7 @@
 import "./TeamsPage.scss";
 
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import Popup from "reactjs-popup";
 import Input from "../../components/input/Input";
 import axios from "axios";
@@ -28,6 +29,7 @@ export default withRouter(
         teamCategories: [],
         teamPicture: "",
         serverResponse: "",
+        redirect: false,
       };
 
       createTeam = (name, description, categories, photo) => {
@@ -63,7 +65,7 @@ export default withRouter(
           }
         } else {
           this.setState({
-            serverResponse: t("createteam.created"),
+            redirect: true,
           });
         }
       };
@@ -122,6 +124,12 @@ export default withRouter(
 
       render() {
         const { t } = this.props;
+
+        if (this.state.redirect) {
+          // TODO change `id` to the _id sent from server
+          return <Redirect to="/teams/id" />;
+        }
+
         return (
           <div className="TeamsPage">
             <div>
@@ -132,88 +140,102 @@ export default withRouter(
               />
               <Popup
                 trigger={<button>{t("createteam.createteam")}</button>}
+                closeOnDocumentClick={false}
                 modal
               >
-                <ScrollArea>
-                  <h2>{t("createteam.createteam")}</h2>
-                  <p children={this.state.serverResponse} />
-                  <form
-                    method="post"
-                    action="api/teams/create"
-                    onSubmit={this.handleSubmit}
-                  >
-                    <Input
-                      name="teamName"
-                      onChange={(e) =>
-                        this.setState({ teamName: e.target.value.trim() })
-                      }
-                      type="text"
-                      placeholder={t("createteam.teamname")}
-                    ></Input>
-                    <textarea
-                      name="description"
-                      onChange={(e) =>
-                        this.setState({ description: e.target.value.trim() })
-                      }
-                      required
-                      type="text"
-                      placeholder={t("createteam.description")}
-                    ></textarea>
-                    <div>
-                      <p>{t("filterlist.categories")}</p>
-                      <ScrollArea>
-                        {Object.keys(categories).map((c) => {
-                          const category = categories[c];
-                          return (
-                            <label key={c}>
-                              {t(`categories.${category.name.toLowerCase()}`)}
-                              <input
-                                type="checkbox"
-                                onChange={(event) => {
-                                  if (event.target.checked) {
-                                    const categories = this.state.teamCategories.concat(
-                                      category.name
-                                    );
-                                    this.setState({
-                                      teamCategories: categories,
-                                    });
-                                  } else {
-                                    const filtered = this.state.teamCategories.filter(
-                                      (c) => c !== category.name
-                                    );
-
-                                    this.setState({
-                                      teamCategories: filtered,
-                                    });
-                                  }
-                                }}
-                              />
-                              <span className="checkmark"></span>
-                            </label>
-                          );
-                        })}
-                      </ScrollArea>
-                    </div>
-                    <ImageUploader
-                      withIcon={true}
-                      buttonText="Choose image"
-                      onChange={(pic) => {
+                {(close) => (
+                  <ScrollArea>
+                    <button
+                      className="close"
+                      onClick={() => {
+                        close();
                         this.setState({
-                          teamPicture: pic,
+                          serverResponse: "",
                         });
                       }}
-                      imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-                      maxFileSize={5242880}
-                      singleImage={true}
-                      withPreview={true}
-                    />
-                    <input
-                      className="SubmitButton"
-                      type="submit"
-                      value={t("submit")}
-                    />
-                  </form>
-                </ScrollArea>
+                    >
+                      &times;
+                    </button>
+                    <h2>{t("createteam.createteam")}</h2>
+                    <p children={this.state.serverResponse} />
+                    <form
+                      method="post"
+                      action="api/teams/create"
+                      onSubmit={this.handleSubmit}
+                    >
+                      <Input
+                        name="teamName"
+                        onChange={(e) =>
+                          this.setState({ teamName: e.target.value.trim() })
+                        }
+                        type="text"
+                        placeholder={t("createteam.teamname")}
+                      ></Input>
+                      <textarea
+                        name="description"
+                        onChange={(e) =>
+                          this.setState({ description: e.target.value.trim() })
+                        }
+                        required
+                        type="text"
+                        placeholder={t("createteam.description")}
+                      ></textarea>
+                      <div>
+                        <p>{t("filterlist.categories")}</p>
+                        <ScrollArea>
+                          {Object.keys(categories).map((c) => {
+                            const category = categories[c];
+                            return (
+                              <label key={c}>
+                                {t(`categories.${category.name.toLowerCase()}`)}
+                                <input
+                                  type="checkbox"
+                                  onChange={(event) => {
+                                    if (event.target.checked) {
+                                      const categories = this.state.teamCategories.concat(
+                                        category.name
+                                      );
+                                      this.setState({
+                                        teamCategories: categories,
+                                      });
+                                    } else {
+                                      const filtered = this.state.teamCategories.filter(
+                                        (c) => c !== category.name
+                                      );
+
+                                      this.setState({
+                                        teamCategories: filtered,
+                                      });
+                                    }
+                                  }}
+                                />
+                                <span className="checkmark"></span>
+                              </label>
+                            );
+                          })}
+                        </ScrollArea>
+                      </div>
+                      <ImageUploader
+                        withIcon={true}
+                        buttonText="Choose image"
+                        onChange={(pic) => {
+                          this.setState({
+                            teamPicture: pic,
+                          });
+                        }}
+                        imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+                        maxFileSize={5242880}
+                        singleImage={true}
+                        withPreview={true}
+                      />
+                      <input
+                        className="SubmitButton"
+                        type="submit"
+                        value={t("submit")}
+                      />
+                    </form>
+                  </ScrollArea>
+                )}
               </Popup>
             </div>
             <span>
