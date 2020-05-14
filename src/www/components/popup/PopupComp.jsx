@@ -72,7 +72,7 @@ class PopupComp extends Component {
     return (
       <Popup
         trigger={
-          <button className="PopupTrigger">{t("createteam.createteam")}</button>
+          <button className="PopupTrigger">{t("createteam.create")}</button>
         }
         closeOnDocumentClick={false}
         modal

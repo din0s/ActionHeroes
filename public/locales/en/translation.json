@@ -153,6 +153,7 @@
   "createteam": {
     "teamname": "Team name",
     "description": "Description",
+    "create": "Create Team",
     "createteam": "Create your team!",
     "created": "Team created!",
     "nameerror": "Team name not available!",
