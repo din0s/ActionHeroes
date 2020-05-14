@@ -27,6 +27,7 @@
     "react-alert": "^7.0.0",
     "react-dom": "^16.8.6",
     "react-i18next": "^11.3.3",
+    "react-images-upload": "^1.2.8",
     "react-leaflet": "^2.7.0",
     "react-parallax": "^3.0.3",
     "react-redux": "^7.2.0",

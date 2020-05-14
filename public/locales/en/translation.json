@@ -154,11 +154,11 @@
     "personal_settings": "Personal Settings",
     "profile": "Profile",
     "security": "Security",
-    "username": "Username",
+    "username": "Change Username",
     "bio": "Let us know more about you!",
     "favourite_categories": "Favourite Categories",
     "location": "Location",
-    "email": "Email",
+    "email": "Update Email",
     "update": {
       "profile": "Update Profile",
       "security": "Update Settings"
@@ -171,8 +171,10 @@
       "mismatch": "Your passwords don't match!"
     },
     "photo": {
-      "upload": "Upload",
+      "save": "Save",
       "remove": "Remove"
-    }
+    },
+    "buttonText": "Choose image",
+    "label": "Max file size: 5mb, accepted: jpg or png"
   }
 }
