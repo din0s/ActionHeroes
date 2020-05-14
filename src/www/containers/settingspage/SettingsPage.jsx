@@ -29,7 +29,7 @@ const options = [
   { value: "Category13", label: "Seniors" },
   { value: "Category14", label: "Special Needs" },
   { value: "Category15", label: "Sports & Recreation" },
-  { vlaue: "Category16", label: "Technology" },
+  { value: "Category16", label: "Technology" },
 ];
 
 const animatedComponents = makeAnimated();
@@ -145,7 +145,7 @@ export default connect(
                       }
                     />
                     <span>{t("settings.favourite_categories")}</span>
-                    <Select
+                    <Select className="Select"
                       closeMenuOnSelect={false}
                       components={animatedComponents}
                       isMulti
@@ -161,7 +161,7 @@ export default connect(
                       }
                     />
                     <span>{t("settings.location")}</span>
-                    <Map />
+                    <Map className="Map"/>
                     <input
                       type="submit"
                       className="Submit-button"

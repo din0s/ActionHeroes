@@ -3,8 +3,11 @@
 .SettingsPage {
   display: flex;
   flex-direction: row;
-  margin: 0;
-  padding: 4rem 8rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5rem;
+  //text-align: center;
+  width: 80rem;
 
   &_navigation {
     border-radius: 0.5rem;
@@ -13,7 +16,7 @@
     height: max-content;
     margin: 2rem;
     text-align: start;
-    width: 25rem;
+    width: 15rem;
 
     &_header {
       padding: 0.8rem;
@@ -57,8 +60,9 @@
     border: 1px solid $softBlack;
     box-shadow: 1px 1px 1rem $softBlack;
     margin: 2rem;
+    padding: 2rem;
     text-align: start;
-    width: 100rem;
+    width: 60rem;
 
     > div {
       display: flex;
@@ -98,13 +102,21 @@
         .Submit-button,
         .Username-field,
         .Bio-field {
-          border: 1px solid $softBlack;
           border-radius: 0.5rem;
+          border: 1px solid $softBlack;
           box-shadow: 1px 1px $softBlack;
           margin-bottom: 1rem;
           outline: none;
           padding: 0.75rem;
           width: 20rem;
+        }
+
+        .Select {
+          width: 21.6rem;
+        }
+
+        .Map {
+          //z-index: -1;
         }
 
         .Password-mismatch {
@@ -113,9 +125,10 @@
         }
 
         .Bio-field {
-          height: 10rem;
+          height: 12rem;
           resize: none;
           word-break: break-all;
+          margin-bottom: 2rem;
         }
 
         .Submit-button {
@@ -134,7 +147,7 @@
 
     .photo {
       text-align: center;
-      width: 20rem;
+      width: 15rem;
       margin-left: 2rem;
       > img {
         padding-top: 4rem;
@@ -143,7 +156,7 @@
 
       .buttons {
         padding: 1rem;
-        
+
         > * {
           border-radius: 0.5rem;
           border: 1px solid rgba(0, 0, 0, 0.1);
@@ -162,10 +175,23 @@
           }
         }
 
-        .Save-button{
+        .Save-button {
           margin-right: 2rem;
         }
       }
     }
+  }
+}
+
+@media only screen and(max-width: 1600px) {
+  .SettingsPage {
+    padding: 4rem 5rem;
+  }
+}
+
+@media only screen and(max-width: 1460px) {
+  .SettingsPage {
+    padding: 0rem;
+    padding-top: 2rem;
   }
 }
