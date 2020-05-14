@@ -130,16 +130,6 @@
   .TeamsPage {
     > div {
       flex-direction: column;
-
-      > button {
-        align-self: center;
-        margin-top: 0.8rem;
-        width: 98%;
-      }
-
-      .popup-content {
-        min-width: 20rem;
-      }
     }
 
     > span {
