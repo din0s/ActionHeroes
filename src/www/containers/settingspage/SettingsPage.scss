@@ -107,6 +107,11 @@
           width: 20rem;
         }
 
+        .Password-mismatch {
+          color: red;
+          margin-top: 0;
+        }
+
         .Bio-field {
           height: 10rem;
           resize: none;
@@ -157,7 +162,7 @@
           }
         }
 
-        .Upload-button{
+        .Save-button{
           margin-right: 2rem;
         }
       }

@@ -3,6 +3,7 @@ import "./SettingsPage.scss";
 import { Link, Redirect } from "react-router-dom";
 import React, { Component } from "react";
 
+import ImageUploader from "react-images-upload";
 import Map from "../../components/map/Map";
 import Select from "react-select";
 import { connect } from "react-redux";
@@ -14,8 +15,21 @@ import { withTranslation } from "react-i18next";
 
 const options = [
   { value: "Category1", label: "Animals" },
-  { value: "Category3", label: "Children" },
-  { value: "Category2", label: "Community" },
+  { value: "Category2", label: "Children" },
+  { value: "Category3", label: "Community" },
+  { value: "Category4", label: "Education & Literacy" },
+  { value: "Category5", label: "Emergency & Safety" },
+  { value: "Category6", label: "Employment" },
+  { value: "Category7", label: "Health & Medicine" },
+  { value: "Category8", label: "Hunger" },
+  { value: "Category9", label: "Homeless" },
+  { value: "Category10", label: "Nature" },
+  { value: "Categorυ11", label: "Poverty" },
+  { value: "Category12", label: "Science" },
+  { value: "Category13", label: "Seniors" },
+  { value: "Category14", label: "Special Needs" },
+  { value: "Category15", label: "Sports & Recreation" },
+  { vlaue: "Category16", label: "Technology" },
 ];
 
 const animatedComponents = makeAnimated();
@@ -34,19 +48,48 @@ export default connect(
       state = {
         activeTab: "profile",
         selectedOption: null,
+        mismatch: false,
+      };
+
+      changeTabs = (tab) => {
+        this.setState({ mismatch: false });
+        this.setState({ activeTab: tab });
+        this.clearfields();
+        //event.target.reset();
+      };
+
+      clearfields = () => {
+        document.getElementById("profile-form").reset();
+        document.getElementById("security-form").reset();
       };
 
       submit = async (event) => {
         event.preventDefault();
+        event.target.reset();
       };
 
-      handleChange = (selectedOption) => {
-        this.setState({ selectedOption });
-        console.log(`Option selected:`, selectedOption);
+      checkPassword = async (pass, confirm) => {
+        this.setState({ mismatch: pass !== confirm });
+      };
+
+      setPassword = async (e) => {
+        const password = e.target.value.trim();
+        const { passwordConfirm } = this.state;
+        this.setState({ password });
+        if (passwordConfirm !== "") {
+          this.checkPassword(password, passwordConfirm);
+        }
+      };
+
+      setPasswordConfirm = async (e) => {
+        const { password } = this.state;
+        const passwordConfirm = e.target.value.trim();
+        this.setState({ passwordConfirm });
+        this.checkPassword(password, passwordConfirm);
       };
 
       render() {
-        console.log(this.props);
+        //console.log(this.props);
         if (!this.props.loggedIn) {
           return null; //<Redirect to="login" />;
         }
@@ -66,7 +109,7 @@ export default connect(
               <div className="SettingsPage_navigation_tabs">
                 <div
                   className={this.state.activeTab === "profile" ? "active" : ""}
-                  onClick={() => this.setState({ activeTab: "profile" })}
+                  onClick={() => this.changeTabs("profile")}
                 >
                   {t("settings.profile")}
                 </div>
@@ -74,7 +117,7 @@ export default connect(
                   className={
                     this.state.activeTab === "security" ? "active" : ""
                   }
-                  onClick={() => this.setState({ activeTab: "security" })}
+                  onClick={() => this.changeTabs("security")}
                 >
                   {t("settings.security")}
                 </div>
@@ -87,6 +130,7 @@ export default connect(
                 <div className="first_panel">
                   <h2>{t("settings.profile")}</h2>
                   <form
+                    id="profile-form"
                     method="post"
                     action="/settings/submit"
                     onSubmit={this.submit}
@@ -127,11 +171,20 @@ export default connect(
                 </div>
                 <div className="photo">
                   <img src="/img/fakedata/profilePhoto.png" alt="Avatar" />
+                  <ImageUploader
+                    withIcon={false}
+                    buttonText={t("settings.buttonText")}
+                    imgExtension={[".jpg", ".png"]}
+                    label={t("settings.label")}
+                    maxFileSize={5242880}
+                    singleImage={true}
+                    withPreview={true}
+                  />
                   <span className="buttons">
                     <input
                       type="submit"
-                      className="Upload-button"
-                      value={t("settings.photo.upload")}
+                      className="Save-button"
+                      value={t("settings.photo.save")}
                     />
                     <input
                       type="submit"
@@ -147,6 +200,7 @@ export default connect(
                 <div className="first_panel">
                   <h2>{t("settings.security")}</h2>
                   <form
+                    id="security-form"
                     method="post"
                     action="/settings/submit"
                     onSubmit={this.submit}

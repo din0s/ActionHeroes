@@ -154,11 +154,11 @@
     "personal_settings": "Προσωπικές Ρυθμίσεις",
     "profile": "Προφίλ",
     "security": "Ασφάλεια",
-    "username": "Όνομα Χρήστη",
+    "username": "Αλλαγή Όνομα Χρήστη",
     "bio": "Γράψε κάτι για εσένα!",
     "favourite_categories": "Αγαπημένες Κατηγορίες",
     "location": "Τοποθεσία",
-    "email": "Email",
+    "email": "Ενημέρωση Email",
     "update": {
       "profile": "Ενημέρωση Προφίλ",
       "security": "Ενημέρωση Ρυθμίσεων Ασφάλειας"
@@ -171,8 +171,10 @@
       "mismatch": "Your passwords don't match!"
     },
     "photo": {
-      "upload": "Ανέβασμα",
+      "save": "Αποθήκευση",
       "remove": "Αφαίρεση"
-    }
+    },
+    "buttonText": "Επιλογή εικόνας",
+    "label": "Μέγιστο μέγεθος αρχείου: 5mb, δεκτά: jpg or png"
   }
 }
