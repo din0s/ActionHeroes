@@ -1,15 +1,15 @@
 @import "../../vars.scss";
 
 .SettingsPage {
+  background-color: rgb(234, 237, 245);
   display: flex;
   flex-direction: row;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 5rem;
-  //text-align: center;
-  width: 80rem;
+  justify-content: center;
+  margin: auto;
+  padding: 2rem 13vw;
 
   &_navigation {
+    background-color: rgba($color: white, $alpha: 0.7);
     border-radius: 0.5rem;
     border: 1px solid $softBlack;
     box-shadow: 1px 1px 1rem $softBlack;
@@ -53,6 +53,7 @@
   }
 
   &_content {
+    background-color: rgba($color: white, $alpha: 0.7);
     > :not(.active) {
       display: none;
     }
@@ -116,7 +117,6 @@
         }
 
         .Map {
-          //z-index: -1;
         }
 
         .Password-mismatch {
@@ -149,9 +149,18 @@
       text-align: center;
       width: 15rem;
       margin-left: 2rem;
+
       > img {
         padding-top: 4rem;
         width: inherit;
+      }
+
+      .deleteImage {
+        background: lightskyblue;
+        font-size: 20px;
+        line-height: 23px;
+        height: 20px;
+        width: 20px;
       }
 
       .buttons {
@@ -185,13 +194,19 @@
 
 @media only screen and(max-width: 1600px) {
   .SettingsPage {
-    padding: 4rem 5rem;
+    padding: 1rem 5rem;
   }
 }
 
 @media only screen and(max-width: 1460px) {
   .SettingsPage {
     padding: 0rem;
-    padding-top: 2rem;
+    padding-top: 1rem;
+  }
+}
+
+@media only screen and(max-width: 1300px) {
+  .SettingsPage {
+    
   }
 }
