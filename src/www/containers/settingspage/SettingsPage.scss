@@ -23,6 +23,12 @@
       > h2 {
         margin: 0;
         padding-bottom: 0.5rem;
+        // For bigger usernames, not tested
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
       }
       > h5 {
         margin: 0;
@@ -54,9 +60,11 @@
 
   &_content {
     background-color: rgba($color: white, $alpha: 0.7);
+
     > :not(.active) {
       display: none;
     }
+
     border-radius: 0.5rem;
     border: 1px solid $softBlack;
     box-shadow: 1px 1px 1rem $softBlack;
@@ -68,7 +76,14 @@
     > div {
       display: flex;
       flex-direction: row;
-      > div > h2 {
+      > div > .header {
+        border-bottom: 1px solid $softBlack;
+        margin-left: 1rem;
+        width: 20rem;
+      }
+
+      > .hidden_header {
+        display: none;
         border-bottom: 1px solid $softBlack;
         margin-left: 1rem;
         width: 20rem;
@@ -116,9 +131,6 @@
           width: 21.6rem;
         }
 
-        .Map {
-        }
-
         .Password-mismatch {
           color: red;
           margin-top: 0;
@@ -148,7 +160,7 @@
     .photo {
       text-align: center;
       width: 15rem;
-      margin-left: 2rem;
+      margin-left: 15rem;
 
       > img {
         padding-top: 4rem;
@@ -205,8 +217,167 @@
   }
 }
 
-@media only screen and(max-width: 1300px) {
+@media only screen and(max-width: 1135px) {
   .SettingsPage {
-    
+    align-items: center;
+    flex-direction: column;
+
+    &_navigation {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom: none;
+      margin-bottom: 0;
+      width: 54rem;
+
+      &_header {
+        display: none;
+      }
+
+      &_tabs {
+        display: flex;
+        flex-direction: row;
+
+        > * {
+          border-top: none;
+          width: 32rem;
+
+          &.active {
+            background-color: $grayHover;
+            border-bottom: 1px solid blue;
+            border-left: none;
+          }
+        }
+      }
+    }
+
+    &_content {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-top: none;
+      margin-top: 0;
+      width: 50rem;
+
+      .photo {
+        margin-left: 6rem;
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 900px) {
+  .SettingsPage {
+    &_navigation {
+      width: 44rem;
+
+      &_tabs {
+        > * {
+          width: 22rem;
+        }
+      }
+    }
+
+    &_content {
+      width: 40rem;
+
+      .photo {
+        margin-left: 2rem;
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 740px) {
+  .SettingsPage {
+    &_navigation {
+      width: 29rem;
+
+      &_tabs {
+        > * {
+          width: 14.5rem;
+        }
+      }
+    }
+
+    &_content {
+      width: 25rem;
+
+      > div {
+        display: flex;
+        flex-direction: column-reverse;
+
+        > .hidden_header {
+          display: block;
+        }
+
+        > div > .header {
+          display: none;
+        }
+      }
+
+      .photo {
+        margin-left: auto;
+        margin-right: auto;
+        > img {
+          padding-top: 2rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 485px) {
+  .SettingsPage {
+    &_navigation {
+      width: 21rem;
+
+      &_tabs {
+        > * {
+          width: 10.5rem;
+        }
+      }
+    }
+
+    &_content {
+      justify-content: center;
+      padding: 0;
+      width: fit-content;
+
+      .first_panel {
+        > form {
+          display: flex;
+          flex-direction: column;
+          margin-left: auto;
+          margin-right: auto;
+          width: fit-content;
+
+          > h4 {
+            width: 10rem;
+          }
+
+          .Email-field,
+          .Password-field,
+          .Submit-button,
+          .Username-field,
+          .Bio-field {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            width: 15rem;
+          }
+
+          .Select {
+            width: 16.6rem;
+          }
+
+          .Map {
+            width: 15rem;
+          }
+
+          .Bio-field {
+            height: 8rem;
+            margin-bottom: 1rem;
+          }
+        }
+      }
+    }
   }
 }
