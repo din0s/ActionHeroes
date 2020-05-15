@@ -1,6 +1,5 @@
 import "./SettingsPage.scss";
 
-import { Link, Redirect } from "react-router-dom";
 import React, { Component } from "react";
 
 import ImageUploader from "react-images-upload";
@@ -10,6 +9,7 @@ import { connect } from "react-redux";
 import makeAnimated from "react-select/animated";
 import { withTranslation } from "react-i18next";
 
+//import { Link, Redirect } from "react-router-dom"; 
 //const favoutite = require("./favourite.json");
 //const categories = require("./categories.json");
 
@@ -95,7 +95,8 @@ export default connect(
         }
 
         const { t, user } = this.props;
-        const { username, profilePhoto } = user;
+        const { username } = user;
+        //const { username, profilePhoto } = user;
         //const photo = profilePhoto || "/img/fakedata/profilePhoto.png";
         //const { selectedOption } = this.state;
 
