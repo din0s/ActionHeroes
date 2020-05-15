@@ -129,7 +129,7 @@ export default connect(
                 className={this.state.activeTab === "profile" ? " active" : ""}
               >
                 <div className="first_panel">
-                  <h2>{t("settings.profile")}</h2>
+                  <h2 className="header">{t("settings.profile")}</h2>
                   <form
                     id="profile-form"
                     method="post"
@@ -194,12 +194,13 @@ export default connect(
                     />
                   </span>
                 </div>
+                <h2 className="hidden_header">{t("settings.profile")}</h2>
               </div>
               <div
                 className={this.state.activeTab === "security" ? " active" : ""}
               >
                 <div className="first_panel">
-                  <h2>{t("settings.security")}</h2>
+                  <h2 className="header">{t("settings.security")}</h2>
                   <form
                     id="security-form"
                     method="post"
@@ -252,6 +253,7 @@ export default connect(
                     />
                   </form>
                 </div>
+                <h2 className="hidden_header">{t("settings.security")}</h2>
               </div>
             </div>
           </div>
