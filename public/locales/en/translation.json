@@ -158,13 +158,11 @@
     "bio": "Let us know more about you!",
     "favourite_categories": "Favourite Categories",
     "location": "Location",
-    "email": "Update Email",
     "update": {
       "profile": "Update Profile",
-      "security": "Update Settings"
+      "password": "Change Password"
     },
     "password": {
-      "change": "Change Password",
       "old": "Old Password",
       "new": "New Password",
       "confirm_new": "Confirm New Password",

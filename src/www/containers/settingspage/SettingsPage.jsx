@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import makeAnimated from "react-select/animated";
 import { withTranslation } from "react-i18next";
 
-//import { Link, Redirect } from "react-router-dom"; 
+//import { Link, Redirect } from "react-router-dom";
 //const favoutite = require("./favourite.json");
 //const categories = require("./categories.json");
 
@@ -32,6 +32,13 @@ const options = [
   { value: "Category16", label: "Technology" },
 ];
 
+const favourite_categories = [
+  { value: "Category1", label: "Animals" },
+  { value: "Category2", label: "Children" },
+];
+
+const coordinates = { lat: 40.63666412, lng: 22.942162898 };
+
 const animatedComponents = makeAnimated();
 
 const mapState = (state) => ({
@@ -47,15 +54,27 @@ export default connect(
     class SettingsPage extends Component {
       state = {
         activeTab: "profile",
-        selectedOption: null,
+        selectedOption: [],
         mismatch: false,
+        position: null,
+        fc: null,
+      };
+
+      componentDidMount() {
+        this.setState({ fc: favourite_categories });
+        this.setState({ position: coordinates });
+      }
+
+      changeFavourites = (selectedOption) => {
+        this.setState({ selectedOption });
       };
 
       changeTabs = (tab) => {
         this.setState({ mismatch: false });
         this.setState({ activeTab: tab });
+        //this.setState({ selectedOption: [] });
+        //this.setState({ position: coordinates });
         this.clearfields();
-        //event.target.reset();
       };
 
       clearfields = () => {
@@ -146,23 +165,32 @@ export default connect(
                       }
                     />
                     <span>{t("settings.favourite_categories")}</span>
-                    <Select className="Select"
+                    <Select
+                      className="Select"
                       closeMenuOnSelect={false}
                       components={animatedComponents}
                       isMulti
                       options={options}
+                      defaultValue={this.state.fc}
+                      onChange={this.changeFavourites}
                     />
                     <span className="bio">{t("settings.bio")}</span>
                     <textarea
                       type="text"
                       name="bio"
                       className="Bio-field"
+                      defaultValue="Hello World"
                       onChange={(e) =>
                         this.setState({ message: e.target.value.trim() })
                       }
                     />
                     <span>{t("settings.location")}</span>
-                    <Map className="Map"/>
+                    <Map
+                      className="Map"
+                      center={this.state.position}
+                      zoom={13}
+                      onClick={(e) => this.setState({ position: e.latlng })}
+                    />
                     <input
                       type="submit"
                       className="Submit-button"
@@ -207,24 +235,15 @@ export default connect(
                     action="/settings/submit"
                     onSubmit={this.submit}
                   >
-                    <span>{t("settings.email")}</span>
-                    <input
-                      type="email"
-                      name="email"
-                      className="Email-field"
-                      onChange={(e) =>
-                        this.setState({ email: e.target.value.trim() })
-                      }
-                    />
-                    <h4>{t("settings.password.change")}</h4>
                     <span>{t("settings.password.old")}</span>
                     <input
                       type="password"
                       name="old_password"
                       className="Password-field"
                       onChange={(e) =>
-                        this.setState({ username: e.target.value.trim() })
+                        this.setState({ old_password: e.target.value.trim() })
                       }
+                      required
                     />
                     <span>{t("settings.password.new")}</span>
                     <input
@@ -232,6 +251,7 @@ export default connect(
                       name="new_password"
                       className="Password-field"
                       onChange={this.setPassword}
+                      required
                     />
                     <span>{t("settings.password.confirm_new")}</span>
                     <input
@@ -239,6 +259,7 @@ export default connect(
                       name="confirm_new_password"
                       className="Password-field"
                       onChange={this.setPasswordConfirm}
+                      required
                     />
                     <p
                       className={`Password-mismatch${
@@ -249,7 +270,7 @@ export default connect(
                     <input
                       type="submit"
                       className="Submit-button"
-                      value={t("settings.update.security")}
+                      value={t("settings.update.password")}
                     />
                   </form>
                 </div>
