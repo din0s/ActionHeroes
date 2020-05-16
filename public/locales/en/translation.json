@@ -157,6 +157,6 @@
     "createteam": "Create your team!",
     "created": "Team created!",
     "nameerror": "Team name not available!",
-    "authentication": "Login to continue!"
+    "image": "Choose image"
   }
 }

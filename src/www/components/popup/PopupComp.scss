@@ -12,144 +12,60 @@
 
 .popup-content {
   border-radius: 1rem;
-  max-width: 40rem;
+  max-width: 75%;
 
-  .close {
-    background: #ffffff;
-    border: 1px solid #cfcece;
-    border-radius: 18px;
-    cursor: pointer;
-    font-size: 24px;
-    line-height: 15px;
-    outline: none;
-    padding: 2.5px 5px;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-  }
+  > div {
+    .close {
+      background: #ffffff;
+      border: 1px solid #cfcece;
+      border-radius: 18px;
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 15px;
+      outline: none;
+      padding: 2.5px 5px;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
 
-  .scrollarea {
-    height: 37rem;
+    > h2 {
+      margin-top: 0.8rem;
+    }
 
-    .scrollarea-content {
-      > h2 {
-        margin-top: 0.8rem;
-      }
+    > p {
+      color: red;
+      margin: 0rem;
+    }
 
-      > p {
-        color: red;
-        margin: 0rem;
-      }
+    > form {
+      margin: 1rem 2rem;
 
-      > form {
-        display: flex;
-        flex-direction: column;
-        margin: 1rem 3rem;
+      .FormArea {
+        max-height: 75vh;
 
-        > input {
-          height: 1.5rem;
-        }
+        &_content {
+          display: flex;
+          flex-direction: column;
+          padding: 0 2rem;
 
-        > textarea {
-          height: 5rem;
-          resize: none;
-        }
-
-        > input,
-        textarea {
-          border: 1px solid $softBlack;
-          border-radius: 0.6rem;
-          box-shadow: 1px 1px $softBlack;
-          margin-bottom: 1rem;
-          outline: none;
-          padding: 0.3rem;
-        }
-
-        > div {
-          margin-bottom: 1rem;
-
-          > p {
-            font-weight: bold;
-            text-align: left;
-            margin: 0.4rem 0;
+          > input {
+            height: 1.5rem;
           }
 
-          .scrollarea {
-            height: 8rem;
-
-            .scrollarea-content {
-              display: flex;
-              flex-wrap: wrap;
-              text-align: left;
-              flex-direction: column;
-
-              > label {
-                display: block;
-                position: relative;
-                padding-left: 40px;
-                margin-bottom: 0.3rem;
-                cursor: pointer;
-                font-size: 1rem;
-                user-select: none;
-                text-align: start;
-
-                &:hover {
-                  color: lightskyblue;
-                }
-
-                input {
-                  position: absolute;
-                  opacity: 0;
-                  cursor: pointer;
-                  height: 0;
-                  width: 0;
-                }
-
-                .checkmark {
-                  position: absolute;
-                  top: 0;
-                  left: 5px;
-                  height: 20px;
-                  width: 20px;
-                  background-color: rgba($color: white, $alpha: 0.75);
-                  border: 1px solid $softBlack;
-
-                  &:after {
-                    content: "";
-                    position: absolute;
-                    display: none;
-                  }
-                }
-              }
-
-              &:hover input ~ .checkmark {
-                background-color: rgba($color: white, $alpha: 0.25);
-                transition: 0.2s ease-in-out;
-              }
-
-              input:checked ~ .checkmark {
-                background-color: lightskyblue;
-              }
-
-              input:checked ~ .checkmark:after {
-                display: block;
-              }
-
-              .checkmark:after {
-                left: 7px;
-                top: 3px;
-                width: 3px;
-                height: 8px;
-                border: solid white;
-                border-width: 0 3px 3px 0;
-                transform: rotate(45deg);
-              }
-            }
+          > textarea {
+            height: 5rem;
+            resize: none;
           }
 
           .fileContainer {
             margin: 0rem;
             padding: 0rem;
+            padding-bottom: 0.5rem;
+
+            .uploadPictureContainer {
+              margin-top: calc(5% - 10px);
+            }
 
             .deleteImage {
               background: lightskyblue;
@@ -159,16 +75,111 @@
               width: 20px;
             }
           }
-        }
 
-        .SubmitButton {
-          align-self: center;
-          cursor: pointer;
-          height: 2rem;
-          margin: 0rem;
-          outline: none;
-          width: 10rem;
+          &_categories {
+            border-top: 1px solid rgba($color: black, $alpha: 0.4);
+
+            > p {
+              padding-top: 0.5rem;
+              font-weight: bold;
+              text-align: left;
+              margin: 0.4rem 0;
+            }
+
+            .scrollarea {
+              height: 8rem;
+
+              .scrollarea-content {
+                display: flex;
+                flex-wrap: wrap;
+                text-align: left;
+                flex-direction: column;
+
+                > label {
+                  display: block;
+                  position: relative;
+                  padding-left: 40px;
+                  margin-bottom: 0.3rem;
+                  cursor: pointer;
+                  font-size: 1rem;
+                  user-select: none;
+                  text-align: start;
+
+                  &:hover {
+                    color: lightskyblue;
+                  }
+
+                  input {
+                    position: absolute;
+                    opacity: 0;
+                    cursor: pointer;
+                    height: 0;
+                    width: 0;
+                  }
+
+                  .checkmark {
+                    position: absolute;
+                    top: 0;
+                    left: 5px;
+                    height: 20px;
+                    width: 20px;
+                    background-color: rgba($color: white, $alpha: 0.75);
+                    border: 1px solid rgba($color: black, $alpha: 0.25);
+
+                    &:after {
+                      content: "";
+                      position: absolute;
+                      display: none;
+                    }
+                  }
+                }
+
+                &:hover input ~ .checkmark {
+                  background-color: rgba($color: white, $alpha: 0.25);
+                  transition: 0.2s ease-in-out;
+                }
+
+                input:checked ~ .checkmark {
+                  background-color: lightskyblue;
+                }
+
+                input:checked ~ .checkmark:after {
+                  display: block;
+                }
+
+                .checkmark:after {
+                  left: 7px;
+                  top: 3px;
+                  width: 3px;
+                  height: 8px;
+                  border: solid white;
+                  border-width: 0 3px 3px 0;
+                  transform: rotate(45deg);
+                }
+              }
+            }
+          }
         }
+      }
+
+      input,
+      textarea {
+        border: 1px solid $softBlack;
+        border-radius: 0.6rem;
+        box-shadow: 1px 1px $softBlack;
+        margin-bottom: 1rem;
+        outline: none;
+        padding: 0.3rem;
+      }
+
+      .SubmitButton {
+        align-self: center;
+        cursor: pointer;
+        height: 2rem;
+        margin: 0rem;
+        margin-top: 1rem;
+        outline: none;
+        width: 10rem;
       }
     }
   }

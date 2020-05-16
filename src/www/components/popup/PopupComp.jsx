@@ -38,10 +38,6 @@ class PopupComp extends Component {
         this.setState({
           serverResponse: t("createteam.nameerror"),
         });
-      } else if (data.error.includes("Authentication")) {
-        this.setState({
-          serverResponse: t("createteam.authentication"),
-        });
       }
     } else {
       this.setState({
@@ -71,14 +67,13 @@ class PopupComp extends Component {
     }
     return (
       <Popup
-        trigger={
-          <button className="PopupTrigger">{t("createteam.create")}</button>
-        }
+        open={this.props.open}
+        onClose={this.props.onClose}
         closeOnDocumentClick={false}
         modal
       >
         {(close) => (
-          <ScrollArea>
+          <div>
             <button
               className="close"
               onClick={() => {
@@ -97,78 +92,84 @@ class PopupComp extends Component {
               action="api/teams/create"
               onSubmit={this.handleSubmit}
             >
-              <Input
-                name="teamName"
-                onChange={(e) =>
-                  this.setState({ teamName: e.target.value.trim() })
-                }
-                type="text"
-                placeholder={t("createteam.teamname")}
-              ></Input>
-              <textarea
-                name="description"
-                onChange={(e) =>
-                  this.setState({ description: e.target.value.trim() })
-                }
-                required
-                type="text"
-                placeholder={t("createteam.description")}
-              ></textarea>
-              <div>
-                <p>{t("filterlist.categories")}</p>
-                <ScrollArea>
-                  {Object.keys(categories).map((c) => {
-                    const category = categories[c];
-                    return (
-                      <label key={c}>
-                        {t(`categories.${category.name.toLowerCase()}`)}
-                        <input
-                          type="checkbox"
-                          onChange={(event) => {
-                            if (event.target.checked) {
-                              const categories = this.state.teamCategories.concat(
-                                category.name
-                              );
-                              this.setState({
-                                teamCategories: categories,
-                              });
-                            } else {
-                              const filtered = this.state.teamCategories.filter(
-                                (c) => c !== category.name
-                              );
+              <ScrollArea
+                className="FormArea"
+                contentClassName="FormArea_content"
+              >
+                <Input
+                  name="teamName"
+                  type="text"
+                  placeholder={t("createteam.teamname")}
+                  onChange={(e) =>
+                    this.setState({ teamName: e.target.value.trim() })
+                  }
+                />
+                <textarea
+                  name="description"
+                  required
+                  type="text"
+                  placeholder={t("createteam.description")}
+                  onChange={(e) =>
+                    this.setState({ description: e.target.value.trim() })
+                  }
+                ></textarea>
+                <ImageUploader
+                  withIcon={true}
+                  buttonText={t("createteam.image")}
+                  imgExtension={[".jpg", ".gif", ".png"]}
+                  maxFileSize={5242880}
+                  singleImage={true}
+                  withPreview={true}
+                  label="Max file size: 5mb, accepted: jpg, gif, png"
+                  onChange={(pic) => {
+                    this.setState({
+                      teamPicture: pic,
+                    });
+                  }}
+                />
+                <div className="FormArea_content_categories">
+                  <p>{t("filterlist.categories")}</p>
+                  <ScrollArea>
+                    {Object.keys(categories).map((c) => {
+                      const category = categories[c];
+                      return (
+                        <label key={c}>
+                          {t(`categories.${category.name.toLowerCase()}`)}
+                          <input
+                            type="checkbox"
+                            onChange={(event) => {
+                              if (event.target.checked) {
+                                const categories = this.state.teamCategories.concat(
+                                  category.name
+                                );
+                                this.setState({
+                                  teamCategories: categories,
+                                });
+                              } else {
+                                const filtered = this.state.teamCategories.filter(
+                                  (c) => c !== category.name
+                                );
 
-                              this.setState({
-                                teamCategories: filtered,
-                              });
-                            }
-                          }}
-                        />
-                        <span className="checkmark"></span>
-                      </label>
-                    );
-                  })}
-                </ScrollArea>
-              </div>
-              <ImageUploader
-                withIcon={true}
-                buttonText="Choose image"
-                onChange={(pic) => {
-                  this.setState({
-                    teamPicture: pic,
-                  });
-                }}
-                imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-                maxFileSize={5242880}
-                singleImage={true}
-                withPreview={true}
-              />
+                                this.setState({
+                                  teamCategories: filtered,
+                                });
+                              }
+                            }}
+                          />
+                          <span className="checkmark"></span>
+                        </label>
+                      );
+                    })}
+                  </ScrollArea>
+                </div>
+              </ScrollArea>
               <input
                 className="SubmitButton"
                 type="submit"
                 value={t("submit")}
               />
             </form>
-          </ScrollArea>
+          </div>
         )}
       </Popup>
     );
