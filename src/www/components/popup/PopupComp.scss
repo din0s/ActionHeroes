@@ -42,7 +42,8 @@
       margin: 1rem 2rem;
 
       .FormArea {
-        max-height: 75vh;
+        max-height: 65vh;
+        min-height: 15rem;
 
         &_content {
           display: flex;
@@ -169,7 +170,7 @@
         box-shadow: 1px 1px $softBlack;
         margin-bottom: 1rem;
         outline: none;
-        padding: 0.3rem;
+        padding: 0.5rem;
       }
 
       .SubmitButton {
@@ -193,28 +194,36 @@
   }
 
   .popup-content {
-    min-width: 20rem;
+    min-width: 30rem;
+  }
+}
 
-    .scrollarea-content {
-      > h2 {
-        font-size: 1rem;
-      }
+@media only screen and(max-width: 500px) {
+  .popup-content {
+    min-width: 25rem;
+
+    > div > h2 {
+      font-size: 1.2rem;
     }
   }
 }
 
-@media only screen and(max-width: 350px) {
+@media only screen and(max-width: 420px) {
   .popup-content {
-    min-width: 18rem;
+    min-width: 20rem;
 
-    .scrollarea
-      .scrollarea-content
-      > form
-      > div
-      .scrollarea
-      .scrollarea-content
-      > label {
-      font-size: 0.8rem;
+    > div {
+      > h2 {
+        font-size: 1rem;
+      }
+
+      > form {
+        margin: 1rem;
+
+        .FormArea_content {
+          padding: 0 1rem;
+        }
+      }
     }
   }
 }
