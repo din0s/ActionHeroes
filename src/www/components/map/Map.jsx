@@ -26,7 +26,6 @@ export default class Mapp extends React.Component {
 
   handleClick(e) {
     this.setState({ currentPos: e.latlng });
-    console.log(this.state.currentPos);
   }
 
   render() {

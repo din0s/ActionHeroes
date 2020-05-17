@@ -68,6 +68,9 @@ export default connect(
               <li className="Page-link">
                 <NavLink to="/profile" children={t("nav.user.profile")} />
               </li>
+              <li className="Page-link">
+                <NavLink to="/settings" children={t("nav.user.settings")} />
+              </li>
               {/* <li className="Page-link">
                 <NavLink to="/user/preferences" children={t("nav.user.pref")} />
               </li> */}

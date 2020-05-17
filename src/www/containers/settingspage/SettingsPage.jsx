@@ -5,8 +5,10 @@ import React, { Component } from "react";
 import ImageUploader from "react-images-upload";
 import Map from "../../components/map/Map";
 import Select from "react-select";
+import axios from "axios";
 import { connect } from "react-redux";
 import makeAnimated from "react-select/animated";
+import { withAlert } from "react-alert";
 import { withTranslation } from "react-i18next";
 
 //import { Link, Redirect } from "react-router-dom";
@@ -46,240 +48,362 @@ const mapState = (state) => ({
   loggedIn: state.auth.loggedIn,
 });
 
-export default connect(
-  mapState,
-  undefined
-)(
-  withTranslation()(
-    class SettingsPage extends Component {
-      state = {
-        activeTab: "profile",
-        selectedOption: [],
-        mismatch: false,
-        position: null,
-        fc: null,
-      };
+export default withAlert()(
+  connect(
+    mapState,
+    undefined
+  )(
+    withTranslation()(
+      class SettingsPage extends Component {
+        state = {
+          activeTab: "profile",
+          selectedOption: [],
+          mismatch: false,
+          position: null,
+          fc: null,
+          old_password: "",
+          new_password: "",
+          passwordConfirm: "",
+          username: "",
+          bio: "",
+          profilePicture: "",
+        };
 
-      componentDidMount() {
-        this.setState({ fc: favourite_categories });
-        this.setState({ position: coordinates });
-      }
-
-      changeFavourites = (selectedOption) => {
-        this.setState({ selectedOption });
-      };
-
-      changeTabs = (tab) => {
-        this.setState({ mismatch: false });
-        this.setState({ activeTab: tab });
-        //this.setState({ selectedOption: [] });
-        //this.setState({ position: coordinates });
-        this.clearfields();
-      };
-
-      clearfields = () => {
-        document.getElementById("profile-form").reset();
-        document.getElementById("security-form").reset();
-      };
-
-      submit = async (event) => {
-        event.preventDefault();
-        event.target.reset();
-      };
-
-      checkPassword = async (pass, confirm) => {
-        this.setState({ mismatch: pass !== confirm });
-      };
-
-      setPassword = async (e) => {
-        const password = e.target.value.trim();
-        const { passwordConfirm } = this.state;
-        this.setState({ password });
-        if (passwordConfirm !== "") {
-          this.checkPassword(password, passwordConfirm);
-        }
-      };
-
-      setPasswordConfirm = async (e) => {
-        const { password } = this.state;
-        const passwordConfirm = e.target.value.trim();
-        this.setState({ passwordConfirm });
-        this.checkPassword(password, passwordConfirm);
-      };
-
-      render() {
-        //console.log(this.props);
-        if (!this.props.loggedIn) {
-          return null; //<Redirect to="login" />;
+        componentDidMount() {
+          this.setState({ fc: favourite_categories });
+          this.setState({ position: coordinates });
         }
 
-        const { t, user } = this.props;
-        const { username } = user;
-        //const { username, profilePhoto } = user;
-        //const photo = profilePhoto || "/img/fakedata/profilePhoto.png";
-        //const { selectedOption } = this.state;
+        changeFavourites = (selectedOption) => {
+          this.setState({ selectedOption });
+        };
 
-        return (
-          <div className="SettingsPage">
-            <div className="SettingsPage_navigation">
-              <div className="SettingsPage_navigation_header">
-                <h2>{username}</h2>
-                <h5>{t("settings.personal_settings")}</h5>
+        changeTabs = (tab) => {
+          this.setState({ mismatch: false });
+          this.setState({ activeTab: tab });
+          this.clearfields();
+        };
+
+        clearfields = () => {
+          document.getElementById("profile-form").reset();
+          document.getElementById("security-form").reset();
+        };
+
+        checkPassword = async (pass, confirm) => {
+          this.setState({ mismatch: pass !== confirm });
+        };
+
+        setPassword = async (e) => {
+          const new_password = e.target.value.trim();
+          const { passwordConfirm } = this.state;
+          this.setState({ new_password });
+          if (passwordConfirm !== "") {
+            this.checkPassword(new_password, passwordConfirm);
+          }
+        };
+
+        setPasswordConfirm = async (e) => {
+          const { new_password } = this.state;
+          const passwordConfirm = e.target.value.trim();
+          this.setState({ passwordConfirm });
+          this.checkPassword(new_password, passwordConfirm);
+        };
+
+        handleResponse = (data, target) => {
+          const { t, alert } = this.props;
+          if (data.error) {
+            alert.error(data.error);
+          } else {
+            alert.success(t("settings.success"));
+            target.reset();
+          }
+        };
+
+        updateProfile = (username, bio, position, selectedOption, target) => {
+          axios
+            .post("/api/settings/submit/profile", {
+              username,
+              bio,
+              position,
+              selectedOption,
+            })
+            .then((res) => this.handleResponse(res.data, target))
+            .catch((err) => this.handleResponse(err.response.data, target));
+        };
+
+        submitProfile = async (event) => {
+          event.preventDefault();
+          const { username, bio, position, selectedOption } = this.state;
+          if (!this.state.mismatch) {
+            event.target.reset();
+            console.log(username);
+            console.log(bio);
+            console.log(position);
+            console.log(selectedOption);
+            this.updateProfile(
+              username,
+              bio,
+              position,
+              selectedOption,
+              event.target
+            );
+          } else {
+            console.log("Fail submitProfile");
+            /*this.setState({
+              username: "",
+              bio: "",
+              position: "",
+              selectedOption: null,
+            });*/
+          }
+        };
+
+        updatePassword = (old_password, new_password, target) => {
+          axios
+            .post("/api/settings/submit/password", {
+              old_password,
+              new_password,
+            })
+            .then((res) => this.handleResponse(res.data, target))
+            .catch((err) => this.handleResponse(err.response.data, target));
+        };
+
+        submitPassword = async (event) => {
+          event.preventDefault();
+          const { old_password, new_password } = this.state;
+          if (!this.state.mismatch) {
+            //event.target.reset();
+            console.log(old_password);
+            console.log(new_password);
+            this.updatePassword(old_password, new_password, event.target);
+          } else {
+            console.log("Fail submitPassword");
+            /*this.setState({
+              new_password: "",
+              passwordConfirm: "",
+            });*/
+          }
+        };
+
+        updatePicture = (profilePicture, target) => {
+          axios
+            .post("/api/settings/submit/picture", {
+              profilePicture,
+            })
+            .then((res) => this.handleResponse(res.data, target))
+            .catch((err) => this.handleResponse(err.response.data, target));
+        };
+
+        removePicture = async (event) => {
+          event.preventDefault();
+          this.updatePicture("", event.target);
+          console.log("Fail removePicture");
+        }
+
+        submitPicture = async (event) => {
+          event.preventDefault();
+          const { profilePicture } = this.state;
+          if (this.state.profilePicture !== "") {
+            console.log(profilePicture);
+            this.updatePicture(profilePicture, event.target);
+          } else {
+            console.log("Fail submitPicture");
+          }
+        };
+
+        render() {
+          //console.log(this.props);
+          if (!this.props.loggedIn) {
+            return null; //<Redirect to="login" />;
+          }
+
+          const { t, user } = this.props;
+          const { username } = user;
+          //const { username, profilePhoto } = user;
+          //const photo = profilePhoto || "/img/fakedata/profilePhoto.png";
+          //const { selectedOption } = this.state;
+
+          return (
+            <div className="SettingsPage">
+              <div className="SettingsPage_navigation">
+                <div className="SettingsPage_navigation_header">
+                  <h2>{username}</h2>
+                  <h5>{t("settings.personal_settings")}</h5>
+                </div>
+                <div className="SettingsPage_navigation_tabs">
+                  <div
+                    className={
+                      this.state.activeTab === "profile" ? "active" : ""
+                    }
+                    onClick={() => this.changeTabs("profile")}
+                  >
+                    {t("settings.profile")}
+                  </div>
+                  <div
+                    className={
+                      this.state.activeTab === "security" ? "active" : ""
+                    }
+                    onClick={() => this.changeTabs("security")}
+                  >
+                    {t("settings.security")}
+                  </div>
+                </div>
               </div>
-              <div className="SettingsPage_navigation_tabs">
+              <div className="SettingsPage_content">
                 <div
-                  className={this.state.activeTab === "profile" ? "active" : ""}
-                  onClick={() => this.changeTabs("profile")}
+                  className={
+                    this.state.activeTab === "profile" ? " active" : ""
+                  }
                 >
-                  {t("settings.profile")}
+                  <div className="first_panel">
+                    <h2 className="header">{t("settings.profile")}</h2>
+                    <form
+                      id="profile-form"
+                      method="post"
+                      action="/settings/submit"
+                      onSubmit={this.submitProfile}
+                    >
+                      <span>{t("settings.username")}</span>
+                      <input
+                        type="text"
+                        name="username"
+                        className="Username-field"
+                        onChange={(e) =>
+                          this.setState({ username: e.target.value.trim() })
+                        }
+                      />
+                      <span>{t("settings.favourite_categories")}</span>
+                      <Select
+                        className="Select"
+                        closeMenuOnSelect={false}
+                        components={animatedComponents}
+                        isMulti
+                        options={options}
+                        defaultValue={this.state.fc}
+                        onChange={this.changeFavourites}
+                      />
+                      <span className="bio">{t("settings.bio")}</span>
+                      <textarea
+                        type="text"
+                        name="bio"
+                        className="Bio-field"
+                        defaultValue="Hello World"
+                        onChange={(e) =>
+                          this.setState({ bio: e.target.value.trim() })
+                        }
+                      />
+                      <span>{t("settings.location")}</span>
+                      <Map
+                        className="Map"
+                        center={this.state.position}
+                        zoom={13}
+                        onClick={(e) => this.setState({ position: e.latlng })}
+                      />
+                      <input
+                        type="submit"
+                        className="Submit-button"
+                        value={t("settings.update.profile")}
+                      />
+                    </form>
+                  </div>
+                  <div className="photo">
+                    <img src="/img/fakedata/profilePhoto.png" alt="Avatar" />
+                    <form
+                      id="profile-picture"
+                      method="post"
+                      action="/settings/submit"
+                      onSubmit={this.submitPicture.bind(this)}
+                    >
+                      <ImageUploader
+                        withIcon={false}
+                        buttonText={t("settings.buttonText")}
+                        imgExtension={[".jpg", ".png"]}
+                        label={t("settings.label")}
+                        maxFileSize={5242880}
+                        singleImage={true}
+                        withPreview={true}
+                        onChange={(pic) => {
+                          this.setState({
+                            profilePicture: pic,
+                          });
+                        }}
+                      />
+                      <span className="buttons">
+                        <input
+                          type="submit"
+                          className="Save-button"
+                          value={t("settings.photo.save")}
+                        />
+                        <input
+                          type="submit"
+                          className="Remove-button"
+                          value={t("settings.photo.remove")}
+                          onClick={this.removePicture.bind(this)}
+                        />
+                      </span>
+                    </form>
+                  </div>
+                  <h2 className="hidden_header">{t("settings.profile")}</h2>
                 </div>
                 <div
                   className={
-                    this.state.activeTab === "security" ? "active" : ""
+                    this.state.activeTab === "security" ? " active" : ""
                   }
-                  onClick={() => this.changeTabs("security")}
                 >
-                  {t("settings.security")}
+                  <div className="first_panel">
+                    <h2 className="header">{t("settings.security")}</h2>
+                    <form
+                      id="security-form"
+                      method="post"
+                      action="/settings/submit"
+                      onSubmit={this.submitPassword}
+                    >
+                      <span>{t("settings.password.old")}</span>
+                      <input
+                        type="password"
+                        name="old_password"
+                        className="Password-field"
+                        onChange={(e) =>
+                          this.setState({ old_password: e.target.value.trim() })
+                        }
+                        required
+                      />
+                      <span>{t("settings.password.new")}</span>
+                      <input
+                        type="password"
+                        name="new_password"
+                        className="Password-field"
+                        onChange={this.setPassword}
+                        required
+                      />
+                      <span>{t("settings.password.confirm_new")}</span>
+                      <input
+                        type="password"
+                        name="confirm_new_password"
+                        className="Password-field"
+                        onChange={this.setPasswordConfirm}
+                        required
+                      />
+                      <p
+                        className={`Password-mismatch${
+                          this.state.mismatch ? "" : " hidden"
+                        }`}
+                        children={t("settings.password.mismatch")}
+                      />
+                      <input
+                        type="submit"
+                        className="Submit-button"
+                        value={t("settings.update.password")}
+                      />
+                    </form>
+                  </div>
+                  <h2 className="hidden_header">{t("settings.security")}</h2>
                 </div>
               </div>
             </div>
-            <div className="SettingsPage_content">
-              <div
-                className={this.state.activeTab === "profile" ? " active" : ""}
-              >
-                <div className="first_panel">
-                  <h2 className="header">{t("settings.profile")}</h2>
-                  <form
-                    id="profile-form"
-                    method="post"
-                    action="/settings/submit"
-                    onSubmit={this.submit}
-                  >
-                    <span>{t("settings.username")}</span>
-                    <input
-                      type="text"
-                      name="username"
-                      className="Username-field"
-                      onChange={(e) =>
-                        this.setState({ email: e.target.value.trim() })
-                      }
-                    />
-                    <span>{t("settings.favourite_categories")}</span>
-                    <Select
-                      className="Select"
-                      closeMenuOnSelect={false}
-                      components={animatedComponents}
-                      isMulti
-                      options={options}
-                      defaultValue={this.state.fc}
-                      onChange={this.changeFavourites}
-                    />
-                    <span className="bio">{t("settings.bio")}</span>
-                    <textarea
-                      type="text"
-                      name="bio"
-                      className="Bio-field"
-                      defaultValue="Hello World"
-                      onChange={(e) =>
-                        this.setState({ message: e.target.value.trim() })
-                      }
-                    />
-                    <span>{t("settings.location")}</span>
-                    <Map
-                      className="Map"
-                      center={this.state.position}
-                      zoom={13}
-                      onClick={(e) => this.setState({ position: e.latlng })}
-                    />
-                    <input
-                      type="submit"
-                      className="Submit-button"
-                      value={t("settings.update.profile")}
-                    />
-                  </form>
-                </div>
-                <div className="photo">
-                  <img src="/img/fakedata/profilePhoto.png" alt="Avatar" />
-                  <ImageUploader
-                    withIcon={false}
-                    buttonText={t("settings.buttonText")}
-                    imgExtension={[".jpg", ".png"]}
-                    label={t("settings.label")}
-                    maxFileSize={5242880}
-                    singleImage={true}
-                    withPreview={true}
-                  />
-                  <span className="buttons">
-                    <input
-                      type="submit"
-                      className="Save-button"
-                      value={t("settings.photo.save")}
-                    />
-                    <input
-                      type="submit"
-                      className="Remove-button"
-                      value={t("settings.photo.remove")}
-                    />
-                  </span>
-                </div>
-                <h2 className="hidden_header">{t("settings.profile")}</h2>
-              </div>
-              <div
-                className={this.state.activeTab === "security" ? " active" : ""}
-              >
-                <div className="first_panel">
-                  <h2 className="header">{t("settings.security")}</h2>
-                  <form
-                    id="security-form"
-                    method="post"
-                    action="/settings/submit"
-                    onSubmit={this.submit}
-                  >
-                    <span>{t("settings.password.old")}</span>
-                    <input
-                      type="password"
-                      name="old_password"
-                      className="Password-field"
-                      onChange={(e) =>
-                        this.setState({ old_password: e.target.value.trim() })
-                      }
-                      required
-                    />
-                    <span>{t("settings.password.new")}</span>
-                    <input
-                      type="password"
-                      name="new_password"
-                      className="Password-field"
-                      onChange={this.setPassword}
-                      required
-                    />
-                    <span>{t("settings.password.confirm_new")}</span>
-                    <input
-                      type="password"
-                      name="confirm_new_password"
-                      className="Password-field"
-                      onChange={this.setPasswordConfirm}
-                      required
-                    />
-                    <p
-                      className={`Password-mismatch${
-                        this.state.mismatch ? "" : " hidden"
-                      }`}
-                      children={t("settings.password.mismatch")}
-                    />
-                    <input
-                      type="submit"
-                      className="Submit-button"
-                      value={t("settings.update.password")}
-                    />
-                  </form>
-                </div>
-                <h2 className="hidden_header">{t("settings.security")}</h2>
-              </div>
-            </div>
-          </div>
-        );
+          );
+        }
       }
-    }
+    )
   )
 );

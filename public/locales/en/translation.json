@@ -17,6 +17,7 @@
       "greet": "Hello",
       "profile": "Profile",
       "pref": "Preferences",
+      "settings": "Settings",
       "exit": "Log Out"
     }
   },
@@ -151,13 +152,14 @@
     "past": "Past Actions"
   },
   "settings": {
+    "success": "Successful Update",
     "personal_settings": "Personal Settings",
     "profile": "Profile",
     "security": "Security",
     "username": "Change Username",
     "bio": "Let us know more about you!",
     "favourite_categories": "Favourite Categories",
-    "location": "Location",
+    "location": "Update Location",
     "update": {
       "profile": "Update Profile",
       "password": "Change Password"
