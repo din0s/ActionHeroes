@@ -119,13 +119,13 @@ export default withAlert()(
           }
         };
 
-        updateProfile = (username, bio, position, selectedOption, target) => {
+        updateProfile = (username, bio, coordinates, categories, target) => {
           axios
-            .post("/api/settings/submit/profile", {
+            .patch("api/users/me/profile", {
               username,
               bio,
-              position,
-              selectedOption,
+              coordinates,
+              categories,
             })
             .then((res) => this.handleResponse(res.data, target))
             .catch((err) => this.handleResponse(err.response.data, target));
@@ -134,33 +134,31 @@ export default withAlert()(
         submitProfile = async (event) => {
           event.preventDefault();
           const { username, bio, position, selectedOption } = this.state;
+          // Parsing data
+          const coordinates = [position.lat, position.lng]
+          const categories = [];
+          selectedOption.forEach(element => categories.push(element.label));
           if (!this.state.mismatch) {
             event.target.reset();
             console.log(username);
             console.log(bio);
-            console.log(position);
-            console.log(selectedOption);
+            console.log(coordinates);
+            console.log(categories);
             this.updateProfile(
               username,
               bio,
-              position,
-              selectedOption,
+              coordinates,
+              categories,
               event.target
             );
           } else {
             console.log("Fail submitProfile");
-            /*this.setState({
-              username: "",
-              bio: "",
-              position: "",
-              selectedOption: null,
-            });*/
           }
         };
 
         updatePassword = (old_password, new_password, target) => {
           axios
-            .post("/api/settings/submit/password", {
+            .patch("api/users/me/change_password", {
               old_password,
               new_password,
             })
@@ -178,16 +176,12 @@ export default withAlert()(
             this.updatePassword(old_password, new_password, event.target);
           } else {
             console.log("Fail submitPassword");
-            /*this.setState({
-              new_password: "",
-              passwordConfirm: "",
-            });*/
           }
         };
 
         updatePicture = (profilePicture, target) => {
           axios
-            .post("/api/settings/submit/picture", {
+            .put("api/users/me/photo", {
               profilePicture,
             })
             .then((res) => this.handleResponse(res.data, target))
