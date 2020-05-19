@@ -38,6 +38,10 @@ class PopupComp extends Component {
         this.setState({
           serverResponse: t("createteam.nameerror"),
         });
+      } else if (data.error.includes("Authentication")) {
+        this.setState({
+          serverResponse: t("createteam.authentication"),
+        });
       }
     } else {
       this.setState({
@@ -116,11 +120,11 @@ class PopupComp extends Component {
                 <ImageUploader
                   withIcon={true}
                   buttonText={t("createteam.image")}
-                  imgExtension={[".jpg", ".gif", ".png"]}
+                  imgExtension={[".jpg", ".gif", ".png", ".jpeg"]}
                   maxFileSize={5242880}
                   singleImage={true}
                   withPreview={true}
-                  label="Max file size: 5mb, accepted: jpg, gif, png"
+                  label="Max file size: 5mb, accepted: jpg, gif, png, jpeg"
                   onChange={(pic) => {
                     this.setState({
                       teamPicture: pic,

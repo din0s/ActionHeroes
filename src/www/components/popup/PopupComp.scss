@@ -60,6 +60,8 @@
           }
 
           .fileContainer {
+            border-radius: 0rem;
+            box-shadow: 0px 0px;
             margin: 0rem;
             padding: 0rem;
             padding-bottom: 0.5rem;
@@ -81,10 +83,10 @@
             border-top: 1px solid rgba($color: black, $alpha: 0.4);
 
             > p {
-              padding-top: 0.5rem;
               font-weight: bold;
-              text-align: left;
               margin: 0.4rem 0;
+              padding-top: 0.5rem;
+              text-align: left;
             }
 
             .scrollarea {
@@ -92,45 +94,46 @@
 
               .scrollarea-content {
                 display: flex;
+                flex-direction: column;
                 flex-wrap: wrap;
                 text-align: left;
-                flex-direction: column;
 
                 > label {
-                  display: block;
-                  position: relative;
-                  padding-left: 40px;
-                  margin-bottom: 0.3rem;
                   cursor: pointer;
+                  display: block;
                   font-size: 1rem;
-                  user-select: none;
+                  margin-bottom: 0.3rem;
+                  padding-left: 40px;
+                  position: relative;
                   text-align: start;
+                  user-select: none;
+                  width: fit-content;
 
                   &:hover {
                     color: lightskyblue;
                   }
 
                   input {
-                    position: absolute;
-                    opacity: 0;
                     cursor: pointer;
                     height: 0;
+                    opacity: 0;
+                    position: absolute;
                     width: 0;
                   }
 
                   .checkmark {
-                    position: absolute;
-                    top: 0;
-                    left: 5px;
-                    height: 20px;
-                    width: 20px;
                     background-color: rgba($color: white, $alpha: 0.75);
                     border: 1px solid rgba($color: black, $alpha: 0.25);
+                    height: 20px;
+                    left: 5px;
+                    position: absolute;
+                    top: 0;
+                    width: 20px;
 
                     &:after {
                       content: "";
-                      position: absolute;
                       display: none;
+                      position: absolute;
                     }
                   }
                 }
@@ -149,13 +152,13 @@
                 }
 
                 .checkmark:after {
-                  left: 7px;
-                  top: 3px;
-                  width: 3px;
-                  height: 8px;
                   border: solid white;
                   border-width: 0 3px 3px 0;
+                  height: 8px;
+                  left: 7px;
+                  top: 3px;
                   transform: rotate(45deg);
+                  width: 3px;
                 }
               }
             }

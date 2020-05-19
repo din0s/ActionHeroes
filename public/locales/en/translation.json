@@ -151,6 +151,7 @@
     "past": "Past Actions"
   },
   "createteam": {
+    "authentication": "Login to continue!",
     "teamname": "Team name",
     "description": "Description",
     "create": "Create Team",
