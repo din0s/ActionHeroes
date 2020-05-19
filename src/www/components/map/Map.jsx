@@ -15,11 +15,13 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
+const coordinates = { lat: 40.63666412, lng: 22.942162898 };
+
 export default class Mapp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPos: null,
+      currentPos: coordinates, // This should get the user's backend coordinates, now it is hardcoded.
     };
     this.handleClick = this.handleClick.bind(this);
   }
