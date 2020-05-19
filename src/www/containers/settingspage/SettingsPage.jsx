@@ -1,7 +1,6 @@
 import "./SettingsPage.scss";
 
 import React, { Component } from "react";
-
 import ImageUploader from "react-images-upload";
 import Map from "../../components/map/Map";
 import Select from "react-select";
@@ -37,13 +36,31 @@ const options = [
   { value: "Category19", label: "" },
   { value: "Category20", label: "" },
 ];
+const favourite_options = [
+  { value: "Category1", label: "" },
+  { value: "Category2", label: "" },
+  { value: "Category3", label: "" },
+  { value: "Category4", label: "" },
+  { value: "Category5", label: "" },
+  { value: "Category6", label: "" },
+  { value: "Category7", label: "" },
+  { value: "Category8", label: "" },
+  { value: "Category9", label: "" },
+  { value: "Category10", label: "" },
+  { value: "Categorυ11", label: "" },
+  { value: "Category12", label: "" },
+  { value: "Category13", label: "" },
+  { value: "Category14", label: "" },
+  { value: "Category15", label: "" },
+  { value: "Category16", label: "" },
+  { value: "Category17", label: "" },
+  { value: "Category18", label: "" },
+  { value: "Category19", label: "" },
+  { value: "Category20", label: "" },
+];
 
 const categoriesList = require("./categories.json");
-
-const favourite_categories = [
-  { value: "Category1", label: "Animals" },
-  { value: "Category2", label: "Children" },
-];
+const favouriteCategories = require("./favouriteCategories.json");
 
 const coordinates = { lat: 40.63666412, lng: 22.942162898 };
 
@@ -61,30 +78,32 @@ export default withAlert()(
   )(
     withTranslation()(
       class SettingsPage extends Component {
-        state = {
-          // Need to give user's backend profile settings if not first time
-          activeTab: "profile",
-          selectedOption: [],
-          mismatch: false,
-          position: coordinates,
-          fc: favourite_categories, // this.formatCategories(categoriesList, favourite_categories),
-          old_password: "",
-          new_password: "",
-          passwordConfirm: "",
-          username: "",
-          bio: "",
-          profilePicture: "",
-        };
+        constructor(props) {
+          super(props);
+          this.state = {
+            activeTab: "profile",
+            selectedOption: [],
+            mismatch: false,
+            position: coordinates,
+            fc: "",
+            old_password: "",
+            new_password: "",
+            passwordConfirm: "",
+            username: "",
+            bio: "",
+            profilePicture: "",
+          };
+        }
 
-        formatCategories = (categoriesList, options) => {
+        formatCategories = (categories, options) => {
           const { t } = this.props;
           let i;
-          for (i = 0; i < options.length; i++) {
+          for (i = 0; i < Object.keys(categories).length; i++) {
             options[i].label = t(
-              "categories." + Object.values(categoriesList)[i].name
+              "categories." + Object.values(categories)[i].name
             );
           }
-          return options;
+          return options.slice(0, Object.keys(categories).length);
         };
 
         changeFavourites = (selectedOption) => {
@@ -286,7 +305,10 @@ export default withAlert()(
                         components={animatedComponents}
                         isMulti
                         options={this.formatCategories(categoriesList, options)}
-                        defaultValue={this.state.fc}
+                        defaultValue={this.formatCategories(
+                          favouriteCategories,
+                          favourite_options
+                        )}
                         onChange={this.changeFavourites}
                       />
                       <span className="bio">{t("settings.bio")}</span>
