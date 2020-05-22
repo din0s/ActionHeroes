@@ -124,7 +124,7 @@ class PopupComp extends Component {
                   maxFileSize={5242880}
                   singleImage={true}
                   withPreview={true}
-                  label="Max file size: 5mb, accepted: jpg, gif, png, jpeg"
+                  label={t("createteam.maxfile")}
                   onChange={(pic) => {
                     this.setState({
                       teamPicture: pic,

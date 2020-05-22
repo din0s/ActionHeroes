@@ -133,6 +133,10 @@
         border-radius: 0.5rem;
         box-shadow: 0 0 5px 1px rgba($color: black, $alpha: 0.25);
         overflow: hidden;
+
+        input {
+          width: 100%;
+        }
       }
     }
 

@@ -158,6 +158,7 @@
     "createteam": "Create your team!",
     "created": "Team created!",
     "nameerror": "Team name not available!",
-    "image": "Choose image"
+    "image": "Choose image",
+    "maxfile": "Max file size: 5mb, accepted: jpg, gif, png, jpeg"
   }
 }
