@@ -120,7 +120,7 @@ class PopupComp extends Component {
                 <ImageUploader
                   withIcon={true}
                   buttonText={t("createteam.image")}
-                  imgExtension={[".jpg", ".gif", ".png", ".jpeg"]}
+                  imgExtension={[".jpg", ".jpeg"]}
                   maxFileSize={5242880}
                   singleImage={true}
                   withPreview={true}
