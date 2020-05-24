@@ -51,15 +51,10 @@ module.exports = {
     User.findById({ _id: req.userData.userId })
       .exec()
       .then((user) => {
-        if (!user) {
-          return res.status(401).json({
-            error: "Invalid credentials",
-          });
-        }
-
         bcrypt.compare(previousPassword, user.hash, (err, success) => {
           if (err) {
-            return res.status(500).send(err);
+            console.error(`Error during password comparison:\n${err}`);
+            return res.status(500).send();
           }
 
           if (success) {
