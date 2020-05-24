@@ -32,7 +32,55 @@ const authResponse = (user) => ({
 });
 
 module.exports = {
-  changePassword: (req, res) => {},
+  changePassword: (req, res) => {
+    const previousPassword = req.body.previousPassword;
+    const newPassword = req.body.newPassword;
+
+    if (!req.body.previousPassword) {
+      return res.status(400).json({
+        error: "Field `previousPassword` is required",
+      });
+    }
+
+    if (!req.body.newPassword) {
+      return res.status(400).json({
+        error: "Field `newPassword` is required",
+      });
+    }
+
+    User.findById({ _id: req.userData.userId })
+      .exec()
+      .then((user) => {
+        bcrypt.compare(previousPassword, user.hash, (err, success) => {
+          if (err) {
+            console.error(`Error during password comparison:\n${err}`);
+            return res.status(500).send();
+          }
+
+          if (success) {
+            bcrypt.hash(newPassword, 10, (err, hash) => {
+              if (err) {
+                console.error(`Error during hashing:\n${err}`);
+                return res.status(500).send();
+              } else {
+                user.hash = hash;
+                user.save().then(() => {
+                  return res.json(authResponse(user));
+                });
+              }
+            });
+          } else {
+            return res.status(401).json({
+              error: "Invalid password",
+            });
+          }
+        });
+      })
+      .catch((err) => {
+        console.error(`Error during user find():\n${err}`);
+        return res.status(500).json();
+      });
+  },
 
   changePhoto: (req, res) => {},
 
