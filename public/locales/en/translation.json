@@ -122,6 +122,7 @@
     "children": "Children & Youth",
     "community": "Community",
     "education & literacy": "Education & Literacy",
+    "education": "Education & Literacy",
     "emergency & safety": "Emergency & Safety",
     "employment": "Employment",
     "environment": "Environment",
@@ -131,15 +132,14 @@
     "nature": "Nature",
     "poverty": "Poverty",
     "programming": "Programming",
-    "seniors": "Seniors",
-    "education": "Education & Literacy",
-    "youth": "Children & Youth",
     "science": "Science",
+    "seniors": "Seniors",
     "special needs": "Special needs",
     "sports & recreation": "Sports & Recreation",
     "students": "Students",
     "technology": "Technology",
-    "women": "Women"
+    "women": "Women",
+    "youth": "Children & Youth"
   },
   "teaminfo": {
     "members": "Members",

@@ -16,28 +16,52 @@ import { withTranslation } from "react-i18next";
 //const categories = require("./categories.json");
 
 const options = [
-  { value: "Category1", label: "Animals" },
-  { value: "Category2", label: "Children" },
-  { value: "Category3", label: "Community" },
-  { value: "Category4", label: "Education & Literacy" },
-  { value: "Category5", label: "Emergency & Safety" },
-  { value: "Category6", label: "Employment" },
-  { value: "Category7", label: "Health & Medicine" },
-  { value: "Category8", label: "Hunger" },
-  { value: "Category9", label: "Homeless" },
-  { value: "Category10", label: "Nature" },
-  { value: "Categorυ11", label: "Poverty" },
-  { value: "Category12", label: "Science" },
-  { value: "Category13", label: "Seniors" },
-  { value: "Category14", label: "Special Needs" },
-  { value: "Category15", label: "Sports & Recreation" },
-  { value: "Category16", label: "Technology" },
+  { value: "Category1", label: "" },
+  { value: "Category2", label: "" },
+  { value: "Category3", label: "" },
+  { value: "Category4", label: "" },
+  { value: "Category5", label: "" },
+  { value: "Category6", label: "" },
+  { value: "Category7", label: "" },
+  { value: "Category8", label: "" },
+  { value: "Category9", label: "" },
+  { value: "Category10", label: "" },
+  { value: "Categorυ11", label: "" },
+  { value: "Category12", label: "" },
+  { value: "Category13", label: "" },
+  { value: "Category14", label: "" },
+  { value: "Category15", label: "" },
+  { value: "Category16", label: "" },
+  { value: "Category17", label: "" },
+  { value: "Category18", label: "" },
+  { value: "Category19", label: "" },
+  { value: "Category20", label: "" },
+];
+const favourite_options = [
+  { value: "Category1", label: "" },
+  { value: "Category2", label: "" },
+  { value: "Category3", label: "" },
+  { value: "Category4", label: "" },
+  { value: "Category5", label: "" },
+  { value: "Category6", label: "" },
+  { value: "Category7", label: "" },
+  { value: "Category8", label: "" },
+  { value: "Category9", label: "" },
+  { value: "Category10", label: "" },
+  { value: "Categorυ11", label: "" },
+  { value: "Category12", label: "" },
+  { value: "Category13", label: "" },
+  { value: "Category14", label: "" },
+  { value: "Category15", label: "" },
+  { value: "Category16", label: "" },
+  { value: "Category17", label: "" },
+  { value: "Category18", label: "" },
+  { value: "Category19", label: "" },
+  { value: "Category20", label: "" },
 ];
 
-const favourite_categories = [
-  { value: "Category1", label: "Animals" },
-  { value: "Category2", label: "Children" },
-];
+const categoriesList = require("./categories.json");
+const favouriteCategories = require("./favouriteCategories.json");
 
 const coordinates = { lat: 40.63666412, lng: 22.942162898 };
 
@@ -55,24 +79,33 @@ export default withAlert()(
   )(
     withTranslation()(
       class SettingsPage extends Component {
-        state = {
-          activeTab: "profile",
-          selectedOption: [],
-          mismatch: false,
-          position: null,
-          fc: null,
-          old_password: "",
-          new_password: "",
-          passwordConfirm: "",
-          username: "",
-          bio: "",
-          profilePicture: "",
-        };
-
-        componentDidMount() {
-          this.setState({ fc: favourite_categories });
-          this.setState({ position: coordinates });
+        constructor(props) {
+          super(props);
+          this.state = {
+            activeTab: "profile",
+            selectedOption: [],
+            mismatch: false,
+            position: coordinates,
+            fc: "",
+            old_password: "",
+            new_password: "",
+            passwordConfirm: "",
+            username: "",
+            bio: "",
+            profilePicture: "",
+          };
         }
+
+        formatCategories = (categories, options) => {
+          const { t } = this.props;
+          let i;
+          for (i = 0; i < Object.keys(categories).length; i++) {
+            options[i].label = t(
+              "categories." + Object.values(categories)[i].name
+            );
+          }
+          return options.slice(0, Object.keys(categories).length);
+        };
 
         changeFavourites = (selectedOption) => {
           this.setState({ selectedOption });
@@ -135,9 +168,9 @@ export default withAlert()(
           event.preventDefault();
           const { username, bio, position, selectedOption } = this.state;
           // Parsing data
-          const coordinates = [position.lat, position.lng]
+          const coordinates = [position.lat, position.lng];
           const categories = [];
-          selectedOption.forEach(element => categories.push(element.label));
+          selectedOption.forEach((element) => categories.push(element.label));
           if (!this.state.mismatch) {
             event.target.reset();
             console.log(username);
@@ -192,7 +225,7 @@ export default withAlert()(
           event.preventDefault();
           this.updatePicture("", event.target);
           console.log("Fail removePicture");
-        }
+        };
 
         submitPicture = async (event) => {
           event.preventDefault();
@@ -272,8 +305,11 @@ export default withAlert()(
                         closeMenuOnSelect={false}
                         components={animatedComponents}
                         isMulti
-                        options={options}
-                        defaultValue={this.state.fc}
+                        options={this.formatCategories(categoriesList, options)}
+                        defaultValue={this.formatCategories(
+                          favouriteCategories,
+                          favourite_options
+                        )}
                         onChange={this.changeFavourites}
                       />
                       <span className="bio">{t("settings.bio")}</span>

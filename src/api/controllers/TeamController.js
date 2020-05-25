@@ -1,5 +1,6 @@
 const Team = require("../models/TeamModel");
 const Category = require("../models/CategoryModel");
+const User = require("../models/UserModel");
 
 module.exports = {
   addMembers: (req, res) => {},
@@ -31,7 +32,17 @@ module.exports = {
         .save()
         .then(() => {
           team.__v = undefined;
-          return res.status(201).send(team);
+          User.findByIdAndUpdate(
+            { _id: req.userData.userId },
+            { $addToSet: { teamsOwned: team._id } }
+          )
+            .then(() => {
+              return res.status(201).send(team);
+            })
+            .catch((err) => {
+              console.error(`Error during user update():\n${err}`);
+              return res.status(500).send();
+            });
         })
         .catch((err) => {
           if (err.name == "ValidationError") {

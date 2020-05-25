@@ -71,6 +71,8 @@ app.use(
   })
 );
 
+mongo.set("useFindAndModify", false);
+
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

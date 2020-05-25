@@ -6,7 +6,7 @@
   flex-direction: row;
   justify-content: center;
   margin: auto;
-  padding: 2rem 13vw;
+  padding: 0rem;
 
   &_navigation {
     background-color: rgba($color: white, $alpha: 0.7);
@@ -14,9 +14,11 @@
     border: 1px solid $softBlack;
     box-shadow: 1px 1px 1rem $softBlack;
     height: max-content;
-    margin: 2rem;
+    margin-top: 2rem;
+    margin-right: 2rem;
+    margin-left: 2rem;
     text-align: start;
-    width: 15rem;
+    min-width: 16rem;
 
     &_header {
       padding: 0.8rem;
@@ -68,10 +70,12 @@
     border-radius: 0.5rem;
     border: 1px solid $softBlack;
     box-shadow: 1px 1px 1rem $softBlack;
-    margin: 2rem;
+    margin-top: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
     padding: 2rem;
     text-align: start;
-    width: 60rem;
+    width: 48rem;
 
     > div {
       display: flex;
@@ -86,7 +90,7 @@
         display: none;
         border-bottom: 1px solid $softBlack;
         margin-left: 1rem;
-        width: 20rem;
+        width: 17rem;
       }
     }
 
@@ -164,7 +168,7 @@
     .photo {
       text-align: center;
       width: 15rem;
-      margin-left: 15rem;
+      margin-left: 5rem;
 
       > img {
         padding-top: 4rem;
@@ -180,7 +184,7 @@
       }
 
       .buttons {
-        padding: 1rem;
+        //padding: 1rem;
 
         > * {
           border-radius: 0.5rem;
@@ -193,7 +197,7 @@
           outline: none;
           padding: 0.75rem;
           transition: 0.1s ease-in-out;
-          width: max-content;
+          width: 10rem;
 
           &:hover {
             background-color: $softBlack;
@@ -201,23 +205,10 @@
         }
 
         .Save-button {
-          margin-right: 2rem;
+          //margin-right: 2rem;
         }
       }
     }
-  }
-}
-
-@media only screen and(max-width: 1600px) {
-  .SettingsPage {
-    padding: 1rem 5rem;
-  }
-}
-
-@media only screen and(max-width: 1460px) {
-  .SettingsPage {
-    padding: 0rem;
-    padding-top: 1rem;
   }
 }
 
@@ -225,12 +216,14 @@
   .SettingsPage {
     align-items: center;
     flex-direction: column;
+    padding-left: 2rem;
 
     &_navigation {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       border-bottom: none;
       margin-bottom: 0;
+      margin-left: 0;
       width: 54rem;
 
       &_header {
@@ -319,10 +312,18 @@
       }
 
       .photo {
+        .buttons {
+          display: flex;
+          justify-content: center;
+          .Save-button {
+            margin-right: 0.3rem;
+          }
+        }
         margin-left: auto;
         margin-right: auto;
         > img {
           padding-top: 2rem;
+          width: 10rem;
         }
       }
     }
@@ -332,19 +333,19 @@
 @media only screen and(max-width: 485px) {
   .SettingsPage {
     &_navigation {
-      width: 21rem;
+      width: 19rem;
 
       &_tabs {
         > * {
-          width: 10.5rem;
+          width: 9.5rem;
         }
       }
     }
 
     &_content {
+      width: 19rem;
       justify-content: center;
       padding: 0;
-      width: fit-content;
 
       .first_panel {
         > form {
