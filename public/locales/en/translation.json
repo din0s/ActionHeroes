@@ -156,10 +156,10 @@
     "personal_settings": "Personal Settings",
     "profile": "Profile",
     "security": "Security",
-    "username": "Change Username",
-    "bio": "Let us know more about you!",
+    "username": "Username",
+    "bio": "User Bio",
     "favourite_categories": "Favourite Categories",
-    "location": "Update Location",
+    "location": "Location",
     "update": {
       "profile": "Update Profile",
       "password": "Change Password"
@@ -175,6 +175,6 @@
       "remove": "Remove"
     },
     "buttonText": "Choose image",
-    "label": "Max file size: 5mb, accepted: jpg or png"
+    "label": "Max file size: 5mb, accepted: jpg & png"
   }
 }
