@@ -93,6 +93,7 @@ export default withAlert()(
             username: "",
             bio: "",
             profilePicture: "",
+            redirect: false,
           };
         }
 
@@ -107,13 +108,8 @@ export default withAlert()(
           return options.slice(0, Object.keys(categories).length);
         };
 
-        changeFavourites = (selectedOption) => {
-          this.setState({ selectedOption });
-        };
-
         changeTabs = (tab) => {
-          this.setState({ mismatch: false });
-          this.setState({ activeTab: tab });
+          this.setState({ mismatch: false, activeTab: tab });
           this.clearfields();
         };
 
@@ -141,6 +137,7 @@ export default withAlert()(
           this.setState({ passwordConfirm });
           this.checkPassword(new_password, passwordConfirm);
         };
+        
 
         handleResponse = (data, target) => {
           const { t, alert } = this.props;
@@ -149,6 +146,9 @@ export default withAlert()(
           } else {
             alert.success(t("settings.success"));
             target.reset();
+            setTimeout(() => {
+              this.setState({ redirect: true });
+            }, 1500);
           }
         };
 
@@ -184,16 +184,14 @@ export default withAlert()(
               categories,
               event.target
             );
-          } else {
-            console.log("Fail submitProfile");
           }
         };
 
-        updatePassword = (old_password, new_password, target) => {
+        updatePassword = (previousPassword, newPassword, target) => {
           axios
             .patch("api/users/me/change_password", {
-              old_password,
-              new_password,
+              previousPassword,
+              newPassword,
             })
             .then((res) => this.handleResponse(res.data, target))
             .catch((err) => this.handleResponse(err.response.data, target));
@@ -207,8 +205,6 @@ export default withAlert()(
             console.log(old_password);
             console.log(new_password);
             this.updatePassword(old_password, new_password, event.target);
-          } else {
-            console.log("Fail submitPassword");
           }
         };
 
@@ -224,7 +220,6 @@ export default withAlert()(
         removePicture = async (event) => {
           event.preventDefault();
           this.updatePicture("", event.target);
-          console.log("Fail removePicture");
         };
 
         submitPicture = async (event) => {
@@ -233,8 +228,6 @@ export default withAlert()(
           if (this.state.profilePicture !== "") {
             console.log(profilePicture);
             this.updatePicture(profilePicture, event.target);
-          } else {
-            console.log("Fail submitPicture");
           }
         };
 
@@ -244,8 +237,12 @@ export default withAlert()(
             return null; //<Redirect to="login" />;
           }
 
+          if (this.state.redirect) {
+            return <Redirect to="/profile" />;
+          }
+
           const { t, user } = this.props;
-          const { username } = user;
+          const { username, bio } = user;
           //const { username, profilePhoto } = user;
           //const photo = profilePhoto || "/img/fakedata/profilePhoto.png";
           //const { selectedOption } = this.state;
@@ -287,7 +284,6 @@ export default withAlert()(
                     <form
                       id="profile-form"
                       method="post"
-                      action="/settings/submit"
                       onSubmit={this.submitProfile}
                     >
                       <span>{t("settings.username")}</span>
@@ -295,6 +291,7 @@ export default withAlert()(
                         type="text"
                         name="username"
                         className="Username-field"
+                        placeholder = {username}
                         onChange={(e) =>
                           this.setState({ username: e.target.value.trim() })
                         }
@@ -310,14 +307,16 @@ export default withAlert()(
                           favouriteCategories,
                           favourite_options
                         )}
-                        onChange={this.changeFavourites}
+                        onChange={(selectedOption) => {
+                          this.setState({ selectedOption });
+                        }}
                       />
                       <span className="bio">{t("settings.bio")}</span>
                       <textarea
                         type="text"
                         name="bio"
                         className="Bio-field"
-                        defaultValue="Hello World"
+                        defaultValue={bio}
                         onChange={(e) =>
                           this.setState({ bio: e.target.value.trim() })
                         }
@@ -341,7 +340,6 @@ export default withAlert()(
                     <form
                       id="profile-picture"
                       method="post"
-                      action="/settings/submit"
                       onSubmit={this.submitPicture.bind(this)}
                     >
                       <ImageUploader
@@ -385,7 +383,6 @@ export default withAlert()(
                     <form
                       id="security-form"
                       method="post"
-                      action="/settings/submit"
                       onSubmit={this.submitPassword}
                     >
                       <span>{t("settings.password.old")}</span>

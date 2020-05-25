@@ -71,9 +71,6 @@ export default connect(
               <li className="Page-link">
                 <NavLink to="/settings" children={t("nav.user.settings")} />
               </li>
-              {/* <li className="Page-link">
-                <NavLink to="/user/preferences" children={t("nav.user.pref")} />
-              </li> */}
               <li className="Page-link">
                 <p children={t("nav.user.exit")} onClick={this.props.logout} />
               </li>
