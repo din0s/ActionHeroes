@@ -4,6 +4,7 @@ import React, { Component } from "react";
 
 import ImageUploader from "react-images-upload";
 import Map from "../../components/map/Map";
+import { Redirect } from "react-router-dom";
 import Select from "react-select";
 import axios from "axios";
 import { connect } from "react-redux";
@@ -11,7 +12,6 @@ import makeAnimated from "react-select/animated";
 import { withAlert } from "react-alert";
 import { withTranslation } from "react-i18next";
 
-//import { Link, Redirect } from "react-router-dom";
 //const favoutite = require("./favourite.json");
 //const categories = require("./categories.json");
 
