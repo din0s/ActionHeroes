@@ -15,7 +15,7 @@ import { withTranslation } from "react-i18next";
 //const favoutite = require("./favourite.json");
 //const categories = require("./categories.json");
 
-const options = [
+var options = [
   { value: "Category1", label: "" },
   { value: "Category2", label: "" },
   { value: "Category3", label: "" },
@@ -37,7 +37,7 @@ const options = [
   { value: "Category19", label: "" },
   { value: "Category20", label: "" },
 ];
-const favourite_options = [
+var favourite_options = [
   { value: "Category1", label: "" },
   { value: "Category2", label: "" },
   { value: "Category3", label: "" },
@@ -60,8 +60,8 @@ const favourite_options = [
   { value: "Category20", label: "" },
 ];
 
-const categoriesList = require("./categories.json");
-const favouriteCategories = require("./favouriteCategories.json");
+var categoriesList = require("./categories.json");
+var favouriteCategories = require("./favouriteCategories.json");
 
 const coordinates = { lat: 40.63666412, lng: 22.942162898 };
 
@@ -99,12 +99,11 @@ export default withAlert()(
 
         formatCategories = (categories, options) => {
           const { t } = this.props;
-          let i;
-          for (i = 0; i < Object.keys(categories).length; i++) {
-            options[i].label = t(
-              "categories." + Object.values(categories)[i].name
-            );
-          }
+
+          Object.keys(categories).map((key, index) => {
+            options[index].label = t("categories." + categories[key].name);
+          });
+
           return options.slice(0, Object.keys(categories).length);
         };
 
@@ -137,7 +136,6 @@ export default withAlert()(
           this.setState({ passwordConfirm });
           this.checkPassword(new_password, passwordConfirm);
         };
-        
 
         handleResponse = (data, target) => {
           const { t, alert } = this.props;
@@ -291,7 +289,7 @@ export default withAlert()(
                         type="text"
                         name="username"
                         className="Username-field"
-                        placeholder = {username}
+                        placeholder={username}
                         onChange={(e) =>
                           this.setState({ username: e.target.value.trim() })
                         }
@@ -356,7 +354,7 @@ export default withAlert()(
                           });
                         }}
                       />
-                      <span className="buttons">
+                      {/* <span className="buttons">
                         <input
                           type="submit"
                           className="Save-button"
@@ -368,7 +366,7 @@ export default withAlert()(
                           value={t("settings.photo.remove")}
                           onClick={this.removePicture.bind(this)}
                         />
-                      </span>
+                      </span> */}
                     </form>
                   </div>
                   <h2 className="hidden_header">{t("settings.profile")}</h2>
