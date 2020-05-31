@@ -150,13 +150,14 @@ export default withAlert()(
           }
         };
 
-        updateProfile = (username, bio, coordinates, categories, target) => {
+        updateProfile = (username, bio, coordinates, categories, profilePicture, target) => {
           axios
             .patch("api/users/me/profile", {
               username,
               bio,
               coordinates,
               categories,
+              profilePicture,
             })
             .then((res) => this.handleResponse(res.data, target))
             .catch((err) => this.handleResponse(err.response.data, target));
@@ -165,21 +166,25 @@ export default withAlert()(
         submitProfile = async (event) => {
           event.preventDefault();
           const { username, bio, position, selectedOption } = this.state;
+          const { profilePicture } = this.state;
           // Parsing data
           const coordinates = [position.lat, position.lng];
           const categories = [];
           selectedOption.forEach((element) => categories.push(element.label));
           if (!this.state.mismatch) {
             event.target.reset();
-            console.log(username);
-            console.log(bio);
-            console.log(coordinates);
-            console.log(categories);
+            // For testing
+            console.log("username: ", username);
+            console.log("bio: ", bio);
+            console.log("coordinates: ", coordinates);
+            console.log("categories: ", categories);
+            console.log("profilePicture: ", profilePicture);
             this.updateProfile(
               username,
               bio,
               coordinates,
               categories,
+              profilePicture,
               event.target
             );
           }
@@ -199,33 +204,9 @@ export default withAlert()(
           event.preventDefault();
           const { old_password, new_password } = this.state;
           if (!this.state.mismatch) {
-            //event.target.reset();
             console.log(old_password);
             console.log(new_password);
             this.updatePassword(old_password, new_password, event.target);
-          }
-        };
-
-        updatePicture = (profilePicture, target) => {
-          axios
-            .put("api/users/me/photo", {
-              profilePicture,
-            })
-            .then((res) => this.handleResponse(res.data, target))
-            .catch((err) => this.handleResponse(err.response.data, target));
-        };
-
-        removePicture = async (event) => {
-          event.preventDefault();
-          this.updatePicture("", event.target);
-        };
-
-        submitPicture = async (event) => {
-          event.preventDefault();
-          const { profilePicture } = this.state;
-          if (this.state.profilePicture !== "") {
-            console.log(profilePicture);
-            this.updatePicture(profilePicture, event.target);
           }
         };
 
@@ -338,7 +319,7 @@ export default withAlert()(
                     <form
                       id="profile-picture"
                       method="post"
-                      onSubmit={this.submitPicture.bind(this)}
+                      onSubmit={this.submitProfile}
                     >
                       <ImageUploader
                         withIcon={false}

@@ -1,7 +1,7 @@
 import "./Map.scss";
 import "leaflet/dist/leaflet.css";
 
-import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import { Map, Marker, TileLayer } from "react-leaflet";
 
 import L from "leaflet";
 import React from "react";
@@ -45,10 +45,6 @@ export default class Mapp extends React.Component {
           />
           {this.state.currentPos && (
             <Marker position={this.state.currentPos} draggable={false}>
-              {/*<Popup position={this.state.currentPos}>
-                Current location:{" "}
-                <pre>{JSON.stringify(this.state.currentPos, null, 2)}</pre>
-          </Popup>*/}
             </Marker>
           )}
         </Map>
