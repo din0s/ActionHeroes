@@ -34,18 +34,16 @@ module.exports = {
       );
     }
 
-    if (req.body.team) {
+    if (req.body.organizer) {
       promises.push(
-        Team.findOne({ name: req.body.team }).then((team) => {
+        Team.findOne({ name: req.body.organizer }).then((team) => {
           if (team) {
-            action[`organizer`][`teamId`] = team._id;
+            action[`organizer`] = team._id;
           } else {
             return res.status(400).json({ error: "Invalid organizer" });
           }
         })
       );
-    } else {
-      action[`organizer`][`userId`] = req.userData.userId;
     }
 
     if (req.body.location) {

@@ -18,10 +18,7 @@ const ActionSchema = new mongo.Schema({
   date: { type: Date, required: true },
   dateCreated: { type: Date, default: Date.now },
   photo: { data: Buffer, contentType: String },
-  organizer: {
-    userId: { type: mongo.Schema.Types.ObjectId, ref: "User" },
-    teamId: { type: mongo.Schema.Types.ObjectId, ref: "Team" },
-  },
+  organizer: { type: mongo.Schema.Types.ObjectId, ref: "Team" },
   attendees: [{ type: mongo.Schema.Types.ObjectId, ref: "User" }],
   approved: { type: Boolean, default: false },
 });
