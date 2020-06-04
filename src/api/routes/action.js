@@ -34,22 +34,6 @@ router.put(
   ActionController.changePhoto
 );
 
-/* Admin */
-
-router.post(
-  "/:action_id/approve",
-  checkAuth,
-  checkAdmin,
-  ActionController.approveAction
-);
-
-router.post(
-  "/:action_id/decline",
-  checkAuth,
-  checkAdmin,
-  ActionController.declineAction
-);
-
 /* Attendants */
 
 router.post("/:action_id/attend", checkAuth, ActionUserController.addAttendant);

@@ -3,8 +3,6 @@ const Team = require("../models/TeamModel");
 const Category = require("../models/CategoryModel");
 
 module.exports = {
-  approveAction: (req, res) => {},
-
   cancelAction: (req, res) => {},
 
   changePhoto: (req, res) => {},
@@ -108,8 +106,6 @@ module.exports = {
         });
     });
   },
-
-  declineAction: (req, res) => {},
 
   search: (req, res) => {},
 
