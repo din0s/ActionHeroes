@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const checkAuth = require("../middleware/check-auth");
-const checkAdmin = require("../middleware/check-admin");
 const checkPermissions = require("../middleware/check-permissions");
 const logSearch = require("../middleware/log-search");
 

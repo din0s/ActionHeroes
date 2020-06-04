@@ -20,7 +20,6 @@ const ActionSchema = new mongo.Schema({
   photo: { data: Buffer, contentType: String },
   organizer: { type: mongo.Schema.Types.ObjectId, ref: "Team" },
   attendees: [{ type: mongo.Schema.Types.ObjectId, ref: "User" }],
-  approved: { type: Boolean, default: false },
 });
 
 ActionSchema.plugin(uniqueValidator);
