@@ -113,5 +113,76 @@ module.exports = {
 
   search: (req, res) => {},
 
-  updateAction: (req, res) => {},
+  updateAction: (req, res) => {
+    var query = {};
+    var promises = [];
+
+    if (req.body.name) {
+      query[`name`] = req.body.name;
+    }
+
+    if (req.body.description) {
+      query[`description`] = req.body.description;
+    }
+
+    if (req.body.date) {
+      query[`date`] = req.body.date;
+    }
+
+    if (req.body.categories) {
+      const categories = req.body.categories;
+      promises.push(
+        Category.find({ name: { $in: categories } }).then((categories) => {
+          query[`categories`] = categories.map((c) => c._id);
+        })
+      );
+    }
+
+    if (req.body.location) {
+      const coordinates = req.body.location.coordinates;
+      const name = req.body.location.name;
+
+      if (!name) {
+        return res
+          .status(400)
+          .json({ error: "Field `location.name` is required" });
+      } else if (!coordinates) {
+        return res
+          .status(400)
+          .json({ error: "Field `location.coordinates is required" });
+      } else {
+        if (coordinates.length == 2) {
+          query[`location`] = {
+            name: name,
+            coordinates: coordinates,
+          };
+        } else {
+          return res.status(400).json({ error: "Invalid coordinates" });
+        }
+      }
+    }
+
+    Promise.all(promises)
+      .then(() => {
+        Action.updateOne({ _id: req.params.action_id }, { $set: query })
+          .then(() => {
+            return res.status(200).send();
+          })
+          .catch((err) => {
+            if (err.name == "MongoError") {
+              if (err.code == "11000") {
+                return res
+                  .status(400)
+                  .json({ error: "Action name not available" });
+              }
+            }
+            console.error(`Error during action update():\n${err}`);
+            return res.status(500).send();
+          });
+      })
+      .catch((err) => {
+        console.error(`Error during Promises.all():\n${err}`);
+        return res.status(500).send();
+      });
+  },
 };
