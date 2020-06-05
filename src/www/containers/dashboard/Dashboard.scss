@@ -8,11 +8,6 @@
   padding: 1rem 2rem;
   text-align: left;
 
-  img {
-    max-width: 1rem;
-    // todo remove
-  }
-
   ul {
     list-style: none;
     padding: 0;
@@ -242,6 +237,83 @@
           }
         }
       }
+    }
+  }
+}
+
+@media only screen and(max-width: 1400px) {
+  .Dashboard {
+    align-items: center;
+    flex-direction: column;
+
+    &_main {
+      max-width: unset;
+    }
+
+    &_side {
+      max-width: unset;
+
+      > div {
+        background-color: unset;
+        margin-top: 1rem;
+        width: calc(100vw - 8rem);
+      }
+
+      &_teams {
+        display: none;
+      }
+
+      &_saved > ul > li {
+        background-color: rgba($color: white, $alpha: 0.25);
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 800px) {
+  .Dashboard_main_next > ul {
+    flex-direction: column;
+
+    > li:not(:last-of-type) {
+      margin-bottom: 2rem;
+      margin-right: 0;
+    }
+
+    > li .NextCard > p {
+      -webkit-line-clamp: 3;
+    }
+  }
+}
+
+@media only screen and(max-width: 560px) {
+  .Dashboard {
+    &_main_next > ul {
+      flex-direction: column;
+
+      > li:not(:last-of-type) {
+        margin-bottom: 2rem;
+        margin-right: 0;
+      }
+
+      > li .NextCard {
+        > span {
+          > img {
+            max-width: 96px;
+          }
+
+          > h4 {
+            font-size: 1.1rem;
+          }
+        }
+
+        > p {
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    &_side_saved > ul > li > a > h4 {
+      margin: 0.5rem 0;
     }
   }
 }
