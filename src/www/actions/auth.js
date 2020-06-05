@@ -24,7 +24,7 @@ const handleResponse = (dispatch, data) => {
       type: "AUTH",
       user: data.user,
     });
-    dispatch(push("/"));
+    dispatch(push("/dashboard"));
   }
 };
 
