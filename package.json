@@ -13,7 +13,7 @@
     "dotenv-defaults": "^1.1.1",
     "i18next": "^19.3.2",
     "i18next-browser-languagedetector": "^4.0.2",
-    "i18next-xhr-backend": "^3.2.2",
+    "i18next-http-backend": "^1.0.15",
     "jsonwebtoken": "^8.5.1",
     "material-ui-flat-pagination": "^4.1.0",
     "mongoose": "^5.9.4",
