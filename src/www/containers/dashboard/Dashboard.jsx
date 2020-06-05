@@ -96,7 +96,7 @@ export default withTranslation()(
             <li key={index}>
               <Link to="/actions/id">
                 <img src={action.photo} alt="" />
-                <h4>{action.name}</h4>
+                <h4 className="clamped" >{action.name}</h4>
               </Link>
             </li>
           );

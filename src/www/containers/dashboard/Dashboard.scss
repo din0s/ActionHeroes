@@ -65,6 +65,7 @@
             box-shadow: 0 0 10px 5px $blackTransparent;
             padding: 1rem;
             transition: 0.2s ease-in-out;
+            word-break: break-all;
 
             &:hover {
               box-shadow: 0 0 10px 5px $softBlack;
@@ -104,6 +105,7 @@
 
   &_side {
     max-width: 20vw;
+    word-break: break-all;
 
     p {
       margin-bottom: 0;
@@ -232,6 +234,7 @@
             }
 
             > h4 {
+              -webkit-line-clamp: 3;
               font-weight: normal;
             }
           }
