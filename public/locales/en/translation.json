@@ -16,7 +16,6 @@
     "user": {
       "greet": "Hello",
       "profile": "Profile",
-      "pref": "Preferences",
       "settings": "Settings",
       "exit": "Log Out"
     }
