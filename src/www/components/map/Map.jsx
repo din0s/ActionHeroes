@@ -15,40 +15,14 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-const coordinates = { lat: 40.63666412, lng: 22.942162898 };
-
-export default class Mapp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentPos: coordinates, // This should get the user's backend coordinates, now it is hardcoded.
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(e) {
-    this.setState({ currentPos: e.latlng });
-  }
-
-  render() {
-    return (
-      <div>
-        <Map
-          className={this.props.className}
-          center={this.props.center}
-          zoom={this.props.zoom}
-          onClick={this.handleClick}
-        >
-          <TileLayer
-            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          {this.state.currentPos && (
-            <Marker position={this.state.currentPos} draggable={false}>
-            </Marker>
-          )}
-        </Map>
-      </div>
-    );
-  }
-}
+export default ({ className, position, zoom, onClick }) => {
+  return (
+    <Map className={className} center={position} zoom={zoom} onClick={onClick}>
+      <TileLayer
+        attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      {position && <Marker position={position} draggable={false}></Marker>}
+    </Map>
+  );
+};

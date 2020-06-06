@@ -6,7 +6,7 @@
   flex-direction: row;
   justify-content: center;
   margin: auto;
-  padding: 0rem;
+  padding: 2rem;
 
   &_navigation {
     background-color: rgba($color: white, $alpha: 0.7);
@@ -14,35 +14,36 @@
     border: 1px solid $softBlack;
     box-shadow: 1px 1px 1rem $softBlack;
     height: max-content;
-    margin-top: 2rem;
-    margin-right: 2rem;
-    margin-left: 2rem;
-    text-align: start;
-    min-width: 16rem;
+    text-align: left;
+    width: 16rem;
 
     &_header {
       padding: 0.8rem;
+
       > h2 {
         margin: 0;
-        padding-bottom: 0.5rem;
-        // For bigger usernames, not tested
-        display: -webkit-box;
         overflow: hidden;
+        padding-bottom: 0.5rem;
         text-overflow: ellipsis;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1;
       }
+
       > h5 {
         margin: 0;
       }
     }
 
     &_tabs {
-      > * {
+      list-style: none;
+      margin: 0.35rem 0;
+      padding: 0;
+
+      > li {
         border-top: 1px solid $softBlack;
         cursor: pointer;
-        padding: 1rem;
-        transition: 0.3s ease-in-out;
+        padding: 0.75rem 0.5rem;
+        transition: 0.2s ease-in-out;
 
         &:hover {
           background-color: $grayHover;
@@ -62,156 +63,135 @@
 
   &_content {
     background-color: rgba($color: white, $alpha: 0.7);
+    border-radius: 0.5rem;
+    border: 1px solid $softBlack;
+    box-shadow: 1px 1px 1rem $softBlack;
+    margin-left: 2rem;
+    padding: 1rem 4rem;
+    text-align: left;
+    width: 48rem;
 
     > :not(.active) {
       display: none;
     }
 
-    border-radius: 0.5rem;
-    border: 1px solid $softBlack;
-    box-shadow: 1px 1px 1rem $softBlack;
-    margin-top: 2rem;
-    margin-right: 2rem;
-    margin-bottom: 2rem;
-    padding: 2rem;
-    text-align: start;
-    width: 48rem;
-
     > div {
-      display: flex;
-      flex-direction: row;
-      > div > .header {
+      > h2 {
         border-bottom: 1px solid $softBlack;
-        margin-left: 1rem;
-        width: 20rem;
+        width: 15rem;
       }
 
-      > .hidden_header {
-        display: none;
-        border-bottom: 1px solid $softBlack;
-        margin-left: 1rem;
-        width: 17rem;
-      }
-    }
-
-    .first_panel {
       > form {
         display: flex;
         flex-direction: column;
-        padding: 1rem;
-
-        > h4 {
-          border-bottom: 1px solid $softBlack;
-          width: 20rem;
-        }
 
         > span {
-          padding-bottom: 0.2rem;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          > div {
+            display: flex;
+            flex-direction: column;
+          }
         }
 
-        > select {
-          margin-bottom: 1rem;
+        label {
+          padding-bottom: 0.5rem;
+
+          &:not(:first-of-type) {
+            margin-top: 1rem;
+          }
         }
 
-        .bio {
-          padding-top: 2rem;
-        }
-
-        .Email-field,
-        .Password-field,
-        .Submit-button,
-        .Username-field,
-        .Bio-field {
+        input,
+        textarea {
           border-radius: 0.5rem;
           border: 1px solid $softBlack;
           box-shadow: 1px 1px $softBlack;
-          margin-bottom: 1rem;
           outline: none;
           padding: 0.75rem;
           width: 20rem;
+        }
+
+        textarea {
+          height: 12rem;
+          resize: none;
+          word-break: break-all;
+        }
+
+        .Select {
+          width: 21.5rem;
         }
 
         .Map {
           z-index: 0;
         }
 
-        .Select {
-          width: 21.6rem;
-        }
-
         .Password-mismatch {
           color: red;
-          margin-top: 0;
-        }
-
-        .Bio-field {
-          height: 12rem;
-          resize: none;
-          word-break: break-all;
-          margin-bottom: 2rem;
+          margin-bottom: -1.5rem;
+          margin-top: 0.3rem;
         }
 
         .Submit-button {
+          border: 1px solid $softBlack;
+          border-radius: 0.5rem;
+          box-shadow: 1px 1px $softBlack;
           cursor: pointer;
           font-size: 1rem;
-          margin-top: 1rem;
+          margin: 0;
+          margin-bottom: 1rem;
+          margin-top: 2rem;
+          padding: 0.75rem 1.5rem;
+          outline: none;
           transition: 0.1s ease-in-out;
           width: max-content;
 
           &:hover {
             background-color: $softBlack;
           }
+
+          &:first-of-type {
+            // only for the profile tab
+            align-self: center;
+          }
         }
       }
-    }
 
-    .photo {
-      text-align: center;
-      width: 15rem;
-      margin-left: 5rem;
+      .PhotoPanel {
+        align-items: center;
+        margin-top: 2rem;
+        width: 17.5rem;
 
-      > img {
-        padding-top: 4rem;
-        width: inherit;
+        > img {
+          width: 10rem;
+        }
+
+        .fileContainer {
+          padding: 0.5rem 0;
+        }
+
+        .deleteImage {
+          background: white;
+          border: 1px solid #cfcece;
+          color: black;
+          font-size: 15px;
+          line-height: 23px;
+          height: 20px;
+          width: 20px;
+        }
       }
-
-      .deleteImage {
-        background: lightskyblue;
-        font-size: 20px;
-        line-height: 23px;
-        height: 20px;
-        width: 20px;
-      }
-
-      // .buttons {
-
-      //   > * {
-      //     border-radius: 0.5rem;
-      //     border: 1px solid rgba(0, 0, 0, 0.1);
-      //     box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
-      //     cursor: pointer;
-      //     font-size: 1rem;
-      //     margin-bottom: 1rem;
-      //     margin-top: 1rem;
-      //     outline: none;
-      //     padding: 0.75rem;
-      //     transition: 0.1s ease-in-out;
-      //     width: 10rem;
-
-      //     &:hover {
-      //       background-color: $softBlack;
-      //     }
-      //   }
-      // }
     }
   }
 }
 
-@media only screen and(max-width: 1135px) {
+@media only screen and(max-width: 1254px) {
   .SettingsPage {
+    $contentWidth: 75vw;
+
     align-items: center;
     flex-direction: column;
-    padding-left: 2rem;
 
     &_navigation {
       border-bottom-left-radius: 0;
@@ -219,29 +199,35 @@
       border-bottom: none;
       margin-bottom: 0;
       margin-left: 0;
-      width: 54rem;
+      width: calc(#{$contentWidth} + 5rem);
 
       &_header {
         display: none;
       }
 
       &_tabs {
-        display: flex;
-        flex-direction: row;
         background-color: $grayHover;
         border-top-left-radius: 0.5rem;
         border-top-right-radius: 0.5rem;
+        display: flex;
+        flex-direction: row;
+        margin: 0;
 
-        > * {
+        > li {
           border-top-left-radius: 0.5rem;
           border-top-right-radius: 0.5rem;
           border-top: none;
-          width: 32rem;
+          padding: 0.75rem 1rem;
+          width: 50%;
 
           &.active {
-            background-color: rgba($color: white, $alpha: 0.7);
             border-bottom: 1px solid blue;
             border-left: none;
+
+            &,
+            &:hover {
+              background-color: rgba($color: white, $alpha: 0.7);
+            }
           }
         }
       }
@@ -251,140 +237,81 @@
       border-top-left-radius: 0;
       border-top-right-radius: 0;
       border-top: none;
-      margin-top: 0;
-      width: 50rem;
-
-      .photo {
-        margin-left: 6rem;
-      }
+      margin-left: 0;
+      padding: 0 2.5rem;
+      width: $contentWidth;
     }
   }
 }
 
 @media only screen and(max-width: 900px) {
   .SettingsPage {
-    &_navigation {
-      width: 44rem;
+    $contentWidth: 60vw;
 
-      &_tabs {
-        > * {
-          width: 22rem;
-        }
-      }
+    &_navigation {
+      width: calc(#{$contentWidth} + 5rem);
     }
 
     &_content {
-      width: 40rem;
-
-      .photo {
-        margin-left: 0.8rem;
-      }
-    }
-  }
-}
-
-@media only screen and(max-width: 740px) {
-  .SettingsPage {
-    &_navigation {
-      width: 29rem;
-
-      &_tabs {
-        > * {
-          width: 14.5rem;
-        }
-      }
-    }
-
-    &_content {
-      width: 25rem;
+      width: $contentWidth;
 
       > div {
+        align-items: center;
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
 
-        > .hidden_header {
-          display: block;
+        > h2 {
+          text-align: center;
         }
 
-        > div > .header {
-          display: none;
-        }
-      }
-
-      .photo {
-        // .buttons {
-        //   display: flex;
-        //   justify-content: center;
-        //   .Save-button {
-        //     margin-right: 0.3rem;
-        //   }
-        // }
-        margin-left: auto;
-        margin-right: auto;
-        > img {
-          padding-top: 2rem;
-          width: 10rem;
-        }
-      }
-    }
-  }
-}
-
-@media only screen and(max-width: 485px) {
-  .SettingsPage {
-    &_navigation {
-      width: 19rem;
-
-      &_tabs {
-        > * {
-          width: 9.5rem;
-        }
-      }
-    }
-
-    &_content {
-      width: 19rem;
-      justify-content: center;
-      padding: 0;
-
-      .first_panel {
         > form {
-          display: flex;
-          flex-direction: column;
-          margin-left: auto;
-          margin-right: auto;
-          width: fit-content;
-
-          > h4 {
-            width: 10rem;
+          label:not(:first-of-type) {
+            margin-top: 1.5rem;
           }
 
-          .Email-field,
-          .Password-field,
-          .Submit-button,
-          .Username-field,
-          .Bio-field {
-            margin-bottom: 1rem;
-            padding: 0.75rem;
-            width: 15rem;
-          }
-
-          .Select {
-            width: 16.6rem;
-          }
-
-          .Map {
-            width: 15rem;
-          }
-
-          .Bio-field {
-            height: 8rem;
-            margin-bottom: 1rem;
+          > span {
+            align-items: center;
+            flex-direction: column-reverse;
           }
 
           .Submit-button {
             align-self: center;
           }
+        }
+      }
+
+      .PhotoPanel {
+        margin-bottom: 2rem;
+        margin-top: 0 !important;
+
+        > img {
+          width: 7.5rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 550px) {
+  .SettingsPage {
+    $contentWidth: 70vw;
+
+    &_navigation {
+      width: calc(#{$contentWidth} + 5rem);
+    }
+
+    &_content {
+      width: $contentWidth;
+
+      > div > form {
+        input,
+        textarea,
+        .Map {
+          width: 16rem;
+        }
+
+        .Select {
+          width: 17.5rem;
         }
       }
     }

@@ -1,118 +1,81 @@
 import "./SettingsPage.scss";
 
 import React, { Component } from "react";
+import {
+  clearErrors,
+  idle,
+  updatePassword,
+  updateProfile,
+} from "../../actions/profile";
 
 import ImageUploader from "react-images-upload";
 import Map from "../../components/map/Map";
 import { Redirect } from "react-router-dom";
 import Select from "react-select";
-import axios from "axios";
 import { connect } from "react-redux";
-import makeAnimated from "react-select/animated";
 import { withAlert } from "react-alert";
 import { withTranslation } from "react-i18next";
 
-//const favoutite = require("./favourite.json");
-//const categories = require("./categories.json");
-
-var options = [
-  { value: "Category1", label: "" },
-  { value: "Category2", label: "" },
-  { value: "Category3", label: "" },
-  { value: "Category4", label: "" },
-  { value: "Category5", label: "" },
-  { value: "Category6", label: "" },
-  { value: "Category7", label: "" },
-  { value: "Category8", label: "" },
-  { value: "Category9", label: "" },
-  { value: "Category10", label: "" },
-  { value: "Categorυ11", label: "" },
-  { value: "Category12", label: "" },
-  { value: "Category13", label: "" },
-  { value: "Category14", label: "" },
-  { value: "Category15", label: "" },
-  { value: "Category16", label: "" },
-  { value: "Category17", label: "" },
-  { value: "Category18", label: "" },
-  { value: "Category19", label: "" },
-  { value: "Category20", label: "" },
-];
-var favourite_options = [
-  { value: "Category1", label: "" },
-  { value: "Category2", label: "" },
-  { value: "Category3", label: "" },
-  { value: "Category4", label: "" },
-  { value: "Category5", label: "" },
-  { value: "Category6", label: "" },
-  { value: "Category7", label: "" },
-  { value: "Category8", label: "" },
-  { value: "Category9", label: "" },
-  { value: "Category10", label: "" },
-  { value: "Categorυ11", label: "" },
-  { value: "Category12", label: "" },
-  { value: "Category13", label: "" },
-  { value: "Category14", label: "" },
-  { value: "Category15", label: "" },
-  { value: "Category16", label: "" },
-  { value: "Category17", label: "" },
-  { value: "Category18", label: "" },
-  { value: "Category19", label: "" },
-  { value: "Category20", label: "" },
-];
-
-var categoriesList = require("./categories.json");
-var favouriteCategories = require("./favouriteCategories.json");
+const _categoriesList = require("./categories.json");
+const _favoriteCategories = require("./favouriteCategories.json");
 
 const coordinates = { lat: 40.63666412, lng: 22.942162898 };
 
-const animatedComponents = makeAnimated();
-
 const mapState = (state) => ({
+  updated: state.auth.updated,
   user: state.auth.user,
-  loggedIn: state.auth.loggedIn,
+  error: state.auth.error,
 });
+
+const mapDispatch = {
+  updatePassword,
+  updateProfile,
+  clearErrors,
+  idle,
+};
 
 export default withAlert()(
   connect(
     mapState,
-    undefined
+    mapDispatch
   )(
     withTranslation()(
       class SettingsPage extends Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            activeTab: "profile",
-            selectedOption: [],
-            mismatch: false,
-            position: coordinates,
-            fc: "",
-            old_password: "",
-            new_password: "",
-            passwordConfirm: "",
-            username: "",
-            bio: "",
-            profilePicture: "",
-            redirect: false,
-          };
-        }
+        state = {
+          activeTab: "profile",
+          username: "",
+          selectedCategories: [],
+          categoriesList: [],
+          bio: "",
+          position: coordinates,
+          profilePicture: undefined,
+          previousPassword: "",
+          newPassword: "",
+          passwordConfirm: "",
+          mismatch: false,
+          redirect: false,
+        };
 
-        formatCategories = (categories, options) => {
+        mapCategories = (categories) => {
           const { t } = this.props;
-
-          Object.keys(categories).map((key, index) => {
-            options[index].label = t("categories." + categories[key].name);
+          return Object.keys(categories).map((key) => {
+            const value = categories[key].name;
+            const label = t(`categories.${value}`);
+            return { label, value };
           });
-
-          return options.slice(0, Object.keys(categories).length);
         };
 
-        changeTabs = (tab) => {
+        remapCategories = (categories) => {
+          const { t } = this.props;
+          return categories.map((category) => {
+            const { value } = category;
+            const label = t(`categories.${value}`);
+            return { label, value };
+          });
+        };
+
+        changeTab = (tab) => {
           this.setState({ mismatch: false, activeTab: tab });
-          this.clearfields();
-        };
-
-        clearfields = () => {
           document.getElementById("profile-form").reset();
           document.getElementById("security-form").reset();
         };
@@ -122,109 +85,112 @@ export default withAlert()(
         };
 
         setPassword = async (e) => {
-          const new_password = e.target.value.trim();
+          const newPassword = e.target.value.trim();
           const { passwordConfirm } = this.state;
-          this.setState({ new_password });
+          this.setState({ newPassword });
           if (passwordConfirm !== "") {
-            this.checkPassword(new_password, passwordConfirm);
+            this.checkPassword(newPassword, passwordConfirm);
           }
         };
 
         setPasswordConfirm = async (e) => {
-          const { new_password } = this.state;
+          const { newPassword } = this.state;
           const passwordConfirm = e.target.value.trim();
           this.setState({ passwordConfirm });
-          this.checkPassword(new_password, passwordConfirm);
+          this.checkPassword(newPassword, passwordConfirm);
         };
 
-        handleResponse = (data, target) => {
+        handleError = (error) => {
+          const { alert } = this.props;
+          setTimeout(() => {
+            // TODO: translate error?
+            alert.error(error);
+            this.props.clearErrors();
+          }, 0)
+        };
+
+        handleSuccess = () => {
           const { t, alert } = this.props;
-          if (data.error) {
-            alert.error(data.error);
-          } else {
+          setTimeout(() => {
+            // setTimeout with 0 delay seems to fix an error
+            // with setting the state too fast after rendering
+            this.props.idle();
             alert.success(t("settings.success"));
-            target.reset();
-            setTimeout(() => {
-              this.setState({ redirect: true });
-            }, 1500);
-          }
-        };
-
-        updateProfile = (username, bio, coordinates, categories, profilePicture, target) => {
-          axios
-            .patch("api/users/me/profile", {
-              username,
-              bio,
-              coordinates,
-              categories,
-              profilePicture,
-            })
-            .then((res) => this.handleResponse(res.data, target))
-            .catch((err) => this.handleResponse(err.response.data, target));
+            this.setState({ redirect: true });
+          }, 0);
         };
 
         submitProfile = async (event) => {
           event.preventDefault();
-          const { username, bio, position, selectedOption } = this.state;
-          const { profilePicture } = this.state;
-          // Parsing data
-          const coordinates = [position.lat, position.lng];
-          const categories = [];
-          selectedOption.forEach((element) => categories.push(element.label));
-          if (!this.state.mismatch) {
-            event.target.reset();
-            // For testing
-            console.log("username: ", username);
-            console.log("bio: ", bio);
-            console.log("coordinates: ", coordinates);
-            console.log("categories: ", categories);
-            console.log("profilePicture: ", profilePicture);
-            this.updateProfile(
-              username,
-              bio,
-              coordinates,
-              categories,
-              profilePicture,
-              event.target
-            );
+          if (this.state.mismatch) {
+            return;
           }
-        };
 
-        updatePassword = (previousPassword, newPassword, target) => {
-          axios
-            .patch("api/users/me/change_password", {
-              previousPassword,
-              newPassword,
-            })
-            .then((res) => this.handleResponse(res.data, target))
-            .catch((err) => this.handleResponse(err.response.data, target));
+          const {
+            username,
+            selectedCategories,
+            bio,
+            position,
+            profilePicture,
+          } = this.state;
+          const coordinates = [position.lat, position.lng];
+          const categories = selectedCategories.map((cat) => cat.value);
+
+          this.props.updateProfile(
+            username || this.props.user.username,
+            categories,
+            bio,
+            coordinates,
+            profilePicture
+          );
         };
 
         submitPassword = async (event) => {
           event.preventDefault();
-          const { old_password, new_password } = this.state;
           if (!this.state.mismatch) {
-            console.log(old_password);
-            console.log(new_password);
-            this.updatePassword(old_password, new_password, event.target);
+            const { previousPassword, newPassword } = this.state;
+            this.props.updatePassword(previousPassword, newPassword);
+          }
+        };
+
+        componentDidMount = () => {
+          this.setState({
+            categoriesList: this.mapCategories(_categoriesList),
+            selectedCategories: this.mapCategories(_favoriteCategories),
+          });
+        };
+
+        componentDidUpdate = (prevProps, prevState) => {
+          if (this.props.t !== prevProps.t) {
+            // language changed, remap categories
+            const { categoriesList, selectedCategories } = prevState;
+            this.setState({
+              categoriesList: this.remapCategories(categoriesList),
+              selectedCategories: this.remapCategories(selectedCategories),
+            });
           }
         };
 
         render() {
-          //console.log(this.props);
-          if (!this.props.loggedIn) {
-            return null; //<Redirect to="login" />;
-          }
-
           if (this.state.redirect) {
             return <Redirect to="/profile" />;
           }
 
+          if (this.props.updated) {
+            this.handleSuccess();
+          } else if (this.props.error) {
+            this.handleError(this.props.error);
+          }
+
           const { t, user } = this.props;
           const { username, bio } = user;
-          //const { username, profilePhoto } = user;
-          //const photo = profilePhoto || "/img/fakedata/profilePhoto.png";
-          //const { selectedOption } = this.state;
+          const {
+            activeTab,
+            categoriesList,
+            selectedCategories,
+            position,
+            mismatch,
+          } = this.state;
 
           return (
             <div className="SettingsPage">
@@ -233,177 +199,143 @@ export default withAlert()(
                   <h2>{username}</h2>
                   <h5>{t("settings.personal_settings")}</h5>
                 </div>
-                <div className="SettingsPage_navigation_tabs">
-                  <div
-                    className={
-                      this.state.activeTab === "profile" ? "active" : ""
-                    }
-                    onClick={() => this.changeTabs("profile")}
+                <ul className="SettingsPage_navigation_tabs">
+                  <li
+                    className={activeTab === "profile" ? "active" : ""}
+                    onClick={() => this.changeTab("profile")}
                   >
                     {t("settings.profile")}
-                  </div>
-                  <div
-                    className={
-                      this.state.activeTab === "security" ? "active" : ""
-                    }
-                    onClick={() => this.changeTabs("security")}
+                  </li>
+                  <li
+                    className={activeTab === "security" ? "active" : ""}
+                    onClick={() => this.changeTab("security")}
                   >
                     {t("settings.security")}
-                  </div>
-                </div>
+                  </li>
+                </ul>
               </div>
               <div className="SettingsPage_content">
-                <div
-                  className={
-                    this.state.activeTab === "profile" ? " active" : ""
-                  }
-                >
-                  <div className="first_panel">
-                    <h2 className="header">{t("settings.profile")}</h2>
-                    <form
-                      id="profile-form"
-                      method="post"
-                      onSubmit={this.submitProfile}
-                    >
-                      <span>{t("settings.username")}</span>
-                      <input
-                        type="text"
-                        name="username"
-                        className="Username-field"
-                        placeholder={username}
-                        onChange={(e) =>
-                          this.setState({ username: e.target.value.trim() })
-                        }
-                      />
-                      <span>{t("settings.favourite_categories")}</span>
-                      <Select
-                        className="Select"
-                        closeMenuOnSelect={false}
-                        components={animatedComponents}
-                        isMulti
-                        options={this.formatCategories(categoriesList, options)}
-                        defaultValue={this.formatCategories(
-                          favouriteCategories,
-                          favourite_options
-                        )}
-                        onChange={(selectedOption) => {
-                          this.setState({ selectedOption });
-                        }}
-                      />
-                      <span className="bio">{t("settings.bio")}</span>
-                      <textarea
-                        type="text"
-                        name="bio"
-                        className="Bio-field"
-                        defaultValue={bio}
-                        onChange={(e) =>
-                          this.setState({ bio: e.target.value.trim() })
-                        }
-                      />
-                      <span>{t("settings.location")}</span>
-                      <Map
-                        className="Map"
-                        center={this.state.position}
-                        zoom={13}
-                        onClick={(e) => this.setState({ position: e.latlng })}
-                      />
-                      <input
-                        type="submit"
-                        className="Submit-button"
-                        value={t("settings.update.profile")}
-                      />
-                    </form>
-                  </div>
-                  <div className="photo">
-                    <img src="/img/fakedata/profilePhoto.png" alt="Avatar" />
-                    <form
-                      id="profile-picture"
-                      method="post"
-                      onSubmit={this.submitProfile}
-                    >
-                      <ImageUploader
-                        withIcon={false}
-                        buttonText={t("settings.buttonText")}
-                        imgExtension={[".jpg", ".png"]}
-                        label={t("settings.label")}
-                        maxFileSize={5242880}
-                        singleImage={true}
-                        withPreview={true}
-                        onChange={(pic) => {
-                          this.setState({
-                            profilePicture: pic,
-                          });
-                        }}
-                      />
-                      {/* <span className="buttons">
+                <div className={activeTab === "profile" ? "active" : ""}>
+                  <h2>{t("settings.profile")}</h2>
+                  <form
+                    id="profile-form"
+                    method="patch"
+                    target="/api/me/profile"
+                    onSubmit={this.submitProfile}
+                  >
+                    <span>
+                      <div className="FormPanel">
+                        <label>{t("settings.username")}</label>
                         <input
-                          type="submit"
-                          className="Save-button"
-                          value={t("settings.photo.save")}
+                          type="text"
+                          name="username"
+                          defaultValue={username}
+                          onChange={(e) =>
+                            this.setState({ username: e.target.value.trim() })
+                          }
                         />
-                        <input
-                          type="submit"
-                          className="Remove-button"
-                          value={t("settings.photo.remove")}
-                          onClick={this.removePicture.bind(this)}
+                        <label>{t("settings.favourite_categories")}</label>
+                        <Select
+                          className="Select"
+                          closeMenuOnSelect={false}
+                          isMulti
+                          options={categoriesList}
+                          value={selectedCategories}
+                          onChange={(selectedCategories) => {
+                            this.setState({ selectedCategories });
+                          }}
                         />
-                      </span> */}
-                    </form>
-                  </div>
-                  <h2 className="hidden_header">{t("settings.profile")}</h2>
+                        <label>{t("settings.bio")}</label>
+                        <textarea
+                          type="text"
+                          name="bio"
+                          defaultValue={bio}
+                          placeholder={t("profile.add-bio")}
+                          onChange={(e) =>
+                            this.setState({ bio: e.target.value.trim() })
+                          }
+                        />
+                        <label>{t("settings.location")}</label>
+                        <Map
+                          className="Map"
+                          position={position}
+                          zoom={13}
+                          onClick={(e) => this.setState({ position: e.latlng })}
+                        />
+                      </div>
+                      <div className="PhotoPanel">
+                        <img
+                          src="/img/fakedata/profilePhoto.png" // TODO: user data
+                          alt="Avatar"
+                        />
+                        <ImageUploader
+                          withIcon={false}
+                          buttonText={t("settings.buttonText")}
+                          imgExtension={[".jpg", ".png"]}
+                          label={t("settings.label")}
+                          maxFileSize={5242880}
+                          singleImage={true}
+                          withPreview={true}
+                          onChange={(pic) => {
+                            this.setState({
+                              profilePicture: pic,
+                            });
+                          }}
+                        />
+                      </div>
+                    </span>
+                    <input
+                      type="submit"
+                      className="Submit-button"
+                      value={t("settings.update.profile")}
+                    />
+                  </form>
                 </div>
-                <div
-                  className={
-                    this.state.activeTab === "security" ? " active" : ""
-                  }
-                >
-                  <div className="first_panel">
-                    <h2 className="header">{t("settings.security")}</h2>
-                    <form
-                      id="security-form"
-                      method="post"
-                      onSubmit={this.submitPassword}
-                    >
-                      <span>{t("settings.password.old")}</span>
-                      <input
-                        type="password"
-                        name="old_password"
-                        className="Password-field"
-                        onChange={(e) =>
-                          this.setState({ old_password: e.target.value.trim() })
-                        }
-                        required
-                      />
-                      <span>{t("settings.password.new")}</span>
-                      <input
-                        type="password"
-                        name="new_password"
-                        className="Password-field"
-                        onChange={this.setPassword}
-                        required
-                      />
-                      <span>{t("settings.password.confirm_new")}</span>
-                      <input
-                        type="password"
-                        name="confirm_new_password"
-                        className="Password-field"
-                        onChange={this.setPasswordConfirm}
-                        required
-                      />
-                      <p
-                        className={`Password-mismatch${
-                          this.state.mismatch ? "" : " hidden"
-                        }`}
-                        children={t("settings.password.mismatch")}
-                      />
-                      <input
-                        type="submit"
-                        className="Submit-button"
-                        value={t("settings.update.password")}
-                      />
-                    </form>
-                  </div>
-                  <h2 className="hidden_header">{t("settings.security")}</h2>
+                <div className={activeTab === "security" ? " active" : ""}>
+                  <h2>{t("settings.security")}</h2>
+                  <form
+                    id="security-form"
+                    method="patch"
+                    target="/api/me/change_password"
+                    onSubmit={this.submitPassword}
+                  >
+                    <label>{t("settings.password.old")}</label>
+                    <input
+                      type="password"
+                      name="previous_password"
+                      onChange={(e) =>
+                        this.setState({
+                          previousPassword: e.target.value.trim(),
+                        })
+                      }
+                      required
+                    />
+                    <label>{t("settings.password.new")}</label>
+                    <input
+                      type="password"
+                      name="new_password"
+                      onChange={this.setPassword}
+                      required
+                    />
+                    <label>{t("settings.password.confirm_new")}</label>
+                    <input
+                      type="password"
+                      name="confirm_new_password"
+                      onChange={this.setPasswordConfirm}
+                      required
+                    />
+                    <p
+                      className={`Password-mismatch${
+                        mismatch ? "" : " hidden"
+                      }`}
+                      children={t("settings.password.mismatch")}
+                    />
+                    <input
+                      type="submit"
+                      className="Submit-button"
+                      value={t("settings.update.password")}
+                    />
+                  </form>
                 </div>
               </div>
             </div>

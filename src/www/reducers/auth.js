@@ -1,4 +1,9 @@
-const initState = { loggedIn: false, user: {}, error: undefined };
+const initState = {
+  loggedIn: false,
+  updated: false,
+  user: {},
+  error: undefined,
+};
 
 export default (state = initState, action) => {
   switch (action.type) {
@@ -10,6 +15,10 @@ export default (state = initState, action) => {
       return { ...state, error: action.error };
     case "CLEAR":
       return { ...state, error: undefined };
+    case "UPDATE":
+      return { ...state, updated: true, user: action.user };
+    case "IDLE":
+      return { ...state, updated: false };
     default:
       return state;
   }
