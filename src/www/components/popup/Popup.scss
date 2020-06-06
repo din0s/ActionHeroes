@@ -35,148 +35,143 @@
         max-height: 65vh;
         min-height: 15rem;
 
-        &_content {
-          display: flex;
-          flex-direction: column;
-          padding: 0 2rem;
+        display: flex;
+        flex-direction: column;
+        padding: 0 2rem;
 
-          > input {
-            height: 1.5rem;
+        > input {
+          height: 1.5rem;
+        }
+
+        > textarea {
+          height: 5rem;
+          resize: none;
+        }
+
+        .fileContainer {
+          border-radius: 0rem;
+          box-shadow: 0px 0px;
+          margin: 0rem;
+          padding: 0rem;
+          padding-bottom: 0.5rem;
+
+          .uploadPictureContainer {
+            margin-top: calc(5% - 10px);
           }
 
-          > textarea {
-            height: 5rem;
-            resize: none;
+          .deleteImage {
+            background: white;
+            border: 1px solid #cfcece;
+            color: black;
+            font-size: 15px;
+            line-height: 23px;
+            height: 20px;
+            width: 20px;
+          }
+        }
+
+        &_categories {
+          border-top: 1px solid rgba($color: black, $alpha: 0.4);
+
+          > p {
+            font-weight: bold;
+            margin: 0.4rem 0;
+            padding-top: 0.5rem;
+            text-align: left;
           }
 
-          .fileContainer {
-            border-radius: 0rem;
-            box-shadow: 0px 0px;
-            margin: 0rem;
-            padding: 0rem;
-            padding-bottom: 0.5rem;
+          &-scroll {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            height: 6rem;
+            text-align: left;
 
-            .uploadPictureContainer {
-              margin-top: calc(5% - 10px);
-            }
+            > label {
+              cursor: pointer;
+              display: block;
+              font-size: 1rem;
+              margin-bottom: 0.3rem;
+              padding-left: 40px;
+              position: relative;
+              text-align: start;
+              user-select: none;
+              width: 42.5%;
 
-            .deleteImage {
-              background: white;
-              border: 1px solid #cfcece;
-              color: black;
-              font-size: 15px;
-              line-height: 23px;
-              height: 20px;
-              width: 20px;
-            }
-          }
+              &:hover {
+                color: lightskyblue;
+              }
 
-          &_categories {
-            border-top: 1px solid rgba($color: black, $alpha: 0.4);
+              input {
+                cursor: pointer;
+                height: 0;
+                opacity: 0;
+                position: absolute;
+                width: 0;
+              }
 
-            > p {
-              font-weight: bold;
-              margin: 0.4rem 0;
-              padding-top: 0.5rem;
-              text-align: left;
-            }
+              .checkmark {
+                background-color: rgba($color: white, $alpha: 0.75);
+                border: 1px solid rgba($color: black, $alpha: 0.25);
+                height: 20px;
+                left: 5px;
+                position: absolute;
+                top: 0;
+                width: 20px;
 
-            .scrollarea {
-              height: 8rem;
-
-              .scrollarea-content {
-                display: flex;
-                flex-direction: column;
-                flex-wrap: wrap;
-                text-align: left;
-
-                > label {
-                  cursor: pointer;
-                  display: block;
-                  font-size: 1rem;
-                  margin-bottom: 0.3rem;
-                  padding-left: 40px;
-                  position: relative;
-                  text-align: start;
-                  user-select: none;
-                  width: fit-content;
-
-                  &:hover {
-                    color: lightskyblue;
-                  }
-
-                  input {
-                    cursor: pointer;
-                    height: 0;
-                    opacity: 0;
-                    position: absolute;
-                    width: 0;
-                  }
-
-                  .checkmark {
-                    background-color: rgba($color: white, $alpha: 0.75);
-                    border: 1px solid rgba($color: black, $alpha: 0.25);
-                    height: 20px;
-                    left: 5px;
-                    position: absolute;
-                    top: 0;
-                    width: 20px;
-
-                    &:after {
-                      content: "";
-                      display: none;
-                      position: absolute;
-                    }
-                  }
-                }
-
-                &:hover input ~ .checkmark {
-                  background-color: rgba($color: white, $alpha: 0.25);
-                  transition: 0.2s ease-in-out;
-                }
-
-                input:checked ~ .checkmark {
-                  background-color: lightskyblue;
-                }
-
-                input:checked ~ .checkmark:after {
-                  display: block;
-                }
-
-                .checkmark:after {
-                  border: solid white;
-                  border-width: 0 3px 3px 0;
-                  height: 8px;
-                  left: 7px;
-                  top: 3px;
-                  transform: rotate(45deg);
-                  width: 3px;
+                &:after {
+                  content: "";
+                  display: none;
+                  position: absolute;
                 }
               }
+            }
+
+            &:hover input ~ .checkmark {
+              background-color: rgba($color: white, $alpha: 0.25);
+              transition: 0.2s ease-in-out;
+            }
+
+            input:checked ~ .checkmark {
+              background-color: lightskyblue;
+            }
+
+            input:checked ~ .checkmark:after {
+              display: block;
+            }
+
+            .checkmark:after {
+              border: solid white;
+              border-width: 0 3px 3px 0;
+              height: 8px;
+              left: 7px;
+              top: 3px;
+              transform: rotate(45deg);
+              width: 3px;
             }
           }
         }
       }
+    }
 
-      input,
-      textarea {
-        border: 1px solid $softBlack;
-        border-radius: 0.6rem;
-        box-shadow: 1px 1px $softBlack;
-        margin-bottom: 1rem;
-        outline: none;
-        padding: 0.5rem;
-      }
+    input,
+    textarea {
+      border: 1px solid $softBlack;
+      border-radius: 0.6rem;
+      box-shadow: 1px 1px $softBlack;
+      margin-bottom: 1rem;
+      outline: none;
+      padding: 0.5rem;
+    }
 
-      .SubmitButton {
-        align-self: center;
-        cursor: pointer;
-        height: 2rem;
-        margin: 0rem;
-        margin-top: 1rem;
-        outline: none;
-        width: 10rem;
-      }
+    .SubmitButton {
+      align-self: center;
+      cursor: pointer;
+      height: 2rem;
+      margin: 0rem;
+      margin-top: 1rem;
+      outline: none;
+      width: 10rem;
     }
   }
 }
@@ -191,8 +186,18 @@
   .popup-content {
     min-width: 25rem;
 
-    > div > h2 {
-      font-size: 1.2rem;
+    > div {
+      > h2 {
+        font-size: 1.2rem;
+      }
+
+      > form {
+        .FormArea_categories-scroll {
+          > label {
+            width: 55%;
+          }
+        }
+      }
     }
   }
 }
@@ -208,9 +213,12 @@
 
       > form {
         margin: 1rem;
+        padding: 0 1rem;
 
-        .FormArea_content {
-          padding: 0 1rem;
+        .FormArea_categories-scroll {
+          > label {
+            width: 100%;
+          }
         }
       }
     }

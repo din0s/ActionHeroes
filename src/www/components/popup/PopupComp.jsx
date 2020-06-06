@@ -5,7 +5,8 @@ import Input from "../../components/input/Input";
 import axios from "axios";
 import Popup from "reactjs-popup";
 import ImageUploader from "react-images-upload";
-import ScrollArea from "react-scrollbar";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css";
 import { Redirect } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 
@@ -115,10 +116,7 @@ class PopupComp extends Component {
               action="api/teams/create"
               onSubmit={this.handleSubmit}
             >
-              <ScrollArea
-                className="FormArea"
-                contentClassName="FormArea_content"
-              >
+              <PerfectScrollbar className="FormArea">
                 <Input
                   name="teamName"
                   type="text"
@@ -150,9 +148,9 @@ class PopupComp extends Component {
                     });
                   }}
                 />
-                <div className="FormArea_content_categories">
+                <div className="FormArea_categories">
                   <p>{t("filterlist.categories")}</p>
-                  <ScrollArea>
+                  <PerfectScrollbar className="FormArea_categories-scroll">
                     {Object.keys(categories).map((c) => {
                       const category = categories[c];
                       return (
@@ -183,9 +181,9 @@ class PopupComp extends Component {
                         </label>
                       );
                     })}
-                  </ScrollArea>
+                  </PerfectScrollbar>
                 </div>
-              </ScrollArea>
+              </PerfectScrollbar>
               <input
                 className="SubmitButton"
                 type="submit"
