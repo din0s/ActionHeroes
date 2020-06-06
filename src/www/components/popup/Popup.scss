@@ -1,15 +1,5 @@
 @import "../../vars.scss";
 
-.PopupTrigger {
-  background-color: rgba($color: rgb(221, 191, 191), $alpha: 0.1);
-  border: 1px solid rgba($color: black, $alpha: 0.25);
-  border-radius: 0.4rem;
-  cursor: pointer;
-  outline: none;
-  padding: 0.5rem;
-  width: 12%;
-}
-
 .popup-content {
   border-radius: 1rem;
   max-width: 75%;
@@ -192,12 +182,6 @@
 }
 
 @media only screen and(max-width: 800px) {
-  .PopupTrigger {
-    align-self: center;
-    margin-top: 0.8rem;
-    width: 95%;
-  }
-
   .popup-content {
     min-width: 30rem;
   }

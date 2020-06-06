@@ -1,4 +1,4 @@
-import "./PopupComp.scss";
+import "./Popup.scss";
 import React, { Component } from "react";
 
 import Input from "../../components/input/Input";
@@ -14,9 +14,9 @@ class PopupComp extends Component {
     teamName: "",
     description: "",
     teamCategories: [],
-    teamPicture: "",
+    teamPicture: undefined,
     serverResponse: "",
-    redirect: false,
+    teamId: "",
   };
 
   createTeam = (name, description, categories, photo) => {
@@ -27,25 +27,43 @@ class PopupComp extends Component {
         categories,
         photo,
       })
-      .then((res) => this.handleResponse(res.data))
-      .catch((err) => this.handleResponse(err.response.data));
+      .then((res) => this.handleSuccess(res.data, photo))
+      .catch((err) => this.handleError(err.response.data));
   };
 
-  handleResponse = (data) => {
-    const { t } = this.props;
-    if (data.error) {
-      if (data.error.includes("Team name")) {
-        this.setState({
-          serverResponse: t("createteam.nameerror"),
-        });
-      } else if (data.error.includes("Authentication")) {
-        this.setState({
-          serverResponse: t("createteam.authentication"),
-        });
-      }
+  handleSuccess = (data, photo) => {
+    const id = data._id;
+
+    if (photo) {
+      axios
+        .put(`/api/teams/${id}/photo`)
+        .then(() =>
+          this.setState({
+            teamId: id,
+          })
+        )
+        .catch((err) => this.handleError(err.response.data));
     } else {
       this.setState({
-        redirect: true,
+        teamId: id,
+      });
+    }
+  };
+
+  handleError = (data) => {
+    const { t } = this.props;
+
+    if (data.error.includes("Team name")) {
+      this.setState({
+        serverResponse: t("createteam.nameerror"),
+      });
+    } else if (data.error.includes("Authentication")) {
+      this.setState({
+        serverResponse: t("createteam.authentication"),
+      });
+    } else {
+      this.setState({
+        serverResponse: data.error,
       });
     }
   };
@@ -64,11 +82,12 @@ class PopupComp extends Component {
 
   render() {
     const { t, categories } = this.props;
+    const { teamId } = this.state;
 
-    if (this.state.redirect) {
-      // TODO change `id` to the _id sent from server
-      return <Redirect to="/teams/id" />;
+    if (teamId !== "") {
+      return <Redirect to={`/teams/${teamId}`} />;
     }
+
     return (
       <Popup
         open={this.props.open}

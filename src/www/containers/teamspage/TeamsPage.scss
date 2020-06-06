@@ -3,6 +3,16 @@
   margin: 0;
   padding: 2rem 3rem;
 
+  .PopupTrigger {
+    background-color: rgba($color: rgb(221, 191, 191), $alpha: 0.1);
+    border: 1px solid rgba($color: black, $alpha: 0.25);
+    border-radius: 0.4rem;
+    cursor: pointer;
+    outline: none;
+    padding: 0.5rem;
+    width: 12%;
+  }
+
   > div {
     display: flex;
     flex-direction: row;
@@ -126,6 +136,12 @@
 
 @media only screen and(max-width: 800px) {
   .TeamsPage {
+    .PopupTrigger {
+      align-self: center;
+      margin-top: 0.8rem;
+      width: 95%;
+    }
+
     > div {
       flex-direction: column;
 
