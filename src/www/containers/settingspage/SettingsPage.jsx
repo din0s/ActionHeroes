@@ -106,7 +106,7 @@ export default withAlert()(
             // TODO: translate error?
             alert.error(error);
             this.props.clearErrors();
-          }, 0)
+          }, 0);
         };
 
         handleSuccess = () => {
@@ -183,7 +183,9 @@ export default withAlert()(
           }
 
           const { t, user } = this.props;
-          const { username, bio } = user;
+          const { username, bio, profilePhoto } = user;
+          const photo = profilePhoto || "/img/fakedata/profilePhoto.png";
+
           const {
             activeTab,
             categoriesList,
@@ -264,10 +266,7 @@ export default withAlert()(
                         />
                       </div>
                       <div className="PhotoPanel">
-                        <img
-                          src="/img/fakedata/profilePhoto.png" // TODO: user data
-                          alt="Avatar"
-                        />
+                        <img src={photo} alt="Avatar" />
                         <ImageUploader
                           withIcon={false}
                           buttonText={t("settings.buttonText")}
