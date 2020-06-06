@@ -35,8 +35,6 @@ export default connect(
           list: actionsOrganized,
           shown: 3,
         },
-        bio: "",
-        editMode: false,
         teamsOwnedShown: 3,
         teamsMemberShown: 3,
       };
@@ -107,42 +105,6 @@ export default connect(
         }
       };
 
-      showBio = () => {
-        const { t, user } = this.props;
-        if (this.state.editMode) {
-          return (
-            <div>
-              {/*TODO: should send request to server */}
-              <textarea
-                placeholder={t("profile.add-bio")}
-                defaultValue={user.bio}
-                onChange={(e) => this.setState({ bio: e.target.value.trim() })}
-                type="text"
-              />
-              <button
-                className="UserPanel_btn-save"
-                onClick={() => {
-                  user.bio = this.state.bio;
-                  this.setState({ editMode: false });
-                }}
-              >
-                {t("profile.save")}
-              </button>
-              <button
-                className="UserPanel_btn-cancel"
-                onClick={() => {
-                  this.setState({ editMode: false });
-                }}
-              >
-                {t("profile.cancel")}
-              </button>
-            </div>
-          );
-        } else {
-          return <p>{user.bio || t("profile.add-bio")}</p>;
-        }
-      };
-
       render() {
         if (!this.props.loggedIn) {
           return <Redirect to="/login" />;
@@ -157,33 +119,13 @@ export default connect(
         return (
           <div className="ProfilePage">
             <div className="UserPanel">
-              <div
-                className={`UserPanel_avatarDiv${
-                  this.state.editMode ? "-edit" : ""
-                }`}
-              >
-                <img src={photo} alt="Avatar" />
-                <button className="UserPanel_btn-file">
-                  {t("profile.edit-avatar")}
-                </button>
-              </div>
-              <div
-                className={`UserPanel_infoDiv${
-                  this.state.editMode ? "-edit" : ""
-                }`}
-              >
+              <img src={photo} alt="Avatar" />
+              <div className={"UserPanel_infoDiv"}>
                 <h2>{username}</h2>
-                {this.showBio()}
-                <button
-                  className="UserPanel_btn-edit"
-                  onClick={() =>
-                    this.setState({
-                      editMode: !this.state.editMode,
-                    })
-                  }
-                >
-                  {t("profile.edit")}
-                </button>
+                <p>{user.bio || t("profile.add-bio")}</p>
+                <Link to="/settings">
+                  <button children={t("profile.settings")} />
+                </Link>
               </div>
             </div>
             <div className="Container">
@@ -203,9 +145,7 @@ export default connect(
               </ul>
               <div className="Container_content">
                 <div
-                  className={
-                    this.state.activeTab === "actions" ? " active" : ""
-                  }
+                  className={this.state.activeTab === "actions" ? "active" : ""}
                 >
                   <section>
                     <h3>{t("profile.attended")}</h3>
@@ -231,7 +171,7 @@ export default connect(
                   </section>
                 </div>
                 <div
-                  className={this.state.activeTab === "teams" ? " active" : ""}
+                  className={this.state.activeTab === "teams" ? "active" : ""}
                 >
                   <section>
                     <h3>{t("profile.teams-owned")}</h3>
