@@ -33,7 +33,6 @@
 
       .FormArea {
         max-height: 65vh;
-        min-height: 15rem;
 
         &_content {
           display: flex;
@@ -81,77 +80,73 @@
               text-align: left;
             }
 
-            .scrollarea {
-              height: 8rem;
+            &-list {
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              text-align: left;
 
-              .scrollarea-content {
-                display: flex;
-                flex-direction: column;
-                flex-wrap: wrap;
-                text-align: left;
+              > label {
+                cursor: pointer;
+                display: block;
+                font-size: 1rem;
+                margin-bottom: 0.3rem;
+                padding-left: 40px;
+                position: relative;
+                text-align: start;
+                user-select: none;
+                width: 42.5%;
 
-                > label {
+                &:hover {
+                  color: lightskyblue;
+                }
+
+                input {
                   cursor: pointer;
-                  display: block;
-                  font-size: 1rem;
-                  margin-bottom: 0.3rem;
-                  padding-left: 40px;
-                  position: relative;
-                  text-align: start;
-                  user-select: none;
-                  width: fit-content;
+                  height: 0;
+                  opacity: 0;
+                  position: absolute;
+                  width: 0;
+                }
 
-                  &:hover {
-                    color: lightskyblue;
-                  }
+                .checkmark {
+                  background-color: rgba($color: white, $alpha: 0.75);
+                  border: 1px solid rgba($color: black, $alpha: 0.25);
+                  height: 20px;
+                  left: 5px;
+                  position: absolute;
+                  top: 0;
+                  width: 20px;
 
-                  input {
-                    cursor: pointer;
-                    height: 0;
-                    opacity: 0;
+                  &:after {
+                    content: "";
+                    display: none;
                     position: absolute;
-                    width: 0;
-                  }
-
-                  .checkmark {
-                    background-color: rgba($color: white, $alpha: 0.75);
-                    border: 1px solid rgba($color: black, $alpha: 0.25);
-                    height: 20px;
-                    left: 5px;
-                    position: absolute;
-                    top: 0;
-                    width: 20px;
-
-                    &:after {
-                      content: "";
-                      display: none;
-                      position: absolute;
-                    }
                   }
                 }
+              }
 
-                &:hover input ~ .checkmark {
-                  background-color: rgba($color: white, $alpha: 0.25);
-                  transition: 0.2s ease-in-out;
-                }
+              &:hover input ~ .checkmark {
+                background-color: rgba($color: white, $alpha: 0.25);
+                transition: 0.2s ease-in-out;
+              }
 
-                input:checked ~ .checkmark {
-                  background-color: lightskyblue;
-                }
+              input:checked ~ .checkmark {
+                background-color: lightskyblue;
+              }
 
-                input:checked ~ .checkmark:after {
-                  display: block;
-                }
+              input:checked ~ .checkmark:after {
+                display: block;
+              }
 
-                .checkmark:after {
-                  border: solid white;
-                  border-width: 0 3px 3px 0;
-                  height: 8px;
-                  left: 7px;
-                  top: 3px;
-                  transform: rotate(45deg);
-                  width: 3px;
-                }
+              .checkmark:after {
+                border: solid white;
+                border-width: 0 3px 3px 0;
+                height: 8px;
+                left: 7px;
+                top: 3px;
+                transform: rotate(45deg);
+                width: 3px;
               }
             }
           }
@@ -177,6 +172,14 @@
         outline: none;
         width: 10rem;
       }
+    }
+  }
+}
+
+@media only screen and(max-width: 1324px) {
+  .popup-content {
+    .FormArea_content_categories-list > label {
+      width: 100% !important;
     }
   }
 }
@@ -213,6 +216,18 @@
           padding: 0 1rem;
         }
       }
+    }
+  }
+}
+
+@media only screen and(max-height: 525px) {
+  .popup-content {
+    .uploadIcon {
+      display: none;
+    }
+
+    .FormArea {
+      max-height: 50vh !important;
     }
   }
 }

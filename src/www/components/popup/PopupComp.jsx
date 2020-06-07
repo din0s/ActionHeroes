@@ -1,12 +1,13 @@
 import "./Popup.scss";
+
 import React, { Component } from "react";
 
-import Input from "../../components/input/Input";
-import axios from "axios";
-import Popup from "reactjs-popup";
 import ImageUploader from "react-images-upload";
-import ScrollArea from "react-scrollbar";
+import Input from "../../components/input/Input";
+import Popup from "reactjs-popup";
 import { Redirect } from "react-router-dom";
+import ScrollArea from "react-scrollbar";
+import axios from "axios";
 import { withTranslation } from "react-i18next";
 
 class PopupComp extends Component {
@@ -152,7 +153,7 @@ class PopupComp extends Component {
                 />
                 <div className="FormArea_content_categories">
                   <p>{t("filterlist.categories")}</p>
-                  <ScrollArea>
+                  <div className="FormArea_content_categories-list">
                     {Object.keys(categories).map((c) => {
                       const category = categories[c];
                       return (
@@ -183,7 +184,7 @@ class PopupComp extends Component {
                         </label>
                       );
                     })}
-                  </ScrollArea>
+                  </div>
                 </div>
               </ScrollArea>
               <input
