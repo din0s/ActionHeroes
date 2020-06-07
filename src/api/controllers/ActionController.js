@@ -159,20 +159,25 @@ module.exports = {
 
     Promise.all(promises)
       .then(() => {
-        Action.updateOne({ _id: req.params.action_id }, { $set: query })
+        Action.findOneAndUpdate(
+          { _id: req.params.action_id },
+          { $set: query },
+          { runValidators: true, context: "query" }
+        )
           .then(() => {
             return res.status(200).send();
           })
           .catch((err) => {
-            if (err.name == "MongoError") {
-              if (err.code == "11000") {
+            if (err.name == "ValidationError") {
+              if (err.errors.name.kind == "unique") {
                 return res
                   .status(400)
                   .json({ error: "Action name not available" });
               }
+            } else {
+              console.error(`Error during Action update:\n${err}`);
+              return res.status(500).send();
             }
-            console.error(`Error during action update():\n${err}`);
-            return res.status(500).send();
           });
       })
       .catch((err) => {
