@@ -38,7 +38,13 @@ module.exports = {
       promises.push(
         Team.findOne({ _id: req.body.organizer }).then((team) => {
           if (team) {
-            action[`organizer`] = team._id;
+            if (team.owner == req.userData.userId) {
+              action[`organizer`] = team._id;
+            } else {
+              return res
+                .status(409)
+                .json({ error: "Insufficient permissions" });
+            }
           } else {
             return res.status(400).json({ error: "Invalid organizer" });
           }
@@ -97,6 +103,8 @@ module.exports = {
               }
             }
 
+            /* BUG: When the user isn't the owner of the team the right message is sent as a 
+            response but the code reaches this point and prints "Path `organizer` is required" error. */
             console.error(`Error during action save():\n${err}`);
             return res.status(500).send();
           }
