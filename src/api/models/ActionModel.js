@@ -2,7 +2,12 @@ const mongo = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
 const ActionSchema = new mongo.Schema({
-  name: { type: String, required: true, unique: true },
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+    uniqueCaseInsensitive: true,
+  },
   description: { type: String },
   categories: [{ type: mongo.Schema.Types.ObjectId, ref: "Category" }],
   location: {

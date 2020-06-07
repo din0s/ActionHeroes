@@ -36,7 +36,7 @@ module.exports = {
 
     if (req.body.organizer) {
       promises.push(
-        Team.findOne({ name: req.body.organizer }).then((team) => {
+        Team.findOne({ _id: req.body.organizer }).then((team) => {
           if (team) {
             action[`organizer`] = team._id;
           } else {
