@@ -2,6 +2,7 @@
   "actions": "Actions",
   "search": "Search...",
   "noresults": "No results.",
+  "submit": "Submit",
   "filterlist": {
     "filters": "Filters",
     "clear": "Clear",
@@ -74,7 +75,6 @@
     "lastname": "Your Last Name",
     "email": "Your Email",
     "message": "Your Message",
-    "submit": "Submit",
     "thanks": "Thanks, we will get back to you soon!"
   },
   "landingpage": {
@@ -118,7 +118,7 @@
   },
   "categories": {
     "animals": "Animals",
-    "children": "Children & Youth",
+    "children & youth": "Children & Youth",
     "community": "Community",
     "education & literacy": "Education & Literacy",
     "emergency & safety": "Emergency & Safety",
@@ -149,5 +149,16 @@
     "unfollow": "Following",
     "upcoming": "Upcoming Actions",
     "past": "Past Actions"
+  },
+  "createteam": {
+    "authentication": "Login to continue!",
+    "teamname": "Team name",
+    "description": "Description",
+    "create": "Create Team",
+    "createteam": "Create your team!",
+    "created": "Team created!",
+    "nameerror": "Team name not available!",
+    "image": "Choose image",
+    "maxfile": "Max file size: 5mb, accepted: jpg, png"
   }
 }

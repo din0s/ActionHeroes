@@ -129,7 +129,7 @@ export default withAlert()(
                 <input
                   className="SubmitButton"
                   type="submit"
-                  value={t("contactpage.submit")}
+                  value={t("submit")}
                 />
               </form>
             </div>
