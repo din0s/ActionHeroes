@@ -44,6 +44,8 @@ module.exports = {
           }
         })
       );
+    } else {
+      return res.status(400).json({ error: "Field `organizer` is required" });
     }
 
     if (req.body.location) {
@@ -124,10 +126,9 @@ module.exports = {
     }
 
     if (req.body.categories) {
-      const categories = req.body.categories;
       promises.push(
-        Category.find({ name: { $in: categories } }).then((categories) => {
-          query[`categories`] = categories.map((c) => c._id);
+        Category.find({ name: { $in: req.body.categories } }).then((cat) => {
+          query[`categories`] = cat.map((c) => c._id);
         })
       );
     }
