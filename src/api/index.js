@@ -16,6 +16,9 @@ const contactRoutes = require("./routes/contact");
 const app = express();
 const port = process.env.PORT || 4000;
 
+// set localhost proxy for nginx
+app.set('trust proxy', '127.0.0.1');
+
 // Database init connection
 const dbUser = process.env.MONGO_INITDB_ROOT_USERNAME;
 const dbPass = process.env.MONGO_INITDB_ROOT_PASSWORD;
