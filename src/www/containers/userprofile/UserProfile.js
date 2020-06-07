@@ -1,8 +1,8 @@
 import "./UserProfile.scss";
 
-import { Link, Redirect } from "react-router-dom";
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 
@@ -16,7 +16,6 @@ const teamsFollow = require("./teamsFollow.json");
 
 const mapState = (state) => ({
   user: state.auth.user,
-  loggedIn: state.auth.loggedIn,
 });
 
 export default connect(
@@ -106,10 +105,6 @@ export default connect(
       };
 
       render() {
-        if (!this.props.loggedIn) {
-          return <Redirect to="/login" />;
-        }
-
         const { t, user } = this.props;
         const { username, profilePhoto } = user;
         const photo = profilePhoto || "/img/fakedata/profilePhoto.png";

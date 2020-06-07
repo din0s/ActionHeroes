@@ -1,15 +1,14 @@
 import "./Authentication.scss";
 
-import { Link, Redirect } from "react-router-dom";
 import React, { Component } from "react";
 import { clearErrors, login } from "../../actions/auth";
 
 import Input from "../../components/input/Input";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 
 const mapState = (state) => ({
-  loggedIn: state.auth.loggedIn,
   error: state.auth.error,
 });
 
@@ -55,10 +54,6 @@ export default connect(
       };
 
       render() {
-        if (this.props.loggedIn) {
-          return <Redirect to="/profile" />;
-        }
-
         const { t } = this.props;
         return (
           <div className="Auth-page">

@@ -3,14 +3,29 @@
   margin: 0;
   padding: 2rem 3rem;
 
-  .SearchBar {
-    margin-bottom: 2rem;
+  .PopupTrigger {
+    background-color: rgba($color: rgb(221, 191, 191), $alpha: 0.1);
+    border: 1px solid rgba($color: black, $alpha: 0.25);
+    border-radius: 0.4rem;
+    cursor: pointer;
+    outline: none;
+    padding: 0.5rem;
+    width: 12%;
+  }
 
-    > input {
-      background-color: white;
-      box-shadow: 0 0 5px 1px rgba($color: black, $alpha: 0.25);
-      height: 1.5rem;
-      width: 80%;
+  > div {
+    display: flex;
+    flex-direction: row;
+
+    .SearchBar {
+      width: 100%;
+
+      > input {
+        background-color: white;
+        box-shadow: 0 0 5px 1px rgba($color: black, $alpha: 0.25);
+        height: 1.5rem;
+        width: 90%;
+      }
     }
   }
 
@@ -121,6 +136,26 @@
 
 @media only screen and(max-width: 800px) {
   .TeamsPage {
+    .PopupTrigger {
+      align-self: center;
+      margin-top: 0.8rem;
+      width: 95%;
+    }
+
+    > div {
+      flex-direction: column;
+
+      .SearchBar {
+        border-radius: 0.5rem;
+        box-shadow: 0 0 5px 1px rgba($color: black, $alpha: 0.25);
+        overflow: hidden;
+
+        input {
+          width: 100%;
+        }
+      }
+    }
+
     > span {
       flex-direction: column;
     }

@@ -11,9 +11,7 @@ const setToken = (token) => {
 };
 
 const handleResponse = (dispatch, data) => {
-  console.log(data);
   if (data.error) {
-    console.log(data.error);
     dispatch({
       type: "ERROR",
       error: data.error,
@@ -24,7 +22,7 @@ const handleResponse = (dispatch, data) => {
       type: "AUTH",
       user: data.user,
     });
-    dispatch(push("/"));
+    dispatch(push("/dashboard"));
   }
 };
 

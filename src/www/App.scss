@@ -8,4 +8,9 @@
   .hidden {
     display: none;
   }
+
+  .blurred {
+    position: fixed;
+    pointer-events: none;
+  }
 }

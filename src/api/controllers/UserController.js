@@ -31,6 +31,19 @@ const authResponse = (user) => ({
   user: sanitizeUser(user),
 });
 
+const findProfile = (req, res) => {
+  User.findOne({ _id: req.params.user_id })
+  .exec()
+  .then((user) => {
+    user = sanitizeUser(user);
+    return res.status(200).json({ user });
+  })
+  .catch((err) => {
+    console.error(`Error during user find():\n${err}`);
+    return res.status(500).send();
+  });
+}
+
 module.exports = {
   changePassword: (req, res) => {
     const previousPassword = req.body.previousPassword;
@@ -86,23 +99,15 @@ module.exports = {
 
   getProfile: (req, res) => {
     if (req.params.user_id === req.userData.userId) {
-      User.findOne({ _id: req.params.user_id })
-        .exec()
-        .then((user) => {
-          user = sanitizeUser(user);
-          return res.status(200).json({ user });
-        })
-        .catch((err) => {
-          console.error(`Error during user find():\n${err}`);
-          return res.status(500).send();
-        });
+      findProfile(req, res);
     } else {
       return res.status(401).send();
     }
   },
 
   getSelfProfile: (req, res) => {
-    res.redirect(`/api/users/${req.userData.userId}/profile`);
+    req.params.user_id = req.userData.userId;
+    findProfile(req, res);
   },
 
   login: (req, res) => {
