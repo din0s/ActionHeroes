@@ -3,14 +3,14 @@ import "./Popup.scss";
 import React, { Component } from "react";
 
 import ImageUploader from "react-images-upload";
-import Input from "../../components/input/Input";
+import Input from "../input/Input";
 import Popup from "reactjs-popup";
 import { Redirect } from "react-router-dom";
 import ScrollArea from "react-scrollbar";
 import axios from "axios";
 import { withTranslation } from "react-i18next";
 
-class PopupComp extends Component {
+class TeamPopup extends Component {
   state = {
     teamName: "",
     description: "",
@@ -200,4 +200,4 @@ class PopupComp extends Component {
   }
 }
 
-export default withTranslation()(PopupComp);
+export default withTranslation()(TeamPopup);

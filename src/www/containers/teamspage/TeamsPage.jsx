@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import FilterList from "../../components/filterlist/FilterList";
 import Pagination from "../../components/pagination/Pagination";
 import SearchBar from "../../components/searchbar/SearchBar";
-import PopupComp from "../../components/popup/PopupComp";
+import TeamPopup from "../../components/popup/TeamPopup";
 import queryString from "query-string";
 import { withRouter } from "react-router-dom";
 import { withTranslation } from "react-i18next";
@@ -68,7 +68,7 @@ export default withRouter(
         const { t } = this.props;
         return (
           <div>
-            <PopupComp
+            <TeamPopup
               categories={categories}
               open={this.state.isBlurred}
               onClose={() => this.setState({ isBlurred: false })}
