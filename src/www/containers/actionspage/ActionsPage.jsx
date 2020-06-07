@@ -3,6 +3,7 @@ import "./ActionsPage.scss";
 import { Link, withRouter } from "react-router-dom";
 import React, { Component } from "react";
 
+import ActionPopup from "../../components/popup/ActionPopup";
 import FilterList from "../../components/filterlist/FilterList";
 import Pagination from "../../components/pagination/Pagination";
 import SearchBar from "../../components/searchbar/SearchBar";
@@ -28,6 +29,7 @@ export default connect(
           categories: [],
           selectedCategories: [],
           query: "",
+          isBlurred: false,
         };
 
         setCategories = async () => {
@@ -114,34 +116,53 @@ export default connect(
         };
 
         render() {
+          const { t } = this.props;
           return (
-            <div className="ActionsPage">
-              <SearchBar
-                action="/actions"
-                value={this.state.query}
-                onChange={(e) => this.setState({ query: e.target.value })}
+            <div>
+              <ActionPopup
+                categories={this.state.categories}
+                open={this.state.isBlurred}
+                onClose={() => this.setState({ isBlurred: false })}
               />
-              <span>
-                <FilterList
-                  categories={this.state.categories}
-                  selected={this.state.selectedCategories}
-                  onCheckbox={this.onCheckbox}
-                  onClear={() => this.setState({ selectedCategories: [] })}
-                  onRemove={this.removeCategory}
-                />
-                <Pagination
-                  baseName="ActionsPage_content"
-                  collection={this.state.actions}
-                  perPage={6}
-                  query={this.state.query.toLowerCase().trim()}
-                  mapFunc={this.showActions}
-                  searchFilter={(actions, query) =>
-                    actions.name.toLowerCase().includes(query) ||
-                    actions.description.toLowerCase().includes(query)
-                  }
-                  selected={this.state.selectedCategories}
-                />
-              </span>
+              <div
+                className={`ActionsPage${
+                  this.state.isBlurred ? " blurred" : ""
+                }`}
+              >
+                <div>
+                  <SearchBar
+                    action="/actions"
+                    value={this.state.query}
+                    onChange={(e) => this.setState({ query: e.target.value })}
+                  />
+                  <button
+                    className="PopupTrigger"
+                    children={t("createaction.create")}
+                    onClick={() => this.setState({ isBlurred: true })}
+                  />
+                </div>
+                <span>
+                  <FilterList
+                    categories={this.state.categories}
+                    selected={this.state.selectedCategories}
+                    onCheckbox={this.onCheckbox}
+                    onClear={() => this.setState({ selectedCategories: [] })}
+                    onRemove={this.removeCategory}
+                  />
+                  <Pagination
+                    baseName="ActionsPage_content"
+                    collection={actions}
+                    perPage={6}
+                    query={this.state.query.toLowerCase().trim()}
+                    mapFunc={this.showActions}
+                    searchFilter={(actions, query) =>
+                      actions.name.toLowerCase().includes(query) ||
+                      actions.description.toLowerCase().includes(query)
+                    }
+                    selected={this.state.selectedCategories}
+                  />
+                </span>
+              </div>
             </div>
           );
         }
