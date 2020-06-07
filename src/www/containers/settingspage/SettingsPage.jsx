@@ -56,6 +56,10 @@ export default withAlert()(
           redirect: false,
         };
 
+        sorted = (categories) => {
+          return categories.sort((c1, c2) => c1.label.localeCompare(c2.label));
+        }
+
         mapCategories = (categories) => {
           const { t } = this.props;
           return Object.keys(categories).map((key) => {
@@ -67,6 +71,9 @@ export default withAlert()(
 
         remapCategories = (categories) => {
           const { t } = this.props;
+          if (!categories) {
+            return [];
+          }
           return categories.map((category) => {
             const { value } = category;
             const label = t(`categories.${value}`);
@@ -241,8 +248,8 @@ export default withAlert()(
                           className="Select"
                           closeMenuOnSelect={false}
                           isMulti
-                          options={categoriesList}
-                          value={selectedCategories}
+                          options={this.sorted(categoriesList)}
+                          value={this.sorted(selectedCategories)}
                           onChange={(selectedCategories) => {
                             this.setState({ selectedCategories });
                           }}
