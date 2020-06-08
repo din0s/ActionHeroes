@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const checkAuth = require("../middleware/check-auth");
-const checkPermissions = require("../middleware/check-permissions");
+const checkOwner = require("../middleware/check-owner");
 const logSearch = require("../middleware/log-search");
 
 const ActionController = require("../controllers/ActionController");
@@ -15,21 +15,21 @@ router.post("/create", checkAuth, ActionController.createAction);
 router.patch(
   "/:action_id",
   checkAuth,
-  checkPermissions,
+  checkOwner,
   ActionController.updateAction
 );
 
 router.delete(
   "/:action_id",
   checkAuth,
-  checkPermissions,
+  checkOwner,
   ActionController.cancelAction
 );
 
 router.put(
   "/:action_id/photo",
   checkAuth,
-  checkPermissions,
+  checkOwner,
   ActionController.changePhoto
 );
 
