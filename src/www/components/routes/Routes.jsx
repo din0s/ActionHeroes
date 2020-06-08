@@ -9,6 +9,7 @@ import LandingPage from "../../containers/landingpage/LandingPage";
 import Login from "../../containers/authentication/Login";
 import PrivateRoute from "./PrivateRoute";
 import React from "react";
+import Settings from "../../containers/settingspage/SettingsPage";
 import Signup from "../../containers/authentication/Signup";
 import TeamProfile from "../../containers/teamprofile/TeamProfile";
 import TeamsPage from "../../containers/teamspage/TeamsPage";
@@ -25,6 +26,7 @@ export default () => {
         <Route path="/actions" children={<ActionsPage />} />
         <GuestRoute path="/login" redirect="/dashboard" children={<Login />} />
         <GuestRoute path="/signup" redirect="/dashboard" children={<Signup />} />
+        <PrivateRoute path="/settings" redirect="/login" children={<Settings />} />
         <PrivateRoute path="/dashboard" redirect="/" children={<Dashboard />} />
         <PrivateRoute
           path="/profile"

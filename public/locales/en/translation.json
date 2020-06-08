@@ -17,7 +17,7 @@
     "user": {
       "greet": "Hello",
       "profile": "Profile",
-      "pref": "Preferences",
+      "settings": "Settings",
       "exit": "Log Out"
     }
   },
@@ -42,13 +42,10 @@
   "profile": {
     "add-bio": "Let us know more about you!",
     "attended": "Actions you have attended",
-    "cancel": "Cancel",
     "categories": "Categories",
-    "edit": "Edit Profile",
-    "edit-avatar": "Edit avatar",
+    "settings": "Settings",
     "join": "Join more teams here!",
     "organized": "Actions you have organized",
-    "save": "Save",
     "show-more": "Show more...",
     "show-less": "Show less...",
     "teams-owned": "Teams you own",
@@ -133,6 +130,7 @@
     "children & youth": "Children & Youth",
     "community": "Community",
     "education & literacy": "Education & Literacy",
+    "education": "Education & Literacy",
     "emergency & safety": "Emergency & Safety",
     "employment": "Employment",
     "environment": "Environment",
@@ -142,15 +140,14 @@
     "nature": "Nature",
     "poverty": "Poverty",
     "programming": "Programming",
-    "seniors": "Seniors",
-    "education": "Education & Literacy",
-    "youth": "Children & Youth",
     "science": "Science",
+    "seniors": "Seniors",
     "special needs": "Special needs",
     "sports & recreation": "Sports & Recreation",
     "students": "Students",
     "technology": "Technology",
-    "women": "Women"
+    "women": "Women",
+    "youth": "Children & Youth"
   },
   "teaminfo": {
     "members": "Members",
@@ -161,6 +158,32 @@
     "unfollow": "Following",
     "upcoming": "Upcoming Actions",
     "past": "Past Actions"
+  },
+  "settings": {
+    "success": "Successful Update",
+    "personal_settings": "Personal Settings",
+    "profile": "Profile",
+    "security": "Security",
+    "username": "Username",
+    "bio": "User Bio",
+    "favourite_categories": "Favourite Categories",
+    "location": "Location",
+    "update": {
+      "profile": "Update Profile",
+      "password": "Change Password"
+    },
+    "password": {
+      "old": "Old Password",
+      "new": "New Password",
+      "confirm_new": "Confirm New Password",
+      "mismatch": "Your passwords don't match!"
+    },
+    "photo": {
+      "save": "Save",
+      "remove": "Remove"
+    },
+    "buttonText": "Choose image",
+    "label": "Max file size: 5mb, accepted: jpg & png"
   },
   "createteam": {
     "authentication": "Login to continue!",

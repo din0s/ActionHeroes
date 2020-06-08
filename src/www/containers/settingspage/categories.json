@@ -1,0 +1,62 @@
+{
+  "Category1": {
+    "name": "animals"
+  },
+  "Category2": {
+    "name": "children & youth"
+  },
+  "Category3": {
+    "name": "community"
+  },
+  "Category4": {
+    "name": "education & literacy"
+  },
+  "Category5": {
+    "name": "emergency & safety"
+  },
+  "Category6": {
+    "name": "employment"
+  },
+  "Category7": {
+    "name": "environment"
+  },
+  "Category8": {
+    "name": "health & medicine"
+  },
+  "Category9": {
+    "name": "hunger"
+  },
+  "Category10": {
+    "name": "homeless"
+  },
+  "Category11": {
+    "name": "nature"
+  },
+  "Category12": {
+    "name": "poverty"
+  },
+  "Category13": {
+    "name": "programming"
+  },
+  "Category14": {
+    "name": "science"
+  },
+  "Category15": {
+    "name": "seniors"
+  },
+  "Category16": {
+    "name": "special needs"
+  },
+  "Category17": {
+    "name": "sports & recreation"
+  },
+  "Category18": {
+    "name": "students"
+  },
+  "Category19": {
+    "name": "technology"
+  },
+  "Category20": {
+    "name": "women"
+  }
+}

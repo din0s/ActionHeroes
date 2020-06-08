@@ -1,0 +1,319 @@
+@import "../../vars.scss";
+
+.SettingsPage {
+  background-color: rgb(234, 237, 245);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: auto;
+  padding: 2rem;
+
+  &_navigation {
+    background-color: rgba($color: white, $alpha: 0.7);
+    border-radius: 0.5rem;
+    border: 1px solid $softBlack;
+    box-shadow: 1px 1px 1rem $softBlack;
+    height: max-content;
+    text-align: left;
+    width: 16rem;
+
+    &_header {
+      padding: 0.8rem;
+
+      > h2 {
+        margin: 0;
+        overflow: hidden;
+        padding-bottom: 0.5rem;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+      }
+
+      > h5 {
+        margin: 0;
+      }
+    }
+
+    &_tabs {
+      list-style: none;
+      margin: 0.35rem 0;
+      padding: 0;
+
+      > li {
+        border-top: 1px solid $softBlack;
+        cursor: pointer;
+        padding: 0.75rem 0.5rem;
+        transition: 0.2s ease-in-out;
+
+        &:hover {
+          background-color: $grayHover;
+        }
+
+        &.active {
+          background-color: $grayHover;
+          border-left: 1px solid blue;
+
+          &:hover {
+            background-color: $grayHoverStrong;
+          }
+        }
+      }
+    }
+  }
+
+  &_content {
+    background-color: rgba($color: white, $alpha: 0.7);
+    border-radius: 0.5rem;
+    border: 1px solid $softBlack;
+    box-shadow: 1px 1px 1rem $softBlack;
+    margin-left: 2rem;
+    padding: 1rem 4rem;
+    text-align: left;
+    width: 48rem;
+
+    > :not(.active) {
+      display: none;
+    }
+
+    > div {
+      > h2 {
+        border-bottom: 1px solid $softBlack;
+        width: 15rem;
+      }
+
+      > form {
+        display: flex;
+        flex-direction: column;
+
+        > span {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          > div {
+            display: flex;
+            flex-direction: column;
+          }
+        }
+
+        label {
+          padding-bottom: 0.5rem;
+
+          &:not(:first-of-type) {
+            margin-top: 1rem;
+          }
+        }
+
+        input,
+        textarea {
+          border-radius: 0.5rem;
+          border: 1px solid $softBlack;
+          box-shadow: 1px 1px $softBlack;
+          outline: none;
+          padding: 0.75rem;
+          width: 20rem;
+        }
+
+        textarea {
+          height: 12rem;
+          resize: none;
+          word-break: break-all;
+        }
+
+        .Select {
+          width: 21.5rem;
+        }
+
+        .Map {
+          z-index: 0;
+        }
+
+        .Password-mismatch {
+          color: red;
+          margin-bottom: -1.5rem;
+          margin-top: 0.3rem;
+        }
+
+        .Submit-button {
+          border: 1px solid $softBlack;
+          border-radius: 0.5rem;
+          box-shadow: 1px 1px $softBlack;
+          cursor: pointer;
+          font-size: 1rem;
+          margin: 0;
+          margin-bottom: 1rem;
+          margin-top: 2rem;
+          padding: 0.75rem 1.5rem;
+          outline: none;
+          transition: 0.1s ease-in-out;
+          width: max-content;
+
+          &:hover {
+            background-color: $softBlack;
+          }
+
+          &:first-of-type {
+            // only for the profile tab
+            align-self: center;
+          }
+        }
+      }
+
+      .PhotoPanel {
+        align-items: center;
+        margin-top: 2rem;
+        width: 17.5rem;
+
+        > img {
+          width: 10rem;
+        }
+
+        .fileContainer {
+          padding: 0.5rem 0;
+        }
+
+        .deleteImage {
+          background: white;
+          border: 1px solid #cfcece;
+          color: black;
+          font-size: 15px;
+          line-height: 23px;
+          height: 20px;
+          width: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 1254px) {
+  .SettingsPage {
+    $contentWidth: 75vw;
+
+    align-items: center;
+    flex-direction: column;
+
+    &_navigation {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom: none;
+      margin-bottom: 0;
+      margin-left: 0;
+      width: calc(#{$contentWidth} + 5rem);
+
+      &_header {
+        display: none;
+      }
+
+      &_tabs {
+        background-color: $grayHover;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+        display: flex;
+        flex-direction: row;
+        margin: 0;
+
+        > li {
+          border-top-left-radius: 0.5rem;
+          border-top-right-radius: 0.5rem;
+          border-top: none;
+          padding: 0.75rem 1rem;
+          width: 50%;
+
+          &.active {
+            border-bottom: 1px solid blue;
+            border-left: none;
+
+            &,
+            &:hover {
+              background-color: rgba($color: white, $alpha: 0.7);
+            }
+          }
+        }
+      }
+    }
+
+    &_content {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-top: none;
+      margin-left: 0;
+      padding: 0 2.5rem;
+      width: $contentWidth;
+    }
+  }
+}
+
+@media only screen and(max-width: 900px) {
+  .SettingsPage {
+    $contentWidth: 60vw;
+
+    &_navigation {
+      width: calc(#{$contentWidth} + 5rem);
+    }
+
+    &_content {
+      width: $contentWidth;
+
+      > div {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+
+        > h2 {
+          text-align: center;
+        }
+
+        > form {
+          label:not(:first-of-type) {
+            margin-top: 1.5rem;
+          }
+
+          > span {
+            align-items: center;
+            flex-direction: column-reverse;
+          }
+
+          .Submit-button {
+            align-self: center;
+          }
+        }
+      }
+
+      .PhotoPanel {
+        margin-bottom: 2rem;
+        margin-top: 0 !important;
+
+        > img {
+          width: 7.5rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 550px) {
+  .SettingsPage {
+    $contentWidth: 70vw;
+
+    &_navigation {
+      width: calc(#{$contentWidth} + 5rem);
+    }
+
+    &_content {
+      width: $contentWidth;
+
+      > div > form {
+        input,
+        textarea,
+        .Map {
+          width: 16rem;
+        }
+
+        .Select {
+          width: 17.5rem;
+        }
+      }
+    }
+  }
+}

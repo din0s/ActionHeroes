@@ -1,0 +1,16 @@
+@import "../../vars.scss";
+
+.Map {
+  border: 1px solid $softBlack;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px $softBlack;
+  margin-bottom: 1rem;
+  outline: none;
+  padding: 0.75rem;
+  width: 20rem;
+  height: 12rem;
+}
+
+.Marker {
+  border: solid;
+}
