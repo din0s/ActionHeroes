@@ -170,10 +170,11 @@ module.exports = {
         Action.findOneAndUpdate(
           { _id: req.params.action_id },
           { $set: query },
-          { runValidators: true, context: "query" }
+          { runValidators: true, context: "query", new: true }
         )
-          .then(() => {
-            return res.status(200).send();
+          .then((action) => {
+            action.__v = undefined;
+            return res.status(200).send(action);
           })
           .catch((err) => {
             if (err.name == "ValidationError") {
