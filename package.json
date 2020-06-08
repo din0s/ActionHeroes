@@ -62,6 +62,7 @@
     "deploy": "deploy-node-app",
     "test": "react-scripts test",
     "prod": "NODE_ENV=production node src/api/index.js",
+    "populate-categories": "node scripts/populate-categories.js",
     "eject-www": "react-scripts eject",
     "mongo": "export $(cat .env | xargs) && mongo mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGO_SERVICE_HOST}:${MONGO_SERVICE_PORT}/${MONGO_INITDB_DATABASE}?authSource=admin"
   },
