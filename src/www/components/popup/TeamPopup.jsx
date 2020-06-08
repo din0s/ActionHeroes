@@ -26,7 +26,6 @@ class TeamPopup extends Component {
         name,
         description,
         categories,
-        photo,
       })
       .then((res) => this.handleSuccess(res.data, photo))
       .catch((err) => this.handleError(err.response.data));
@@ -81,6 +80,31 @@ class TeamPopup extends Component {
     }
   };
 
+  onCheckbox = (event, name) => {
+    if (event.target.checked) {
+      const categories = this.state.teamCategories.concat(name);
+      this.setState({
+        teamCategories: categories,
+      });
+    } else {
+      const filtered = this.state.teamCategories.filter((c) => c !== name);
+
+      this.setState({
+        teamCategories: filtered,
+      });
+    }
+  };
+
+  reset = () => {
+    this.props.onClose();
+    this.setState({
+      teamName: "",
+      description: "",
+      teamCategories: [],
+      teamPicture: undefined,
+    });
+  };
+
   render() {
     const { t, categories } = this.props;
     const { teamId } = this.state;
@@ -92,7 +116,7 @@ class TeamPopup extends Component {
     return (
       <Popup
         open={this.props.open}
-        onClose={this.props.onClose}
+        onClose={this.reset}
         closeOnDocumentClick={false}
         modal
       >
@@ -154,32 +178,11 @@ class TeamPopup extends Component {
                 <div className="FormArea_content_categories">
                   <p>{t("filterlist.categories")}</p>
                   <div className="FormArea_content_categories-list">
-                    {Object.keys(categories).map((c) => {
-                      const category = categories[c];
+                    {categories.map((name) => {
                       return (
-                        <label key={c}>
-                          {t(`categories.${category.name.toLowerCase()}`)}
-                          <input
-                            type="checkbox"
-                            onChange={(event) => {
-                              if (event.target.checked) {
-                                const categories = this.state.teamCategories.concat(
-                                  category.name
-                                );
-                                this.setState({
-                                  teamCategories: categories,
-                                });
-                              } else {
-                                const filtered = this.state.teamCategories.filter(
-                                  (c) => c !== category.name
-                                );
-
-                                this.setState({
-                                  teamCategories: filtered,
-                                });
-                              }
-                            }}
-                          />
+                        <label key={name}>
+                          {t(`categories.${name.toLowerCase()}`)}
+                          <input type="checkbox" onChange={(event) => this.onCheckbox(event, name)} />
                           <span className="checkmark"></span>
                         </label>
                       );
