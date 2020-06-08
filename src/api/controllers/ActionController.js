@@ -1,3 +1,4 @@
+const CustomError = require("../CustomError.js");
 const Action = require("../models/ActionModel");
 const Team = require("../models/TeamModel");
 const Category = require("../models/CategoryModel");
@@ -36,19 +37,25 @@ module.exports = {
 
     if (req.body.organizer) {
       promises.push(
-        Team.findOne({ _id: req.body.organizer }).then((team) => {
-          if (team) {
-            if (team.owner == req.userData.userId) {
-              action[`organizer`] = team._id;
+        Team.findOne({ _id: req.body.organizer })
+          .then((team) => {
+            if (team) {
+              if (team.owner == req.userData.userId) {
+                action[`organizer`] = team._id;
+              } else {
+                throw new CustomError("Insufficient permissions", 403);
+              }
             } else {
-              return res
-                .status(403)
-                .json({ error: "Insufficient permissions" });
+              throw new CustomError("Invalid organizer", 400);
             }
-          } else {
-            return res.status(400).json({ error: "Invalid organizer" });
-          }
-        })
+          })
+          .catch((err) => {
+            if (err.name == "CastError") {
+              throw new CustomError("Invalid organizer", 400);
+            } else {
+              throw err;
+            }
+          })
       );
     } else {
       return res.status(400).json({ error: "Field `organizer` is required" });
@@ -80,39 +87,41 @@ module.exports = {
       return res.status(400).json({ error: "Field `location` is required" });
     }
 
-    Promise.all(promises).then(() => {
-      action
-        .save()
-        .then(() => {
-          action.__v = undefined;
-          return res.status(201).send(action);
-        })
-        .catch((err) => {
-          if (err.name == "ValidationError") {
-            if (err.errors.date) {
-              if (err.errors.date.kind == "Date") {
-                return res.status(400).json({ error: "Date is invalid" });
+    Promise.all(promises)
+      .then(() => {
+        action
+          .save()
+          .then(() => {
+            action.__v = undefined;
+            return res.status(201).send(action);
+          })
+          .catch((err) => {
+            if (err.name == "ValidationError") {
+              if (err.errors.date) {
+                if (err.errors.date.kind == "Date") {
+                  return res.status(400).json({ error: "Date is invalid" });
+                }
               }
+
+              if (err.errors.name) {
+                if (err.errors.name.kind == "unique") {
+                  return res
+                    .status(400)
+                    .json({ error: "Action name not available" });
+                }
+              }
+
+              console.error(`Error during action save():\n${err}`);
+              return res.status(500).send();
             }
 
-            if (err.errors.name) {
-              if (err.errors.name.kind == "unique") {
-                return res
-                  .status(400)
-                  .json({ error: "Action name not available" });
-              }
-            }
-
-            /* BUG: When the user isn't the owner of the team the right message is sent as a 
-            response but the code reaches this point and prints "Path `organizer` is required" error. */
             console.error(`Error during action save():\n${err}`);
             return res.status(500).send();
-          }
-
-          console.error(`Error during action save():\n${err}`);
-          return res.status(500).send();
-        });
-    });
+          });
+      })
+      .catch((err) => {
+        return res.status(err.code).json({ error: err.message });
+      });
   },
 
   search: (req, res) => {},
