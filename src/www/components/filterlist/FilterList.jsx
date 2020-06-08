@@ -17,11 +17,7 @@ export default ({ categories, selected, onCheckbox, onClear, onRemove }) => {
     });
   };
 
-  const isChecked = (item, list) => {
-    return Object.keys(list).find((k) => list[k] === item);
-  };
-
-  const listFilters = (selected, onRemove) => {
+  const selectedFilters = () => {
     if (selected.length === 0) {
       return <p children={t("filterlist.none")} />;
     }
@@ -41,7 +37,7 @@ export default ({ categories, selected, onCheckbox, onClear, onRemove }) => {
           <h2>{t("filterlist.filters")}</h2>
           <p onClick={onClear}>{t("filterlist.clear")}</p>
         </span>
-        <ul children={listFilters(selected, onRemove)} />
+        <ul children={selectedFilters()} />
       </div>
       <div className="FilterList_menu">
         <h4>{t("filterlist.categories")}</h4>
@@ -52,7 +48,7 @@ export default ({ categories, selected, onCheckbox, onClear, onRemove }) => {
                 {t(`categories.${name.toLowerCase()}`)}
                 <input
                   type="checkbox"
-                  checked={isChecked(name, selected)}
+                  checked={selected.includes(name)}
                   onChange={(event) => onCheckbox(event, name)}
                 />
                 <span className="checkmark"></span>
