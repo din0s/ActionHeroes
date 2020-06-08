@@ -57,6 +57,9 @@ export default withAlert()(
         };
 
         sorted = (categories) => {
+          if (!categories) {
+            return [];
+          }
           return categories.sort((c1, c2) => c1.label.localeCompare(c2.label));
         }
 
