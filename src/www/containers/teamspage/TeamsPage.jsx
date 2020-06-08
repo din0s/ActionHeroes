@@ -31,14 +31,24 @@ export default connect(
           isBlurred: false,
         };
 
+        setCategories = async () => {
+          this.setState({
+            categories: this.props.categories.map((c) => c.name),
+          });
+        };
+
         componentDidMount = () => {
           const { query } = queryString.parse(this.props.location.search);
           if (query) {
             this.setState({ query });
           }
-          this.setState({
-            categories: this.props.categories.map(c => c.name)
-          })
+          this.setCategories();
+        };
+
+        componentDidUpdate = (prevProps) => {
+          if (prevProps.categories !== this.props.categories) {
+            this.setCategories();
+          }
         };
 
         onCheckbox = (event, category) => {
