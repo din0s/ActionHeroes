@@ -16,15 +16,13 @@ import { connect } from "react-redux";
 import { withAlert } from "react-alert";
 import { withTranslation } from "react-i18next";
 
-const _categoriesList = require("./categories.json");
-const _favoriteCategories = require("./favouriteCategories.json");
-
 const coordinates = { lat: 40.63666412, lng: 22.942162898 };
 
 const mapState = (state) => ({
   updated: state.auth.updated,
   user: state.auth.user,
   error: state.auth.error,
+  categories: state.categories.data,
 });
 
 const mapDispatch = {
@@ -65,9 +63,12 @@ export default withAlert()(
 
         mapCategories = (categories) => {
           const { t } = this.props;
-          return Object.keys(categories).map((key) => {
-            const value = categories[key].name;
-            const label = t(`categories.${value}`);
+          if (!categories) {
+            return [];
+          }
+          return categories.map((category) => {
+            const value = category.name;
+            const label = t(`categories.${value.toLowerCase()}`);
             return { label, value };
           });
         };
@@ -79,7 +80,7 @@ export default withAlert()(
           }
           return categories.map((category) => {
             const { value } = category;
-            const label = t(`categories.${value}`);
+            const label = t(`categories.${value.toLowerCase()}`);
             return { label, value };
           });
         };
@@ -165,18 +166,17 @@ export default withAlert()(
 
         componentDidMount = () => {
           this.setState({
-            categoriesList: this.mapCategories(_categoriesList),
-            selectedCategories: this.mapCategories(_favoriteCategories),
+            categoriesList: this.mapCategories(this.props.categories),
+            selectedCategories: this.mapCategories(this.props.user.favoriteCategories),
           });
         };
 
         componentDidUpdate = (prevProps, prevState) => {
           if (this.props.t !== prevProps.t) {
             // language changed, remap categories
-            const { categoriesList, selectedCategories } = prevState;
             this.setState({
-              categoriesList: this.remapCategories(categoriesList),
-              selectedCategories: this.remapCategories(selectedCategories),
+              categoriesList: this.mapCategories(this.props.categories),
+              selectedCategories: this.remapCategories(prevState.selectedCategories),
             });
           }
         };
