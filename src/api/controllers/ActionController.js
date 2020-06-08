@@ -42,7 +42,7 @@ module.exports = {
               action[`organizer`] = team._id;
             } else {
               return res
-                .status(409)
+                .status(403)
                 .json({ error: "Insufficient permissions" });
             }
           } else {
