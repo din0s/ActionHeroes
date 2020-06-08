@@ -3,6 +3,7 @@ const router = express.Router();
 
 const checkAuth = require("../middleware/check-auth");
 const checkOwner = require("../middleware/check-owner");
+const extractTeam = require("../middleware/extract-team");
 const logSearch = require("../middleware/log-search");
 
 const ActionController = require("../controllers/ActionController");
@@ -15,6 +16,7 @@ router.post("/create", checkAuth, ActionController.createAction);
 router.patch(
   "/:action_id",
   checkAuth,
+  extractTeam,
   checkOwner,
   ActionController.updateAction
 );
@@ -22,6 +24,7 @@ router.patch(
 router.delete(
   "/:action_id",
   checkAuth,
+  extractTeam,
   checkOwner,
   ActionController.cancelAction
 );
@@ -29,6 +32,7 @@ router.delete(
 router.put(
   "/:action_id/photo",
   checkAuth,
+  extractTeam,
   checkOwner,
   ActionController.changePhoto
 );
