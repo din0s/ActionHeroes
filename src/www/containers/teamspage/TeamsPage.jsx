@@ -25,6 +25,7 @@ export default connect(
     withTranslation()(
       class TeamsPage extends Component {
         state = {
+          categories: [],
           selectedCategories: [],
           query: "",
           isBlurred: false,
@@ -35,6 +36,9 @@ export default connect(
           if (query) {
             this.setState({ query });
           }
+          this.setState({
+            categories: this.props.categories.map(c => c.name)
+          })
         };
 
         onCheckbox = (event, category) => {
@@ -73,7 +77,8 @@ export default connect(
         };
 
         render() {
-          const { t, categories } = this.props;
+          const { t } = this.props;
+          const { categories } = this.state;
           return (
             <div>
               <TeamPopup

@@ -22,6 +22,7 @@ export default connect(
   withRouter(
     class ActionsPage extends Component {
       state = {
+        categories: [],
         selectedCategories: [],
         query: "",
       };
@@ -31,6 +32,9 @@ export default connect(
         if (query) {
           this.setState({ query });
         }
+        this.setState({
+          categories: this.props.categories.map(c => c.name)
+        })
       };
 
       onCheckbox = (event, category) => {
@@ -90,7 +94,7 @@ export default connect(
             />
             <span>
               <FilterList
-                categories={this.props.categories}
+                categories={this.state.categories}
                 selected={this.state.selectedCategories}
                 onCheckbox={this.onCheckbox}
                 onClear={() => this.setState({ selectedCategories: [] })}
