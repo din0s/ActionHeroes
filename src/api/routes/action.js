@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const checkAuth = require("../middleware/check-auth");
-const checkAdmin = require("../middleware/check-admin");
-const checkPermissions = require("../middleware/check-permissions");
+const checkOwner = require("../middleware/check-owner");
+const extractTeam = require("../middleware/extract-team");
 const logSearch = require("../middleware/log-search");
 
 const ActionController = require("../controllers/ActionController");
@@ -16,38 +16,25 @@ router.post("/create", checkAuth, ActionController.createAction);
 router.patch(
   "/:action_id",
   checkAuth,
-  checkPermissions,
+  extractTeam,
+  checkOwner,
   ActionController.updateAction
 );
 
 router.delete(
   "/:action_id",
   checkAuth,
-  checkPermissions,
+  extractTeam,
+  checkOwner,
   ActionController.cancelAction
 );
 
 router.put(
   "/:action_id/photo",
   checkAuth,
-  checkPermissions,
+  extractTeam,
+  checkOwner,
   ActionController.changePhoto
-);
-
-/* Admin */
-
-router.post(
-  "/:action_id/approve",
-  checkAuth,
-  checkAdmin,
-  ActionController.approveAction
-);
-
-router.post(
-  "/:action_id/decline",
-  checkAuth,
-  checkAdmin,
-  ActionController.declineAction
 );
 
 /* Attendants */
