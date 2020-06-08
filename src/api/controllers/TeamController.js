@@ -68,5 +68,53 @@ module.exports = {
 
   search: (req, res) => {},
 
-  updateTeam: (req, res) => {},
+  updateTeam: (req, res) => {
+    var query = {};
+    var promises = [];
+
+    if (req.body.name) {
+      query[`name`] = req.body.name;
+    }
+
+    if (req.body.description) {
+      query[`description`] = req.body.description;
+    }
+
+    if (req.body.categories) {
+      promises.push(
+        Category.find({ name: { $in: req.body.categories } }).then((cat) => {
+          query[`categories`] = cat.map((c) => c._id);
+        })
+      );
+    }
+
+    Promise.all(promises)
+      .then(() => {
+        Team.findOneAndUpdate(
+          { _id: req.params.team_id },
+          { $set: query },
+          { runValidators: true, context: "query", new: true }
+        )
+          .then((team) => {
+            team.__v = undefined;
+            return res.status(200).send(team);
+          })
+          .catch((err) => {
+            if (err.name == "ValidationError") {
+              if (err.errors.name.kind == "unique") {
+                return res
+                  .status(400)
+                  .json({ error: "Team name not available" });
+              }
+            } else {
+              console.error(`Error during Team update:\n${err}`);
+              return res.status(500).send();
+            }
+          });
+      })
+      .catch((err) => {
+        console.error(`Error during Promise.all():\n${err}`);
+        return res.status(500).send();
+      });
+  },
 };
