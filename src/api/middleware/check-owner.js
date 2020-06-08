@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
       if (team.owner == req.userData.userId) {
         next();
       } else {
-        return res.status(409).json({
+        return res.status(403).json({
           error: "Insufficient permissions",
         });
       }
