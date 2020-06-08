@@ -93,10 +93,11 @@ module.exports = {
         Team.findOneAndUpdate(
           { _id: req.params.team_id },
           { $set: query },
-          { runValidators: true, context: "query" }
+          { runValidators: true, context: "query", new: true }
         )
-          .then(() => {
-            return res.status(200).send();
+          .then((team) => {
+            team.__v = undefined;
+            return res.status(200).send(team);
           })
           .catch((err) => {
             if (err.name == "ValidationError") {
