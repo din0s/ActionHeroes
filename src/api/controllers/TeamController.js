@@ -1,5 +1,6 @@
-const Team = require("../models/TeamModel");
+const Action = require("../models/ActionModel");
 const Category = require("../models/CategoryModel");
+const Team = require("../models/TeamModel");
 const User = require("../models/UserModel");
 
 module.exports = {
@@ -60,7 +61,34 @@ module.exports = {
 
   changePhoto: (req, res) => {},
 
-  deleteTeam: (req, res) => {},
+  deleteTeam: (req, res) => {
+    Action.exists({ organizer: req.params.team_id })
+      .then((hasAction) => {
+        if (hasAction) {
+          res.status(405).json({ error: "An action depends on this team" });
+        } else {
+          Team.findById(req.params.team_id)
+            .then((team) => {
+              team
+                .remove()
+                .then(() => res.status(200).send())
+                .catch((err) => {
+                  console.error(`Error during team remove():\n${err}`);
+                  res.status(500).send();
+                });
+            })
+            .catch((err) => {
+              console.error(`Error during team findById():\n${err}`);
+              res.status(500).send();
+            });
+        }
+        res.send();
+      })
+      .catch((err) => {
+        console.error(`Error during action exists():\n${err}`);
+        res.status(500).send();
+      });
+  },
 
   search: (req, res) => {},
 
