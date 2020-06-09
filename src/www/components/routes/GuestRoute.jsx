@@ -1,24 +1,30 @@
 import { Redirect, Route } from "react-router-dom";
 
 import React from "react";
+import SpinnerPage from "../spinner/SpinnerPage";
 import { connect } from "react-redux";
-import { useTranslation } from "react-i18next";
+
+const mapState = (state) => ({
+  auth: state.auth.loggedIn,
+  handshake: state.auth.handshake,
+});
 
 export default connect(
-  (state) => ({ auth: state.auth.loggedIn }),
+  mapState,
   undefined
-)(({ auth, redirect, children, ...rest }) => {
-  useTranslation(); // wait for translation to load - fixes incorrect redirect!
+)(({ auth, handshake, redirect, children, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={({ location }) =>
-        auth ? (
+      render={({ location }) => {
+        return !auth ? (
+          children
+        ) : handshake ? (
           <Redirect to={{ pathname: redirect, state: { from: location } }} />
         ) : (
-          children
-        )
-      }
+          <SpinnerPage />
+        );
+      }}
     />
   );
 });

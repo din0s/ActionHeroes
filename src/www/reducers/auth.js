@@ -1,4 +1,5 @@
 const initState = {
+  handshake: false,
   loggedIn: false,
   updated: false,
   user: {},
@@ -7,10 +8,12 @@ const initState = {
 
 export default (state = initState, action) => {
   switch (action.type) {
+    case "HANDSHAKE":
+      return { ...state, handshake: true, loggedIn: action.success, user: action.user };
     case "AUTH":
-      return { loggedIn: true, user: action.user, error: undefined };
+      return { ...state, loggedIn: true, user: action.user, error: undefined };
     case "DEAUTH":
-      return { loggedIn: false, user: {}, error: undefined };
+      return { ...state, loggedIn: false, user: {} };
     case "ERROR":
       return { ...state, error: action.error };
     case "CLEAR":

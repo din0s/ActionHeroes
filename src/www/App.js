@@ -11,6 +11,7 @@ import NavBar from "./components/navbar/NavBar";
 import { Provider } from "react-redux";
 import Routes from "./components/routes/Routes";
 import ScrollToTop from "react-router-scroll-top";
+import SpinnerPage from "./components/spinner/SpinnerPage";
 import { createBrowserHistory } from "history";
 import { createRootReducer } from "./reducers";
 import { handshake } from "./actions/auth";
@@ -41,9 +42,8 @@ export default class App extends Component {
 
   render() {
     return (
-      // TODO: loading fallback?
       <Provider store={store}>
-        <Suspense fallback="">
+        <Suspense fallback={<SpinnerPage />}>
           <ConnectedRouter history={history}>
             <ScrollToTop>
               <AlertProvider template={AlertTemplate} {...alert_options}>
