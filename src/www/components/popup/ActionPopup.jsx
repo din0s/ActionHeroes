@@ -4,6 +4,7 @@ import React, { Component } from "react";
 
 import ImageUploader from "react-images-upload";
 import Input from "../input/Input";
+import Map from "../../components/map/Map";
 import Popup from "reactjs-popup";
 import { Redirect } from "react-router-dom";
 import ScrollArea from "react-scrollbar";
@@ -11,6 +12,7 @@ import axios from "axios";
 import { withTranslation } from "react-i18next";
 import { DateTimePicker } from "react-widgets"; // should uninstall
 
+const coordinates = { lat: 40.63666412, lng: 22.942162898 };
 class ActionPopup extends Component {
   state = {
     actionName: "",
@@ -22,6 +24,7 @@ class ActionPopup extends Component {
     serverResponse: "",
     actionId: "",
     actionLocation: "", // Not used yet
+    position: coordinates,
   };
 
   createAction = (
@@ -111,7 +114,7 @@ class ActionPopup extends Component {
 
   render() {
     const { t, categories } = this.props;
-    const { actionId } = this.state;
+    const { actionId, position } = this.state;
 
     if (actionId !== "") {
       return <Redirect to={`/actions/${actionId}`} />;
@@ -190,6 +193,14 @@ class ActionPopup extends Component {
                     });
                   }}
                 />
+                <div className="FormArea_content_map">
+                  <Map
+                    className="Map"
+                    position={position}
+                    zoom={13}
+                    onClick={(e) => this.setState({ position: e.latlng })}
+                  />
+                </div>
                 <div className="FormArea_content_categories">
                   <p>{t("filterlist.categories")}</p>
                   <div className="FormArea_content_categories-list">
