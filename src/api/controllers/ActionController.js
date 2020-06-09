@@ -4,7 +4,15 @@ const Team = require("../models/TeamModel");
 const Category = require("../models/CategoryModel");
 
 module.exports = {
-  cancelAction: (req, res) => {},
+  cancelAction: (req, res) => {
+    // should we check if the action is in the past?
+    Action.deleteOne({ _id: req.params.action_id })
+      .then(() => res.status(200).send())
+      .catch((err) => {
+        console.error(`Error during action delete():\n${err}`);
+        res.status(500).send();
+      });
+  },
 
   changePhoto: (req, res) => {},
 
