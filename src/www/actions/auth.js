@@ -48,6 +48,12 @@ export const handshake = () => {
             user: {},
           });
         });
+    } else {
+      dispatch({
+        type: "HANDSHAKE",
+        success: false,
+        user: {},
+      });
     }
   };
 };
