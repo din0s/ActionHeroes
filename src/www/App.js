@@ -11,7 +11,7 @@ import NavBar from "./components/navbar/NavBar";
 import { Provider } from "react-redux";
 import Routes from "./components/routes/Routes";
 import ScrollToTop from "react-router-scroll-top";
-import SpinnerPage from "./components/spinner/SpinnerPage";
+import SpinnerPage from "./containers/spinner/SpinnerPage";
 import { createBrowserHistory } from "history";
 import { createRootReducer } from "./reducers";
 import { handshake } from "./actions/auth";

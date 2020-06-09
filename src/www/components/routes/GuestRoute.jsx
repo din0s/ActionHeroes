@@ -1,7 +1,7 @@
 import { Redirect, Route } from "react-router-dom";
 
 import React from "react";
-import SpinnerPage from "../spinner/SpinnerPage";
+import SpinnerPage from "../../containers/spinner/SpinnerPage";
 import { connect } from "react-redux";
 
 const mapState = (state) => ({
