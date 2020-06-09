@@ -11,7 +11,7 @@ const TeamSchema = new mongo.Schema({
   description: { type: String },
   photo: { data: Buffer, contentType: String },
   owner: { type: mongo.Schema.Types.ObjectId, required: true, ref: "User" },
-  members: [{ type: mongo.Schema.Types.ObjectId, ref: "User" }],
+  followers: [{ type: mongo.Schema.Types.ObjectId, ref: "User" }],
   categories: [{ type: mongo.Schema.Types.ObjectId, ref: "Category" }],
   dateCreated: { type: Date, default: Date.now },
 });
