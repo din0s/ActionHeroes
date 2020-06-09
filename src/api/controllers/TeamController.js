@@ -3,8 +3,6 @@ const Category = require("../models/CategoryModel");
 const User = require("../models/UserModel");
 
 module.exports = {
-  addMembers: (req, res) => {},
-
   createTeam: (req, res) => {
     const team = new Team();
     const promises = [];
@@ -61,8 +59,6 @@ module.exports = {
   },
 
   changePhoto: (req, res) => {},
-
-  deleteMembers: (req, res) => {},
 
   deleteTeam: (req, res) => {},
 
