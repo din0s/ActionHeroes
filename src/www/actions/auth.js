@@ -35,11 +35,25 @@ export const handshake = () => {
         .get("/api/users/me/profile")
         .then((res) => {
           dispatch({
-            type: "AUTH",
+            type: "HANDSHAKE",
+            success: true,
             user: res.data.user,
           });
         })
-        .catch(() => localStorage.removeItem("token"));
+        .catch(() => {
+          localStorage.removeItem("token");
+          dispatch({
+            type: "HANDSHAKE",
+            success: false,
+            user: {},
+          });
+        });
+    } else {
+      dispatch({
+        type: "HANDSHAKE",
+        success: false,
+        user: {},
+      });
     }
   };
 };

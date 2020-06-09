@@ -1,0 +1,16 @@
+.SpinnerPage {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 1000;
+
+  h1 {
+    color: #eb3434;
+  }
+}
