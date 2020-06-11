@@ -279,7 +279,7 @@ module.exports = {
           { $set: query },
           { runValidators: true, context: "query", new: true }
         )
-          .then((user) => res.json(sanitizeUser(user)))
+          .then((user) => res.json({ user: sanitizeUser(user) }))
           .catch((err) => {
             if (err.name === "ValidationError") {
               if (err.errors.email) {
