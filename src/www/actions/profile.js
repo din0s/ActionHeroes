@@ -47,9 +47,11 @@ export const updateProfile = (
   return (dispatch) => {
     const fd = new FormData();
     fd.set("username", username);
-    fd.set("categories", categories);
-    fd.set("bio", bio);
-    fd.set("coordinates", coordinates);
+    fd.set("categories", JSON.stringify(categories));
+    fd.set("coordinates", JSON.stringify(coordinates));
+    if (bio !== "") {
+      fd.set("bio", bio);
+    }
     if (photo) {
       fd.set("photo", photo);
     }

@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 // const sharp = require("sharp");
 const jwt = require("jsonwebtoken");
 
+const Category = require("../models/CategoryModel");
 const Image = require("../models/ImageModel");
 const User = require("../models/UserModel");
 
@@ -236,10 +237,11 @@ module.exports = {
           .status(400)
           .json({ error: "Field `location.coordinates is required" });
       } else {
-        if (coordinates.length == 2) {
+        const coords = JSON.parse(coordinates);
+        if (coords.length == 2) {
           query[`location`] = {
             name,
-            coordinates,
+            coordinates: coords,
           };
         } else {
           return res.status(400).json({ error: "Invalid coordinates" });
@@ -251,10 +253,12 @@ module.exports = {
       query[`language`] = req.body.language;
     }
 
-    if (req.body.favoriteCategories) {
+    if (req.body.categories) {
       promises.push(
-        Category.find({ name: { $in: req.body.favoriteCategories } }).then(
-          (categories) => (query[`categories`] = categories.map((c) => c._id))
+        Category.find({ name: { $in: JSON.parse(req.body.categories) } }).then(
+          (categories) => {
+            query[`categories`] = categories.map((c) => c._id);
+          }
         )
       );
     }
@@ -268,7 +272,9 @@ module.exports = {
           mimeType: req.file.mimetype,
         })
           .save()
-          .then((img) => (query[`photo`] = img._id))
+          .then((img) => {
+            query[`photo`] = img._id;
+          })
       );
     }
 

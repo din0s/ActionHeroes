@@ -59,7 +59,7 @@ export default withAlert()(
             return [];
           }
           return categories.sort((c1, c2) => c1.label.localeCompare(c2.label));
-        }
+        };
 
         mapCategories = (categories) => {
           const { t } = this.props;
@@ -194,7 +194,9 @@ export default withAlert()(
 
           const { t, user } = this.props;
           const { username, bio, photo } = user;
-          const photoSrc = photo ? `/api/img/${photo}` : "/img/profile/default.png";
+          const photoSrc = photo
+            ? `/api/images/${photo}`
+            : "/img/profile/default.png";
 
           const {
             activeTab,
@@ -242,6 +244,7 @@ export default withAlert()(
                           type="text"
                           name="username"
                           defaultValue={username}
+                          required
                           onChange={(e) =>
                             this.setState({ username: e.target.value.trim() })
                           }
@@ -287,7 +290,7 @@ export default withAlert()(
                           withPreview={true}
                           onChange={(pic) => {
                             this.setState({
-                              profilePicture: pic,
+                              profilePicture: pic[0],
                             });
                           }}
                         />

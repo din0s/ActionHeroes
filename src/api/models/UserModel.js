@@ -16,7 +16,7 @@ const UserSchema = new mongo.Schema({
     name: { type: String },
     coordinates: { type: [Number] },
   },
-  favoriteCategories: [{ type: mongo.Schema.Types.ObjectId, ref: "Category" }],
+  categories: [{ type: mongo.Schema.Types.ObjectId, ref: "Category" }],
   language: { type: String },
 });
 
