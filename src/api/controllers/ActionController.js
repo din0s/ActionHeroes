@@ -3,7 +3,36 @@ const Action = require("../models/ActionModel");
 const Team = require("../models/TeamModel");
 const Category = require("../models/CategoryModel");
 
+const updateList = (req, res, add, list) => {
+  const query = {
+    [add ? "$addToSet" : "$pull"]: { [list]: req.userData.userId }
+  };
+  Action.findOneAndUpdate({ _id: req.params.action_id }, query)
+    .then((action) => {
+      action
+        ? res.status(200).send()
+        : res.status(400).json({ error: "Invalid action id" });
+    })
+    .catch(() => res.status(400).send({ error: "Invalid action id" }));
+}
+
+const updateAttendants = (req, res, add) => {
+  updateList(req, res, add, "attendees");
+};
+
+const updateSaves = (req, res, add) => {
+  updateList(req, res, add, "saves");
+};
+
 module.exports = {
+  addAttendant: (req, res) => {
+    updateAttendants(req, res, true);
+  },
+
+  addSave: (req, res) => {
+    updateSaves(req, res, true);
+  },
+
   cancelAction: (req, res) => {
     // should we check if the action is in the past?
     Action.deleteOne({ _id: req.params.action_id })
@@ -130,6 +159,14 @@ module.exports = {
       .catch((err) => {
         return res.status(err.code).json({ error: err.message });
       });
+  },
+
+  removeAttendant: (req, res) => {
+    updateAttendants(req, res, false);
+  },
+
+  removeSave: (req, res) => {
+    updateSaves(req, res, false);
   },
 
   search: (req, res) => {},

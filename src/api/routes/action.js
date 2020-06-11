@@ -7,7 +7,6 @@ const extractTeam = require("../middleware/extract-team");
 const logSearch = require("../middleware/log-search");
 
 const ActionController = require("../controllers/ActionController");
-const ActionUserController = require("../controllers/ActionUserController");
 
 /* CRUD */
 
@@ -39,23 +38,19 @@ router.put(
 
 /* Attendants */
 
-router.post("/:action_id/attend", checkAuth, ActionUserController.addAttendant);
+router.post("/:action_id/attend", checkAuth, ActionController.addAttendant);
 
 router.delete(
   "/:action_id/attend",
   checkAuth,
-  ActionUserController.removeAttendant
+  ActionController.removeAttendant
 );
 
 /* Saved Actions */
 
-router.post("/:action_id/save", checkAuth, ActionUserController.addSavedAction);
+router.post("/:action_id/save", checkAuth, ActionController.addSave);
 
-router.delete(
-  "/:action_id/save",
-  checkAuth,
-  ActionUserController.removeSavedAction
-);
+router.delete("/:action_id/save", checkAuth, ActionController.removeSave);
 
 /* Search */
 

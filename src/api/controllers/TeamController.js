@@ -3,7 +3,24 @@ const Category = require("../models/CategoryModel");
 const Team = require("../models/TeamModel");
 const User = require("../models/UserModel");
 
+const updateFollowers = (req, res, add) => {
+  const query = {
+    [add ? "$addToSet" : "$pull"]: { followers: req.userData.userId },
+  };
+  Team.findOneAndUpdate({ _id: req.params.team_id }, query)
+    .then((team) => {
+      team
+        ? res.status(200).send()
+        : res.status(400).json({ error: "Invalid team id" });
+    })
+    .catch(() => res.status(400).send({ error: "Invalid team id" }));
+};
+
 module.exports = {
+  addFollower: (req, res) => {
+    updateFollowers(req, res, true);
+  },
+
   createTeam: (req, res) => {
     const team = new Team();
     const promises = [];
@@ -88,6 +105,10 @@ module.exports = {
         console.error(`Error during action exists():\n${err}`);
         res.status(500).send();
       });
+  },
+
+  removeFollower: (req, res) => {
+    updateFollowers(req, res, false);
   },
 
   search: (req, res) => {},
