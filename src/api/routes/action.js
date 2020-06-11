@@ -5,6 +5,7 @@ const checkAuth = require("../middleware/check-auth");
 const checkOwner = require("../middleware/check-owner");
 const extractTeam = require("../middleware/extract-team");
 const logSearch = require("../middleware/log-search");
+const upload = require("../middleware/upload");
 
 const ActionController = require("../controllers/ActionController");
 
@@ -17,6 +18,7 @@ router.patch(
   checkAuth,
   extractTeam,
   checkOwner,
+  upload,
   ActionController.updateAction
 );
 
@@ -26,14 +28,6 @@ router.delete(
   extractTeam,
   checkOwner,
   ActionController.cancelAction
-);
-
-router.put(
-  "/:action_id/photo",
-  checkAuth,
-  extractTeam,
-  checkOwner,
-  ActionController.changePhoto
 );
 
 /* Attendants */

@@ -10,7 +10,7 @@ const UserSchema = new mongo.Schema({
   },
   username: { type: String, required: true, unique: true },
   hash: { type: String, required: true },
-  profilePhoto: { data: Buffer, contentType: String },
+  photo: { type: mongo.Schema.Types.ObjectId, ref: "Image" },
   bio: { type: String },
   location: {
     type: {

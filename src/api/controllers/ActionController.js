@@ -43,8 +43,6 @@ module.exports = {
       });
   },
 
-  changePhoto: (req, res) => {},
-
   createAction: (req, res) => {
     const action = new Action();
     var promises = [];

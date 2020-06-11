@@ -95,8 +95,6 @@ module.exports = {
       });
   },
 
-  changePhoto: (req, res) => {},
-
   getProfile: (req, res) => {
     if (req.params.user_id === req.userData.userId) {
       findProfile(req, res);

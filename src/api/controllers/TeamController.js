@@ -76,8 +76,6 @@ module.exports = {
     });
   },
 
-  changePhoto: (req, res) => {},
-
   deleteTeam: (req, res) => {
     Action.exists({ organizer: req.params.team_id })
       .then((hasAction) => {

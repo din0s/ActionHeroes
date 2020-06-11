@@ -9,6 +9,7 @@ require("dotenv-defaults").config();
 
 const actionRoutes = require("./routes/action");
 const authRoutes = require("./routes/auth");
+const imageRoutes = require("./routes/image");
 const teamRoutes = require("./routes/team");
 const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
@@ -84,6 +85,7 @@ app.use(express.json());
 // Routes
 app.use("/api/actions", actionRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/images", imageRoutes);
 app.use("/api/teams", teamRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/categories", categoryRoutes);

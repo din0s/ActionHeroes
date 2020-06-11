@@ -22,7 +22,7 @@ const ActionSchema = new mongo.Schema({
   },
   date: { type: Date, required: true },
   dateCreated: { type: Date, default: Date.now },
-  photo: { data: Buffer, contentType: String },
+  photo: { type: mongo.Schema.Types.ObjectId, ref: "Image" },
   organizer: { type: mongo.Schema.Types.ObjectId, ref: "Team", required: true },
   attendees: [{ type: mongo.Schema.Types.ObjectId, ref: "User" }],
   saves: [{ type: mongo.Schema.Types.ObjectId, ref: "User" }],

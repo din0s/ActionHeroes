@@ -3,6 +3,7 @@ const router = express.Router();
 
 const checkAuth = require("../middleware/check-auth");
 const checkOwner = require("../middleware/check-owner");
+const upload = require("../middleware/upload");
 const logSearch = require("../middleware/log-search");
 
 const TeamController = require("../controllers/TeamController");
@@ -11,16 +12,15 @@ const TeamController = require("../controllers/TeamController");
 
 router.post("/create", checkAuth, TeamController.createTeam);
 
-router.patch("/:team_id", checkAuth, checkOwner, TeamController.updateTeam);
-
-router.delete("/:team_id", checkAuth, checkOwner, TeamController.deleteTeam);
-
-router.put(
-  "/:team_id/photo",
+router.patch(
+  "/:team_id",
   checkAuth,
   checkOwner,
-  TeamController.changePhoto
+  upload,
+  TeamController.updateTeam
 );
+
+router.delete("/:team_id", checkAuth, checkOwner, TeamController.deleteTeam);
 
 /* Followers */
 
