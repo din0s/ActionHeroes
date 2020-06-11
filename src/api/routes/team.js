@@ -6,7 +6,6 @@ const checkOwner = require("../middleware/check-owner");
 const logSearch = require("../middleware/log-search");
 
 const TeamController = require("../controllers/TeamController");
-const TeamUserController = require("../controllers/TeamUserController");
 
 /* CRUD */
 
@@ -25,9 +24,9 @@ router.put(
 
 /* Followers */
 
-router.post("/:team_id/follow", checkAuth, TeamUserController.addFollower);
+router.post("/:team_id/follow", checkAuth, TeamController.addFollower);
 
-router.delete("/:team_id/follow", checkAuth, TeamUserController.deleteFollower);
+router.delete("/:team_id/follow", checkAuth, TeamController.removeFollower);
 
 /* Search */
 

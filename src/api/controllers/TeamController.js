@@ -1,9 +1,25 @@
-const Team = require("../models/TeamModel");
+const Action = require("../models/ActionModel");
 const Category = require("../models/CategoryModel");
+const Team = require("../models/TeamModel");
 const User = require("../models/UserModel");
 
+const updateFollowers = (req, res, add) => {
+  const query = {
+    [add ? "$addToSet" : "$pull"]: { followers: req.userData.userId },
+  };
+  Team.findOneAndUpdate({ _id: req.params.team_id }, query)
+    .then((team) => {
+      team
+        ? res.status(200).send()
+        : res.status(400).json({ error: "Invalid team id" });
+    })
+    .catch(() => res.status(400).send({ error: "Invalid team id" }));
+};
+
 module.exports = {
-  addMembers: (req, res) => {},
+  addFollower: (req, res) => {
+    updateFollowers(req, res, true);
+  },
 
   createTeam: (req, res) => {
     const team = new Team();
@@ -62,9 +78,37 @@ module.exports = {
 
   changePhoto: (req, res) => {},
 
-  deleteMembers: (req, res) => {},
+  deleteTeam: (req, res) => {
+    Action.exists({ organizer: req.params.team_id })
+      .then((hasAction) => {
+        if (hasAction) {
+          res.status(405).json({ error: "An action depends on this team" });
+        } else {
+          Team.findById(req.params.team_id)
+            .then((team) => {
+              team
+                .remove()
+                .then(() => res.status(200).send())
+                .catch((err) => {
+                  console.error(`Error during team remove():\n${err}`);
+                  res.status(500).send();
+                });
+            })
+            .catch((err) => {
+              console.error(`Error during team findById():\n${err}`);
+              res.status(500).send();
+            });
+        }
+      })
+      .catch((err) => {
+        console.error(`Error during action exists():\n${err}`);
+        res.status(500).send();
+      });
+  },
 
-  deleteTeam: (req, res) => {},
+  removeFollower: (req, res) => {
+    updateFollowers(req, res, false);
+  },
 
   search: (req, res) => {},
 
