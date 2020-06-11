@@ -13,13 +13,8 @@ const UserSchema = new mongo.Schema({
   photo: { type: mongo.Schema.Types.ObjectId, ref: "Image" },
   bio: { type: String },
   location: {
-    type: {
-      type: String,
-      enum: ["Point"],
-    },
-    coordinates: {
-      type: [Number],
-    },
+    name: { type: String },
+    coordinates: { type: [Number] },
   },
   favoriteCategories: [{ type: mongo.Schema.Types.ObjectId, ref: "Category" }],
   language: { type: String },

@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
+// const sharp = require("sharp");
 const jwt = require("jsonwebtoken");
 
+const Image = require("../models/ImageModel");
 const User = require("../models/UserModel");
 
 const generateToken = (user) =>
@@ -8,7 +10,6 @@ const generateToken = (user) =>
     // payload
     {
       userId: user._id,
-      email: user.email,
     },
     // secret
     process.env.TOKEN_SECRET_KEY,
@@ -32,17 +33,16 @@ const authResponse = (user) => ({
 });
 
 const findProfile = (req, res) => {
-  User.findOne({ _id: req.params.user_id })
-  .exec()
-  .then((user) => {
-    user = sanitizeUser(user);
-    return res.status(200).json({ user });
-  })
-  .catch((err) => {
-    console.error(`Error during user find():\n${err}`);
-    return res.status(500).send();
-  });
-}
+  User.findById(req.params.user_id)
+    .then((user) => {
+      user = sanitizeUser(user);
+      return res.status(200).json({ user });
+    })
+    .catch((err) => {
+      console.error(`Error during user find():\n${err}`);
+      return res.status(500).send();
+    });
+};
 
 module.exports = {
   changePassword: (req, res) => {
@@ -209,5 +209,102 @@ module.exports = {
     });
   },
 
-  updateProfile: (req, res) => {},
+  updateProfile: (req, res) => {
+    const query = {};
+    const promises = [];
+
+    if (req.body.email) {
+      query[`email`] = req.body.email;
+    }
+
+    if (req.body.username) {
+      query[`username`] = req.body.username;
+    }
+
+    if (req.body.bio) {
+      query[`bio`] = req.body.bio;
+    }
+
+    if (req.body.location) {
+      const { coordinates, name } = req.body.location;
+      if (!name) {
+        return res
+          .status(400)
+          .json({ error: "Field `location.name` is required" });
+      } else if (!coordinates) {
+        return res
+          .status(400)
+          .json({ error: "Field `location.coordinates is required" });
+      } else {
+        if (coordinates.length == 2) {
+          query[`location`] = {
+            name,
+            coordinates,
+          };
+        } else {
+          return res.status(400).json({ error: "Invalid coordinates" });
+        }
+      }
+    }
+
+    if (req.body.language) {
+      query[`language`] = req.body.language;
+    }
+
+    if (req.body.favoriteCategories) {
+      promises.push(
+        Category.find({ name: { $in: req.body.favoriteCategories } }).then(
+          (categories) => (query[`categories`] = categories.map((c) => c._id))
+        )
+      );
+    }
+
+    if (req.file) {
+      // apply image resizing etc here using sharp
+      // https://www.npmjs.com/package/sharp
+      promises.push(
+        new Image({
+          data: req.file.buffer,
+          mimeType: req.file.mimetype,
+        })
+          .save()
+          .then((img) => (query[`photo`] = img._id))
+      );
+    }
+
+    Promise.all(promises)
+      .then(() => {
+        User.findOneAndUpdate(
+          { _id: req.userData.userId },
+          { $set: query },
+          { runValidators: true, context: "query", new: true }
+        )
+          .then((user) => res.json(sanitizeUser(user)))
+          .catch((err) => {
+            if (err.name === "ValidationError") {
+              if (err.errors.email) {
+                switch (err.errors.email.kind) {
+                  case "unique":
+                    return res
+                      .status(400)
+                      .json({ error: "Email isn't unique" });
+                  case "regexp":
+                    return res
+                      .status(400)
+                      .json({ error: "Invalid email address" });
+                }
+              }
+              if (err.errors.username.kind === "unique") {
+                return res.status(400).json({ error: "Username isn't unique" });
+              }
+            }
+            console.error(`Error during user update():\n${err}`);
+            res.status(500).json({ err });
+          });
+      })
+      .catch((err) => {
+        console.error(`Error during Promise.all():\n${err}`);
+        res.status(500).send();
+      });
+  },
 };
