@@ -226,26 +226,12 @@ module.exports = {
       query[`bio`] = req.body.bio;
     }
 
-    if (req.body.location) {
-      const { coordinates, name } = req.body.location;
-      if (!name) {
-        return res
-          .status(400)
-          .json({ error: "Field `location.name` is required" });
-      } else if (!coordinates) {
-        return res
-          .status(400)
-          .json({ error: "Field `location.coordinates is required" });
+    if (req.body.coordinates) {
+      const coords = JSON.parse(coordinates);
+      if (coords.length == 2) {
+        query[`coordinates`] = coords;
       } else {
-        const coords = JSON.parse(coordinates);
-        if (coords.length == 2) {
-          query[`location`] = {
-            name,
-            coordinates: coords,
-          };
-        } else {
-          return res.status(400).json({ error: "Invalid coordinates" });
-        }
+        return res.status(400).json({ error: "Invalid coordinates" });
       }
     }
 

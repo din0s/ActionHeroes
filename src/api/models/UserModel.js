@@ -12,10 +12,7 @@ const UserSchema = new mongo.Schema({
   hash: { type: String, required: true },
   photo: { type: mongo.Schema.Types.ObjectId, ref: "Image" },
   bio: { type: String },
-  location: {
-    name: { type: String },
-    coordinates: { type: [Number] },
-  },
+  coordinates: { type: [Number] },
   categories: [{ type: mongo.Schema.Types.ObjectId, ref: "Category" }],
   language: { type: String },
 });
