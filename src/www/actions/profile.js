@@ -49,9 +49,7 @@ export const updateProfile = (
     fd.set("username", username);
     fd.set("categories", JSON.stringify(categories));
     fd.set("coordinates", JSON.stringify(coordinates));
-    if (bio !== "") {
-      fd.set("bio", bio);
-    }
+    fd.set("bio", bio);
     if (photo) {
       fd.set("photo", photo);
     }
