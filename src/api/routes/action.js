@@ -11,7 +11,7 @@ const ActionController = require("../controllers/ActionController");
 
 /* CRUD */
 
-router.post("/create", checkAuth, ActionController.createAction);
+router.post("/create", checkAuth, upload, ActionController.createAction);
 
 router.patch(
   "/:action_id",

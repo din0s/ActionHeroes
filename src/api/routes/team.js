@@ -10,7 +10,7 @@ const TeamController = require("../controllers/TeamController");
 
 /* CRUD */
 
-router.post("/create", checkAuth, TeamController.createTeam);
+router.post("/create", checkAuth, upload, TeamController.createTeam);
 
 router.patch(
   "/:team_id",
