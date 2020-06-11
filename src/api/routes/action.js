@@ -50,4 +50,6 @@ router.delete("/:action_id/save", checkAuth, ActionController.removeSave);
 
 router.get("/search", checkAuth, logSearch, ActionController.search);
 
+router.get("/", ActionController.getAll);
+
 module.exports = router;

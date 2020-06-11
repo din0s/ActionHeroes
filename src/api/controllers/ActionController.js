@@ -177,6 +177,30 @@ module.exports = {
       });
   },
 
+  getAll: (_, res) => {
+    var response = [];
+
+    Action.find()
+      .sort({ dateCreated: -1 })
+      .populate("categories")
+      .then((actions) => {
+        actions.forEach((action) => {
+          action = action.toJSON();
+
+          action.__v = undefined;
+          action.attendees = undefined;
+          action.saves = undefined;
+          action.dateCreated = undefined;
+          action.categories = action.categories.map((c) => c.name);
+
+          response.push(action);
+        });
+      })
+      .then(() => {
+        return res.send(response);
+      });
+  },
+
   removeAttendant: (req, res) => {
     updateAttendants(req, res, false);
   },
