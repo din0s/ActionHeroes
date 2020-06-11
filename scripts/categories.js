@@ -1,0 +1,18 @@
+module.exports = [
+  "Animals",
+  "Children & Youth",
+  "Community",
+  "Education & Literacy",
+  "Emergency & Safety",
+  "Employment",
+  "Health & Medicine",
+  "Hunger",
+  "Homeless",
+  "Nature",
+  "Poverty",
+  "Science",
+  "Seniors",
+  "Special Needs",
+  "Sports & Recreation",
+  "Technology",
+];

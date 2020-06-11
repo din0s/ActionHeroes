@@ -11,6 +11,7 @@ const actionRoutes = require("./routes/action");
 const authRoutes = require("./routes/auth");
 const teamRoutes = require("./routes/team");
 const userRoutes = require("./routes/user");
+const categoryRoutes = require("./routes/category");
 const contactRoutes = require("./routes/contact");
 
 const app = express();
@@ -85,6 +86,7 @@ app.use("/api/actions", actionRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/teams", teamRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/categories", categoryRoutes);
 app.use("/api/contact", contactRoutes);
 
 if (process.env.NODE_ENV == "production") {

@@ -14,6 +14,7 @@ import ScrollToTop from "react-router-scroll-top";
 import SpinnerPage from "./containers/spinner/SpinnerPage";
 import { createBrowserHistory } from "history";
 import { createRootReducer } from "./reducers";
+import { fetchCategories } from "./actions/categories";
 import { handshake } from "./actions/auth";
 import thunk from "redux-thunk";
 
@@ -38,6 +39,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     store.dispatch(handshake());
+    store.dispatch(fetchCategories());
   }
 
   render() {
