@@ -99,7 +99,6 @@ module.exports = {
               res.status(500).send();
             });
         }
-        res.send();
       })
       .catch((err) => {
         console.error(`Error during action exists():\n${err}`);
