@@ -21,33 +21,23 @@ class TeamPopup extends Component {
   };
 
   createTeam = (name, description, categories, photo) => {
+    const fd = new FormData();
+    fd.set("name", name);
+    fd.set("description", description);
+    fd.set("categories", JSON.stringify(categories));
+    if (photo) {
+      fd.set("photo", photo);
+    }
     axios
-      .post("/api/teams/create", {
-        name,
-        description,
-        categories,
-      })
-      .then((res) => this.handleSuccess(res.data, photo))
+      .post("/api/teams/create", fd)
+      .then((res) => this.handleSuccess(res.data))
       .catch((err) => this.handleError(err.response.data));
   };
 
-  handleSuccess = (data, photo) => {
-    const id = data._id;
-
-    if (photo) {
-      axios
-        .put(`/api/teams/${id}/photo`)
-        .then(() =>
-          this.setState({
-            teamId: id,
-          })
-        )
-        .catch((err) => this.handleError(err.response.data));
-    } else {
-      this.setState({
-        teamId: id,
-      });
-    }
+  handleSuccess = (data) => {
+    this.setState({
+      teamId: data._id,
+    });
   };
 
   handleError = (data) => {
@@ -88,7 +78,6 @@ class TeamPopup extends Component {
       });
     } else {
       const filtered = this.state.teamCategories.filter((c) => c !== name);
-
       this.setState({
         teamCategories: filtered,
       });
@@ -171,7 +160,7 @@ class TeamPopup extends Component {
                   label={t("createteam.maxfile")}
                   onChange={(pic) => {
                     this.setState({
-                      teamPicture: pic,
+                      teamPicture: pic[0],
                     });
                   }}
                 />
@@ -182,7 +171,10 @@ class TeamPopup extends Component {
                       return (
                         <label key={name}>
                           {t(`categories.${name.toLowerCase()}`)}
-                          <input type="checkbox" onChange={(event) => this.onCheckbox(event, name)} />
+                          <input
+                            type="checkbox"
+                            onChange={(event) => this.onCheckbox(event, name)}
+                          />
                           <span className="checkmark"></span>
                         </label>
                       );
