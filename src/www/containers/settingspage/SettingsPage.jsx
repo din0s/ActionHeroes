@@ -193,8 +193,8 @@ export default withAlert()(
           }
 
           const { t, user } = this.props;
-          const { username, bio, profilePhoto } = user;
-          const photo = profilePhoto || "/img/fakedata/profilePhoto.png";
+          const { username, bio, photo } = user;
+          const photoSrc = photo ? `/api/img/${photo}` : "/img/profile/default.png";
 
           const {
             activeTab,
@@ -276,7 +276,7 @@ export default withAlert()(
                         />
                       </div>
                       <div className="PhotoPanel">
-                        <img src={photo} alt="Avatar" />
+                        <img src={photoSrc} alt="Avatar" />
                         <ImageUploader
                           withIcon={false}
                           buttonText={t("settings.buttonText")}

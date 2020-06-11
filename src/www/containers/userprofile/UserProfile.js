@@ -106,15 +106,15 @@ export default connect(
 
       render() {
         const { t, user } = this.props;
-        const { username, profilePhoto } = user;
-        const photo = profilePhoto || "/img/fakedata/profilePhoto.png";
+        const { username, photo } = user;
+        const photoSrc = photo ? `/api/images/${photo}` : "/img/profile/default.png";
         const action_link = "/actions/id";
         const team_link = "/teams/id";
 
         return (
           <div className="ProfilePage">
             <div className="UserPanel">
-              <img src={photo} alt="Avatar" />
+              <img src={photoSrc} alt="Avatar" />
               <div className={"UserPanel_infoDiv"}>
                 <h2>{username}</h2>
                 <p>{user.bio || t("profile.add-bio")}</p>
