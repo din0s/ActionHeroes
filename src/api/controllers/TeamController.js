@@ -145,40 +145,51 @@ module.exports = {
     Team.findOne({ _id: req.params.team_id })
       .populate("categories")
       .then((team) => {
-        toSanitize = ["__v", "owner", "dateCreated"];
-        team = sanitize(team, toSanitize);
-        team.categories = team.categories.map((c) => c.name);
-        team.followers = team.followers.length;
+        if (team) {
+          toSanitize = ["__v", "owner", "dateCreated"];
+          team = sanitize(team, toSanitize);
+          team.categories = team.categories.map((c) => c.name);
+          team.followers = team.followers.length;
 
-        Action.find({ organizer: team._id })
-          .sort({ date: -1 })
-          .populate("categories")
-          .then((actions) => {
-            team["upcoming"] = [];
-            team["past"] = [];
+          Action.find({ organizer: team._id })
+            .sort({ date: -1 })
+            .populate("categories")
+            .then((actions) => {
+              team["upcoming"] = [];
+              team["past"] = [];
 
-            actions.forEach((action) => {
-              satinizeAction = [
-                "__v",
-                "attendees",
-                "saves",
-                "dateCreated",
-                "organizer",
-              ];
+              actions.forEach((action) => {
+                satinizeAction = [
+                  "__v",
+                  "attendees",
+                  "saves",
+                  "dateCreated",
+                  "organizer",
+                ];
 
-              action = sanitize(action, satinizeAction);
-              action.categories = action.categories.map((c) => c.name);
+                action = sanitize(action, satinizeAction);
+                action.categories = action.categories.map((c) => c.name);
 
-              if (action.date > new Date()) {
-                team.upcoming.push(action);
-              } else {
-                team.past.push(action);
-              }
+                if (action.date > new Date()) {
+                  team.upcoming.push(action);
+                } else {
+                  team.past.push(action);
+                }
+              });
+
+              team["actions"] = actions.length;
+              return res.send(team);
             });
-
-            team["actions"] = actions.length;
-            return res.send(team);
-          });
+        } else {
+          return res.status(400).json({ error: "Invalid team id" });
+        }
+      })
+      .catch((err) => {
+        if (err.name === "CastError") {
+          return res.status(400).json({ error: "Invalid team id" });
+        }
+        console.error(`Error during team find():\n${err}`);
+        res.status(500).send();
       });
   },
 

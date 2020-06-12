@@ -183,24 +183,36 @@ module.exports = {
       .populate("categories")
       .populate("organizer")
       .then((action) => {
-        toSanitize = ["__v", "dateCreated"];
+        if (action) {
+          toSanitize = ["__v", "dateCreated"];
 
-        action = sanitize(action, toSanitize);
-        action.attendees = action.attendees.length;
-        action.saves = action.saves.length;
-        action.categories = action.categories.map((c) => c.name);
+          action = sanitize(action, toSanitize);
+          action.attendees = action.attendees.length;
+          action.saves = action.saves.length;
+          action.categories = action.categories.map((c) => c.name);
 
-        toSanitizeOrganizer = [
-          "__v",
-          "description",
-          "dateCreated",
-          "followers",
-          "categories",
-          "owner",
-        ];
-        action.organizer = sanitize(action.organizer, toSanitizeOrganizer);
+          toSanitizeOrganizer = [
+            "__v",
+            "description",
+            "dateCreated",
+            "followers",
+            "categories",
+            "owner",
+          ];
+          action.organizer = sanitize(action.organizer, toSanitizeOrganizer);
 
-        return res.send(action);
+          return res.send(action);
+        } else {
+          return res.status(400).json({ error: "Invalid action id" });
+        }
+      })
+      .catch((err) => {
+        if (err.name === "CastError") {
+          return res.status(400).json({ error: "Invalid action id" });
+        }
+
+        console.error(`Error during action find():\n${err}`);
+        return res.status(500).send();
       });
   },
 
