@@ -120,6 +120,30 @@ module.exports = {
       });
   },
 
+  getAll: (_, res) => {
+    var response = [];
+
+    Team.find()
+      .sort({ dateCreated: -1 })
+      .populate("categories")
+      .then((teams) => {
+        teams.forEach((team) => {
+          team = team.toJSON();
+
+          team.__v = undefined;
+          team.owner = undefined;
+          team.followers = undefined;
+          team.dateCreated = undefined;
+          team.categories = team.categories.map((c) => c.name);
+
+          response.push(team);
+        });
+      })
+      .then(() => {
+        return res.send(response);
+      });
+  },
+
   removeFollower: (req, res) => {
     updateFollowers(req, res, false);
   },

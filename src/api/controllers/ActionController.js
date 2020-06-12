@@ -191,6 +191,7 @@ module.exports = {
           action.attendees = undefined;
           action.saves = undefined;
           action.dateCreated = undefined;
+          action.organizer = undefined;
           action.categories = action.categories.map((c) => c.name);
 
           response.push(action);

@@ -32,4 +32,6 @@ router.delete("/:team_id/follow", checkAuth, TeamController.removeFollower);
 
 router.get("/search", checkAuth, logSearch, TeamController.search);
 
+router.get("/", TeamController.getAll);
+
 module.exports = router;
