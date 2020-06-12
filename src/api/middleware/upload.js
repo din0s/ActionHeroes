@@ -39,18 +39,24 @@ module.exports = (w, h) => (req, res, next) => {
       res.status(500).send();
     } else {
       // no errors during file parsing
-      sharp(req.file.buffer)
-        .resize(w, h)
-        .webp()
-        .toBuffer()
-        .then((buf) => {
-          req.file.buffer = buf;
-          next();
-        })
-        .catch((err) => {
-          console.error(`Error during sharp():\n${err}`);
-          res.status(500).send();
-        });
+      if (req.file) {
+        // transform file buffer
+        sharp(req.file.buffer)
+          .resize(w, h)
+          .webp()
+          .toBuffer()
+          .then((buf) => {
+            req.file.buffer = buf;
+            next();
+          })
+          .catch((err) => {
+            console.error(`Error during sharp():\n${err}`);
+            res.status(500).send();
+          });
+      } else {
+        // no file, continue
+        next();
+      }
     }
   });
 };
