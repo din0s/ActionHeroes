@@ -34,4 +34,6 @@ router.get("/search", checkAuth, logSearch, TeamController.search);
 
 router.get("/", TeamController.getAll);
 
+router.get("/:team_id", TeamController.getTeam);
+
 module.exports = router;

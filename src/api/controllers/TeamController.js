@@ -3,6 +3,8 @@ const Category = require("../models/CategoryModel");
 const Image = require("../models/ImageModel");
 const Team = require("../models/TeamModel");
 const User = require("../models/UserModel");
+const sanitizeAction = require("../sanitizeAction");
+const sanitizeTeam = require("../sanitizeTeam");
 
 const updateFollowers = (req, res, add) => {
   const query = {
@@ -128,19 +130,43 @@ module.exports = {
       .populate("categories")
       .then((teams) => {
         teams.forEach((team) => {
-          team = team.toJSON();
-
-          team.__v = undefined;
-          team.owner = undefined;
+          team = sanitizeTeam(team);
           team.followers = undefined;
           team.dateCreated = undefined;
-          team.categories = team.categories.map((c) => c.name);
 
           response.push(team);
         });
       })
       .then(() => {
         return res.send(response);
+      });
+  },
+
+  getTeam: (req, res) => {
+    Team.findOne({ _id: req.params.team_id })
+      .populate("categories")
+      .then((team) => {
+        team = sanitizeTeam(team);
+        team.followers = team.followers.length;
+
+        Action.find({ organizer: team._id })
+          .sort({ date: -1 })
+          .populate("categories")
+          .then((actions) => {
+            team["upcoming"] = [];
+            team["past"] = [];
+            actions.forEach((action) => {
+              action = sanitizeAction(action);
+              if (action.date > new Date()) {
+                team.upcoming.push(action);
+              } else {
+                team.past.push(action);
+              }
+            });
+
+            team["actions"] = actions.length;
+            return res.send(team);
+          });
       });
   },
 

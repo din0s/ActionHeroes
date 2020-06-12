@@ -4,6 +4,7 @@ const Action = require("../models/ActionModel");
 const Category = require("../models/CategoryModel");
 const Image = require("../models/ImageModel");
 const Team = require("../models/TeamModel");
+const sanitizeAction = require("../sanitizeAction");
 
 const updateList = (req, res, add, list) => {
   const query = {
@@ -185,15 +186,7 @@ module.exports = {
       .populate("categories")
       .then((actions) => {
         actions.forEach((action) => {
-          action = action.toJSON();
-
-          action.__v = undefined;
-          action.attendees = undefined;
-          action.saves = undefined;
-          action.dateCreated = undefined;
-          action.organizer = undefined;
-          action.categories = action.categories.map((c) => c.name);
-
+          action = sanitizeAction(action);
           response.push(action);
         });
       })
