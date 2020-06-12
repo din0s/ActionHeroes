@@ -1,12 +1,25 @@
+@import "../../vars.scss";
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
 .Card {
   align-items: center;
   background-image: linear-gradient(to bottom right, rgb(233, 233, 233), white);
   border-radius: 0.5rem;
-  border: 1px solid rgba($color: black, $alpha: 0.3);
+  border: 1px solid $mediumBlack;
   display: flex;
   flex-direction: row;
   padding: 1.5rem 1rem;
   width: calc(100% - 2rem); //100% - padding left&right
+  box-shadow: 0 0 10px 5px $blackTransparent;
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0 10px 5px $softBlack;
+  }
 
   > img {
     border-radius: 0.5rem;
