@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 import { withAlert } from "react-alert";
 import { withTranslation } from "react-i18next";
 
-const coordinates = { lat: 40.63666412, lng: 22.942162898 };
+const defPos = { lat: 40.6331, lng: 22.9572 };
 
 const mapState = (state) => ({
   updated: state.auth.updated,
@@ -45,7 +45,7 @@ export default withAlert()(
           selectedCategories: [],
           categoriesList: [],
           bio: "",
-          position: coordinates,
+          position: defPos,
           profilePicture: undefined,
           previousPassword: "",
           newPassword: "",
@@ -83,6 +83,13 @@ export default withAlert()(
             const label = t(`categories.${value.toLowerCase()}`);
             return { label, value };
           });
+        };
+
+        mapPosition = (coords) => {
+          if (!coords || coords.length !== 2) {
+            return null;
+          }
+          return { lat: coords[0], lng: coords[1] };
         };
 
         changeTab = (tab) => {
@@ -168,6 +175,7 @@ export default withAlert()(
           this.setState({
             categoriesList: this.mapCategories(this.props.categories),
             selectedCategories: this.mapCategories(this.props.user.categories),
+            position: this.mapPosition(this.props.user.coordinates) || defPos,
           });
         };
 
@@ -176,7 +184,10 @@ export default withAlert()(
             // language changed, remap categories
             this.setState({
               categoriesList: this.mapCategories(this.props.categories),
-              selectedCategories: this.remapCategories(prevState.selectedCategories),
+              selectedCategories: this.remapCategories(
+                prevState.selectedCategories
+              ),
+              position: this.mapPosition(this.props.user.coordinates) || defPos,
             });
           }
         };
