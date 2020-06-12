@@ -19,15 +19,14 @@ class ActionPopup extends Component {
   state = {
     actionName: "",
     description: "",
-    actionDate: "", // Not used yet. How can i initialize Date Object?
+    actionDate: undefined, // How can i initialize Date Object?
     actionCategories: [],
-    actionTeam: "", // Not used yet
     actionPicture: undefined,
     serverResponse: "",
     actionId: "",
     actionLocation: "", // Not used yet
     position: coordinates,
-    t_select: jsonFile.teams[0], // team selection
+    actionTeam: jsonFile.teams[0], // team selection
   };
 
   createAction = (
@@ -35,7 +34,7 @@ class ActionPopup extends Component {
     date,
     description,
     categories,
-    team,
+    organizer,
     location,
     photo
   ) => {
@@ -46,7 +45,7 @@ class ActionPopup extends Component {
         date,
         description,
         categories,
-        team,
+        organizer,
         location,
         photo,
       })
@@ -94,23 +93,35 @@ class ActionPopup extends Component {
   };
 
   handleSubmit = (event) => {
-    //Should fill with state parameters
     event.preventDefault();
     const {
       actionName,
+      actionDate,
       description,
       actionCategories,
+      actionTeam,
+      actionLocation, // The location is initialized in the beginning, so it can't be empty. We can either
+      // remove it from here (can we really?), or force the user to input coordinates different of our initials.
       actionPicture,
     } = this.state;
 
-    if (actionName !== "" && description !== "") {
+    if (
+      //Not sure about all these conditions
+      actionName !== "" &&
+      description !== "" &&
+      actionDate !== "" &&
+      actionTeam !== ""
+    ) {
       this.setState({
-        actionNameHighlight: false,
+        actionNameHighlight: false, //What is this?
       });
       this.createAction(
         actionName,
+        actionDate,
         description,
         actionCategories,
+        actionTeam,
+        actionLocation,
         actionPicture
       );
     }
@@ -118,7 +129,7 @@ class ActionPopup extends Component {
 
   showTeamImg = () => {
     const { t } = this.props;
-    const team = this.state.t_select;
+    const team = this.state.actionTeam;
     if (team) {
       return (
         <div className="TeamSelected">
@@ -173,7 +184,7 @@ class ActionPopup extends Component {
                 <Selector
                   centered="center"
                   value={<h3>{t("createaction.teams")}</h3>}
-                  onChange={(opt) => this.setState({ t_select: opt.value })}
+                  onChange={(opt) => this.setState({ actionTeam: opt.value })}
                   options={jsonFile.teams.map((t) => ({
                     value: t,
                     label: t.name,
