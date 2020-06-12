@@ -30,6 +30,7 @@
 
     > img {
       border-radius: 0.5rem;
+      max-height: 15rem;
       max-width: 15rem;
     }
 
@@ -243,7 +244,8 @@
 
     .UserPanel {
       > img {
-        width: 8rem;
+        max-height: 8rem;
+        max-width: 8rem;
       }
 
       &_infoDiv {
