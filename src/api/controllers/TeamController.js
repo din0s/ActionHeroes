@@ -1,5 +1,6 @@
 const Action = require("../models/ActionModel");
 const Category = require("../models/CategoryModel");
+const Image = require("../models/ImageModel");
 const Team = require("../models/TeamModel");
 const User = require("../models/UserModel");
 
@@ -35,11 +36,26 @@ module.exports = {
     team[`owner`] = req.userData.userId;
 
     if (req.body.categories) {
-      const categories = req.body.categories;
       promises.push(
-        Category.find({ name: { $in: categories } }).then((categories) => {
-          team[`categories`] = categories.map((c) => c._id);
+        Category.find({ name: { $in: JSON.parse(req.body.categories) } }).then(
+          (categories) => {
+            team[`categories`] = categories.map((c) => c._id);
+          }
+        )
+      );
+    }
+
+    if (req.file) {
+      promises.push(
+        new Image({
+          user: req.userData.userId,
+          data: req.file.buffer,
+          mimeType: req.file.mimetype,
         })
+          .save()
+          .then((img) => {
+            team[`photo`] = img._id;
+          })
       );
     }
 
@@ -75,8 +91,6 @@ module.exports = {
         });
     });
   },
-
-  changePhoto: (req, res) => {},
 
   deleteTeam: (req, res) => {
     Action.exists({ organizer: req.params.team_id })
@@ -126,9 +140,25 @@ module.exports = {
 
     if (req.body.categories) {
       promises.push(
-        Category.find({ name: { $in: req.body.categories } }).then((cat) => {
-          query[`categories`] = cat.map((c) => c._id);
+        Category.find({ name: { $in: JSON.parse(req.body.categories) } }).then(
+          (categories) => {
+            query[`categories`] = categories.map((c) => c._id);
+          }
+        )
+      );
+    }
+
+    if (req.file) {
+      promises.push(
+        new Image({
+          user: req.userData.userId,
+          data: req.file.buffer,
+          mimeType: req.file.mimetype,
         })
+          .save()
+          .then((img) => {
+            query[`photo`] = img._id;
+          })
       );
     }
 

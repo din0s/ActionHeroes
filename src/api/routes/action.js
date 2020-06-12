@@ -5,18 +5,20 @@ const checkAuth = require("../middleware/check-auth");
 const checkOwner = require("../middleware/check-owner");
 const extractTeam = require("../middleware/extract-team");
 const logSearch = require("../middleware/log-search");
+const upload = require("../middleware/upload")(720, 405); // resize images to 720x405
 
 const ActionController = require("../controllers/ActionController");
 
 /* CRUD */
 
-router.post("/create", checkAuth, ActionController.createAction);
+router.post("/create", checkAuth, upload, ActionController.createAction);
 
 router.patch(
   "/:action_id",
   checkAuth,
   extractTeam,
   checkOwner,
+  upload,
   ActionController.updateAction
 );
 
@@ -26,14 +28,6 @@ router.delete(
   extractTeam,
   checkOwner,
   ActionController.cancelAction
-);
-
-router.put(
-  "/:action_id/photo",
-  checkAuth,
-  extractTeam,
-  checkOwner,
-  ActionController.changePhoto
 );
 
 /* Attendants */

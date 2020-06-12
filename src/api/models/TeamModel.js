@@ -9,7 +9,7 @@ const TeamSchema = new mongo.Schema({
     uniqueCaseInsensitive: true,
   },
   description: { type: String },
-  photo: { data: Buffer, contentType: String },
+  photo: { type: mongo.Schema.Types.ObjectId, ref: "Image" },
   owner: { type: mongo.Schema.Types.ObjectId, required: true, ref: "User" },
   followers: [{ type: mongo.Schema.Types.ObjectId, ref: "User" }],
   categories: [{ type: mongo.Schema.Types.ObjectId, ref: "Category" }],

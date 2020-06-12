@@ -3,24 +3,24 @@ const router = express.Router();
 
 const checkAuth = require("../middleware/check-auth");
 const checkOwner = require("../middleware/check-owner");
+const upload = require("../middleware/upload")(128, 128); // resize files to 128x128
 const logSearch = require("../middleware/log-search");
 
 const TeamController = require("../controllers/TeamController");
 
 /* CRUD */
 
-router.post("/create", checkAuth, TeamController.createTeam);
+router.post("/create", checkAuth, upload, TeamController.createTeam);
 
-router.patch("/:team_id", checkAuth, checkOwner, TeamController.updateTeam);
-
-router.delete("/:team_id", checkAuth, checkOwner, TeamController.deleteTeam);
-
-router.put(
-  "/:team_id/photo",
+router.patch(
+  "/:team_id",
   checkAuth,
   checkOwner,
-  TeamController.changePhoto
+  upload,
+  TeamController.updateTeam
 );
+
+router.delete("/:team_id", checkAuth, checkOwner, TeamController.deleteTeam);
 
 /* Followers */
 

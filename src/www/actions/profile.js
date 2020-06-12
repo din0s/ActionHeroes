@@ -25,17 +25,6 @@ const handlePasswordResponse = (dispatch, data) => {
   }
 };
 
-const handleProfilePicture = (dispatch, data, photo) => {
-  if (photo) {
-    axios
-      .put("api/users/me/photo", { photo })
-      .then(() => handleUpdate(dispatch, data))
-      .catch((err) => handleError(dispatch, err.response.data));
-  } else {
-    handleUpdate(dispatch, data);
-  }
-};
-
 export const updatePassword = (previousPassword, newPassword) => {
   return (dispatch) => {
     return axios
@@ -56,14 +45,17 @@ export const updateProfile = (
   photo
 ) => {
   return (dispatch) => {
+    const fd = new FormData();
+    fd.set("username", username);
+    fd.set("categories", JSON.stringify(categories));
+    fd.set("coordinates", JSON.stringify(coordinates));
+    fd.set("bio", bio);
+    if (photo) {
+      fd.set("photo", photo);
+    }
     return axios
-      .patch("api/users/me/profile", {
-        username,
-        categories,
-        bio,
-        coordinates,
-      })
-      .then((res) => handleProfilePicture(dispatch, res.data, photo))
+      .patch("api/users/me/profile", fd)
+      .then((res) => handleUpdate(dispatch, res.data))
       .catch((err) => handleError(dispatch, err.response.data));
   };
 };

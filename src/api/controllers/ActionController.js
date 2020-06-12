@@ -1,11 +1,13 @@
 const CustomError = require("../CustomError.js");
+
 const Action = require("../models/ActionModel");
-const Team = require("../models/TeamModel");
 const Category = require("../models/CategoryModel");
+const Image = require("../models/ImageModel");
+const Team = require("../models/TeamModel");
 
 const updateList = (req, res, add, list) => {
   const query = {
-    [add ? "$addToSet" : "$pull"]: { [list]: req.userData.userId }
+    [add ? "$addToSet" : "$pull"]: { [list]: req.userData.userId },
   };
   Action.findOneAndUpdate({ _id: req.params.action_id }, query)
     .then((action) => {
@@ -14,7 +16,7 @@ const updateList = (req, res, add, list) => {
         : res.status(400).json({ error: "Invalid action id" });
     })
     .catch(() => res.status(400).send({ error: "Invalid action id" }));
-}
+};
 
 const updateAttendants = (req, res, add) => {
   updateList(req, res, add, "attendees");
@@ -43,8 +45,6 @@ module.exports = {
       });
   },
 
-  changePhoto: (req, res) => {},
-
   createAction: (req, res) => {
     const action = new Action();
     var promises = [];
@@ -64,11 +64,12 @@ module.exports = {
     action[`description`] = req.body.description;
 
     if (req.body.categories) {
-      const categories = req.body.categories;
       promises.push(
-        Category.find({ name: { $in: categories } }).then((categories) => {
-          action[`categories`] = categories.map((c) => c._id);
-        })
+        Category.find({ name: { $in: JSON.parse(req.body.categories) } }).then(
+          (categories) => {
+            action[`categories`] = categories.map((c) => c._id);
+          }
+        )
       );
     }
 
@@ -110,8 +111,9 @@ module.exports = {
       }
 
       if (coordinates) {
-        if (coordinates.length == 2) {
-          action[`location`][`coordinates`] = coordinates;
+        const coords = JSON.parse(coordinates);
+        if (coords.length == 2) {
+          action[`location`][`coordinates`] = coords;
         } else {
           return res.status(400).json({ error: "Invalid coordinates" });
         }
@@ -122,6 +124,20 @@ module.exports = {
       }
     } else {
       return res.status(400).json({ error: "Field `location` is required" });
+    }
+
+    if (req.file) {
+      promises.push(
+        new Image({
+          user: req.userData.userId,
+          data: req.file.buffer,
+          mimeType: req.file.mimetype,
+        })
+          .save()
+          .then((img) => {
+            action[`photo`] = img._id;
+          })
+      );
     }
 
     Promise.all(promises)
@@ -189,9 +205,11 @@ module.exports = {
 
     if (req.body.categories) {
       promises.push(
-        Category.find({ name: { $in: req.body.categories } }).then((cat) => {
-          query[`categories`] = cat.map((c) => c._id);
-        })
+        Category.find({ name: { $in: JSON.parse(req.body.categories) } }).then(
+          (categories) => {
+            query[`categories`] = categories.map((c) => c._id);
+          }
+        )
       );
     }
 
@@ -208,15 +226,30 @@ module.exports = {
           .status(400)
           .json({ error: "Field `location.coordinates is required" });
       } else {
-        if (coordinates.length == 2) {
+        const coords = JSON.parse(coordinates);
+        if (coords.length == 2) {
           query[`location`] = {
             name: name,
-            coordinates: coordinates,
+            coordinates: coords,
           };
         } else {
           return res.status(400).json({ error: "Invalid coordinates" });
         }
       }
+    }
+
+    if (req.file) {
+      promises.push(
+        new Image({
+          user: req.userData.userId,
+          data: req.file.buffer,
+          mimeType: req.file.mimetype,
+        })
+          .save()
+          .then((img) => {
+            query[`photo`] = img._id;
+          })
+      );
     }
 
     Promise.all(promises)

@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 import { withAlert } from "react-alert";
 import { withTranslation } from "react-i18next";
 
-const coordinates = { lat: 40.63666412, lng: 22.942162898 };
+const defPos = { lat: 40.6331, lng: 22.9572 };
 
 const mapState = (state) => ({
   updated: state.auth.updated,
@@ -45,7 +45,7 @@ export default withAlert()(
           selectedCategories: [],
           categoriesList: [],
           bio: "",
-          position: coordinates,
+          position: defPos,
           profilePicture: undefined,
           previousPassword: "",
           newPassword: "",
@@ -59,7 +59,7 @@ export default withAlert()(
             return [];
           }
           return categories.sort((c1, c2) => c1.label.localeCompare(c2.label));
-        }
+        };
 
         mapCategories = (categories) => {
           const { t } = this.props;
@@ -83,6 +83,13 @@ export default withAlert()(
             const label = t(`categories.${value.toLowerCase()}`);
             return { label, value };
           });
+        };
+
+        mapPosition = (coords) => {
+          if (!coords || coords.length !== 2) {
+            return null;
+          }
+          return { lat: coords[0], lng: coords[1] };
         };
 
         changeTab = (tab) => {
@@ -167,7 +174,8 @@ export default withAlert()(
         componentDidMount = () => {
           this.setState({
             categoriesList: this.mapCategories(this.props.categories),
-            selectedCategories: this.mapCategories(this.props.user.favoriteCategories),
+            selectedCategories: this.mapCategories(this.props.user.categories),
+            position: this.mapPosition(this.props.user.coordinates) || defPos,
           });
         };
 
@@ -176,7 +184,10 @@ export default withAlert()(
             // language changed, remap categories
             this.setState({
               categoriesList: this.mapCategories(this.props.categories),
-              selectedCategories: this.remapCategories(prevState.selectedCategories),
+              selectedCategories: this.remapCategories(
+                prevState.selectedCategories
+              ),
+              position: this.mapPosition(this.props.user.coordinates) || defPos,
             });
           }
         };
@@ -193,8 +204,10 @@ export default withAlert()(
           }
 
           const { t, user } = this.props;
-          const { username, bio, profilePhoto } = user;
-          const photo = profilePhoto || "/img/fakedata/profilePhoto.png";
+          const { username, bio, photo } = user;
+          const photoSrc = photo
+            ? `/api/images/${photo}`
+            : "/img/profile/default.png";
 
           const {
             activeTab,
@@ -242,6 +255,7 @@ export default withAlert()(
                           type="text"
                           name="username"
                           defaultValue={username}
+                          required
                           onChange={(e) =>
                             this.setState({ username: e.target.value.trim() })
                           }
@@ -253,8 +267,10 @@ export default withAlert()(
                           isMulti
                           options={this.sorted(categoriesList)}
                           value={this.sorted(selectedCategories)}
-                          onChange={(selectedCategories) => {
-                            this.setState({ selectedCategories });
+                          onChange={(selection) => {
+                            this.setState({
+                              selectedCategories: selection || [],
+                            });
                           }}
                         />
                         <label>{t("settings.bio")}</label>
@@ -276,7 +292,7 @@ export default withAlert()(
                         />
                       </div>
                       <div className="PhotoPanel">
-                        <img src={photo} alt="Avatar" />
+                        <img src={photoSrc} alt="Avatar" />
                         <ImageUploader
                           withIcon={false}
                           buttonText={t("settings.buttonText")}
@@ -287,7 +303,7 @@ export default withAlert()(
                           withPreview={true}
                           onChange={(pic) => {
                             this.setState({
-                              profilePicture: pic,
+                              profilePicture: pic[0],
                             });
                           }}
                         />
