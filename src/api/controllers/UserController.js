@@ -25,6 +25,7 @@ const sanitizeUser = (user) => {
   user._id = undefined;
   user.hash = undefined;
   user.__v = undefined;
+  user.categories = user.categories.map((c) => ({ name: c.name }));
   return user;
 };
 
@@ -35,6 +36,8 @@ const authResponse = (user) => ({
 
 const findProfile = (req, res) => {
   User.findById(req.params.user_id)
+    .populate("categories")
+    .exec()
     .then((user) => {
       user = sanitizeUser(user);
       return res.status(200).json({ user });
@@ -63,6 +66,7 @@ module.exports = {
     }
 
     User.findById({ _id: req.userData.userId })
+      .populate("categories")
       .exec()
       .then((user) => {
         bcrypt.compare(previousPassword, user.hash, (err, success) => {
@@ -122,6 +126,8 @@ module.exports = {
     }
 
     User.findOne({ email })
+      .populate("categories")
+      .exec()
       .then((user) => {
         if (!user) {
           return res.status(401).json({
@@ -227,7 +233,7 @@ module.exports = {
     }
 
     if (req.body.coordinates) {
-      const coords = JSON.parse(coordinates);
+      const coords = JSON.parse(req.body.coordinates);
       if (coords.length == 2) {
         query[`coordinates`] = coords;
       } else {
@@ -271,6 +277,8 @@ module.exports = {
           { $set: query },
           { runValidators: true, context: "query", new: true }
         )
+          .populate("categories")
+          .exec()
           .then((user) => res.json({ user: sanitizeUser(user) }))
           .catch((err) => {
             if (err.name === "ValidationError") {
