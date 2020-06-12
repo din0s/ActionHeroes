@@ -1,5 +1,10 @@
+const mongo = require("mongoose");
+
 const sanitize = (document, objects) => {
-  document = document.toJSON();
+  if (document instanceof mongo.Document) {
+    document = document.toJSON();
+  }
+
   objects.forEach((ob) => {
     document[ob] = undefined;
   });

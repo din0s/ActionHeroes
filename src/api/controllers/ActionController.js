@@ -178,7 +178,31 @@ module.exports = {
       });
   },
 
-  getAction: (req, res) => {},
+  getAction: (req, res) => {
+    Action.findOne({ _id: req.params.action_id })
+      .populate("categories")
+      .populate("organizer")
+      .then((action) => {
+        toSanitize = ["__v", "dateCreated"];
+
+        action = sanitize(action, toSanitize);
+        action.attendees = action.attendees.length;
+        action.saves = action.saves.length;
+        action.categories = action.categories.map((c) => c.name);
+
+        toSanitizeOrganizer = [
+          "__v",
+          "description",
+          "dateCreated",
+          "followers",
+          "categories",
+          "owner",
+        ];
+        action.organizer = sanitize(action.organizer, toSanitizeOrganizer);
+
+        return res.send(action);
+      });
+  },
 
   getAll: (_, res) => {
     var response = [];
