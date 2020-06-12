@@ -1,3 +1,4 @@
+const sharp = require("sharp");
 const multer = require("multer");
 
 const extensions = ["jpeg", "jpg", "png"];
@@ -22,19 +23,34 @@ const upload = multer({
   },
 }).single("photo");
 
-module.exports = (req, res, next) => {
+module.exports = (w, h) => (req, res, next) => {
   return upload(req, res, (err) => {
-    if (err instanceof multer.MulterError) {
-      if (err.code == "LIMIT_FILE_SIZE") {
-        return res.status(413).json({ error: "The file you sent is too big" });
+    if (err) {
+      if (err instanceof multer.MulterError) {
+        if (err.code == "LIMIT_FILE_SIZE") {
+          return res
+            .status(413)
+            .json({ error: "The file you sent is too big" });
+        }
+        // any other limit error handling should go here
       }
-      // any other limit error handling should go here
-    } else if (!err) {
+      // uncaught error
+      console.error(`Error during upload():\n${err}`);
+      res.status(500).send();
+    } else {
       // no errors during file parsing
-      return next();
+      sharp(req.file.buffer)
+        .resize(w, h)
+        .webp()
+        .toBuffer()
+        .then((buf) => {
+          req.file.buffer = buf;
+          next();
+        })
+        .catch((err) => {
+          console.error(`Error during sharp():\n${err}`);
+          res.status(500).send();
+        });
     }
-    // uncaught error
-    console.error(`Error during upload():\n${err}`);
-    res.status(500).send();
   });
 };

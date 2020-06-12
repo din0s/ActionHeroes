@@ -1,5 +1,4 @@
 const bcrypt = require("bcrypt");
-// const sharp = require("sharp");
 const jwt = require("jsonwebtoken");
 
 const Category = require("../models/CategoryModel");
@@ -256,8 +255,6 @@ module.exports = {
     }
 
     if (req.file) {
-      // apply image resizing etc here using sharp
-      // https://www.npmjs.com/package/sharp
       promises.push(
         new Image({
           user: req.userData.userId,

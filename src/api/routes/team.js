@@ -3,7 +3,7 @@ const router = express.Router();
 
 const checkAuth = require("../middleware/check-auth");
 const checkOwner = require("../middleware/check-owner");
-const upload = require("../middleware/upload");
+const upload = require("../middleware/upload")(128, 128); // resize files to 128x128
 const logSearch = require("../middleware/log-search");
 
 const TeamController = require("../controllers/TeamController");

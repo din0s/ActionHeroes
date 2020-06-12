@@ -46,8 +46,6 @@ module.exports = {
     }
 
     if (req.file) {
-      // apply image resizing etc here using sharp
-      // https://www.npmjs.com/package/sharp
       promises.push(
         new Image({
           user: req.userData.userId,
@@ -151,8 +149,6 @@ module.exports = {
     }
 
     if (req.file) {
-      // apply image resizing etc here using sharp
-      // https://www.npmjs.com/package/sharp
       promises.push(
         new Image({
           user: req.userData.userId,
