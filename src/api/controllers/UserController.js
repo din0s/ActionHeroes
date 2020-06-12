@@ -260,6 +260,7 @@ module.exports = {
       // https://www.npmjs.com/package/sharp
       promises.push(
         new Image({
+          user: req.userData.userId,
           data: req.file.buffer,
           mimeType: req.file.mimetype,
         })
