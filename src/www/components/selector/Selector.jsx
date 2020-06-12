@@ -1,7 +1,7 @@
 import React from "react";
 import Select from "react-select";
 
-export default ({ value, onChange, options }) => (
+export default ({ centered, value, onChange, options }) => (
   <Select
     className="Selector"
     components={{
@@ -11,6 +11,7 @@ export default ({ value, onChange, options }) => (
       control: () => ({
         border: "none",
         display: "flex",
+        justifyContent: centered ? "center" : "",
       }),
       indicatorSeparator: () => ({
         display: "none",

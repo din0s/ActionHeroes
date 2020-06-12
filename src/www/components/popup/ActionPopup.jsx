@@ -8,10 +8,12 @@ import Map from "../../components/map/Map";
 import Popup from "reactjs-popup";
 import { Redirect } from "react-router-dom";
 import ScrollArea from "react-scrollbar";
+import Selector from "../../components/selector/Selector";
 import axios from "axios";
 import { withTranslation } from "react-i18next";
 import { DateTimePicker } from "react-widgets"; // should uninstall
 
+const jsonFile = require("./ActionPopup.json");
 const coordinates = { lat: 40.63666412, lng: 22.942162898 };
 class ActionPopup extends Component {
   state = {
@@ -25,6 +27,7 @@ class ActionPopup extends Component {
     actionId: "",
     actionLocation: "", // Not used yet
     position: coordinates,
+    t_select: jsonFile.teams[0], // team selection
   };
 
   createAction = (
@@ -91,6 +94,7 @@ class ActionPopup extends Component {
   };
 
   handleSubmit = (event) => {
+    //Should fill with state parameters
     event.preventDefault();
     const {
       actionName,
@@ -109,6 +113,21 @@ class ActionPopup extends Component {
         actionCategories,
         actionPicture
       );
+    }
+  };
+
+  showTeamImg = () => {
+    const { t } = this.props;
+    const team = this.state.t_select;
+    if (team) {
+      return (
+        <div className="TeamSelected">
+          <img src={team.photo} alt="" />
+          <h4 className="clamped">{team.name}</h4>
+        </div>
+      );
+    } else {
+      return <p>{t("createaction.noteam")}</p>;
     }
   };
 
@@ -151,6 +170,16 @@ class ActionPopup extends Component {
                 className="FormArea"
                 contentClassName="FormArea_content"
               >
+                <Selector
+                  centered="center"
+                  value={<h3>{t("createaction.teams")}</h3>}
+                  onChange={(opt) => this.setState({ t_select: opt.value })}
+                  options={jsonFile.teams.map((t) => ({
+                    value: t,
+                    label: t.name,
+                  }))}
+                />
+                {this.showTeamImg()}
                 <Input
                   name="actionName"
                   type="text"
@@ -193,6 +222,8 @@ class ActionPopup extends Component {
                     });
                   }}
                 />
+                <hr />
+                <p>{t("createaction.location")}</p>
                 <div className="FormArea_content_map">
                   <Map
                     className="Map"

@@ -1,0 +1,22 @@
+{
+  "teams": [
+    {
+      "name": "ACM AUTH",
+      "photo": "/img/actionprofile/acm.png",
+      "members": 50,
+      "recent": {
+        "name": "Latest action by my team!",
+        "date": "2020-06-15T08:30:00Z"
+      }
+    },
+    {
+      "name": "My other team",
+      "photo": "/img/fakedata/harry_potter.png",
+      "members": 12,
+      "recent": {
+        "name": "Latest action by my team!",
+        "date": "2020-06-15T08:30:00Z"
+      }
+    }
+  ]
+}

@@ -39,6 +39,43 @@
           flex-direction: column;
           padding: 0 2rem;
 
+          > p {
+            font-weight: bold;
+            color: rgb(80, 80, 80);
+            font-size: 0.9rem;
+            margin: 0;
+            margin-bottom: 0.8rem;
+          }
+
+          hr {
+            margin: 0.7rem 0rem;
+            opacity: 0.2;
+          }
+
+          h3 {
+            color: rgb(80, 80, 80);
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            font-size: 0.9rem;
+            margin: 0;
+            margin-left: 10px;
+          }
+
+          .TeamSelected {
+            margin-top: 0.3rem;
+            margin-bottom: 0.8rem;
+            > img {
+              max-width: 50px;
+              object-fit: contain;
+              margin-bottom: 0.3rem;
+            }
+            > h4 {
+              -webkit-line-clamp: 1;
+              font-weight: normal;
+              margin: 0;
+            }
+          }
           > input {
             height: 1.5rem;
           }
@@ -75,8 +112,8 @@
             display: flex;
             justify-content: center;
             .Map {
-              height: 15rem;
-              width: 30rem;
+              height: 12rem;
+              width: 18rem;
             }
           }
 
