@@ -167,7 +167,7 @@ export default withAlert()(
         componentDidMount = () => {
           this.setState({
             categoriesList: this.mapCategories(this.props.categories),
-            selectedCategories: this.mapCategories(this.props.user.favoriteCategories),
+            selectedCategories: this.mapCategories(this.props.user.categories),
           });
         };
 
@@ -256,8 +256,10 @@ export default withAlert()(
                           isMulti
                           options={this.sorted(categoriesList)}
                           value={this.sorted(selectedCategories)}
-                          onChange={(selectedCategories) => {
-                            this.setState({ selectedCategories });
+                          onChange={(selection) => {
+                            this.setState({
+                              selectedCategories: selection || [],
+                            });
                           }}
                         />
                         <label>{t("settings.bio")}</label>
