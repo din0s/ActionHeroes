@@ -13,7 +13,7 @@ import axios from "axios";
 import { withTranslation } from "react-i18next";
 import { DateTimePicker } from "react-widgets"; // should uninstall
 
-const jsonFile = require("./ActionPopup.json");
+const jsonFile = require("./data.json");
 const coordinates = { lat: 40.63666412, lng: 22.942162898 };
 class ActionPopup extends Component {
   state = {
