@@ -52,4 +52,6 @@ router.get("/search", checkAuth, logSearch, ActionController.search);
 
 router.get("/", ActionController.getAll);
 
+router.get("/:action_id", ActionController.getAction);
+
 module.exports = router;

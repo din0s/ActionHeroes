@@ -3,8 +3,7 @@ const Category = require("../models/CategoryModel");
 const Image = require("../models/ImageModel");
 const Team = require("../models/TeamModel");
 const User = require("../models/UserModel");
-const sanitizeAction = require("../sanitizeAction");
-const sanitizeTeam = require("../sanitizeTeam");
+const sanitize = require("../sanitize");
 
 const updateFollowers = (req, res, add) => {
   const query = {
@@ -130,9 +129,9 @@ module.exports = {
       .populate("categories")
       .then((teams) => {
         teams.forEach((team) => {
-          team = sanitizeTeam(team);
-          team.followers = undefined;
-          team.dateCreated = undefined;
+          toSanitize = ["__v", "followers", "dateCreated", "owner"];
+          team = sanitize(team, toSanitize);
+          team.categories = team.categories.map((c) => c.name);
 
           response.push(team);
         });
@@ -146,7 +145,9 @@ module.exports = {
     Team.findOne({ _id: req.params.team_id })
       .populate("categories")
       .then((team) => {
-        team = sanitizeTeam(team);
+        toSanitize = ["__v", "owner", "dateCreated"];
+        team = sanitize(team, toSanitize);
+        team.categories = team.categories.map((c) => c.name);
         team.followers = team.followers.length;
 
         Action.find({ organizer: team._id })
@@ -155,8 +156,19 @@ module.exports = {
           .then((actions) => {
             team["upcoming"] = [];
             team["past"] = [];
+
             actions.forEach((action) => {
-              action = sanitizeAction(action);
+              satinizeAction = [
+                "__v",
+                "attendees",
+                "saves",
+                "dateCreated",
+                "organizer",
+              ];
+
+              action = sanitize(action, satinizeAction);
+              action.categories = action.categories.map((c) => c.name);
+
               if (action.date > new Date()) {
                 team.upcoming.push(action);
               } else {

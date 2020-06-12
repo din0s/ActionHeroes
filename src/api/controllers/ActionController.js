@@ -4,7 +4,7 @@ const Action = require("../models/ActionModel");
 const Category = require("../models/CategoryModel");
 const Image = require("../models/ImageModel");
 const Team = require("../models/TeamModel");
-const sanitizeAction = require("../sanitizeAction");
+const sanitize = require("../sanitize");
 
 const updateList = (req, res, add, list) => {
   const query = {
@@ -178,6 +178,8 @@ module.exports = {
       });
   },
 
+  getAction: (req, res) => {},
+
   getAll: (_, res) => {
     var response = [];
 
@@ -186,7 +188,15 @@ module.exports = {
       .populate("categories")
       .then((actions) => {
         actions.forEach((action) => {
-          action = sanitizeAction(action);
+          toSanitize = [
+            "__v",
+            "dateCreated",
+            "organizer",
+            "attendees",
+            "saves",
+          ];
+          action = sanitize(action, toSanitize);
+          action.categories = action.categories.map((c) => c.name);
           response.push(action);
         });
       })
