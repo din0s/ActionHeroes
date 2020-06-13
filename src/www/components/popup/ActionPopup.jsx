@@ -15,6 +15,7 @@ import { DateTimePicker } from "react-widgets"; // should uninstall
 
 const jsonFile = require("./data.json");
 const coordinates = { lat: 40.63666412, lng: 22.942162898 };
+
 class ActionPopup extends Component {
   state = {
     actionName: "",
@@ -26,7 +27,7 @@ class ActionPopup extends Component {
     actionId: "",
     actionLocation: "", // Not used yet
     position: coordinates,
-    actionTeam: jsonFile.teams[0], // team selection
+    actionTeam: jsonFile.teams[0], // Since implementing the API this should change
   };
 
   createAction = (
@@ -39,37 +40,26 @@ class ActionPopup extends Component {
     photo
   ) => {
     //location(name,coordinates)
+    const fd = new FormData();
+    fd.set("name", name);
+    fd.set("date", date); // Like that?
+    fd.set("description", description);
+    fd.set("categories", categories);
+    fd.set("organizer", organizer);
+    fd.set("location", location); // Like that?
+    if (photo) {
+      fd.set("photo", photo);
+    }
     axios
-      .post("/api/actions/create", {
-        name,
-        date,
-        description,
-        categories,
-        organizer,
-        location,
-        photo,
-      })
-      .then((res) => this.handleSuccess(res.data, photo))
+      .post("/api/actions/create", fd)
+      .then((res) => this.handleSuccess(res.data))
       .catch((err) => this.handleError(err.response.data));
   };
 
-  handleSuccess = (data, photo) => {
-    const id = data._id;
-
-    if (photo) {
-      axios
-        .put(`/api/actions/${id}/photo`) //Not sure about that
-        .then(() =>
-          this.setState({
-            actionId: id,
-          })
-        )
-        .catch((err) => this.handleError(err.response.data));
-    } else {
-      this.setState({
-        actionId: id,
-      });
-    }
+  handleSuccess = (data) => {
+    this.setState({
+      actionId: data._id,
+    });
   };
 
   handleError = (data) => {
@@ -142,6 +132,34 @@ class ActionPopup extends Component {
     }
   };
 
+  onCheckbox = (event, name) => {
+    if (event.target.checked) {
+      const categories = this.state.actionCategories.concat(name);
+      this.setState({
+        actionCategories: categories,
+      });
+    } else {
+      const filtered = this.state.actionCategories.filter((c) => c !== name);
+      this.setState({
+        actionCategories: filtered,
+      });
+    }
+  };
+
+  reset = () => {
+    this.props.onClose();
+    this.setState({
+      actionName: "",
+      description: "",
+      actionDate: undefined, // How can i initialize Date Object?
+      actionCategories: [],
+      actionPicture: undefined,
+      actionLocation: "", // Not used yet
+      position: coordinates,
+      actionTeam: jsonFile.teams[0], // Since implementing the API this should change
+    });
+  };
+
   render() {
     const { t, categories } = this.props;
     const { actionId, position } = this.state;
@@ -153,7 +171,7 @@ class ActionPopup extends Component {
     return (
       <Popup
         open={this.props.open}
-        onClose={this.props.onClose}
+        onClose={this.reset}
         closeOnDocumentClick={false}
         modal
       >
@@ -186,6 +204,7 @@ class ActionPopup extends Component {
                   value={<h3>{t("createaction.teams")}</h3>}
                   onChange={(opt) => this.setState({ actionTeam: opt.value })}
                   options={jsonFile.teams.map((t) => ({
+                    // Since implementing the API this should change
                     value: t,
                     label: t.name,
                   }))}
@@ -252,24 +271,7 @@ class ActionPopup extends Component {
                           {t(`categories.${name.toLowerCase()}`)}
                           <input
                             type="checkbox"
-                            onChange={(event) => {
-                              if (event.target.checked) {
-                                const newCategories = this.state.actionCategories.concat(
-                                  name
-                                );
-                                this.setState({
-                                  actionCategories: newCategories,
-                                });
-                              } else {
-                                const filtered = this.state.actionCategories.filter(
-                                  (c) => c !== name
-                                );
-
-                                this.setState({
-                                  actionCategories: filtered,
-                                });
-                              }
-                            }}
+                            onChange={(event) => this.onCheckbox(event, name)}
                           />
                           <span className="checkmark"></span>
                         </label>
