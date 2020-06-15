@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const checkAuth = require("../middleware/check-auth");
+const checkAuthOptional = require("../middleware/check-auth-optional");
 const checkOwner = require("../middleware/check-owner");
 const extractTeam = require("../middleware/extract-team");
 const logSearch = require("../middleware/log-search");
@@ -52,6 +53,6 @@ router.get("/search", checkAuth, logSearch, ActionController.search);
 
 router.get("/", ActionController.getAll);
 
-router.get("/:action_id", ActionController.getAction);
+router.get("/:action_id", checkAuthOptional, ActionController.getAction);
 
 module.exports = router;

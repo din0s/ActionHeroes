@@ -198,6 +198,7 @@ module.exports = {
           const teamId = organizer._id;
           const teamName = organizer.name;
           const teamPhoto = organizer.photo;
+          const teamOwner = organizer.owner;
 
           return res.json({
             _id,
@@ -214,6 +215,7 @@ module.exports = {
             },
             attendees: attendees.length,
             saves: saves.length,
+            isHost: req.userData.userId == teamOwner,
           });
         } else {
           return res.status(400).json({ error: "Invalid action id" });

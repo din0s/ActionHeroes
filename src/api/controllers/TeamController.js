@@ -152,6 +152,7 @@ module.exports = {
             followers,
             categories,
             dateCreated,
+            owner,
           } = team;
 
           Action.find({ organizer: team._id })
@@ -196,6 +197,7 @@ module.exports = {
                 dateCreated,
                 upcoming,
                 past,
+                isOwner: req.userData.userId == owner,
               });
             });
         } else {
