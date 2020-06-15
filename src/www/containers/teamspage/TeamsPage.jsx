@@ -8,10 +8,9 @@ import SearchBar from "../../components/searchbar/SearchBar";
 import TeamPopup from "../../components/popup/TeamPopup";
 import { connect } from "react-redux";
 import queryString from "query-string";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
-
-const teams = require("./teams.json");
+import axios from "axios";
 
 const mapState = (state) => ({
   categories: state.categories.data,
@@ -29,6 +28,7 @@ export default connect(
           selectedCategories: [],
           query: "",
           isBlurred: false,
+          teams: [],
         };
 
         setCategories = async () => {
@@ -43,6 +43,10 @@ export default connect(
             this.setState({ query });
           }
           this.setCategories();
+
+          axios.get("/api/teams/").then((res) => {
+            this.setState({ teams: res.data });
+          });
         };
 
         componentDidUpdate = (prevProps) => {
@@ -69,19 +73,23 @@ export default connect(
           });
         };
 
-        showTeam = (key, team) => {
-          const team_link = "/teams/id";
+        showTeam = (team) => {
+          const { _id, name, description, photo } = team;
+          const photoSrc = photo
+            ? `/api/images/${photo}`
+            : "/img/teaminfo/default.png";
+
           return (
-            <li key={key}>
+            <li key={team._id}>
               <span>
-                <a href={team_link}>
-                  <img src={team.logo} alt="Team Logo" />
-                </a>
-                <a href={team_link}>
-                  <h3>{team.name}</h3>
-                </a>
+                <Link to={`/teams/${_id}`}>
+                  <img src={photoSrc} alt="Team Logo" />
+                </Link>
+                <Link to={`/teams/${_id}`}>
+                  <h3>{name}</h3>
+                </Link>
               </span>
-              <p>{team.description}</p>
+              <p>{description}</p>
             </li>
           );
         };
@@ -121,7 +129,7 @@ export default connect(
                   />
                   <Pagination
                     baseName="TeamsPage_content"
-                    collection={teams}
+                    collection={this.state.teams}
                     perPage={6}
                     query={this.state.query.toLowerCase().trim()}
                     mapFunc={this.showTeam}
