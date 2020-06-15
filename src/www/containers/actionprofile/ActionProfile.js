@@ -83,7 +83,6 @@ export default connect(
             photo,
             location,
             description,
-            saves,
             attendees,
             categories,
             organizer,
@@ -169,7 +168,7 @@ export default connect(
                       </p>
                       <p>{description}</p>
                       <p className="Attendees">
-                        {attendees + saves + t("actioninfo.attendees")}
+                        {attendees + t("actioninfo.attendees")}
                       </p>
                       <div className="ActionDetails_infoDiv_categories">
                         <h3>{t("actioninfo.tags")}</h3>
