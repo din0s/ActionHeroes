@@ -6,33 +6,49 @@ import ActionCard from "../../components/actioncard/ActionCard";
 import { Link } from "react-router-dom";
 import Pagination from "material-ui-flat-pagination";
 import Selector from "../../components/selector/Selector";
+import axios from "axios";
 import { parseDate } from "../../date";
 import { withTranslation } from "react-i18next";
 
-const jsonFile = require("./dashboard.json");
 const r_page = 5;
 
 export default withTranslation()(
   class Dashboard extends Component {
     state = {
       r_offset: 0, // recommended actions offset
-      t_select: jsonFile.teams[0], // team selection
+      t_select: undefined, // team selection
+      next: [],
+      saved: [],
+      teams: [],
+      recommend: [],
+    };
+
+    componentDidMount = () => {
+      axios
+        .get("/api/users/me/dashboard")
+        .then((res) => {
+          const { next, saved, teams, recommend } = res.data;
+          this.setState({ next, saved, teams, recommend, t_select: teams[0] });
+        });
     };
 
     showNextActions = () => {
       const { t } = this.props;
-      if (jsonFile.next.length !== 0) {
-        return jsonFile.next.map((action, index) => {
+      const { next } = this.state;
+      if (next.length !== 0) {
+        return next.map((action, index) => {
+          const { _id, name, description, photo, date } = action;
+          const photoSrc = photo ? `/api/images/${photo}` : "/img/actionprofile/default.jpg";
           return (
             <li key={index}>
-              <h5>{parseDate(action.date, t)}</h5>
-              <Link to="/actions/id">
+              <h5>{parseDate(date, t)}</h5>
+              <Link to={`/actions/${_id}`}>
                 <div className="NextCard">
                   <span>
-                    <img src={action.photo} alt="" />
-                    <h4 className="clamped">{action.name}</h4>
+                    <img src={photoSrc} alt="" />
+                    <h4 className="clamped">{name}</h4>
                   </span>
-                  <p className="clamped">{action.description}</p>
+                  <p className="clamped">{description}</p>
                 </div>
               </Link>
             </li>
@@ -45,9 +61,9 @@ export default withTranslation()(
 
     showRecommend = () => {
       const { t } = this.props;
-      const o = this.state.r_offset;
-      if (jsonFile.recommend.length !== 0) {
-        return jsonFile.recommend.slice(o, o + r_page).map((action) => {
+      const { r_offset, recommend } = this.state;
+      if (recommend.length !== 0) {
+        return recommend.slice(r_offset, r_offset + r_page).map((action) => {
           return <ActionCard />;
         });
       } else {
@@ -59,28 +75,32 @@ export default withTranslation()(
       const { t } = this.props;
       const team = this.state.t_select;
       if (team) {
+        const { _id, name, photo, followers, recent } = team;
+        const photoSrc = photo ? `/api/images/${photo}` : "/img/teaminfo/default.png";
         return (
           <div className="TeamCard">
             <span className="TeamCard-top">
-              <img src={team.photo} alt="" />
+              <img src={photoSrc} alt="" />
               <div>
-                <Link to="/teams/id">
-                  <h4 className="clamped">{team.name}</h4>
+                <Link to={`teams/${_id}`}>
+                  <h4 className="clamped">{name}</h4>
                 </Link>
                 <p>
-                  {t("dashboard.members")}: {team.members}
+                  {t("dashboard.followers")}: {followers}
                 </p>
               </div>
             </span>
-            <span className="TeamCard-bot">
-              <h5>{t("dashboard.recent")}</h5>
-              <Link to="/actions/id">
-                <div>
-                  <h4>{team.recent.name}</h4>
-                  <p>{parseDate(team.recent.date, t)}</p>
-                </div>
-              </Link>
-            </span>
+            {recent && (
+              <span className="TeamCard-bot">
+                <h5>{t("dashboard.recent")}</h5>
+                <Link to={`/actions/${recent._id}`}>
+                  <div>
+                    <h4>{recent.name}</h4>
+                    <p>{parseDate(recent.date, t)}</p>
+                  </div>
+                </Link>
+              </span>
+            )}
           </div>
         );
       } else {
@@ -90,13 +110,16 @@ export default withTranslation()(
 
     showSavedActions = () => {
       const { t } = this.props;
-      if (jsonFile.saved.length !== 0) {
-        return jsonFile.saved.map((action, index) => {
+      const { saved } = this.state;
+      if (saved.length !== 0) {
+        return saved.map((action, index) => {
+          const { _id, photo, name } = action;
+          const photoSrc = photo ? `/api/images/${photo}` : "/img/actionprofile/default.jpg"
           return (
             <li key={index}>
-              <Link to="/actions/id">
-                <img src={action.photo} alt="" />
-                <h4 className="clamped">{action.name}</h4>
+              <Link to={`/actions/${_id}`}>
+                <img src={photoSrc} alt="" />
+                <h4 className="clamped">{name}</h4>
               </Link>
             </li>
           );
@@ -121,7 +144,7 @@ export default withTranslation()(
               <Pagination
                 limit={r_page}
                 offset={this.state.r_offset}
-                total={jsonFile.recommend.length}
+                total={this.state.recommend.length}
                 onClick={(_, o) => this.setState({ r_offset: o })}
                 disableRipple={true}
               />
@@ -132,7 +155,7 @@ export default withTranslation()(
               <Selector
                 value={<h3>{t("dashboard.teams")}</h3>}
                 onChange={(opt) => this.setState({ t_select: opt.value })}
-                options={jsonFile.teams.map((t) => ({
+                options={this.state.teams.map((t) => ({
                   value: t,
                   label: t.name,
                 }))}
