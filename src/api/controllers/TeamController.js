@@ -3,7 +3,6 @@ const Category = require("../models/CategoryModel");
 const Image = require("../models/ImageModel");
 const Team = require("../models/TeamModel");
 const User = require("../models/UserModel");
-const sanitize = require("../sanitize");
 
 const updateFollowers = (req, res, add) => {
   const query = {
@@ -122,22 +121,22 @@ module.exports = {
   },
 
   getAll: (_, res) => {
-    var response = [];
-
     Team.find()
       .sort({ dateCreated: -1 })
       .populate("categories")
       .then((teams) => {
-        teams.forEach((team) => {
-          toSanitize = ["__v", "followers", "dateCreated", "owner"];
-          team = sanitize(team, toSanitize);
-          team.categories = team.categories.map((c) => c.name);
-
-          response.push(team);
-        });
-      })
-      .then(() => {
-        return res.send(response);
+        res.send(
+          teams.map((team) => {
+            const { _id, name, description, photo, categories } = team;
+            return {
+              _id,
+              name,
+              description,
+              photo,
+              categories: categories.map((c) => c.name),
+            };
+          })
+        );
       });
   },
 
@@ -146,39 +145,58 @@ module.exports = {
       .populate("categories")
       .then((team) => {
         if (team) {
-          toSanitize = ["__v", "owner", "dateCreated"];
-          team = sanitize(team, toSanitize);
-          team.categories = team.categories.map((c) => c.name);
-          team.followers = team.followers.length;
+          const {
+            name,
+            description,
+            photo,
+            followers,
+            categories,
+            dateCreated,
+          } = team;
 
           Action.find({ organizer: team._id })
             .sort({ date: -1 })
             .populate("categories")
             .then((actions) => {
-              team["upcoming"] = [];
-              team["past"] = [];
+              const upcoming = [];
+              const past = [];
 
+              const today = new Date();
               actions.forEach((action) => {
-                satinizeAction = [
-                  "__v",
-                  "attendees",
-                  "saves",
-                  "dateCreated",
-                  "organizer",
-                ];
+                const {
+                  name,
+                  description,
+                  categories,
+                  location,
+                  date,
+                  photo,
+                } = action;
+                const item = {
+                  name,
+                  description,
+                  categories,
+                  location,
+                  date,
+                  photo,
+                };
 
-                action = sanitize(action, satinizeAction);
-                action.categories = action.categories.map((c) => c.name);
-
-                if (action.date > new Date()) {
-                  team.upcoming.push(action);
+                if (date > today) {
+                  upcoming.push(item);
                 } else {
-                  team.past.push(action);
+                  past.push(item);
                 }
               });
 
-              team["actions"] = actions.length;
-              return res.send(team);
+              return res.json({
+                name,
+                description,
+                photo,
+                followers: followers.length,
+                categories: categories.map((c) => c.name),
+                dateCreated,
+                upcoming,
+                past,
+              });
             });
         } else {
           return res.status(400).json({ error: "Invalid team id" });

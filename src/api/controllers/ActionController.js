@@ -4,7 +4,6 @@ const Action = require("../models/ActionModel");
 const Category = require("../models/CategoryModel");
 const Image = require("../models/ImageModel");
 const Team = require("../models/TeamModel");
-const sanitize = require("../sanitize");
 
 const updateList = (req, res, add, list) => {
   const query = {
@@ -184,24 +183,38 @@ module.exports = {
       .populate("organizer")
       .then((action) => {
         if (action) {
-          toSanitize = ["__v", "dateCreated"];
+          const {
+            _id,
+            name,
+            description,
+            categories,
+            location,
+            date,
+            photo,
+            organizer,
+            attendees,
+            saves,
+          } = action;
+          const teamId = organizer._id;
+          const teamName = organizer.name;
+          const teamPhoto = organizer.photo;
 
-          action = sanitize(action, toSanitize);
-          action.attendees = action.attendees.length;
-          action.saves = action.saves.length;
-          action.categories = action.categories.map((c) => c.name);
-
-          toSanitizeOrganizer = [
-            "__v",
-            "description",
-            "dateCreated",
-            "followers",
-            "categories",
-            "owner",
-          ];
-          action.organizer = sanitize(action.organizer, toSanitizeOrganizer);
-
-          return res.send(action);
+          return res.json({
+            _id,
+            name,
+            description,
+            categories: categories.map((c) => c.name),
+            location,
+            date,
+            photo,
+            organizer: {
+              _id: teamId,
+              name: teamName,
+              photo: teamPhoto,
+            },
+            attendees: attendees.length,
+            saves: saves.length,
+          });
         } else {
           return res.status(400).json({ error: "Invalid action id" });
         }
@@ -217,27 +230,33 @@ module.exports = {
   },
 
   getAll: (_, res) => {
-    var response = [];
-
     Action.find()
       .sort({ dateCreated: -1 })
       .populate("categories")
       .then((actions) => {
-        actions.forEach((action) => {
-          toSanitize = [
-            "__v",
-            "dateCreated",
-            "organizer",
-            "attendees",
-            "saves",
-          ];
-          action = sanitize(action, toSanitize);
-          action.categories = action.categories.map((c) => c.name);
-          response.push(action);
-        });
-      })
-      .then(() => {
-        return res.send(response);
+        res.send(
+          actions.map((action) => {
+            const {
+              _id,
+              name,
+              description,
+              categories,
+              location,
+              date,
+              photo,
+            } = action;
+
+            return {
+              _id,
+              name,
+              description,
+              categories: categories.map((c) => c.name),
+              location,
+              date,
+              photo,
+            };
+          })
+        );
       });
   },
 
