@@ -5,143 +5,204 @@ import React, { Component } from "react";
 import ActionCard from "../../components/actioncard/ActionCard";
 import { parseDate } from "../../date";
 import { withTranslation } from "react-i18next";
+import axios from "axios";
+import { connect } from "react-redux";
+import { withRouter, Redirect } from "react-router-dom";
 
-const team = require("./team.json");
+const mapState = (state) => ({
+  loggedIn: state.auth.loggedIn,
+});
 
-export default withTranslation()(
-  class TeamProfile extends Component {
-    state = {
-      followed: false,
-      totalmembers: team.followers.length,
-    };
+export default connect(
+  mapState,
+  undefined
+)(
+  withRouter(
+    withTranslation()(
+      class TeamProfile extends Component {
+        state = {
+          id: "",
+          name: "",
+          description: "",
+          photo: "",
+          followers: 0,
+          categories: [],
+          dateCreated: undefined,
+          upcoming: [],
+          past: [],
+          isOwner: false,
+          followed: false,
+          error: false,
+        };
 
-    render() {
-      const { t } = this.props;
-      return (
-        <div className="TeamProfile">
-          <section className="TopPanel">
-            <span className="TopPanel_info">
-              <img alt="Team Logo" src="/img/fakedata/acm.png" />
-              <div>
-                <img alt="Team Logo" src="/img/fakedata/acm.png" />
-                <h1>{team.name}</h1>
-                <h2>{team.description}</h2>
-              </div>
-            </span>
-            <h3>{team.description}</h3>
-            {!this.state.followed && (
-              <button
-                className="TopPanel_followbutton"
-                onClick={() =>
-                  this.setState({
-                    followed: !this.state.followed,
-                    totalmembers: this.state.totalmembers + 1,
-                  })
-                }
-                children={t("teaminfo.follow")}
-              />
-            )}
-            {this.state.followed && (
-              <button
-                className="TopPanel_unfollowbutton"
-                onClick={() =>
-                  this.setState({
-                    followed: !this.state.followed,
-                    totalmembers: this.state.totalmembers - 1,
-                  })
-                }
-                children={t("teaminfo.unfollow")}
-              />
-            )}
-          </section>
-          <section className="MidPanel">
-            <div className="MidPanel_info">
-              <h1>
-                {t("teaminfo.members")}: {this.state.totalmembers}
-              </h1>
-              <h1>
-                {t("teaminfo.actions")}: {Object.keys(team.actionList).length}
-              </h1>
-              <hr />
-              <h1>{t("teaminfo.createdon")}:</h1>
-              <h1>{parseDate(team.dateCreated, t)}</h1>
-            </div>
+        componentDidMount = () => {
+          const { id } = this.props.match.params;
+          axios
+            .get(`/api/teams/${id}`)
+            .then((res) => {
+              this.setState({
+                ...res.data,
+                id,
+              });
+            })
+            .catch(() => {
+              this.setState({ error: true });
+            });
+        };
 
-            <div className="MidPanel_categories">
-              <h1>{t("teaminfo.categories")}:</h1>
-              <ul>
-                {Object.keys(team.categories).map((cKey) => {
-                  const category = team.categories[cKey].name;
-                  return <li key={cKey}>{t(`categories.${category}`)}</li>;
-                })}
-              </ul>
-            </div>
-            <div className="MidPanel_both">
-              <div className="MidPanel_both_center">
-                <h1>
-                  {t("teaminfo.members")}: {this.state.totalmembers}
-                </h1>
-                <p> </p>
-                <h1>
-                  {t("teaminfo.actions")}: {Object.keys(team.actionList).length}
-                </h1>
-              </div>
-              <h1>
-                {t("teaminfo.createdon")}: {parseDate(team.dateCreated, t)}
-              </h1>
-              <hr />
-              <h1>{t("teaminfo.categories")}:</h1>
-              <ul>
-                {Object.keys(team.categories).map((cKey) => {
-                  return (
-                    <li key={cKey}>{`${t(
-                      "categories." + team.categories[cKey].name
-                    )}`}</li>
-                  );
-                })}
-              </ul>
-            </div>
-          </section>
-          <section className="BottomPanel">
-            <div className="LeftSide">
-              <div className="LeftSide_info">
-                <h1>
-                  {t("teaminfo.members")}: {this.state.totalmembers}
-                </h1>
-                <h1>
-                  {t("teaminfo.actions")}: {Object.keys(team.actionList).length}
-                </h1>
-                <hr />
-                <h1>{t("teaminfo.createdon")}:</h1>
-                <h1>{parseDate(team.dateCreated, t)}</h1>
-              </div>
+        handleFollow = () => {
+          const url = `/api/teams/${this.state.id}/follow`;
+          if (this.state.followed) {
+            axios.delete(url).then(() => {
+              this.setState({ followed: false });
+            });
+          } else {
+            axios.post(url).then(() => {
+              this.setState({ followed: true });
+            });
+          }
+        };
 
-              <div className="LeftSide_categories">
-                <h1>{t("teaminfo.categories")}:</h1>
-                <ul>
-                  {Object.keys(team.categories).map((cKey) => {
-                    return (
-                      <li key={cKey}>{`${t(
-                        "categories." + team.categories[cKey].name
-                      )}`}</li>
-                    );
-                  })}
-                </ul>
-              </div>
+        render() {
+          if (this.state.error) {
+            return <Redirect to="/teams/" />;
+          }
+
+          const { t } = this.props;
+          const {
+            name,
+            description,
+            photo,
+            followers,
+            upcoming,
+            past,
+            dateCreated,
+            categories,
+          } = this.state;
+
+          const photoSrc = photo
+            ? `/api/images/${photo}`
+            : "/img/teaminfo/default.png";
+
+          return (
+            <div className="TeamProfile">
+              <section className="TopPanel">
+                <span className="TopPanel_info">
+                  <img alt="Team Logo" src={photoSrc} />
+                  <div>
+                    <img alt="Team Logo" src={photoSrc} />
+                    <h1>{name}</h1>
+                    <h2>{description}</h2>
+                  </div>
+                </span>
+                <h3>{description}</h3>
+                {!this.state.followed && this.props.loggedIn && (
+                  <button
+                    className="TopPanel_followbutton"
+                    onClick={this.handleFollow}
+                    children={t("teaminfo.follow")}
+                  />
+                )}
+                {this.state.followed && this.props.loggedIn && (
+                  <button
+                    className="TopPanel_unfollowbutton"
+                    onClick={this.handleFollow}
+                    children={t("teaminfo.unfollow")}
+                  />
+                )}
+              </section>
+              <section className="MidPanel">
+                <div className="MidPanel_info">
+                  <h1>
+                    {t("teaminfo.followers")}: {followers}
+                  </h1>
+                  <h1>
+                    {t("teaminfo.actions")}: {upcoming.length + past.length}
+                  </h1>
+                  <hr />
+                  <h1>{t("teaminfo.createdon")}:</h1>
+                  <h1>{parseDate(dateCreated, t)}</h1>
+                </div>
+
+                <div className="MidPanel_categories">
+                  <h1>{t("teaminfo.categories")}:</h1>
+                  <ul>
+                    {categories.map((c) => {
+                      return (
+                        <li key={c}>{t(`categories.${c.toLowerCase()}`)}</li>
+                      );
+                    })}
+                  </ul>
+                </div>
+                <div className="MidPanel_both">
+                  <div className="MidPanel_both_center">
+                    <h1>
+                      {t("teaminfo.followers")}: {followers}
+                    </h1>
+                    <p> </p>
+                    <h1>
+                      {t("teaminfo.actions")}: {upcoming.length + past.length}
+                    </h1>
+                  </div>
+                  <h1>
+                    {t("teaminfo.createdon")}: {parseDate(dateCreated, t)}
+                  </h1>
+                  <hr />
+                  <h1>{t("teaminfo.categories")}:</h1>
+                  <ul>
+                    {categories.map((c) => {
+                      return (
+                        <li key={c}>{t(`categories.${c.toLowerCase()}`)}</li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </section>
+              <section className="BottomPanel">
+                <div className="LeftSide">
+                  <div className="LeftSide_info">
+                    <h1>
+                      {t("teaminfo.followers")}: {followers}
+                    </h1>
+                    <h1>
+                      {t("teaminfo.actions")}: {upcoming.length + past.length}
+                    </h1>
+                    <hr />
+                    <h1>{t("teaminfo.createdon")}:</h1>
+                    <h1>{parseDate(dateCreated, t)}</h1>
+                  </div>
+
+                  <div className="LeftSide_categories">
+                    <h1>{t("teaminfo.categories")}:</h1>
+                    <ul>
+                      {categories.map((c) => {
+                        return (
+                          <li key={c}>{t(`categories.${c.toLowerCase()}`)}</li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </div>
+                <div className="RightSide">
+                  <div className="RightSide_events">
+                    {upcoming.length + past.length === 0 && (
+                      <h1>{t("teaminfo.empty")}</h1>
+                    )}
+                    {upcoming.length > 0 && <h1>{t("teaminfo.upcoming")}:</h1>}
+                    {upcoming.map((action) => {
+                      return <ActionCard />;
+                    })}
+                    {past.length > 0 && <h1>{t("teaminfo.past")}:</h1>}
+                    {past.map((action) => {
+                      return <ActionCard />;
+                    })}
+                  </div>
+                </div>
+              </section>
             </div>
-            <div className="RightSide">
-              <div className="RightSide_events">
-                <h1>{t("teaminfo.upcoming")}:</h1>
-                <ActionCard />
-                <ActionCard />
-                <h1>{t("teaminfo.past")}:</h1>
-                <ActionCard />
-                <ActionCard />
-              </div>
-            </div>
-          </section>
-        </div>
-      );
-    }
-  }
+          );
+        }
+      }
+    )
+  )
 );

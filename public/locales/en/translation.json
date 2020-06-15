@@ -152,14 +152,15 @@
     "youth": "Children & Youth"
   },
   "teaminfo": {
-    "members": "Members",
+    "followers": "Followers",
     "categories": "Relevant Categories",
     "actions": "Actions",
     "createdon": "Created on",
     "follow": "Follow",
     "unfollow": "Following",
     "upcoming": "Upcoming Actions",
-    "past": "Past Actions"
+    "past": "Past Actions",
+    "empty": "This team has no actions yet."
   },
   "settings": {
     "success": "Successful Update",
