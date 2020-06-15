@@ -198,6 +198,7 @@ module.exports = {
                 upcoming,
                 past,
                 isOwner: req.userData.userId == owner,
+                followed: followers.includes(req.userData.userId),
               });
             });
         } else {

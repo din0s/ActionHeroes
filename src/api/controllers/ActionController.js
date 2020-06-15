@@ -214,8 +214,9 @@ module.exports = {
               photo: teamPhoto,
             },
             attendees: attendees.length,
-            saves: saves.length,
             isHost: req.userData.userId == teamOwner,
+            toAttend: attendees.includes(req.userData.userId),
+            saved: saves.includes(req.userData.userId),
           });
         } else {
           return res.status(400).json({ error: "Invalid action id" });
