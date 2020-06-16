@@ -8,6 +8,7 @@ import { withTranslation } from "react-i18next";
 import axios from "axios";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
+import SpinnerPage from "../spinner/SpinnerPage";
 
 const mapState = (state) => ({
   loggedIn: state.auth.loggedIn,
@@ -66,6 +67,8 @@ export default connect(
         render() {
           if (this.state.error) {
             return <Redirect to="/teams/" />;
+          } else if (this.state.id === "") {
+            return <SpinnerPage />;
           }
 
           const { t } = this.props;
