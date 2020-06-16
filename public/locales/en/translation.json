@@ -84,7 +84,9 @@
     "nonext": "No next actions",
     "norecommend": "No recommended actions",
     "noteam": "No selected team",
-    "nosaved": "No saved actions"
+    "nosaved": "No saved actions",
+    "action_prompt": "Show your interest in a new action!",
+    "team_prompt": "Browse the available organizing teams!"
   },
   "landingpage": {
     "catchphrase": "The more we give, the happier we feel.",

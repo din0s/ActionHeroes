@@ -24,38 +24,51 @@ export default withTranslation()(
     };
 
     componentDidMount = () => {
-      axios
-        .get("/api/users/me/dashboard")
-        .then((res) => {
-          const { next, saved, teams, recommend } = res.data;
-          this.setState({ next, saved, teams, recommend, t_select: teams[0] });
-        });
+      axios.get("/api/users/me/dashboard").then((res) => {
+        const { next, saved, teams, recommend } = res.data;
+        this.setState({ next, saved, teams, recommend, t_select: teams[0] });
+      });
     };
 
     showNextActions = () => {
       const { t } = this.props;
       const { next } = this.state;
       if (next.length !== 0) {
-        return next.map((action, index) => {
-          const { _id, name, description, photo, date } = action;
-          const photoSrc = photo ? `/api/images/${photo}` : "/img/actionprofile/default.jpg";
-          return (
-            <li key={index}>
-              <h5>{parseDate(date, t)}</h5>
-              <Link to={`/actions/${_id}`}>
-                <div className="NextCard">
-                  <span>
-                    <img src={photoSrc} alt="" />
-                    <h4 className="clamped">{name}</h4>
-                  </span>
-                  <p className="clamped">{description}</p>
-                </div>
-              </Link>
-            </li>
-          );
-        });
+        return (
+          <ul>
+            {next.map((action, index) => {
+              const { _id, name, description, photo, date } = action;
+              const photoSrc = photo
+                ? `/api/images/${photo}`
+                : "/img/actionprofile/default.jpg";
+              return (
+                <li key={index}>
+                  <h5>{parseDate(date, t)}</h5>
+                  <Link to={`/actions/${_id}`}>
+                    <div className="NextCard">
+                      <span>
+                        <img src={photoSrc} alt="" />
+                        <h4 className="clamped">{name}</h4>
+                      </span>
+                      <p className="clamped">{description}</p>
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        );
       } else {
-        return <p>{t("dashboard.nonext")}</p>;
+        return (
+          <ul className="vertical">
+            <li>
+              <p children={t("dashboard.nonext")} />
+            </li>
+            <li>
+              <Link to="/actions" children={t("dashboard.action_prompt")} />
+            </li>
+          </ul>
+        );
       }
     };
 
@@ -63,11 +76,24 @@ export default withTranslation()(
       const { t } = this.props;
       const { r_offset, recommend } = this.state;
       if (recommend.length !== 0) {
-        return recommend.slice(r_offset, r_offset + r_page).map((action) => {
-          return <ActionCard />;
-        });
+        return (
+          <ul>
+            {recommend.slice(r_offset, r_offset + r_page).map((action) => {
+              return <ActionCard />;
+            })}
+          </ul>
+        );
       } else {
-        return <p>{t("dashboard.norecommend")}</p>;
+        return (
+          <ul>
+            <li>
+              <p children={t("dashboard.norecommend")} />
+            </li>
+            <li>
+              <Link to="/teams" children={t("dashboard.team_prompt")} />
+            </li>
+          </ul>
+        );
       }
     };
 
@@ -76,7 +102,9 @@ export default withTranslation()(
       const team = this.state.t_select;
       if (team) {
         const { _id, name, photo, followers, recent } = team;
-        const photoSrc = photo ? `/api/images/${photo}` : "/img/teaminfo/default.png";
+        const photoSrc = photo
+          ? `/api/images/${photo}`
+          : "/img/teaminfo/default.png";
         return (
           <div className="TeamCard">
             <span className="TeamCard-top">
@@ -114,7 +142,9 @@ export default withTranslation()(
       if (saved.length !== 0) {
         return saved.map((action, index) => {
           const { _id, photo, name } = action;
-          const photoSrc = photo ? `/api/images/${photo}` : "/img/actionprofile/default.jpg"
+          const photoSrc = photo
+            ? `/api/images/${photo}`
+            : "/img/actionprofile/default.jpg";
           return (
             <li key={index}>
               <Link to={`/actions/${_id}`}>
@@ -136,11 +166,11 @@ export default withTranslation()(
           <div className="Dashboard_main">
             <div className="Dashboard_main_next">
               <h2>{t("dashboard.next")}</h2>
-              <ul>{this.showNextActions()}</ul>
+              {this.showNextActions()}
             </div>
             <div className="Dashboard_main_recommend">
               <h2>{t("dashboard.recommend")}</h2>
-              <ul>{this.showRecommend()}</ul>
+              {this.showRecommend()}
               <Pagination
                 limit={r_page}
                 offset={this.state.r_offset}
