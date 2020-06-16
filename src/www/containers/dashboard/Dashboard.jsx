@@ -181,17 +181,19 @@ export default withTranslation()(
             </div>
           </div>
           <div className="Dashboard_side">
-            <div className="Dashboard_side_teams">
-              <Selector
-                value={<h3>{t("dashboard.teams")}</h3>}
-                onChange={(opt) => this.setState({ t_select: opt.value })}
-                options={this.state.teams.map((t) => ({
-                  value: t,
-                  label: t.name,
-                }))}
-              />
-              {this.showTeamCard()}
-            </div>
+            {this.state.teams.length > 0 && (
+              <div className="Dashboard_side_teams">
+                <Selector
+                  value={<h3>{t("dashboard.teams")}</h3>}
+                  onChange={(opt) => this.setState({ t_select: opt.value })}
+                  options={this.state.teams.map((t) => ({
+                    value: t,
+                    label: t.name,
+                  }))}
+                />
+                {this.showTeamCard()}
+              </div>
+            )}
             <div className="Dashboard_side_saved">
               <h3>{t("dashboard.saved")}</h3>
               <ul>{this.showSavedActions()}</ul>
