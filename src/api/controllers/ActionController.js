@@ -61,7 +61,11 @@ module.exports = {
       return res.status(400).json({ error: "Field `date` is required" });
     }
 
-    action[`description`] = req.body.description;
+    if (req.body.description) {
+      action[`description`] = req.body.description;
+    } else {
+      return res.status(400).json({ error: "Field `description` is required" });
+    }
 
     if (req.body.categories) {
       promises.push(

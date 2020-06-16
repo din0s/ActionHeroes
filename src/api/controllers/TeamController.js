@@ -32,7 +32,12 @@ module.exports = {
       return res.status(400).json({ error: "Field `name` is required" });
     }
 
-    team[`description`] = req.body.description;
+    if (req.body.description) {
+      team[`description`] = req.body.description;
+    } else {
+      return res.status(400).json({ error: "Field `description` is required" });
+    }
+
     team[`owner`] = req.userData.userId;
 
     if (req.body.categories) {
