@@ -213,6 +213,7 @@
     "image": "Choose image",
     "location": "Location",
     "maxfile": "Max file size: 5mb, accepted: jpg, png",
-    "teams": "Choose a team"
+    "teams": "Organized by",
+    "date": "Choose Date and Time"
   }
 }

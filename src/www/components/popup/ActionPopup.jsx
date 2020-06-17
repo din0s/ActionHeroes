@@ -11,24 +11,32 @@ import ScrollArea from "react-scrollbar";
 import Selector from "../../components/selector/Selector";
 import axios from "axios";
 import { withTranslation } from "react-i18next";
-import { DateTimePicker } from "react-widgets"; // should uninstall
+//import { DateTimePicker } from "react-widgets"; // should uninstall
+import DateTimePicker from "date-time-picker-react";
 
 const jsonFile = require("./data.json");
-const coordinates = { lat: 40.63666412, lng: 22.942162898 };
+const initPosition = { lat: 40.63666412, lng: 22.942162898 };
+var defDate = new Date();
 
 class ActionPopup extends Component {
   state = {
     actionName: "",
     description: "",
-    actionDate: undefined, // How can i initialize Date Object?
+    actionDate: defDate,
     actionCategories: [],
     actionPicture: undefined,
     serverResponse: "",
     actionId: "",
-    actionLocation: "", // Not used yet
-    position: coordinates,
+    actionLocation: { name: "", coordinates: initPosition },
     actionTeam: jsonFile.teams[0], // Since implementing the API this should change
   };
+
+  // componentDidMount = () => {                                             // This is copy paste from Dashboard
+  //   axios.get("/api/users/me/getprofile").then((res) => {
+  //     const { next, saved, teams, recommend } = res.data;
+  //     this.setState({ next, saved, teams, recommend, t_select: teams[0] });
+  //   });
+  // };
 
   createAction = (
     name,
@@ -39,12 +47,11 @@ class ActionPopup extends Component {
     location,
     photo
   ) => {
-    //location(name,coordinates)
     const fd = new FormData();
     fd.set("name", name);
     fd.set("date", date); // Like that?
     fd.set("description", description);
-    fd.set("categories", categories);
+    fd.set("categories", JSON.stringify(categories));
     fd.set("organizer", organizer);
     fd.set("location", location); // Like that?
     if (photo) {
@@ -99,8 +106,7 @@ class ActionPopup extends Component {
       //Not sure about all these conditions
       actionName !== "" &&
       description !== "" &&
-      actionDate !== "" &&
-      actionTeam !== ""
+      actionTeam !== undefined //Should also add a condition for actionDate to be > than current Date (hours,mins)
     ) {
       this.setState({
         actionNameHighlight: false, //What is this?
@@ -148,21 +154,21 @@ class ActionPopup extends Component {
 
   reset = () => {
     this.props.onClose();
+    defDate = new Date();
     this.setState({
       actionName: "",
       description: "",
-      actionDate: undefined, // How can i initialize Date Object?
+      actionDate: new Date(),
       actionCategories: [],
       actionPicture: undefined,
-      actionLocation: "", // Not used yet
-      position: coordinates,
+      actionLocation: { name: "", coordinates: initPosition },
       actionTeam: jsonFile.teams[0], // Since implementing the API this should change
     });
   };
 
   render() {
     const { t, categories } = this.props;
-    const { actionId, position } = this.state;
+    const { actionId } = this.state;
 
     if (actionId !== "") {
       return <Redirect to={`/actions/${actionId}`} />;
@@ -210,6 +216,18 @@ class ActionPopup extends Component {
                   }))}
                 />
                 {this.showTeamImg()}
+                <hr />
+                <p>{t("createaction.date")}</p>
+                <div className="FormArea_content_dateTime">
+                  <DateTimePicker
+                    className="Date"
+                    min={defDate}
+                    onChange={
+                      (e) => this.setState({ actionDate: e }) //Not sure if correct
+                    }
+                  />
+                </div>
+                {console.log(this.state)}
                 <Input
                   name="actionName"
                   type="text"
@@ -218,15 +236,15 @@ class ActionPopup extends Component {
                     this.setState({ actionName: e.target.value.trim() })
                   }
                 />
-                <input
+                {/* <input
                   name="actionDate"
                   type="datetime-local"
-                  placeholder={t("createaction.actiondate")} // This doesn't work??
+                  placeholder={t("createaction.actiondate")} // This works only on not supporting browsers
                   required
                   onChange={
                     (e) => this.setState({ actionDate: e.target.value.trim() }) //Not sure if correct
                   }
-                />
+                /> */}
                 {/* this is temporary, Firefox, Safari not supported. Need to add backend things*/}
 
                 <textarea
@@ -257,11 +275,16 @@ class ActionPopup extends Component {
                 <div className="FormArea_content_map">
                   <Map
                     className="Map"
-                    position={position}
+                    position={this.state.actionLocation.coordinates}
                     zoom={13}
-                    onClick={(e) => this.setState({ position: e.latlng })}
+                    onClick={(e) =>
+                      this.setState({
+                        actionLocation: { coordinates: e.latlng },
+                      })
+                    }
                   />
                 </div>
+
                 <div className="FormArea_content_categories">
                   <p>{t("filterlist.categories")}</p>
                   <div className="FormArea_content_categories-list">

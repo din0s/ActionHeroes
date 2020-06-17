@@ -62,9 +62,13 @@
             margin-left: 10px;
           }
 
+          &_dateTime {
+            margin-bottom: 0.3rem;
+          }
+
           .TeamSelected {
             margin-top: 0.3rem;
-            margin-bottom: 0.8rem;
+            //margin-bottom: 0.8rem;
             > img {
               max-width: 50px;
               object-fit: contain;
