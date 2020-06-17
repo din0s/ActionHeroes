@@ -286,7 +286,7 @@ export default withAlert()(
                         <label>{t("settings.location")}</label>
                         <Map
                           className="Map"
-                          position={position}
+                          center={position}
                           zoom={13}
                           onClick={(e) => this.setState({ position: e.latlng })}
                         />
