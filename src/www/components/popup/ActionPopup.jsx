@@ -235,7 +235,6 @@ class ActionPopup extends Component {
                     }
                   />
                 </div>
-                {console.log(this.state)}
                 <Input
                   name="actionName"
                   type="text"
