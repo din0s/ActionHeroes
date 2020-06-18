@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 const Category = require("../models/CategoryModel");
 const Image = require("../models/ImageModel");
 const User = require("../models/UserModel");
+const Action = require("../models/ActionModel");
+const Team = require("../models/TeamModel");
 
 const generateToken = (user) =>
   jwt.sign(
@@ -34,12 +36,90 @@ const authResponse = (user) => ({
 });
 
 const findProfile = (req, res) => {
+  var promises = [];
+  var response = {};
+
   User.findById(req.params.user_id)
     .populate("categories")
     .exec()
     .then((user) => {
+      promises.push(
+        Team.find({ followers: user._id })
+          .populate("categories")
+          .then((teams) => {
+            response[`teamsFollow`] = teams.map((team) => {
+              const { _id, name, description, categories, photo } = team;
+              return {
+                _id,
+                name,
+                description,
+                categories: categories.map((c) => c.name),
+                photo,
+              };
+            });
+          })
+      );
+
+      promises.push(
+        Team.find({ owner: user._id })
+          .populate("categories")
+          .then((teams) => {
+            response[`teamsOwned`] = teams.map((team) => {
+              const { _id, name, description, categories, photo } = team;
+              return {
+                _id,
+                name,
+                description,
+                categories: categories.map((c) => c.name),
+                photo,
+              };
+            });
+          })
+      );
+
+      promises.push(
+        Action.find({ attendees: user._id })
+          .populate("categories")
+          .then((actions) => {
+            response[`actionsAttendeed`] = actions.map((action) => {
+              const { _id, name, description, categories, photo } = action;
+              return {
+                _id,
+                name,
+                description,
+                categories: categories.map((c) => c.name),
+                photo,
+              };
+            });
+          })
+      );
+
+      promises.push(
+        Action.find({ saves: user._id })
+          .populate("categories")
+          .then((actions) => {
+            response[`actionsSaved`] = actions.map((action) => {
+              const { _id, name, description, categories, photo } = action;
+              return {
+                _id,
+                name,
+                description,
+                categories: categories.map((c) => c.name),
+                photo,
+              };
+            });
+          })
+      );
+
       user = sanitizeUser(user);
-      return res.status(200).json({ user });
+      response[`username`] = user.username;
+      response[`email`] = user.email;
+      response[`coordinates`] = user.coordinates;
+      response[`categories`] = user.categories.map((c) => c.map);
+
+      Promise.all(promises).then(() => {
+        return res.status(200).send(response);
+      });
     })
     .catch((err) => {
       console.error(`Error during user find():\n${err}`);

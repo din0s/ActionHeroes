@@ -8,7 +8,6 @@ import { withTranslation } from "react-i18next";
 
 const minCardsShown = 3;
 
-// user.actionsAttended
 const actionsAttended = require("./actionsAttended.json");
 const actionsOrganized = require("./actionsOrganized.json");
 const teamsOwned = require("./teamsOwned.json");
@@ -107,7 +106,9 @@ export default connect(
       render() {
         const { t, user } = this.props;
         const { username, photo } = user;
-        const photoSrc = photo ? `/api/images/${photo}` : "/img/profile/default.png";
+        const photoSrc = photo
+          ? `/api/images/${photo}`
+          : "/img/profile/default.png";
         const action_link = "/actions/id";
         const team_link = "/teams/id";
 
