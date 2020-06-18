@@ -286,9 +286,11 @@ export default withAlert()(
                         <label>{t("settings.location")}</label>
                         <Map
                           className="Map"
-                          position={position}
-                          zoom={13}
-                          onClick={(e) => this.setState({ position: e.latlng })}
+                          center={position}
+                          zoom={15}
+                          onClick={(center) =>
+                            this.setState({ position: center })
+                          }
                         />
                       </div>
                       <div className="PhotoPanel">

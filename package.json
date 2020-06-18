@@ -16,6 +16,7 @@
     "i18next-http-backend": "^1.0.15",
     "jsonwebtoken": "^8.5.1",
     "leaflet": "^1.6.0",
+    "leaflet-control-geocoder": "^1.13.0",
     "material-ui-flat-pagination": "^4.1.0",
     "mongoose": "^5.9.4",
     "mongoose-unique-validator": "^2.0.3",
