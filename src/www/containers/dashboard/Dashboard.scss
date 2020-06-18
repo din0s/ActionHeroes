@@ -19,6 +19,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  
+  .vertical {
+    text-align: center;
+  }
 
   &_main {
     max-width: 70vw;

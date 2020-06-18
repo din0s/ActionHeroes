@@ -85,7 +85,7 @@ export default withTranslation()(
         );
       } else {
         return (
-          <ul>
+          <ul className="vertical">
             <li>
               <p children={t("dashboard.norecommend")} />
             </li>
@@ -140,22 +140,30 @@ export default withTranslation()(
       const { t } = this.props;
       const { saved } = this.state;
       if (saved.length !== 0) {
-        return saved.map((action, index) => {
-          const { _id, photo, name } = action;
-          const photoSrc = photo
-            ? `/api/images/${photo}`
-            : "/img/actionprofile/default.jpg";
-          return (
-            <li key={index}>
-              <Link to={`/actions/${_id}`}>
-                <img src={photoSrc} alt="" />
-                <h4 className="clamped">{name}</h4>
-              </Link>
-            </li>
-          );
-        });
+        return (
+          <ul>
+            {saved.map((action, index) => {
+              const { _id, photo, name } = action;
+              const photoSrc = photo
+                ? `/api/images/${photo}`
+                : "/img/actionprofile/default.jpg";
+              return (
+                <li key={index}>
+                  <Link to={`/actions/${_id}`}>
+                    <img src={photoSrc} alt="" />
+                    <h4 className="clamped">{name}</h4>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        );
       } else {
-        return <p>{t("dashboard.nosaved")}</p>;
+        return (
+          <span className="vertical">
+            <p children={t("dashboard.nosaved")} />
+          </span>
+        );
       }
     };
 
@@ -196,7 +204,7 @@ export default withTranslation()(
             )}
             <div className="Dashboard_side_saved">
               <h3>{t("dashboard.saved")}</h3>
-              <ul>{this.showSavedActions()}</ul>
+              {this.showSavedActions()}
             </div>
           </div>
         </div>
