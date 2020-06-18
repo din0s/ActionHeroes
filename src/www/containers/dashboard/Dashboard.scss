@@ -22,6 +22,15 @@
   
   .vertical {
     text-align: center;
+    
+    p {
+      font-size: 1.2rem;
+      word-break: keep-all;
+    }
+
+    a {
+      font-size: 0.9rem;
+    }
   }
 
   &_main {
