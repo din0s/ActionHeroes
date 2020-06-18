@@ -40,12 +40,13 @@
     }
   },
   "profile": {
+    "attend": "Find more actions to attend!",
     "add-bio": "Let us know more about you!",
     "attended": "Actions you have attended",
     "categories": "Categories",
     "settings": "Settings",
-    "join": "Join more teams here!",
-    "organized": "Actions you have organized",
+    "join": "Follow more teams here!",
+    "saved": "Actions you have saved",
     "show-more": "Show more...",
     "show-less": "Show less...",
     "teams-owned": "Teams you own",
