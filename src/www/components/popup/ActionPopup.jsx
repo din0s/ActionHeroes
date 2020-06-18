@@ -18,6 +18,14 @@ const jsonFile = require("./data.json");
 const initPosition = { lat: 40.63666412, lng: 22.942162898 };
 var defDate = new Date();
 
+//https://stackoverflow.com/questions/822452/strip-html-from-text-javascript
+
+function stripHtml(html) {
+  var tmp = document.createElement("DIV");
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || "";
+}
+
 class ActionPopup extends Component {
   state = {
     actionName: "",
@@ -275,11 +283,14 @@ class ActionPopup extends Component {
                 <div className="FormArea_content_map">
                   <Map
                     className="Map"
-                    position={this.state.actionLocation.coordinates}
-                    zoom={13}
-                    onClick={(e) =>
+                    center={this.state.actionLocation.coordinates}
+                    zoom={15}
+                    onClick={(center, html) =>
                       this.setState({
-                        actionLocation: { coordinates: e.latlng },
+                        actionLocation: {
+                          name: stripHtml(html),
+                          coordinates: center,
+                        },
                       })
                     }
                   />
