@@ -5,7 +5,6 @@ const checkAuth = require("../middleware/check-auth");
 const checkAuthOptional = require("../middleware/check-auth-optional");
 const checkOwner = require("../middleware/check-owner");
 const upload = require("../middleware/upload")(128, 128); // resize files to 128x128
-const logSearch = require("../middleware/log-search");
 
 const TeamController = require("../controllers/TeamController");
 
@@ -29,9 +28,7 @@ router.post("/:team_id/follow", checkAuth, TeamController.addFollower);
 
 router.delete("/:team_id/follow", checkAuth, TeamController.removeFollower);
 
-/* Search */
-
-router.get("/search", checkAuth, logSearch, TeamController.search);
+/* GET */
 
 router.get("/", TeamController.getAll);
 

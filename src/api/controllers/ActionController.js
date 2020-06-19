@@ -275,8 +275,6 @@ module.exports = {
     updateSaves(req, res, false);
   },
 
-  search: (req, res) => {},
-
   updateAction: (req, res) => {
     var query = {};
     var promises = [];

@@ -5,7 +5,6 @@ const checkAuth = require("../middleware/check-auth");
 const checkAuthOptional = require("../middleware/check-auth-optional");
 const checkOwner = require("../middleware/check-owner");
 const extractTeam = require("../middleware/extract-team");
-const logSearch = require("../middleware/log-search");
 const upload = require("../middleware/upload")(720, 405); // resize images to 720x405
 
 const ActionController = require("../controllers/ActionController");
@@ -47,9 +46,7 @@ router.post("/:action_id/save", checkAuth, ActionController.addSave);
 
 router.delete("/:action_id/save", checkAuth, ActionController.removeSave);
 
-/* Search */
-
-router.get("/search", checkAuth, logSearch, ActionController.search);
+/* GET */
 
 router.get("/", ActionController.getAll);
 
