@@ -8,8 +8,6 @@ const Category = require("../models/CategoryModel");
 const Image = require("../models/ImageModel");
 const Team = require("../models/TeamModel");
 const User = require("../models/UserModel");
-const Action = require("../models/ActionModel");
-const Team = require("../models/TeamModel");
 
 const generateToken = (user) =>
   jwt.sign(
