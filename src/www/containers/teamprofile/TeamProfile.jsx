@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import { Redirect, withRouter } from "react-router-dom";
 
 import ActionCard from "../../components/actioncard/ActionCard";
-import { Divider } from "@material-ui/core";
 import SpinnerPage from "../spinner/SpinnerPage";
 import axios from "axios";
 import { connect } from "react-redux";
@@ -130,13 +129,17 @@ export default connect(
 
                 <div className="MidPanel_categories">
                   <h1>{t("teaminfo.categories")}:</h1>
-                  <ul>
-                    {categories.map((c) => {
-                      return (
-                        <li key={c}>{t(`categories.${c.toLowerCase()}`)}</li>
-                      );
-                    })}
-                  </ul>
+                  {categories.length > 0 ? (
+                    <ul>
+                      {categories.map((c) => {
+                        return (
+                          <li key={c}>{t(`categories.${c.toLowerCase()}`)}</li>
+                        );
+                      })}
+                    </ul>
+                  ) : (
+                    <p children={t("teaminfo.none")} />
+                  )}
                 </div>
                 <div className="MidPanel_both">
                   <div className="MidPanel_both_center">
@@ -153,13 +156,17 @@ export default connect(
                   </h1>
                   <hr />
                   <h1>{t("teaminfo.categories")}:</h1>
-                  <ul>
-                    {categories.map((c) => {
-                      return (
-                        <li key={c}>{t(`categories.${c.toLowerCase()}`)}</li>
-                      );
-                    })}
-                  </ul>
+                  {categories.length > 0 ? (
+                    <ul>
+                      {categories.map((c) => {
+                        return (
+                          <li key={c}>{t(`categories.${c.toLowerCase()}`)}</li>
+                        );
+                      })}
+                    </ul>
+                  ) : (
+                    <p children={t("teaminfo.none")} />
+                  )}
                 </div>
               </section>
               <section className="BottomPanel">
@@ -178,13 +185,19 @@ export default connect(
 
                   <div className="LeftSide_categories">
                     <h1>{t("teaminfo.categories")}:</h1>
-                    <ul>
-                      {categories.map((c) => {
-                        return (
-                          <li key={c}>{t(`categories.${c.toLowerCase()}`)}</li>
-                        );
-                      })}
-                    </ul>
+                    {categories.length > 0 ? (
+                      <ul>
+                        {categories.map((c) => {
+                          return (
+                            <li key={c}>
+                              {t(`categories.${c.toLowerCase()}`)}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    ) : (
+                      <p children={t("teaminfo.none")} />
+                    )}
                   </div>
                 </div>
                 <div className="RightSide">

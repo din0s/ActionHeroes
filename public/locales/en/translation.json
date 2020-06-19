@@ -160,7 +160,8 @@
     "unfollow": "Following",
     "upcoming": "Upcoming Actions",
     "past": "Past Actions",
-    "empty": "This team has no actions yet."
+    "empty": "This team has no actions yet.",
+    "none": "None"
   },
   "settings": {
     "success": "Successful Update",
