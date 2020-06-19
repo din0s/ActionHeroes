@@ -99,8 +99,8 @@ export default connect(
                 <Link to="/signup" children={t("auth.signup.action")} />
               </span>
               <p
-                className="Social"
-                children={`${t("auth.login.action")} ${t("auth.fb")}`}
+                className="Forgot_Password"
+                children={t("auth.forgot_pass")}
               />
             </form>
           </div>

@@ -26,7 +26,7 @@
     "email": "email",
     "password": "κωδικός",
     "confirm_password": "επιβεβαίωση κωδικού",
-    "fb": "με Facebook (σύντομα!)",
+    "forgot_pass": "Ξέχασες τον κωδικό σου? (σύντομα!)",
     "login": {
       "action": "Σύνδεση",
       "greeting": "Καλωσήρθες!",

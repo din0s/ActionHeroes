@@ -26,7 +26,7 @@
     "email": "email",
     "password": "password",
     "confirm_password": "confirm password",
-    "fb": "with Facebook (soon!)",
+    "forgot_pass": "Forgot your password? (soon!)",
     "login": {
       "action": "Log in",
       "greeting": "Welcome back!",
