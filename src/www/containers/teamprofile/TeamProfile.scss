@@ -8,15 +8,21 @@
     border-radius: 0.5rem;
     border: 1px solid rgba($color: black, $alpha: 0.3);
     padding: 2rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+
     &_info {
-      display: flex;
+      display:flex;
       flex-direction: row;
+      overflow: hidden;
 
       > img {
+        //display: flex;
         border-radius: 160px;
         border-width: 1px;
         border: 1px solid rgba($color: black, $alpha: 0.3);
-        height: 13rem;
+        height: 108px;
+        width: 108px;
         margin-bottom: 1rem;
         margin-right: 2rem;
         margin-top: 1rem;
@@ -24,6 +30,9 @@
 
       > div {
         text-align: left;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
 
         > img {
           border-radius: 160px;
@@ -34,15 +43,22 @@
           margin-bottom: 1rem;
           margin-right: 2rem;
           margin-top: 1rem;
+          width: 4rem;
         }
 
         > h1 {
           font-size: 2.4rem;
           margin-bottom: 1.5rem;
           margin-top: 0;
+          -webkit-line-clamp: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         > h2 {
+          -webkit-line-clamp: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
           font-size: 1.2rem; //max 400 characters
           font-weight: normal;
         }
@@ -50,6 +66,9 @@
     }
 
     > h3 {
+      -webkit-line-clamp: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
       display: none;
       font-size: 1.2rem; //max 400 characters
       font-weight: normal;
@@ -180,9 +199,6 @@
     padding: 2rem 12vw;
     .TopPanel {
       &_info {
-        > img {
-          height: 9rem;
-        }
 
         > div {
           text-align: left;
@@ -254,9 +270,6 @@
   .TeamProfile {
     .TopPanel {
       &_info {
-        > img {
-          height: 8rem;
-        }
 
         > div {
           text-align: left;
@@ -364,9 +377,6 @@
     padding: 2rem 2vw;
     .TopPanel {
       &_info {
-        > img {
-          height: 6rem;
-        }
 
         > div {
           text-align: left;
@@ -436,6 +446,7 @@
 @media only screen and(max-width: 560px) {
   .TeamProfile {
     padding: 2rem 1vw;
+    overflow: hidden;
     .TopPanel {
       &_info {
         > img {
@@ -465,7 +476,7 @@
         }
       }
       > h3 {
-        display: flex;
+        display: block;
         font-size: 0.9rem; //max 400 characters
         text-align: left;
       }

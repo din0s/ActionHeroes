@@ -19,30 +19,29 @@ export default ({
   const [prevQuery, setPrevQuery] = useState("");
   const [prevSelected, setPrevSelected] = useState([]);
 
-  const filtered = Object.keys(collection)
-    .filter((key) => {
+  const filtered = collection
+    .filter((item) => {
       // Search filtering
       if (query === "") {
         return true;
       }
-      return searchFilter(collection[key], query);
+      return searchFilter(item, query);
     })
-    .filter((key) => {
+    .filter((item) => {
       // Category filtering
       if (selected.length === 0) {
         return true;
       }
 
-      const categories = collection[key].categories;
+      const categories = item.categories;
       return selected.every((sc) =>
-        Object.keys(categories).find((c) => {
-          const category = categories[c];
-          return sc === category;
+        categories.find((c) => {
+          return sc === c;
         })
       );
     });
 
-  const contentLength = Object.keys(filtered).length;
+  const contentLength = filtered.length;
   if (prevQuery !== query) {
     setOffset(0);
     setPrevQuery(query);
@@ -56,8 +55,8 @@ export default ({
     <div className={baseName}>
       <ul className={`${baseName}_list`}>
         {contentLength === 0 && <p children={t("noresults")} />}
-        {filtered.slice(offset, offset + perPage).map((key) => {
-          return mapFunc(key, collection[key]);
+        {filtered.slice(offset, offset + perPage).map((item) => {
+          return mapFunc(item);
         })}
       </ul>
       <Pagination

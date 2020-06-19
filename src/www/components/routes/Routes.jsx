@@ -19,14 +19,22 @@ export default () => {
   return (
     <main>
       <Switch>
-        <Route path="/teams/id" children={<TeamProfile />} />
+        <Route path="/teams/:id" children={<TeamProfile />} />
         <Route path="/teams" children={<TeamsPage />} />
         <Route path="/contact" children={<ContactPage />} />
-        <Route path="/actions/id" children={<ActionInfo />} />
+        <Route path="/actions/:id" children={<ActionInfo />} />
         <Route path="/actions" children={<ActionsPage />} />
         <GuestRoute path="/login" redirect="/dashboard" children={<Login />} />
-        <GuestRoute path="/signup" redirect="/dashboard" children={<Signup />} />
-        <PrivateRoute path="/settings" redirect="/login" children={<Settings />} />
+        <GuestRoute
+          path="/signup"
+          redirect="/dashboard"
+          children={<Signup />}
+        />
+        <PrivateRoute
+          path="/settings"
+          redirect="/login"
+          children={<Settings />}
+        />
         <PrivateRoute path="/dashboard" redirect="/" children={<Dashboard />} />
         <PrivateRoute
           path="/profile"

@@ -32,7 +32,12 @@ module.exports = {
       return res.status(400).json({ error: "Field `name` is required" });
     }
 
-    team[`description`] = req.body.description;
+    if (req.body.description) {
+      team[`description`] = req.body.description;
+    } else {
+      return res.status(400).json({ error: "Field `description` is required" });
+    }
+
     team[`owner`] = req.userData.userId;
 
     if (req.body.categories) {
@@ -116,6 +121,100 @@ module.exports = {
       })
       .catch((err) => {
         console.error(`Error during action exists():\n${err}`);
+        res.status(500).send();
+      });
+  },
+
+  getAll: (_, res) => {
+    Team.find()
+      .sort({ dateCreated: -1 })
+      .populate("categories")
+      .then((teams) => {
+        res.send(
+          teams.map((team) => {
+            const { _id, name, description, photo, categories } = team;
+            return {
+              _id,
+              name,
+              description,
+              photo,
+              categories: categories.map((c) => c.name),
+            };
+          })
+        );
+      });
+  },
+
+  getTeam: (req, res) => {
+    Team.findOne({ _id: req.params.team_id })
+      .populate("categories")
+      .then((team) => {
+        if (team) {
+          const {
+            name,
+            description,
+            photo,
+            followers,
+            categories,
+            dateCreated,
+            owner,
+          } = team;
+
+          Action.find({ organizer: team._id })
+            .sort({ date: -1 })
+            .populate("categories")
+            .then((actions) => {
+              const upcoming = [];
+              const past = [];
+
+              const today = new Date();
+              actions.forEach((action) => {
+                const {
+                  name,
+                  description,
+                  categories,
+                  location,
+                  date,
+                  photo,
+                } = action;
+                const item = {
+                  name,
+                  description,
+                  categories,
+                  location,
+                  date,
+                  photo,
+                };
+
+                if (date > today) {
+                  upcoming.push(item);
+                } else {
+                  past.push(item);
+                }
+              });
+
+              return res.json({
+                name,
+                description,
+                photo,
+                followers: followers.length,
+                categories: categories.map((c) => c.name),
+                dateCreated,
+                upcoming,
+                past,
+                isOwner: req.userData.userId == owner,
+                followed: followers.includes(req.userData.userId),
+              });
+            });
+        } else {
+          return res.status(400).json({ error: "Invalid team id" });
+        }
+      })
+      .catch((err) => {
+        if (err.name === "CastError") {
+          return res.status(400).json({ error: "Invalid team id" });
+        }
+        console.error(`Error during team find():\n${err}`);
         res.status(500).send();
       });
   },

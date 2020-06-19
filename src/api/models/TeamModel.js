@@ -8,7 +8,7 @@ const TeamSchema = new mongo.Schema({
     unique: true,
     uniqueCaseInsensitive: true,
   },
-  description: { type: String },
+  description: { type: String, required: true },
   photo: { type: mongo.Schema.Types.ObjectId, ref: "Image" },
   owner: { type: mongo.Schema.Types.ObjectId, required: true, ref: "User" },
   followers: [{ type: mongo.Schema.Types.ObjectId, ref: "User" }],

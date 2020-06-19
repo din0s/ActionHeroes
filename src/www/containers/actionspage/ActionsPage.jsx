@@ -1,16 +1,16 @@
 import "./ActionsPage.scss";
 
+import { Link, withRouter } from "react-router-dom";
 import React, { Component } from "react";
 
 import FilterList from "../../components/filterlist/FilterList";
 import Pagination from "../../components/pagination/Pagination";
 import SearchBar from "../../components/searchbar/SearchBar";
+import axios from "axios";
 import { connect } from "react-redux";
+import { parseDate } from "../../date";
 import queryString from "query-string";
-import { withRouter } from "react-router-dom";
 import { withTranslation } from "react-i18next";
-
-const actions = require("./actions.json");
 
 const mapState = (state) => ({
   categories: state.categories.data,
@@ -24,6 +24,7 @@ export default connect(
     withTranslation()(
       class ActionsPage extends Component {
         state = {
+          actions: [],
           categories: [],
           selectedCategories: [],
           query: "",
@@ -33,7 +34,7 @@ export default connect(
           this.setState({
             categories: this.props.categories.map((c) => c.name),
           });
-        }
+        };
 
         componentDidMount = () => {
           const { query } = queryString.parse(this.props.location.search);
@@ -41,13 +42,17 @@ export default connect(
             this.setState({ query });
           }
           this.setCategories();
+
+          axios.get("/api/actions/").then((res) => {
+            this.setState({ actions: res.data });
+          });
         };
 
         componentDidUpdate = (prevProps) => {
           if (prevProps.categories !== this.props.categories) {
             this.setCategories();
           }
-        }
+        };
 
         onCheckbox = (event, category) => {
           if (event.target.checked) {
@@ -67,34 +72,42 @@ export default connect(
           });
         };
 
-        showActions = (key, action) => {
-          const action_link = "/actions/id";
-          const location_link = "https://www.google.com/maps";
+        showActions = (action) => {
+          const { t } = this.props;
+          const { _id, name, date, description, photo, location } = action;
+
+          const photoSrc = photo
+            ? `/api/images/${photo}`
+            : "/img/actionprofile/default.jpg";
+
+          const coords = location.coordinates;
+          const location_link = `https://maps.google.com?q=${coords[0]},${coords[1]}`;
+
           return (
-            <li key={key}>
-              <a href={action_link}>
-                <img alt="Card icon" src={action.logo} />
-              </a>
+            <li key={_id}>
+              <Link to={`/actions/${_id}`}>
+                <img alt="Card icon" src={photoSrc} />
+              </Link>
               <div>
-                <a href={action_link}>
-                  <h3>{action.name}</h3>
-                </a>
+                <Link to={`/actions/${_id}`}>
+                  <h3 className="clamped">{name}</h3>
+                </Link>
                 <div className="date">
-                  <span>{action.date}</span>
+                  <span>{parseDate(date, t)}</span>
                 </div>
                 <a
                   href={location_link}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span>{action.location}</span>
+                  <span>{location.name}</span>
                 </a>
                 <div className="description">
-                  <p>{action.description}</p>
+                  <p className="clamped">{description}</p>
                 </div>
               </div>
               <div className="hidden_desc">
-                <p>{action.description}</p>
+                <p className="clamped">{description}</p>
               </div>
             </li>
           );
@@ -118,7 +131,7 @@ export default connect(
                 />
                 <Pagination
                   baseName="ActionsPage_content"
-                  collection={actions}
+                  collection={this.state.actions}
                   perPage={6}
                   query={this.state.query.toLowerCase().trim()}
                   mapFunc={this.showActions}

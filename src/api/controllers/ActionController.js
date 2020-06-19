@@ -61,7 +61,11 @@ module.exports = {
       return res.status(400).json({ error: "Field `date` is required" });
     }
 
-    action[`description`] = req.body.description;
+    if (req.body.description) {
+      action[`description`] = req.body.description;
+    } else {
+      return res.status(400).json({ error: "Field `description` is required" });
+    }
 
     if (req.body.categories) {
       promises.push(
@@ -174,6 +178,92 @@ module.exports = {
       })
       .catch((err) => {
         return res.status(err.code).json({ error: err.message });
+      });
+  },
+
+  getAction: (req, res) => {
+    Action.findOne({ _id: req.params.action_id })
+      .populate("categories")
+      .populate("organizer")
+      .then((action) => {
+        if (action) {
+          const {
+            _id,
+            name,
+            description,
+            categories,
+            location,
+            date,
+            photo,
+            organizer,
+            attendees,
+            saves,
+          } = action;
+          const teamId = organizer._id;
+          const teamName = organizer.name;
+          const teamPhoto = organizer.photo;
+          const teamOwner = organizer.owner;
+
+          return res.json({
+            _id,
+            name,
+            description,
+            categories: categories.map((c) => c.name),
+            location,
+            date,
+            photo,
+            organizer: {
+              _id: teamId,
+              name: teamName,
+              photo: teamPhoto,
+            },
+            attendees: attendees.length,
+            isHost: req.userData.userId == teamOwner,
+            toAttend: attendees.includes(req.userData.userId),
+            saved: saves.includes(req.userData.userId),
+          });
+        } else {
+          return res.status(400).json({ error: "Invalid action id" });
+        }
+      })
+      .catch((err) => {
+        if (err.name === "CastError") {
+          return res.status(400).json({ error: "Invalid action id" });
+        }
+
+        console.error(`Error during action find():\n${err}`);
+        return res.status(500).send();
+      });
+  },
+
+  getAll: (_, res) => {
+    Action.find()
+      .sort({ dateCreated: -1 })
+      .populate("categories")
+      .then((actions) => {
+        res.send(
+          actions.map((action) => {
+            const {
+              _id,
+              name,
+              description,
+              categories,
+              location,
+              date,
+              photo,
+            } = action;
+
+            return {
+              _id,
+              name,
+              description,
+              categories: categories.map((c) => c.name),
+              location,
+              date,
+              photo,
+            };
+          })
+        );
       });
   },
 

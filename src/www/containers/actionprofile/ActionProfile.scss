@@ -16,10 +16,8 @@
       border-radius: 0.5rem;
       box-shadow: 0 0 30px 1px rgba($color: black, $alpha: 0.5);
       display: flex;
-      max-width: 60rem;
-      min-height: 10rem;
-      min-width: 40rem;
       padding: 1rem;
+      overflow: hidden;
 
       > img {
         border-radius: 0.5rem;
@@ -28,19 +26,15 @@
       }
 
       > div {
+        width: 33rem;
         padding-left: 1rem;
-        text-align: left;
-        width: 100%;
 
         h1 {
+          -webkit-line-clamp: 1;
           margin: 0.5rem 0;
         }
 
-        > p {
-          margin: 0.5rem 0;
-        }
-
-        > button {
+        button {
           background-color: rgba($color: white, $alpha: 0.6);
           border: 0.5px solid rgba($color: black, $alpha: 0.3);
           border-radius: 0.3rem;
@@ -50,7 +44,7 @@
           outline: none;
           padding: 0.3rem;
           transition: 0.15s ease-in-out;
-          width: 33%;
+          width: 43%;
 
           &:hover {
             background-color: rgba($color: white, $alpha: 0.8);
@@ -65,7 +59,9 @@
   }
 
   .ActionDetails {
-    padding: 0 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: left;
 
     > h3 {
@@ -84,7 +80,10 @@
       box-shadow: 1px 1px rgba($color: black, $alpha: 0.3);
       display: flex;
       flex-direction: row;
+      height: fit-content;
       margin-right: 1rem;
+      max-width: 75vw;
+      min-width: 40vw;
       padding: 0 0.6rem;
 
       > span {
@@ -120,7 +119,6 @@
             background-color: rgba($color: burlywood, $alpha: 0.3);
             border: 1px solid rgba($color: black, $alpha: 0.3);
             border-radius: 0.2rem;
-            cursor: pointer;
             padding: 0.25rem;
             margin-top: 0.3rem;
 
@@ -138,6 +136,7 @@
       border-radius: 0.5rem;
       box-shadow: 1px 1px rgba($color: black, $alpha: 0.3);
       height: fit-content;
+      max-width: 15vw;
       min-width: 12rem;
       padding: 0.3rem;
       text-align: center;
@@ -149,6 +148,7 @@
       }
 
       > h3 {
+        -webkit-line-clamp: 2;
         overflow-wrap: break-word;
       }
     }
@@ -175,9 +175,8 @@
   .ActionProfile {
     .ActionHeader {
       &_infoDiv {
-        min-width: 30rem;
-
         > div {
+          width: 20rem;
           > h1 {
             font-size: 1.2rem;
           }
@@ -203,11 +202,9 @@
   .ActionProfile {
     .ActionHeader {
       &_infoDiv {
-        min-width: 20rem;
-
         > div {
+          width: 15rem;
           padding: 0rem;
-          text-align: center;
         }
 
         > img {

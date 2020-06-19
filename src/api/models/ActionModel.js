@@ -8,7 +8,7 @@ const ActionSchema = new mongo.Schema({
     unique: true,
     uniqueCaseInsensitive: true,
   },
-  description: { type: String },
+  description: { type: String, required: true },
   categories: [{ type: mongo.Schema.Types.ObjectId, ref: "Category" }],
   location: {
     name: {
