@@ -28,14 +28,10 @@
       > div {
         width: 33rem;
         padding-left: 1rem;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
 
         h1 {
           -webkit-line-clamp: 1;
           margin: 0.5rem 0;
-          overflow: hidden;
-          text-overflow: ellipsis;
         }
 
         button {
@@ -48,7 +44,7 @@
           outline: none;
           padding: 0.3rem;
           transition: 0.15s ease-in-out;
-          width: 40%;
+          width: 43%;
 
           &:hover {
             background-color: rgba($color: white, $alpha: 0.8);
@@ -85,6 +81,8 @@
       display: flex;
       flex-direction: row;
       margin-right: 1rem;
+      max-width: 75vw;
+      min-width: 40vw;
       padding: 0 0.6rem;
 
       > span {
@@ -137,6 +135,7 @@
       border-radius: 0.5rem;
       box-shadow: 1px 1px rgba($color: black, $alpha: 0.3);
       height: fit-content;
+      max-width: 15vw;
       min-width: 12rem;
       padding: 0.3rem;
       text-align: center;
@@ -148,6 +147,7 @@
       }
 
       > h3 {
+        -webkit-line-clamp: 2;
         overflow-wrap: break-word;
       }
     }

@@ -1,16 +1,16 @@
 import "./ActionsPage.scss";
 
+import { Link, withRouter } from "react-router-dom";
 import React, { Component } from "react";
 
 import FilterList from "../../components/filterlist/FilterList";
 import Pagination from "../../components/pagination/Pagination";
 import SearchBar from "../../components/searchbar/SearchBar";
-import { connect } from "react-redux";
-import queryString from "query-string";
-import { withRouter, Link } from "react-router-dom";
-import { withTranslation } from "react-i18next";
 import axios from "axios";
+import { connect } from "react-redux";
 import { parseDate } from "../../date";
+import queryString from "query-string";
+import { withTranslation } from "react-i18next";
 
 const mapState = (state) => ({
   categories: state.categories.data,
@@ -90,7 +90,7 @@ export default connect(
               </Link>
               <div>
                 <Link to={`/actions/${_id}`}>
-                  <h3>{name}</h3>
+                  <h3 className="clamped">{name}</h3>
                 </Link>
                 <div className="date">
                   <span>{parseDate(date, t)}</span>
@@ -103,11 +103,11 @@ export default connect(
                   <span>{location.name}</span>
                 </a>
                 <div className="description">
-                  <p>{description}</p>
+                  <p className="clamped">{description}</p>
                 </div>
               </div>
               <div className="hidden_desc">
-                <p>{description}</p>
+                <p className="clamped">{description}</p>
               </div>
             </li>
           );

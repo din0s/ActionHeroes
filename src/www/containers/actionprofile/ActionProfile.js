@@ -1,14 +1,14 @@
 import "./ActionProfile.scss";
 
 import React, { Component } from "react";
+import { Redirect, withRouter } from "react-router-dom";
 
 import { Parallax } from "react-parallax";
+import SpinnerPage from "../spinner/SpinnerPage";
+import axios from "axios";
+import { connect } from "react-redux";
 import { parseDate } from "../../date";
 import { withTranslation } from "react-i18next";
-import axios from "axios";
-import { withRouter, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import SpinnerPage from "../spinner/SpinnerPage";
 
 const mapState = (state) => ({
   loggedIn: state.auth.loggedIn,
@@ -115,7 +115,7 @@ export default connect(
                   <div className="ActionHeader_infoDiv">
                     <img src={actionPhoto} alt="" />
                     <div>
-                      <h1>{name}</h1>
+                      <h1 className="clamped">{name}</h1>
                       <p>{parseDate(date, t)}</p>
                       {this.props.loggedIn && (
                         <div>
@@ -153,7 +153,7 @@ export default connect(
                       </div>
                     </span>
                     <div>
-                      <p className="ActionDetails_infoDiv_location">
+                      <p className="ActionDetails_infoDiv_location clamped">
                         {location.name}
                       </p>
                       <p
@@ -169,7 +169,7 @@ export default connect(
                       >
                         {"📍  " + t("actioninfo.map")}
                       </p>
-                      <p>{description}</p>
+                      <p className="clamped">{description}</p>
                       <p className="Attendees">
                         {attendees + t("actioninfo.attendees")}
                       </p>
@@ -188,7 +188,7 @@ export default connect(
                   </div>
                   <div className="ActionDetails_organizerDiv">
                     <img src={organizerPhoto} alt="Organizer"></img>
-                    <h3> {organizer.name}</h3>
+                    <h3 className="clamped"> {organizer.name}</h3>
                     <p>{t("actioninfo.organizer")}</p>
                   </div>
                 </div>

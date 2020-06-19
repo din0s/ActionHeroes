@@ -1,16 +1,16 @@
 import "./TeamsPage.scss";
 
+import { Link, withRouter } from "react-router-dom";
 import React, { Component } from "react";
 
 import FilterList from "../../components/filterlist/FilterList";
 import Pagination from "../../components/pagination/Pagination";
 import SearchBar from "../../components/searchbar/SearchBar";
 import TeamPopup from "../../components/popup/TeamPopup";
+import axios from "axios";
 import { connect } from "react-redux";
 import queryString from "query-string";
-import { withRouter, Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
-import axios from "axios";
 
 const mapState = (state) => ({
   categories: state.categories.data,
@@ -86,10 +86,10 @@ export default connect(
                   <img src={photoSrc} alt="Team Logo" />
                 </Link>
                 <Link to={`/teams/${_id}`}>
-                  <h3>{name}</h3>
+                  <h3 className="clamped">{name}</h3>
                 </Link>
               </span>
-              <p>{description}</p>
+              <p className="clamped">{description}</p>
             </li>
           );
         };
