@@ -173,17 +173,19 @@ export default connect(
                       <p className="Attendees">
                         {attendees + t("actioninfo.attendees")}
                       </p>
-                      <div className="ActionDetails_infoDiv_categories">
-                        <h3>{t("actioninfo.tags")}</h3>
-                        <ul>
-                          {categories.map((c) => {
-                            const category = c.toLowerCase();
-                            return (
-                              <li key={c}>{t(`categories.${category}`)}</li>
-                            );
-                          })}
-                        </ul>
-                      </div>
+                      {categories.length > 0 && (
+                        <div className="ActionDetails_infoDiv_categories">
+                          <h3>{t("actioninfo.tags")}</h3>
+                          <ul>
+                            {categories.map((c) => {
+                              const category = c.toLowerCase();
+                              return (
+                                <li key={c}>{t(`categories.${category}`)}</li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="ActionDetails_organizerDiv">
