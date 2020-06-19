@@ -8,6 +8,8 @@ const Category = require("../models/CategoryModel");
 const Image = require("../models/ImageModel");
 const Team = require("../models/TeamModel");
 const User = require("../models/UserModel");
+const Action = require("../models/ActionModel");
+const Team = require("../models/TeamModel");
 
 const generateToken = (user) =>
   jwt.sign(
@@ -32,18 +34,119 @@ const sanitizeUser = (user) => {
   return user;
 };
 
-const authResponse = (user) => ({
-  jwt: generateToken(user),
-  user: sanitizeUser(user),
-});
+const joinUser = async (user) => {
+  const promises = [];
+  const response = {};
+
+  promises.push(
+    Team.find({ followers: user._id })
+      .populate("categories")
+      .then((teams) => {
+        response[`teamsFollow`] = teams.map((team) => {
+          const { _id, name, description, categories, photo } = team;
+          return {
+            _id,
+            name,
+            description,
+            categories: categories.map((c) => c.name),
+            photo,
+          };
+        });
+      })
+  );
+
+  promises.push(
+    Team.find({ owner: user._id })
+      .populate("categories")
+      .then((teams) => {
+        response[`teamsOwned`] = teams.map((team) => {
+          const { _id, name, description, categories, photo } = team;
+          return {
+            _id,
+            name,
+            description,
+            categories: categories.map((c) => c.name),
+            photo,
+          };
+        });
+      })
+  );
+
+  promises.push(
+    Action.find({ attendees: user._id })
+      .populate("categories")
+      .then((actions) => {
+        response[`actionsAttended`] = actions.map((action) => {
+          const { _id, name, description, categories, photo } = action;
+          return {
+            _id,
+            name,
+            description,
+            categories: categories.map((c) => c.name),
+            photo,
+          };
+        });
+      })
+  );
+
+  promises.push(
+    Action.find({ saves: user._id })
+      .populate("categories")
+      .then((actions) => {
+        response[`actionsSaved`] = actions.map((action) => {
+          const { _id, name, description, categories, photo } = action;
+          return {
+            _id,
+            name,
+            description,
+            categories: categories.map((c) => c.name),
+            photo,
+          };
+        });
+      })
+  );
+
+  user = sanitizeUser(user);
+  response[`username`] = user.username;
+  response[`email`] = user.email;
+  response[`coordinates`] = user.coordinates;
+  response[`categories`] = user.categories;
+
+  try {
+    await Promise.all(promises);
+    return response;
+  } catch (err) {
+    return err;
+  }
+};
+
+const authResponse = async (res, user) => {
+  const join = await joinUser(user);
+  if (join instanceof Error) {
+    console.error(`Error during user join:\n${join}`);
+    return res.status(500).send();
+  }
+
+  return res.json({
+    jwt: generateToken(user),
+    user: await joinUser(user),
+  });
+};
 
 const findProfile = (req, res) => {
   User.findById(req.params.user_id)
     .populate("categories")
     .exec()
-    .then((user) => {
-      user = sanitizeUser(user);
-      return res.status(200).json({ user });
+    .then(async (user) => {
+      const join = await joinUser(user);
+      if (join instanceof Error) {
+        console.error(`Error during user join:\n${join}`);
+        return res.status(500).send();
+      }
+
+      return res.json({
+        user: join,
+      });
     })
     .catch((err) => {
       console.error(`Error during user find():\n${err}`);
@@ -85,8 +188,8 @@ module.exports = {
                 return res.status(500).send();
               } else {
                 user.hash = hash;
-                user.save().then(() => {
-                  return res.json(authResponse(user));
+                user.save().then(async () => {
+                  return await authResponse(res, user);
                 });
               }
             });
@@ -280,14 +383,14 @@ module.exports = {
           });
         }
 
-        bcrypt.compare(password, user.hash, (err, success) => {
+        bcrypt.compare(password, user.hash, async (err, success) => {
           if (err) {
             console.error(`Error during hash comparison:\n${err}`);
             return res.status(500).send();
           }
 
           if (success) {
-            return res.status(200).json(authResponse(user));
+            return await authResponse(res, user);
           } else {
             return res.status(401).json({
               error: "Invalid credentials",
@@ -325,7 +428,9 @@ module.exports = {
 
       user
         .save()
-        .then(() => res.status(201).json(authResponse(user)))
+        .then(async () => {
+          return await authResponse(res, user);
+        })
         .catch((err) => {
           if (err.name === "ValidationError") {
             if (err.errors.email) {
@@ -423,7 +528,14 @@ module.exports = {
         )
           .populate("categories")
           .exec()
-          .then((user) => res.json({ user: sanitizeUser(user) }))
+          .then(async (user) => {
+            const join = await joinUser(user);
+            if (join instanceof Error) {
+              console.error(`Error during user join:\n${err}`);
+              return res.status(500).send();
+            }
+            res.json({ user: join });
+          })
           .catch((err) => {
             if (err.name === "ValidationError") {
               if (err.errors.email) {

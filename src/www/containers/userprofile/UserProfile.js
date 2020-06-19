@@ -5,14 +5,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
+import SpinnerPage from "../spinner/SpinnerPage";
 
 const minCardsShown = 3;
-
-// user.actionsAttended
-const actionsAttended = require("./actionsAttended.json");
-const actionsOrganized = require("./actionsOrganized.json");
-const teamsOwned = require("./teamsOwned.json");
-const teamsFollow = require("./teamsFollow.json");
 
 const mapState = (state) => ({
   user: state.auth.user,
@@ -26,54 +21,60 @@ export default connect(
     class UserProfile extends Component {
       state = {
         activeTab: "actions",
-        actionsAttended: {
-          list: actionsAttended,
-          shown: 3,
-        },
-        actionsOrganized: {
-          list: actionsOrganized,
-          shown: 3,
-        },
-        teamsOwnedShown: 3,
-        teamsMemberShown: 3,
+        actionsAttended: minCardsShown,
+        actionsSaved: minCardsShown,
+        teamsOwned: minCardsShown,
+        teamsFollow: minCardsShown,
       };
 
-      showCards = (cards, count, link) => {
+      showCards = (cards, count, isAction) => {
         const { t } = this.props;
         return Object.keys(cards).map((key, index) => {
           const card = cards[key];
           if (index >= count) {
             return null;
           }
+          const link = `/${isAction ? "actions" : "teams"}/${card._id}`;
+          const photo = card.photo
+            ? `/api/images/${card.photo}`
+            : isAction
+            ? "/img/actionprofile/default.jpg"
+            : "/img/teaminfo/default.png";
+
           return (
             <li key={key} className="Card">
-              <a href={link}>
-                <img src={card.photo} alt="" />
-              </a>
+              <Link to={link}>
+                <img src={photo} alt="" />
+              </Link>
               <div className="Card_body">
-                <a href={link}>
+                <Link to={link}>
                   <h4>{card.name}</h4>
-                </a>
+                </Link>
                 <p>{card.description}</p>
-                <div className="Card_categories">
-                  <h4>{t("profile.categories")}:</h4>
-                  <ul>
-                    {Object.keys(card.categories).map((cKey) => {
-                      const category = card.categories[cKey].name.toLowerCase();
-                      return <li key={cKey}>{t(`categories.${category}`)}</li>;
-                    })}
-                  </ul>
-                </div>
+                {card.categories.length > 0 && (
+                  <div className="Card_categories">
+                    <h4>{t("profile.categories")}:</h4>
+                    <ul>
+                      {card.categories.map((name) => {
+                        return (
+                          <li key={name}>
+                            {t(`categories.${name.toLowerCase()}`)}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                )}
               </div>
             </li>
           );
         });
       };
 
-      expandActions = (actions) => {
+      expandCards = (actions) => {
         const { t } = this.props;
-        const actionsShown = this.state[actions].shown;
-        const available = Object.keys(this.state[actions].list).length;
+        const actionsShown = this.state[actions];
+        const available = this.props.user[actions].length;
 
         if (available <= minCardsShown) {
           return null;
@@ -82,7 +83,7 @@ export default connect(
             <p
               onClick={() =>
                 this.setState({
-                  [actions]: { ...this.state[actions], shown: minCardsShown },
+                  [actions]: minCardsShown,
                 })
               }
             >
@@ -94,7 +95,7 @@ export default connect(
             <p
               onClick={() =>
                 this.setState({
-                  [actions]: { ...this.state[actions], shown: available },
+                  [actions]: available,
                 })
               }
             >
@@ -105,11 +106,22 @@ export default connect(
       };
 
       render() {
+        if (this.props.user === {}) {
+          return <SpinnerPage />;
+        }
+
         const { t, user } = this.props;
-        const { username, photo } = user;
-        const photoSrc = photo ? `/api/images/${photo}` : "/img/profile/default.png";
-        const action_link = "/actions/id";
-        const team_link = "/teams/id";
+        const {
+          username,
+          photo,
+          actionsAttended,
+          actionsSaved,
+          teamsFollow,
+          teamsOwned,
+        } = user;
+        const photoSrc = photo
+          ? `/api/images/${photo}`
+          : "/img/profile/default.png";
 
         return (
           <div className="ProfilePage">
@@ -147,50 +159,59 @@ export default connect(
                     <ul>
                       {this.showCards(
                         actionsAttended,
-                        this.state.actionsAttended.shown,
-                        action_link
+                        this.state.actionsAttended,
+                        true
                       )}
                     </ul>
-                    {this.expandActions("actionsAttended")}
+                    {this.expandCards("actionsAttended")}
+                    <Link to="/actions">
+                      <p>{t("profile.attend")}</p>
+                    </Link>
                   </section>
-                  <section>
-                    <h3>{t("profile.organized")}</h3>
-                    <ul>
-                      {this.showCards(
-                        actionsOrganized,
-                        this.state.actionsOrganized.shown,
-                        action_link
-                      )}
-                    </ul>
-                    {this.expandActions("actionsOrganized")}
-                  </section>
+                  {actionsSaved.length !== 0 && (
+                    <section>
+                      <h3>{t("profile.saved")}</h3>
+                      <ul>
+                        {this.showCards(
+                          actionsSaved,
+                          this.state.actionsSaved,
+                          true
+                        )}
+                      </ul>
+                      {this.expandCards("actionsSaved")}
+                    </section>
+                  )}
                 </div>
                 <div
                   className={this.state.activeTab === "teams" ? "active" : ""}
                 >
                   <section>
-                    <h3>{t("profile.teams-owned")}</h3>
-                    <ul>
-                      {this.showCards(
-                        teamsOwned,
-                        this.state.teamsOwnedShown,
-                        team_link
-                      )}
-                    </ul>
-                  </section>
-                  <section>
                     <h3>{t("profile.teams-member")}</h3>
                     <ul>
                       {this.showCards(
                         teamsFollow,
-                        this.state.teamsMemberShown,
-                        team_link
+                        this.state.teamsFollow,
+                        false
                       )}
                     </ul>
+                    {this.expandCards("teamsFollow")}
                     <Link to="/teams">
                       <p>{t("profile.join")}</p>
                     </Link>
                   </section>
+                  {teamsOwned.length !== 0 && (
+                    <section>
+                      <h3>{t("profile.teams-owned")}</h3>
+                      <ul>
+                        {this.showCards(
+                          teamsOwned,
+                          this.state.teamsOwned,
+                          false
+                        )}
+                      </ul>
+                      {this.expandCards("teamsOwned")}
+                    </section>
+                  )}
                 </div>
               </div>
             </div>
