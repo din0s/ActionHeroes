@@ -1,8 +1,12 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const CustomError = require("../CustomError");
+
+const Action = require("../models/ActionModel");
 const Category = require("../models/CategoryModel");
 const Image = require("../models/ImageModel");
+const Team = require("../models/TeamModel");
 const User = require("../models/UserModel");
 
 const generateToken = (user) =>
@@ -96,6 +100,148 @@ module.exports = {
       .catch((err) => {
         console.error(`Error during user find():\n${err}`);
         return res.status(500).json();
+      });
+  },
+
+  getDashboard: (req, res) => {
+    const id = req.userData.userId;
+    const promises = [];
+    const response = {};
+
+    // next actions
+    promises.push(
+      Action.find({ attendees: { $in: [id] }, date: { $gt: new Date() } })
+        .sort({ date: +1 }) // sort ascending
+        .limit(3)
+        .then((actions) => {
+          response[`next`] = actions.map((action) => {
+            const { _id, name, description, date, photo } = action;
+            return { _id, name, description, date, photo };
+          });
+        })
+        .catch((err) => {
+          console.log(`Error during action find():\n${err}`);
+          throw new CustomError(undefined, 500);
+        })
+    );
+
+    // recommended actions
+    promises.push(
+      Team.find({ $or: [{ followers: { $in: [id] } }, { owner: id }] })
+        .then(async (teams) => {
+          // actions the user is interested in
+          // because of the teams that they follow
+          const followActions = await Action.find({
+            organizer: { $in: teams.map((t) => t._id) },
+          });
+          // actions the user has explicitly stated
+          // that they're interested in (attend/save)
+          const interestActions = await Action.find({
+            $or: [{ attendees: { $in: [id] } }, { saves: { $in: [id] } }],
+          });
+          // combine lists without duplicates
+          const jointActions = [...new Set(followActions.concat(interestActions))];
+          response[`recommend`] = jointActions
+            .sort((a1, a2) => a1.dateCreated < a2.dateCreated) // sort descending
+            .map((action) => {
+              const {
+                _id,
+                name,
+                description,
+                categories,
+                location,
+                date,
+                photo,
+              } = action;
+              return {
+                _id,
+                name,
+                description,
+                categories: categories.map((c) => c.name),
+                location,
+                date,
+                photo,
+              };
+            });
+        })
+        .catch((err) => {
+          console.error(`Error during team find():\n${err}`);
+          throw new CustomError(undefined, 500);
+        })
+    );
+
+    // teams
+    promises.push(
+      Team.find({ owner: id })
+        .then(async (teams) => {
+          const teamActionMap = {};
+          await Action.find({ organizer: { $in: teams.map((t) => t._id) } })
+            .sort({ dateCreated: -1 }) // sort descending
+            .then((actions) => {
+              actions.forEach((action) => {
+                const { organizer } = action;
+                if (!teamActionMap[organizer]) {
+                  const { _id, name, date } = action;
+                  teamActionMap[organizer] = {
+                    _id,
+                    name,
+                    date,
+                  };
+                }
+              });
+            })
+            .then(() => {
+              response[`teams`] = teams.map((team) => {
+                const { _id, name, photo, followers } = team;
+                return {
+                  _id,
+                  name,
+                  photo,
+                  followers: followers.length,
+                  recent: teamActionMap[_id],
+                };
+              });
+            })
+            .catch((err) => {
+              console.log(`Error during action find():\n${err}`);
+              throw new CustomError(undefined, 500);
+            });
+        })
+        .catch((err) => {
+          console.log(`Error during team find():\n${err}`);
+          throw new CustomError(undefined, 500);
+        })
+    );
+
+    // saved actions
+    promises.push(
+      Action.find({ saves: { $in: [id] } })
+        .sort({ date: +1 }) // sort ascending
+        .then((actions) => {
+          response[`saved`] = actions.map((action) => {
+            const { _id, name, photo } = action;
+            return { _id, name, photo };
+          });
+        })
+        .catch((err) => {
+          console.log(`Error during action find():\n${err}`);
+          throw new CustomError(undefined, 500);
+        })
+    );
+
+    Promise.all(promises)
+      .then(() => res.send(response))
+      .catch((err) => {
+        if (err instanceof CustomError) {
+          if (err.message) {
+            res.status(err.code).json({ error: err.message });
+          } else {
+            res.status(err.code).send();
+          }
+        } else {
+          console.log(`Error during Promise.all():\n${err}`);
+          res.status(500).send();
+        }
       });
   },
 

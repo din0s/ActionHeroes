@@ -16,4 +16,8 @@ router.get("/:user_id/profile", checkAuth, UserController.getProfile);
 
 router.patch("/me/change_password", checkAuth, UserController.changePassword);
 
+/* Dashboard */
+
+router.get("/me/dashboard", checkAuth, UserController.getDashboard);
+
 module.exports = router;

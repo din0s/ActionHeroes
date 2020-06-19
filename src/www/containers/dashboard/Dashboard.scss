@@ -19,9 +19,23 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  
+  .vertical {
+    text-align: center;
+    
+    p {
+      font-size: 1.2rem;
+      word-break: keep-all;
+    }
+
+    a {
+      font-size: 0.9rem;
+    }
+  }
 
   &_main {
     max-width: 70vw;
+    width: 100%;
 
     > div {
       > h2 {
@@ -35,11 +49,15 @@
         list-style: none;
         margin: 0;
         padding: 1rem;
+
+        > li > a {
+          color: initial;
+        }
       }
     }
 
     &_next {
-      > ul {
+      > ul:not(.vertical) {
         display: flex;
         flex-direction: row;
 
