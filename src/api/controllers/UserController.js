@@ -106,7 +106,7 @@ const joinUser = async (user) => {
   response[`username`] = user.username;
   response[`email`] = user.email;
   response[`coordinates`] = user.coordinates;
-  response[`categories`] = user.categories.map((c) => c.map);
+  response[`categories`] = user.categories;
 
   try {
     await Promise.all(promises);
@@ -382,7 +382,14 @@ module.exports = {
         )
           .populate("categories")
           .exec()
-          .then((user) => res.json({ user: sanitizeUser(user) }))
+          .then(async (user) => {
+            const join = await joinUser(user);
+            if (join instanceof Error) {
+              console.error(`Error during user join:\n${err}`);
+              return res.status(500).send();
+            }
+            res.json({ user: join });
+          })
           .catch((err) => {
             if (err.name === "ValidationError") {
               if (err.errors.email) {
