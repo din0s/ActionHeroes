@@ -26,7 +26,6 @@
     "email": "email",
     "password": "password",
     "confirm_password": "confirm password",
-    "forgot_pass": "Forgot your password? (soon!)",
     "login": {
       "action": "Log in",
       "greeting": "Welcome back!",

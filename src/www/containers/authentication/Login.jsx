@@ -98,10 +98,6 @@ export default connect(
                 <p children={t("auth.login.alt-call")} />
                 <Link to="/signup" children={t("auth.signup.action")} />
               </span>
-              <p
-                className="Forgot_Password"
-                children={t("auth.forgot_pass")}
-              />
             </form>
           </div>
         );
