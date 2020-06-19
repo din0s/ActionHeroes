@@ -9,9 +9,35 @@ footer {
     margin: 0;
   }
 
-  > p {
-    color: rgba($color: black, $alpha: 0.95);
-    font-size: 0.75rem;
-    padding: 0 1rem;
+  .Content {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    .Copyrights > p {
+      color: rgba($color: black, $alpha: 0.95);
+      font-size: 0.75rem;
+      padding: 0 1rem;
+    }
+
+    .Social_Media {
+      margin-left: auto;
+      margin-right: 0.5rem;
+      > a > img {
+        margin-top: 1rem;
+        max-height: 30px;
+        padding-right: 5px;
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 550px) {
+  footer .Content {
+    flex-direction: column;
+    
+    .Social_Media{
+      margin: 0;
+      padding: 0 1rem;
+    }
   }
 }
