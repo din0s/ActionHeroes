@@ -223,8 +223,6 @@ module.exports = {
     updateFollowers(req, res, false);
   },
 
-  search: (req, res) => {},
-
   updateTeam: (req, res) => {
     var query = {};
     var promises = [];
