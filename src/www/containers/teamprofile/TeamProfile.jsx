@@ -1,14 +1,15 @@
 import "./TeamProfile.scss";
 
 import React, { Component } from "react";
+import { Redirect, withRouter } from "react-router-dom";
 
 import ActionCard from "../../components/actioncard/ActionCard";
-import { parseDate } from "../../date";
-import { withTranslation } from "react-i18next";
+import { Divider } from "@material-ui/core";
+import SpinnerPage from "../spinner/SpinnerPage";
 import axios from "axios";
 import { connect } from "react-redux";
-import { withRouter, Redirect } from "react-router-dom";
-import SpinnerPage from "../spinner/SpinnerPage";
+import { parseDate } from "../../date";
+import { withTranslation } from "react-i18next";
 
 const mapState = (state) => ({
   loggedIn: state.auth.loggedIn,
