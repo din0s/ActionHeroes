@@ -191,28 +191,6 @@ class ActionPopup extends Component {
                 className="FormArea"
                 contentClassName="FormArea_content"
               >
-                <Selector
-                  centered="center"
-                  value={<h3>{t("createaction.teams")}</h3>}
-                  onChange={(opt) => this.setState({ actionTeam: opt.value })}
-                  options={jsonFile.teams.map((t) => ({
-                    // Since implementing the API this should change
-                    value: t,
-                    label: t.name,
-                  }))}
-                />
-                {this.showTeamImg()}
-                <hr />
-                <p>{t("createaction.date")}</p>
-                <div className="FormArea_content_dateTime">
-                  <DateTimePicker
-                    className="Date"
-                    min={defDate}
-                    onChange={
-                      (e) => this.setState({ actionDate: e }) //Not sure if correct
-                    }
-                  />
-                </div>
                 <Input
                   name="actionName"
                   type="text"
@@ -231,39 +209,71 @@ class ActionPopup extends Component {
                     this.setState({ description: e.target.value.trim() })
                   }
                 ></textarea>
-                <ImageUploader
-                  withIcon={true}
-                  buttonText={t("createaction.image")}
-                  imgExtension={[".jpg", ".jpeg", ".png"]}
-                  maxFileSize={5242880}
-                  singleImage={true}
-                  withPreview={true}
-                  label={t("createaction.maxfile")}
-                  onChange={(pic) => {
-                    this.setState({
-                      actionPicture: pic,
-                    });
-                  }}
-                />
+                <div className="bigBoxNo1">
+                  <div className="smallBoxLeft">
+                    <Selector
+                      centered="center"
+                      value={<h3>{t("createaction.teams")}</h3>}
+                      onChange={(opt) =>
+                        this.setState({ actionTeam: opt.value })
+                      }
+                      options={jsonFile.teams.map((t) => ({
+                        // Since implementing the API this should change
+                        value: t,
+                        label: t.name,
+                      }))}
+                    />
+                    {this.showTeamImg()}
+                  </div>
+                  <div className="smallBoxRight">
+                    <ImageUploader
+                      withIcon={true}
+                      buttonText={t("createaction.image")}
+                      imgExtension={[".jpg", ".jpeg", ".png"]}
+                      maxFileSize={5242880}
+                      singleImage={true}
+                      withPreview={true}
+                      label={t("createaction.maxfile")}
+                      onChange={(pic) => {
+                        this.setState({
+                          actionPicture: pic,
+                        });
+                      }}
+                    />
+                  </div>
+                </div>
                 <hr />
-                <p>{t("createaction.location")}</p>
-                <div className="FormArea_content_map">
-                  <Map
-                    className="Map"
-                    center={this.state.actionLocation.coordinates}
-                    zoom={15}
-                    onClick={(center, address) =>
-                      this.setState(
-                        {
-                          actionLocation: {
-                            name: address,
-                            coordinates: center,
-                          },
-                        },
-                        console.log(this.state)
-                      )
-                    }
-                  />
+                <div className="bigBoxNo2">
+                  <div className="smallBoxLeft">
+                    <p>{t("createaction.date")}</p>
+                    <div className="FormArea_content_dateTime">
+                      <DateTimePicker
+                        className="Date"
+                        min={defDate}
+                        onChange={
+                          (e) => this.setState({ actionDate: e }) //Not sure if correct
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="smallBoxRight">
+                    <p>{t("createaction.location")}</p>
+                    <div className="FormArea_content_map">
+                      <Map
+                        className="Map"
+                        center={this.state.actionLocation.coordinates}
+                        zoom={15}
+                        onClick={(center, address) =>
+                          this.setState({
+                            actionLocation: {
+                              name: address,
+                              coordinates: center,
+                            },
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
                 </div>
 
                 <div className="FormArea_content_categories">

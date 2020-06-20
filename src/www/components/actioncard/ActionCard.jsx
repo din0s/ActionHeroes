@@ -11,9 +11,9 @@ const action = require("./action.json");
 export default withTranslation()(
   class ActionCard extends Component {
     render() {
-      const { t, id } = this.props; //Should see what's up with key=id prop
+      const { t } = this.props; //Should see what's up with key=id prop
       return (
-        <li className="Card" key={id}>
+        <li className="Card" key={action._id}>
           <Link to="/actions/id">
             <img src={action.photo} alt="" />
             <div className="Card_body">

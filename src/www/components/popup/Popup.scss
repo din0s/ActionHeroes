@@ -73,6 +73,41 @@
             margin-bottom: 0.3rem;
           }
 
+          .bigBoxNo1 {
+            margin-top: 15px;
+            display: flex;
+
+            .smallBoxRight {
+              width: 49%;
+              padding-left: 2%;
+              padding-right: 1%;
+            }
+
+            .smallBoxLeft {
+              width: 47%;
+              padding-right: 1%;
+              padding-left: 3px;
+              display: block;
+              border-right: solid 2px rgb(216, 216, 216);
+            }
+          }
+
+          .bigBoxNo2 {
+            display: flex;
+            margin-bottom: 25px;
+            .smallBoxLeft {
+              margin-top: 5rem;
+              width: 50%;
+              margin-left: -2%;
+            }
+            .smallBoxRight {
+              border-left: solid 2px rgb(216, 216, 216);
+              width: 47%;
+              padding-left: 2%;
+              padding-right: 1%;
+            }
+          }
+
           .TeamSelected {
             margin-top: 0.3rem;
             //margin-bottom: 0.8rem;
@@ -123,8 +158,8 @@
             display: flex;
             justify-content: center;
             .Map {
-              height: 12rem;
-              width: 18rem;
+              z-index: 1;
+              max-height: 12rem;
             }
           }
 
@@ -238,6 +273,58 @@
   .popup-content {
     .FormArea_content_categories-list > label {
       width: 100% !important;
+    }
+  }
+}
+
+@media only screen and(max-width: 1200px) {
+  .popup-content {
+    > div {
+      > form {
+        .FormArea {
+          &_content {
+            .bigBoxNo1 {
+              margin-top: 0px;
+              display: block;
+              .smallBoxRight {
+                width: 100%;
+                padding-left: 0%;
+                padding-right: 0%;
+                border-top: solid 2px rgb(216, 216, 216);
+                padding-top: 15px;
+              }
+
+              .smallBoxLeft {
+                width: 100%;
+                padding-right: 0%;
+                padding-left: 0px;
+                padding-bottom: 20px;
+                display: block;
+                border-right: none;
+              }
+            }
+
+            .bigBoxNo2 {
+              display: block;
+              margin-bottom: 10px;
+              .smallBoxLeft {
+                padding-bottom: 7px;
+                margin-top: 0rem;
+                width: 100%;
+                margin-left: 0%;
+              }
+              .smallBoxRight {
+                padding-top: 3px;
+                border-top: solid 2px rgb(216, 216, 216);
+                border-left: none;
+                width: 100%;
+                padding-left: 0%;
+                padding-right: 0%;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
