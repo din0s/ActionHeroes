@@ -4,7 +4,6 @@ import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
 import { Parallax } from "react-parallax";
-import ScrollUpButton from "react-scroll-up-button";
 import { withTranslation } from "react-i18next";
 
 const categoriesList = require("./categories.json");
@@ -101,12 +100,6 @@ export default withTranslation()(
               </div>
             </Parallax>
           </section>
-          <ScrollUpButton
-            ContainerClassName="ScrollButton"
-            AnimationDuration={1200}
-            EasingType="easeInOutCubic"
-            ShowAtPosition={150}
-          />
         </div>
       );
     }

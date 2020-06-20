@@ -98,10 +98,6 @@ export default connect(
                 <p children={t("auth.login.alt-call")} />
                 <Link to="/signup" children={t("auth.signup.action")} />
               </span>
-              <p
-                className="Social"
-                children={`${t("auth.login.action")} ${t("auth.fb")}`}
-              />
             </form>
           </div>
         );

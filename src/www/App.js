@@ -11,6 +11,7 @@ import NavBar from "./components/navbar/NavBar";
 import { Provider } from "react-redux";
 import Routes from "./components/routes/Routes";
 import ScrollToTop from "react-router-scroll-top";
+import ScrollUpButton from "react-scroll-up-button";
 import SpinnerPage from "./containers/spinner/SpinnerPage";
 import { createBrowserHistory } from "history";
 import { createRootReducer } from "./reducers";
@@ -53,6 +54,13 @@ export default class App extends Component {
                   <NavBar />
                   <Routes />
                   <Footer />
+                  <ScrollUpButton
+                    ContainerClassName="ScrollButton"
+                    AnimationDuration={1200}
+                    EasingType="easeInOutCubic"
+                    ShowAtPosition={150}
+                    style={{ bottom: 75 }}
+                  />
                 </div>
               </AlertProvider>
             </ScrollToTop>

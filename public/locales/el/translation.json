@@ -26,7 +26,6 @@
     "email": "email",
     "password": "κωδικός",
     "confirm_password": "επιβεβαίωση κωδικού",
-    "fb": "με Facebook (σύντομα!)",
     "login": {
       "action": "Σύνδεση",
       "greeting": "Καλωσήρθες!",
