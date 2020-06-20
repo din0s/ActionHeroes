@@ -170,6 +170,7 @@ module.exports = {
               const today = new Date();
               actions.forEach((action) => {
                 const {
+                  _id,
                   name,
                   description,
                   categories,
@@ -178,9 +179,10 @@ module.exports = {
                   photo,
                 } = action;
                 const item = {
+                  _id,
                   name,
                   description,
-                  categories,
+                  categories: categories.map(c => c.name),
                   location,
                   date,
                   photo,
