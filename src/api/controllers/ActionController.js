@@ -45,7 +45,7 @@ module.exports = {
       });
   },
 
-  createAction: (req, res) => {
+  createAction: async (req, res) => {
     const action = new Action();
     var promises = [];
 
@@ -104,20 +104,19 @@ module.exports = {
     }
 
     if (req.body.location) {
-      const coordinates = req.body.location.coordinates;
+      const location = JSON.parse(req.body.location);
 
-      if (req.body.location.name) {
-        action[`location`][`name`] = req.body.location.name;
+      if (location.name) {
+        action[`location`][`name`] = location.name;
       } else {
         return res
           .status(400)
           .json({ error: "Field `location.name` is required" });
       }
 
-      if (coordinates) {
-        const coords = JSON.parse(coordinates);
-        if (coords.length == 2) {
-          action[`location`][`coordinates`] = coords;
+      if (location.coordinates) {
+        if (location.coordinates.length == 2) {
+          action[`location`][`coordinates`] = location.coordinates;
         } else {
           return res.status(400).json({ error: "Invalid coordinates" });
         }
@@ -144,8 +143,8 @@ module.exports = {
       );
     }
 
-    Promise.all(promises)
-      .then(() => {
+    try {
+      await Promise.all(promises).then(() => {
         action
           .save()
           .then(() => {
@@ -167,18 +166,20 @@ module.exports = {
                     .json({ error: "Action name not available" });
                 }
               }
-
-              console.error(`Error during action save():\n${err}`);
-              return res.status(500).send();
             }
 
             console.error(`Error during action save():\n${err}`);
             return res.status(500).send();
           });
-      })
-      .catch((err) => {
-        return res.status(err.code).json({ error: err.message });
       });
+    } catch (err) {
+      if (err instanceof CustomError) {
+        return res.status(err.code).json({ error: err.message });
+      } else {
+        console.error(`Error during Promise.all:\n${err}`);
+        return res.status(500).send();
+      }
+    }
   },
 
   getAction: (req, res) => {

@@ -264,7 +264,7 @@ class ActionPopup extends Component {
                           this.setState({
                             actionLocation: {
                               name: address,
-                              coordinates: center,
+                              coordinates: Object.values(center),
                             },
                           })
                         }
