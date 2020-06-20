@@ -12,6 +12,7 @@ import ScrollArea from "react-scrollbar";
 import Selector from "../../components/selector/Selector";
 import axios from "axios";
 import { connect } from "react-redux";
+import { editAction } from "../../actions/action";
 import { withTranslation } from "react-i18next";
 
 const defDate = new Date();
@@ -94,6 +95,12 @@ class ActionPopup extends Component {
     this.setState({
       actionId: data._id,
     });
+
+    const isEdit = false; // change for edit
+    if (isEdit) {
+      const { _id, name, description, categories, photo } = data;
+      this.props.editAction({ _id, name, description, categories, photo });
+    }
   };
 
   handleError = (data) => {
@@ -337,4 +344,6 @@ const mapState = (state) => ({
   user: state.auth.user,
 });
 
-export default connect(mapState, undefined)(withTranslation()(ActionPopup));
+export default connect(mapState, { editAction })(
+  withTranslation()(ActionPopup)
+);

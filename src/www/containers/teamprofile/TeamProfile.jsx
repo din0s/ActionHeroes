@@ -7,6 +7,7 @@ import ActionCard from "../../components/actioncard/ActionCard";
 import SpinnerPage from "../spinner/SpinnerPage";
 import axios from "axios";
 import { connect } from "react-redux";
+import { followTeam } from "../../actions/team";
 import { parseDate } from "../../date";
 import { withTranslation } from "react-i18next";
 
@@ -14,10 +15,7 @@ const mapState = (state) => ({
   loggedIn: state.auth.loggedIn,
 });
 
-export default connect(
-  mapState,
-  undefined
-)(
+export default connect(mapState, { followTeam })(
   withRouter(
     withTranslation()(
       class TeamProfile extends Component {
@@ -62,6 +60,12 @@ export default connect(
               this.setState({ followed: true });
             });
           }
+
+          const { id, name, description, categories, photo } = this.state;
+          this.props.followTeam(
+            { _id: id, name, description, categories, photo },
+            !this.state.followed
+          );
         };
 
         render() {

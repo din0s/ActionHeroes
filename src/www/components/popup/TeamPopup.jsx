@@ -8,6 +8,8 @@ import Popup from "reactjs-popup";
 import { Redirect } from "react-router-dom";
 import ScrollArea from "react-scrollbar";
 import axios from "axios";
+import { connect } from "react-redux";
+import { modifyTeam } from "../../actions/team";
 import { withTranslation } from "react-i18next";
 
 class TeamPopup extends Component {
@@ -38,6 +40,13 @@ class TeamPopup extends Component {
     this.setState({
       teamId: data._id,
     });
+
+    const isCreate = true; // change for edit
+    const { _id, name, description, categories, photo } = data;
+    this.props.modifyTeam(
+      { _id, name, description, categories, photo },
+      isCreate
+    );
   };
 
   handleError = (data) => {
@@ -195,4 +204,4 @@ class TeamPopup extends Component {
   }
 }
 
-export default withTranslation()(TeamPopup);
+export default connect(undefined, { modifyTeam })(withTranslation()(TeamPopup));
