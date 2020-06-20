@@ -70,7 +70,24 @@
           }
 
           &_dateTime {
-            margin-bottom: 0.3rem;
+            > div {
+              display: flex;
+              justify-content: center;
+
+              > div {
+                margin-top: 40px !important;
+
+                > div {
+                  :last-child {
+                    align-items: baseline !important;
+
+                    > input {
+                      margin-right: 5px;
+                    }
+                  }
+                }
+              }
+            }
           }
 
           .bigBoxNo1 {
@@ -96,7 +113,6 @@
             display: flex;
             margin-bottom: 25px;
             .smallBoxLeft {
-              margin-top: 5rem;
               width: 50%;
               margin-left: -2%;
             }

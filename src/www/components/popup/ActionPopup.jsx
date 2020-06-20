@@ -2,6 +2,7 @@ import "./Popup.scss";
 
 import React, { Component } from "react";
 
+import DateTimePicker from "date-time-picker-react";
 import ImageUploader from "react-images-upload";
 import Input from "../input/Input";
 import Map from "../../components/map/Map";
@@ -11,7 +12,6 @@ import ScrollArea from "react-scrollbar";
 import Selector from "../../components/selector/Selector";
 import axios from "axios";
 import { withTranslation } from "react-i18next";
-import DateTimePicker from "date-time-picker-react";
 
 const jsonFile = require("./data.json");
 const initPosition = {
@@ -248,11 +248,8 @@ class ActionPopup extends Component {
                     <p>{t("createaction.date")}</p>
                     <div className="FormArea_content_dateTime">
                       <DateTimePicker
-                        className="Date"
                         min={defDate}
-                        onChange={
-                          (e) => this.setState({ actionDate: e }) //Not sure if correct
-                        }
+                        onChange={(actionDate) => this.setState({ actionDate })}
                       />
                     </div>
                   </div>
