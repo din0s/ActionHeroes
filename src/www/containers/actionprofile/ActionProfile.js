@@ -1,7 +1,7 @@
 import "./ActionProfile.scss";
 
+import { Link, Redirect, withRouter } from "react-router-dom";
 import React, { Component } from "react";
-import { Redirect, withRouter } from "react-router-dom";
 
 import { Parallax } from "react-parallax";
 import SpinnerPage from "../spinner/SpinnerPage";
@@ -188,11 +188,14 @@ export default connect(
                       )}
                     </div>
                   </div>
-                  <div className="ActionDetails_organizerDiv">
+                  <Link
+                    to={`/teams/${organizer._id}`}
+                    className="ActionDetails_organizerDiv"
+                  >
                     <img src={organizerPhoto} alt="Organizer"></img>
                     <h3 className="clamped"> {organizer.name}</h3>
                     <p>{t("actioninfo.organizer")}</p>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>
