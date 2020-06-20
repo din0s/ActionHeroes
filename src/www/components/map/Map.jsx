@@ -6,7 +6,6 @@ import { Map, Marker, TileLayer } from "react-leaflet";
 import React, { Component } from "react";
 
 import L from "leaflet";
-import { template } from "leaflet-control-geocoder/src/util";
 
 const height = { height: "18rem" };
 
@@ -19,27 +18,61 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 export default class MapComponent extends Component {
+  extractAddress = (a, delim) => {
+    const { tourism, amenity, building, leisure } = a;
+    const { road, residential, house_number } = a;
+    const { city, town, village, hamlet, postcode } = a;
+
+    var topLine = "";
+    if (tourism) {
+      topLine = tourism;
+    } else if (amenity) {
+      topLine = amenity;
+    } else if (building) {
+      topLine = building;
+    } else if (leisure) {
+      topLine = leisure;
+    }
+    if (topLine !== "") {
+      topLine += delim;
+    }
+
+    var midLine = "";
+    if (road) {
+      midLine = road;
+    } else if (residential) {
+      midLine = residential;
+    }
+    if (house_number) {
+      midLine += ` ${house_number}`;
+    }
+    if (midLine !== "") {
+      midLine += delim;
+    }
+
+    var botLine = "";
+    if (city) {
+      botLine += city;
+    } else if (town) {
+      botLine += town;
+    } else if (village) {
+      botLine += village;
+    } else if (hamlet) {
+      botLine += hamlet;
+    }
+    if (postcode) {
+      botLine += `, ${postcode}`;
+    }
+
+    return `${topLine}${midLine}${botLine}`;
+  };
+
   componentDidMount = () => {
     const map = this.leafletMap.leafletElement;
 
     const geocoder = L.Control.Geocoder.nominatim({
-      htmlTemplate: function(r) {
-        var a = r.address,
-          className,
-          parts = [];
-        if (a.road || a.building) {
-          parts.push("{building} {road} {house_number} {leisure} {amenity}");
-        }
-        if (a.city || a.town || a.village || a.hamlet) {
-          className =
-            parts.length > 0 ? "leaflet-control-geocoder-address-detail" : "";
-          parts.push(
-            '<span class="' +
-              className +
-              '">{postcode} {city} {town} {village} {hamlet}</span>'
-          );
-        }
-        return template(parts.join("<br/>"), a, true);
+      htmlTemplate: (r) => {
+        return this.extractAddress(r.address, "<br/>");
       },
     });
     let marker;
@@ -48,47 +81,7 @@ export default class MapComponent extends Component {
       geocoder.reverse(e.latlng, map.options.crs.scale(18), (results) => {
         var r = results[0];
         if (r) {
-          // let address = "";
-          // r.properties.address.forEach((e) => {
-          //   if (e !== undefined) {
-          //     address += e + " ";
-          //   }
-          // });
-          var address = "",
-            address1 = "",
-            address2 = "",
-            address3 = "",
-            address4 = "";
-          Object.keys(r.properties.address).map((e) => {
-            if (e === "building" || e === "leisure" || e === "amenity") {
-              let k = r.properties.address[e];
-              if (k !== undefined) {
-                address1 += k + " ";
-              }
-            } else if (e === "road") {
-              let k = r.properties.address[e];
-              if (k !== undefined) {
-                address2 += k + " ";
-              }
-            } else if (e === "house_number") {
-              let k = r.properties.address[e];
-              if (k !== undefined) {
-                address3 += k + " ";
-              }
-            } else if (
-              e === "city" ||
-              e === "town" ||
-              e === "village" ||
-              e === "hamlet"
-            ) {
-              let k = r.properties.address[e];
-              if (k !== undefined) {
-                address4 += k + " ";
-              }
-            }
-            return 0;
-          });
-          address = address1 + address2 + address3 + address4;
+          const address = this.extractAddress(r.properties.address, "\n");
           this.props.onClick(r.center, address);
           if (marker) {
             marker

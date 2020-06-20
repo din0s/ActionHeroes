@@ -15,10 +15,13 @@ import { withTranslation } from "react-i18next";
 
 const jsonFile = require("./data.json");
 const initPosition = {
-  name: "Σχολή Θετικών Επιστημών (ΦΜΣ) Εθνικής Αμύνης 546 35 Θεσσαλονίκη",
-  coordinates: [40.6336563, 22.956871945706702],
+  name:
+    "Department of Biology and Informatics\n" +
+    "Αγίου Δημητρίου\n" +
+    "Thessaloniki, 546 35",
+  coordinates: [40.6332769, 22.9573108],
 };
-var defDate = new Date();
+const defDate = new Date();
 
 class ActionPopup extends Component {
   state = {
@@ -48,7 +51,13 @@ class ActionPopup extends Component {
     fd.set("description", description);
     fd.set("categories", JSON.stringify(categories));
     fd.set("organizer", organizer._id);
-    fd.set("location", JSON.stringify(location));
+    fd.set(
+      "location",
+      JSON.stringify({
+        ...location,
+        name: location.name.replaceAll(/\n/g, ", "),
+      })
+    );
     if (photo) {
       fd.set("photo", photo);
     }
@@ -172,12 +181,7 @@ class ActionPopup extends Component {
       >
         {(close) => (
           <div>
-            <button
-              className="close"
-              onClick={() => {
-                close();
-              }}
-            >
+            <button className="close" onClick={close}>
               &times;
             </button>
             <h2>{t("createaction.createaction")}</h2>
