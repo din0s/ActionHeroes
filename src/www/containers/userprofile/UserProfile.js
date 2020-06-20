@@ -3,9 +3,9 @@ import "./UserProfile.scss";
 import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
+import SpinnerPage from "../spinner/SpinnerPage";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
-import SpinnerPage from "../spinner/SpinnerPage";
 
 const minCardsShown = 3;
 
@@ -45,27 +45,25 @@ export default connect(
             <li key={key} className="Card">
               <Link to={link}>
                 <img src={photo} alt="" />
-              </Link>
-              <div className="Card_body">
-                <Link to={link}>
+                <div className="Card_body">
                   <h4>{card.name}</h4>
-                </Link>
-                <p>{card.description}</p>
-                {card.categories.length > 0 && (
-                  <div className="Card_categories">
-                    <h4>{t("profile.categories")}:</h4>
-                    <ul>
-                      {card.categories.map((name) => {
-                        return (
-                          <li key={name}>
-                            {t(`categories.${name.toLowerCase()}`)}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
-                )}
-              </div>
+                  <p>{card.description}</p>
+                  {card.categories.length > 0 && (
+                    <div className="Card_categories">
+                      <h4>{t("profile.categories")}:</h4>
+                      <ul>
+                        {card.categories.map((name) => {
+                          return (
+                            <li key={name}>
+                              {t(`categories.${name.toLowerCase()}`)}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </Link>
             </li>
           );
         });

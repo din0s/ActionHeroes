@@ -13,15 +13,13 @@ export default ({ action }) => {
     ? `/api/images/${photo}`
     : "/img/actionprofile/default.jpg";
 
-    console.log(categories);
-
   return (
-    <div className="Card">
+    <div className="ActionCard">
       <Link to={`/actions/${_id}`}>
         <img src={photoSrc} alt="" />
-        <div className="Card_body">
+        <div className="ActionCard_body">
           <img src={photoSrc} alt="" />
-          <div className="Card_body_container">
+          <div className="ActionCard_body_container">
             <h1>{name}</h1>
             <h2>
               <span role="img" aria-label="pinpoint">
@@ -31,7 +29,7 @@ export default ({ action }) => {
             </h2>
             <p>{description}</p>
           </div>
-          <div className="Card_categories">
+          <div className="ActionCard_categories">
             <h1>{t("actioncard.categories")}:</h1>
             <ul>
               {categories.map((name) => (
@@ -40,7 +38,7 @@ export default ({ action }) => {
             </ul>
           </div>
         </div>
-        <div className="Card_hiddenDesc">
+        <div className="ActionCard_hiddenDesc">
           <p>{description}</p>
         </div>
       </Link>
