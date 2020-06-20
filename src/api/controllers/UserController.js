@@ -107,6 +107,7 @@ const joinUser = async (user) => {
   user = sanitizeUser(user);
   response[`username`] = user.username;
   response[`email`] = user.email;
+  response[`bio`] = user.bio;
   response[`coordinates`] = user.coordinates;
   response[`categories`] = user.categories;
 
