@@ -5,6 +5,7 @@ import { Redirect, withRouter } from "react-router-dom";
 
 import ActionCard from "../../components/actioncard/ActionCard";
 import SpinnerPage from "../spinner/SpinnerPage";
+import TeamPopup from "../../components/popup/TeamPopup";
 import axios from "axios";
 import { connect } from "react-redux";
 import { followTeam } from "../../actions/team";
@@ -13,6 +14,7 @@ import { withTranslation } from "react-i18next";
 
 const mapState = (state) => ({
   loggedIn: state.auth.loggedIn,
+  categories: state.categories.data,
 });
 
 export default connect(mapState, { followTeam })(
@@ -26,6 +28,7 @@ export default connect(mapState, { followTeam })(
           photo: "",
           followers: 0,
           categories: [],
+          allCategories: [],
           dateCreated: undefined,
           upcoming: [],
           past: [],
@@ -34,7 +37,19 @@ export default connect(mapState, { followTeam })(
           error: false,
         };
 
+        setCategories = async () => {
+          this.setState({
+            allCategories: this.props.categories.map((c) => c.name),
+          });
+        };
+
         componentDidMount = () => {
+          this.setCategories();
+
+          axios.get("/api/teams/").then((res) => {
+            this.setState({ teams: res.data });
+          });
+
           const { id } = this.props.match.params;
           axios
             .get(`/api/teams/${id}`)
@@ -47,6 +62,12 @@ export default connect(mapState, { followTeam })(
             .catch(() => {
               this.setState({ error: true });
             });
+        };
+
+        componentDidUpdate = (prevProps) => {
+          if (prevProps.categories !== this.props.categories) {
+            this.setCategories();
+          }
         };
 
         handleFollow = () => {
@@ -74,6 +95,28 @@ export default connect(mapState, { followTeam })(
           );
         };
 
+        followButton = (t) => {
+          if (this.props.loggedIn) {
+            if (!this.state.followed) {
+              return (
+                <button
+                  className="TopPanel_followbutton"
+                  onClick={this.handleFollow}
+                  children={t("teaminfo.follow")}
+                />
+              );
+            } else {
+              return (
+                <button
+                  className="TopPanel_unfollowbutton"
+                  onClick={this.handleFollow}
+                  children={t("teaminfo.unfollow")}
+                />
+              );
+            }
+          }
+        };
+
         render() {
           if (this.state.error) {
             return <Redirect to="/teams/" />;
@@ -91,6 +134,8 @@ export default connect(mapState, { followTeam })(
             past,
             dateCreated,
             categories,
+            allCategories,
+            id,
           } = this.state;
 
           const photoSrc = photo
@@ -98,90 +143,47 @@ export default connect(mapState, { followTeam })(
             : "/img/teaminfo/default.png";
 
           return (
-            <div className="TeamProfile">
-              <section className="TopPanel">
-                <span className="TopPanel_info">
-                  <img alt="Team Logo" src={photoSrc} />
-                  <div>
+            <div>
+              <TeamPopup
+                categories={allCategories}
+                open={this.state.isBlurred}
+                onClose={() => this.setState({ isBlurred: false })}
+                name={name}
+                description={description}
+                checkedCategories={categories}
+                title={t("teaminfo.title")}
+                button={t("teaminfo.button")}
+                method={"patch"}
+                action={`/api/teams/${id}`}
+                functionality="update"
+              />
+              <div
+                className={`TeamProfile${
+                  this.state.isBlurred ? " blurred" : ""
+                }`}
+              >
+                <section className="TopPanel">
+                  <span className="TopPanel_info">
                     <img alt="Team Logo" src={photoSrc} />
-                    <h1>{name}</h1>
-                    <h2>{description}</h2>
-                  </div>
-                </span>
-                <h3>{description}</h3>
-                {!this.state.followed && this.props.loggedIn && (
-                  <button
-                    className="TopPanel_followbutton"
-                    onClick={this.handleFollow}
-                    children={t("teaminfo.follow")}
-                  />
-                )}
-                {this.state.followed && this.props.loggedIn && (
-                  <button
-                    className="TopPanel_unfollowbutton"
-                    onClick={this.handleFollow}
-                    children={t("teaminfo.unfollow")}
-                  />
-                )}
-              </section>
-              <section className="MidPanel">
-                <div className="MidPanel_info">
-                  <h1>
-                    {t("teaminfo.followers")}: {followers}
-                  </h1>
-                  <h1>
-                    {t("teaminfo.actions")}: {upcoming.length + past.length}
-                  </h1>
-                  <hr />
-                  <h1>{t("teaminfo.createdon")}:</h1>
-                  <h1>{parseDate(dateCreated, t)}</h1>
-                </div>
-
-                <div className="MidPanel_categories">
-                  <h1>{t("teaminfo.categories")}:</h1>
-                  {categories.length > 0 ? (
-                    <ul>
-                      {categories.map((c) => {
-                        return (
-                          <li key={c}>{t(`categories.${c.toLowerCase()}`)}</li>
-                        );
-                      })}
-                    </ul>
+                    <div>
+                      <img alt="Team Logo" src={photoSrc} />
+                      <h1>{name}</h1>
+                      <h2>{description}</h2>
+                    </div>
+                  </span>
+                  <h3>{description}</h3>
+                  {this.state.isOwner ? (
+                    <button
+                      className="TopPanel_followbutton"
+                      children={t("teaminfo.edit")}
+                      onClick={() => this.setState({ isBlurred: true })}
+                    />
                   ) : (
-                    <p children={t("teaminfo.none")} />
+                    this.followButton(t)
                   )}
-                </div>
-                <div className="MidPanel_both">
-                  <div className="MidPanel_both_center">
-                    <h1>
-                      {t("teaminfo.followers")}: {followers}
-                    </h1>
-                    <p> </p>
-                    <h1>
-                      {t("teaminfo.actions")}: {upcoming.length + past.length}
-                    </h1>
-                  </div>
-                  <h1>
-                    {t("teaminfo.createdon")}: {parseDate(dateCreated, t)}
-                  </h1>
-                  <hr />
-                  <h1>{t("teaminfo.categories")}:</h1>
-                  {categories.length > 0 ? (
-                    <ul>
-                      {categories.map((c) => {
-                        return (
-                          <li key={c}>{t(`categories.${c.toLowerCase()}`)}</li>
-                        );
-                      })}
-                    </ul>
-                  ) : (
-                    <p children={t("teaminfo.none")} />
-                  )}
-                </div>
-              </section>
-              <section className="BottomPanel">
-                <div className="LeftSide">
-                  <div className="LeftSide_info">
+                </section>
+                <section className="MidPanel">
+                  <div className="MidPanel_info">
                     <h1>
                       {t("teaminfo.followers")}: {followers}
                     </h1>
@@ -193,7 +195,7 @@ export default connect(mapState, { followTeam })(
                     <h1>{parseDate(dateCreated, t)}</h1>
                   </div>
 
-                  <div className="LeftSide_categories">
+                  <div className="MidPanel_categories">
                     <h1>{t("teaminfo.categories")}:</h1>
                     {categories.length > 0 ? (
                       <ul>
@@ -209,11 +211,33 @@ export default connect(mapState, { followTeam })(
                       <p children={t("teaminfo.none")} />
                     )}
                   </div>
-                </div>
-                <div className="RightSide">
-                  <div className="RightSide_events">
-                    {upcoming.length + past.length === 0 && (
-                      <h1>{t("teaminfo.empty")}</h1>
+                  <div className="MidPanel_both">
+                    <div className="MidPanel_both_center">
+                      <h1>
+                        {t("teaminfo.followers")}: {followers}
+                      </h1>
+                      <p> </p>
+                      <h1>
+                        {t("teaminfo.actions")}: {upcoming.length + past.length}
+                      </h1>
+                    </div>
+                    <h1>
+                      {t("teaminfo.createdon")}: {parseDate(dateCreated, t)}
+                    </h1>
+                    <hr />
+                    <h1>{t("teaminfo.categories")}:</h1>
+                    {categories.length > 0 ? (
+                      <ul>
+                        {categories.map((c) => {
+                          return (
+                            <li key={c}>
+                              {t(`categories.${c.toLowerCase()}`)}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    ) : (
+                      <p children={t("teaminfo.none")} />
                     )}
                     {upcoming.length > 0 && <h1>{t("teaminfo.upcoming")}:</h1>}
                     <ul>
@@ -238,8 +262,56 @@ export default connect(mapState, { followTeam })(
                       })}
                     </ul>
                   </div>
-                </div>
-              </section>
+                </section>
+                <section className="BottomPanel">
+                  <div className="LeftSide">
+                    <div className="LeftSide_info">
+                      <h1>
+                        {t("teaminfo.followers")}: {followers}
+                      </h1>
+                      <h1>
+                        {t("teaminfo.actions")}: {upcoming.length + past.length}
+                      </h1>
+                      <hr />
+                      <h1>{t("teaminfo.createdon")}:</h1>
+                      <h1>{parseDate(dateCreated, t)}</h1>
+                    </div>
+                    <div className="LeftSide_categories">
+                      <h1>{t("teaminfo.categories")}:</h1>
+                      {categories.length > 0 ? (
+                        <ul>
+                          {categories.map((c) => {
+                            return (
+                              <li key={c}>
+                                {t(`categories.${c.toLowerCase()}`)}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      ) : (
+                        <p children={t("teaminfo.none")} />
+                      )}
+                    </div>
+                  </div>
+                  <div className="RightSide">
+                    <div className="RightSide_events">
+                      {upcoming.length + past.length === 0 && (
+                        <h1>{t("teaminfo.empty")}</h1>
+                      )}
+                      {upcoming.length > 0 && (
+                        <h1>{t("teaminfo.upcoming")}:</h1>
+                      )}
+                      {upcoming.map((action) => {
+                        return <ActionCard />;
+                      })}
+                      {past.length > 0 && <h1>{t("teaminfo.past")}:</h1>}
+                      {past.map((action) => {
+                        return <ActionCard />;
+                      })}
+                    </div>
+                  </div>
+                </section>
+              </div>
             </div>
           );
         }

@@ -17,6 +17,7 @@ class TeamPopup extends Component {
     teamName: "",
     description: "",
     teamCategories: [],
+    checkedCategories: this.props.categories,
     teamPicture: undefined,
     serverResponse: "",
     teamId: "",
@@ -32,6 +33,20 @@ class TeamPopup extends Component {
     }
     axios
       .post("/api/teams/create", fd)
+      .then((res) => this.handleSuccess(res.data))
+      .catch((err) => this.handleError(err.response.data));
+  };
+
+  updateTeam = (name, description, categories, photo) => {
+    const fd = new FormData();
+    fd.set("name", name);
+    fd.set("description", description);
+    fd.set("categories", JSON.stringify(categories));
+    if (photo) {
+      fd.set("photo", photo);
+    }
+    axios
+      .patch("/api/teams/:team_id", fd)
       .then((res) => this.handleSuccess(res.data))
       .catch((err) => this.handleError(err.response.data));
   };
@@ -52,7 +67,11 @@ class TeamPopup extends Component {
   handleError = (data) => {
     const { t } = this.props;
 
-    if (data.error.includes("Team name")) {
+    if (!data.error) {
+      this.setState({
+        serverResponse: t("somethingwrong"),
+      });
+    } else if (data.error.includes("Team name")) {
       this.setState({
         serverResponse: t("createteam.nameerror"),
       });
@@ -67,15 +86,20 @@ class TeamPopup extends Component {
     }
   };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  handleSubmit = (e, functionality) => {
+    e.preventDefault();
     const { teamName, description, teamCategories, teamPicture } = this.state;
-
+    
     if (teamName !== "" && description !== "") {
       this.setState({
         teamNameHighlight: false,
       });
-      this.createTeam(teamName, description, teamCategories, teamPicture);
+      if (functionality=="create") {
+        this.createTeam(teamName, description, teamCategories, teamPicture);
+      } else {
+        this.updateTeam(teamName, description, teamCategories, teamPicture);
+      }
+      
     }
   };
 
@@ -99,12 +123,13 @@ class TeamPopup extends Component {
       teamName: "",
       description: "",
       teamCategories: [],
+      checkedCategories: this.props.categories,
       teamPicture: undefined,
     });
   };
 
   render() {
-    const { t, categories } = this.props;
+    const { t, categories, checkedCategories } = this.props;
     const { teamId } = this.state;
 
     if (teamId !== "") {
@@ -131,21 +156,22 @@ class TeamPopup extends Component {
             >
               &times;
             </button>
-            <h2>{t("createteam.createteam")}</h2>
+            <h2>{this.props.title}</h2>
             <p children={this.state.serverResponse} />
             <form
-              method="post"
-              action="api/teams/create"
-              onSubmit={this.handleSubmit}
+              method={this.props.method}
+              action={this.props.action}
+              onSubmit={(e) => this.handleSubmit(e, this.props.functionality)}
             >
               <ScrollArea
                 className="FormArea"
                 contentClassName="FormArea_content"
               >
-                <Input
+                <input
                   name="teamName"
                   type="text"
                   placeholder={t("createteam.teamname")}
+                  defaultValue={this.props.name}
                   onChange={(e) =>
                     this.setState({ teamName: e.target.value.trim() })
                   }
@@ -155,6 +181,7 @@ class TeamPopup extends Component {
                   required
                   type="text"
                   placeholder={t("createteam.description")}
+                  defaultValue={this.props.description}
                   onChange={(e) =>
                     this.setState({ description: e.target.value.trim() })
                   }
@@ -183,6 +210,7 @@ class TeamPopup extends Component {
                           <input
                             type="checkbox"
                             onChange={(event) => this.onCheckbox(event, name)}
+                            defaultChecked={checkedCategories.includes(name)}
                           />
                           <span className="checkmark"></span>
                         </label>
@@ -194,7 +222,7 @@ class TeamPopup extends Component {
               <input
                 className="SubmitButton"
                 type="submit"
-                value={t("submit")}
+                value={this.props.button}
               />
             </form>
           </div>

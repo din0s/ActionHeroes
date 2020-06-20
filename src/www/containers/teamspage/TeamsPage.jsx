@@ -105,6 +105,12 @@ export default connect(
                 categories={categories}
                 open={this.state.openModal}
                 onClose={() => this.setState({ openModal: false })}
+                checkedCategories={[]}
+                title={t("createteam.createteam")}
+                button={t("submit")}
+                method={"post"}
+                action={"api/teams/create"}
+                functionality="create"
               />
               <div className={"TeamsPage"}>
                 <div>

@@ -3,6 +3,7 @@
   "search": "Search...",
   "noresults": "No results.",
   "submit": "Submit",
+  "somethingwrong": "Something went wrong!",
   "filterlist": {
     "filters": "Filters",
     "clear": "Clear",
@@ -161,7 +162,10 @@
     "upcoming": "Upcoming Actions",
     "past": "Past Actions",
     "empty": "This team has no actions yet.",
-    "none": "None"
+    "none": "None",
+    "title": "Edit your team!",
+    "button": "Update",
+    "edit": "Edit Team"
   },
   "settings": {
     "success": "Successful Update",
