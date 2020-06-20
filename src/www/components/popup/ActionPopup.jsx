@@ -11,9 +11,10 @@ import { Redirect } from "react-router-dom";
 import ScrollArea from "react-scrollbar";
 import Selector from "../../components/selector/Selector";
 import axios from "axios";
+import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 
-const jsonFile = require("./data.json");
+const defDate = new Date();
 const initPosition = {
   name:
     "Department of Biology and Informatics\n" +
@@ -21,10 +22,10 @@ const initPosition = {
     "Thessaloniki, 546 35",
   coordinates: [40.6332769, 22.9573108],
 };
-const defDate = new Date();
 
 class ActionPopup extends Component {
   state = {
+    teams: [],
     actionName: "",
     description: "",
     actionDate: defDate,
@@ -33,7 +34,29 @@ class ActionPopup extends Component {
     serverResponse: "",
     actionId: "",
     actionLocation: initPosition,
-    actionTeam: jsonFile.teams[0], // Since implementing the API this should change
+    actionTeam: {},
+  };
+
+  setTeams = () => {
+    if (this.props.user === {}) {
+      return;
+    }
+
+    const { teamsOwned } = this.props.user;
+    this.setState({
+      teams: teamsOwned,
+      actionTeam: teamsOwned[0],
+    });
+  };
+
+  componentDidMount = () => {
+    this.setTeams();
+  };
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.user !== this.props.user) {
+      this.setTeams();
+    }
   };
 
   createAction = (
@@ -55,7 +78,7 @@ class ActionPopup extends Component {
       "location",
       JSON.stringify({
         ...location,
-        name: location.name.replaceAll(/\n/g, ", "),
+        name: location.name.replace(/\n/g, ", "),
       })
     );
     if (photo) {
@@ -125,9 +148,12 @@ class ActionPopup extends Component {
     const { t } = this.props;
     const team = this.state.actionTeam;
     if (team) {
+      const photo = team.photo
+        ? `/api/images/${team.photo}`
+        : "/img/teaminfo/default.png";
       return (
         <div className="TeamSelected">
-          <img src={team.photo} alt="" />
+          <img src={photo} alt="" />
           <h4 className="clamped">{team.name}</h4>
         </div>
       );
@@ -159,7 +185,7 @@ class ActionPopup extends Component {
       actionCategories: [],
       actionPicture: undefined,
       actionLocation: initPosition,
-      actionTeam: jsonFile.teams[0], // Since implementing the API this should change
+      actionTeam: this.state.teams[0],
       serverResponse: "",
     });
   };
@@ -221,8 +247,7 @@ class ActionPopup extends Component {
                       onChange={(opt) =>
                         this.setState({ actionTeam: opt.value })
                       }
-                      options={jsonFile.teams.map((t) => ({
-                        // Since implementing the API this should change
+                      options={this.state.teams.map((t) => ({
                         value: t,
                         label: t.name,
                       }))}
@@ -240,7 +265,7 @@ class ActionPopup extends Component {
                       label={t("createaction.maxfile")}
                       onChange={(pic) => {
                         this.setState({
-                          actionPicture: pic,
+                          actionPicture: pic[0],
                         });
                       }}
                     />
@@ -308,4 +333,8 @@ class ActionPopup extends Component {
   }
 }
 
-export default withTranslation()(ActionPopup);
+const mapState = (state) => ({
+  user: state.auth.user,
+});
+
+export default connect(mapState, undefined)(withTranslation()(ActionPopup));
