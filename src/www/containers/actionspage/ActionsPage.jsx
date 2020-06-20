@@ -151,7 +151,7 @@ export default connect(
                   />
                   <Pagination
                     baseName="ActionsPage_content"
-                    collection={actions}
+                    collection={this.state.actions}
                     perPage={6}
                     query={this.state.query.toLowerCase().trim()}
                     mapFunc={this.showActions}
