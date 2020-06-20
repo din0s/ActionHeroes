@@ -1,11 +1,4 @@
 @import "../../vars.scss";
-
-a {
-  color: black;
-  text-decoration: none;
-  display: flex;
-}
-
 .Card {
   align-items: center;
   background-image: linear-gradient(to bottom right, rgb(233, 233, 233), white);
@@ -17,6 +10,12 @@ a {
   width: calc(100% - 2rem); //100% - padding left&right
   box-shadow: 0 0 10px 5px $blackTransparent;
   transition: 0.2s ease-in-out;
+
+  a {
+    color: black;
+    text-decoration: none;
+    display: flex;
+  }
 
   &:hover {
     box-shadow: 0 0 10px 5px $softBlack;
