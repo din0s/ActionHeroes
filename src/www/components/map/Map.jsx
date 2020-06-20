@@ -21,7 +21,7 @@ export default class MapComponent extends Component {
   extractAddress = (a, delim) => {
     const { tourism, amenity, building, leisure } = a;
     const { road, residential, house_number } = a;
-    const { city, town, village, hamlet, postcode } = a;
+    const { city, town, village, hamlet, county, postcode } = a;
 
     var topLine = "";
     if (tourism) {
@@ -59,6 +59,8 @@ export default class MapComponent extends Component {
       botLine += village;
     } else if (hamlet) {
       botLine += hamlet;
+    } else if (county) {
+      botLine += county;
     }
     if (postcode) {
       botLine += `, ${postcode}`;
