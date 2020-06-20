@@ -27,7 +27,7 @@ export default connect(
           categories: [],
           selectedCategories: [],
           query: "",
-          isBlurred: false,
+          openModal: false,
           teams: [],
         };
 
@@ -101,12 +101,10 @@ export default connect(
             <div>
               <TeamPopup
                 categories={categories}
-                open={this.state.isBlurred}
-                onClose={() => this.setState({ isBlurred: false })}
+                open={this.state.openModal}
+                onClose={() => this.setState({ openModal: false })}
               />
-              <div
-                className={`TeamsPage${this.state.isBlurred ? " blurred" : ""}`}
-              >
+              <div className={"TeamsPage"}>
                 <div>
                   <SearchBar
                     action="/teams"
@@ -116,7 +114,7 @@ export default connect(
                   <button
                     className="PopupTrigger"
                     children={t("createteam.create")}
-                    onClick={() => this.setState({ isBlurred: true })}
+                    onClick={() => this.setState({ openModal: true })}
                   />
                 </div>
                 <span>
