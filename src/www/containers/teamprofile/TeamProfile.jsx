@@ -206,13 +206,27 @@ export default connect(
                       <h1>{t("teaminfo.empty")}</h1>
                     )}
                     {upcoming.length > 0 && <h1>{t("teaminfo.upcoming")}:</h1>}
-                    {upcoming.map((action) => {
-                      return <ActionCard />;
-                    })}
+                    <ul>
+                      {upcoming.map((action) => {
+                        return (
+                          <li
+                            key={action._id}
+                            children={<ActionCard action={action} />}
+                          />
+                        );
+                      })}
+                    </ul>
                     {past.length > 0 && <h1>{t("teaminfo.past")}:</h1>}
-                    {past.map((action) => {
-                      return <ActionCard />;
-                    })}
+                    <ul>
+                      {past.map((action) => {
+                        return (
+                          <li
+                            key={action._id}
+                            children={<ActionCard action={action} />}
+                          />
+                        );
+                      })}
+                    </ul>
                   </div>
                 </div>
               </section>

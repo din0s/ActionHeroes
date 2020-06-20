@@ -1,53 +1,49 @@
 import "./ActionCard.scss";
 
-import React, { Component } from "react";
-
-import { parseDate } from "../../date";
-import { withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import React from "react";
+import { parseDate } from "../../date";
+import { useTranslation } from "react-i18next";
 
-const action = require("./action.json");
+export default ({ action }) => {
+  const { t } = useTranslation();
+  const { _id, name, description, categories, location, date, photo } = action;
 
-export default withTranslation()(
-  class ActionCard extends Component {
-    render() {
-      const { t } = this.props; //Should see what's up with key=id prop
-      return (
-        <li className="Card" key={action._id}>
-          <Link to="/actions/id">
-            <img src={action.photo} alt="" />
-            <div className="Card_body">
-              <img src={action.photo} alt="" />
-              <div className="Card_body_container">
-                <h1>{action.name}</h1>
-                <h2>
-                  <span role="img" aria-label="pinpoint">
-                    📍
-                  </span>
-                  {" " + action.location.name} • {parseDate(action.date, t)}
-                </h2>
-                {/* <h3>{action.organizer.teamId.name}</h3> */}
-                <p>{action.description}</p>
-              </div>
-              <div className="Card_categories">
-                <h1>{t("actioncard.categories")}:</h1>
-                <ul>
-                  {Object.keys(action.categories).map((cKey) => {
-                    return (
-                      <li key={cKey}>{`${t(
-                        "categories." + action.categories[cKey].name
-                      )}`}</li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </div>
-            <div className="Card_hiddenDesc">
-              <p>{action.description}</p>
-            </div>
-          </Link>
-        </li>
-      );
-    }
-  }
-);
+  const photoSrc = photo
+    ? `/api/images/${photo}`
+    : "/img/actionprofile/default.jpg";
+
+    console.log(categories);
+
+  return (
+    <div className="Card">
+      <Link to={`/actions/${_id}`}>
+        <img src={photoSrc} alt="" />
+        <div className="Card_body">
+          <img src={photoSrc} alt="" />
+          <div className="Card_body_container">
+            <h1>{name}</h1>
+            <h2>
+              <span role="img" aria-label="pinpoint">
+                📍
+              </span>
+              {" " + location.name} • {parseDate(date, t)}
+            </h2>
+            <p>{description}</p>
+          </div>
+          <div className="Card_categories">
+            <h1>{t("actioncard.categories")}:</h1>
+            <ul>
+              {categories.map((name) => (
+                <li key={name}>{t(`categories.${name.toLowerCase()}`)}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="Card_hiddenDesc">
+          <p>{description}</p>
+        </div>
+      </Link>
+    </div>
+  );
+};

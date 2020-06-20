@@ -79,7 +79,7 @@ export default withTranslation()(
         return (
           <ul>
             {recommend.slice(r_offset, r_offset + r_page).map((action) => {
-              return <ActionCard />;
+              return <li key={action._id} children={<ActionCard action={action} />} />;
             })}
           </ul>
         );
