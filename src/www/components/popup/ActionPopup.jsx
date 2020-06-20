@@ -11,20 +11,14 @@ import ScrollArea from "react-scrollbar";
 import Selector from "../../components/selector/Selector";
 import axios from "axios";
 import { withTranslation } from "react-i18next";
-//import { DateTimePicker } from "react-widgets"; // should uninstall
 import DateTimePicker from "date-time-picker-react";
 
 const jsonFile = require("./data.json");
-const initPosition = { lat: 40.63666412, lng: 22.942162898 };
+const initPosition = {
+  name: "Σχολή Θετικών Επιστημών (ΦΜΣ) Εθνικής Αμύνης 546 35 Θεσσαλονίκη",
+  coordinates: [40.6336563, 22.956871945706702],
+};
 var defDate = new Date();
-
-//https://stackoverflow.com/questions/822452/strip-html-from-text-javascript
-
-function stripHtml(html) {
-  var tmp = document.createElement("DIV");
-  tmp.innerHTML = html;
-  return tmp.textContent || tmp.innerText || "";
-}
 
 class ActionPopup extends Component {
   state = {
@@ -35,16 +29,9 @@ class ActionPopup extends Component {
     actionPicture: undefined,
     serverResponse: "",
     actionId: "",
-    actionLocation: { name: "", coordinates: initPosition },
+    actionLocation: initPosition,
     actionTeam: jsonFile.teams[0], // Since implementing the API this should change
   };
-
-  // componentDidMount = () => {                                             // This is copy paste from Dashboard
-  //   axios.get("/api/users/me/getprofile").then((res) => {
-  //     const { next, saved, teams, recommend } = res.data;
-  //     this.setState({ next, saved, teams, recommend, t_select: teams[0] });
-  //   });
-  // };
 
   createAction = (
     name,
@@ -57,11 +44,11 @@ class ActionPopup extends Component {
   ) => {
     const fd = new FormData();
     fd.set("name", name);
-    fd.set("date", date); // Like that?
+    fd.set("date", date.toISOString());
     fd.set("description", description);
     fd.set("categories", JSON.stringify(categories));
-    fd.set("organizer", organizer);
-    fd.set("location", location); // Like that?
+    fd.set("organizer", organizer._id);
+    fd.set("location", JSON.stringify(location));
     if (photo) {
       fd.set("photo", photo);
     }
@@ -81,12 +68,10 @@ class ActionPopup extends Component {
     const { t } = this.props;
 
     if (data.error.includes("Action name")) {
-      // Should i place "Action Name"?
       this.setState({
         serverResponse: t("createaction.nameerror"),
       });
     } else if (data.error.includes("Authentication")) {
-      // Do I need this authentication?
       this.setState({
         serverResponse: t("createaction.authentication"),
       });
@@ -99,26 +84,22 @@ class ActionPopup extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    const { t } = this.props;
     const {
       actionName,
       actionDate,
       description,
       actionCategories,
       actionTeam,
-      actionLocation, // The location is initialized in the beginning, so it can't be empty. We can either
-      // remove it from here (can we really?), or force the user to input coordinates different of our initials.
+      actionLocation,
       actionPicture,
     } = this.state;
-
-    if (
-      //Not sure about all these conditions
-      actionName !== "" &&
-      description !== "" &&
-      actionTeam !== undefined //Should also add a condition for actionDate to be > than current Date (hours,mins)
-    ) {
+    if (actionTeam === undefined) {
       this.setState({
-        actionNameHighlight: false, //What is this?
+        serverResponse: t("createaction.noteamerror"),
       });
+    }
+    if (actionName !== "" && description !== "" && actionTeam !== undefined) {
       this.createAction(
         actionName,
         actionDate,
@@ -162,15 +143,15 @@ class ActionPopup extends Component {
 
   reset = () => {
     this.props.onClose();
-    defDate = new Date();
     this.setState({
       actionName: "",
       description: "",
-      actionDate: new Date(),
+      actionDate: defDate,
       actionCategories: [],
       actionPicture: undefined,
-      actionLocation: { name: "", coordinates: initPosition },
+      actionLocation: initPosition,
       actionTeam: jsonFile.teams[0], // Since implementing the API this should change
+      serverResponse: "",
     });
   };
 
@@ -195,9 +176,6 @@ class ActionPopup extends Component {
               className="close"
               onClick={() => {
                 close();
-                this.setState({
-                  serverResponse: "",
-                });
               }}
             >
               &times;
@@ -243,16 +221,6 @@ class ActionPopup extends Component {
                     this.setState({ actionName: e.target.value.trim() })
                   }
                 />
-                {/* <input
-                  name="actionDate"
-                  type="datetime-local"
-                  placeholder={t("createaction.actiondate")} // This works only on not supporting browsers
-                  required
-                  onChange={
-                    (e) => this.setState({ actionDate: e.target.value.trim() }) //Not sure if correct
-                  }
-                /> */}
-                {/* this is temporary, Firefox, Safari not supported. Need to add backend things*/}
 
                 <textarea
                   name="description"
@@ -284,13 +252,16 @@ class ActionPopup extends Component {
                     className="Map"
                     center={this.state.actionLocation.coordinates}
                     zoom={15}
-                    onClick={(center, html) =>
-                      this.setState({
-                        actionLocation: {
-                          name: stripHtml(html),
-                          coordinates: center,
+                    onClick={(center, address) =>
+                      this.setState(
+                        {
+                          actionLocation: {
+                            name: address,
+                            coordinates: center,
+                          },
                         },
-                      })
+                        console.log(this.state)
+                      )
                     }
                   />
                 </div>

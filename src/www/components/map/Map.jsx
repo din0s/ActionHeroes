@@ -48,7 +48,48 @@ export default class MapComponent extends Component {
       geocoder.reverse(e.latlng, map.options.crs.scale(18), (results) => {
         var r = results[0];
         if (r) {
-          this.props.onClick(r.center, r.html);
+          // let address = "";
+          // r.properties.address.forEach((e) => {
+          //   if (e !== undefined) {
+          //     address += e + " ";
+          //   }
+          // });
+          var address = "",
+            address1 = "",
+            address2 = "",
+            address3 = "",
+            address4 = "";
+          Object.keys(r.properties.address).map((e) => {
+            if (e === "building" || e === "leisure" || e === "amenity") {
+              let k = r.properties.address[e];
+              if (k !== undefined) {
+                address1 += k + " ";
+              }
+            } else if (e === "road") {
+              let k = r.properties.address[e];
+              if (k !== undefined) {
+                address2 += k + " ";
+              }
+            } else if (e === "house_number") {
+              let k = r.properties.address[e];
+              if (k !== undefined) {
+                address3 += k + " ";
+              }
+            } else if (
+              e === "city" ||
+              e === "town" ||
+              e === "village" ||
+              e === "hamlet"
+            ) {
+              let k = r.properties.address[e];
+              if (k !== undefined) {
+                address4 += k + " ";
+              }
+            }
+            return 0;
+          });
+          address = address1 + address2 + address3 + address4;
+          this.props.onClick(r.center, address);
           if (marker) {
             marker
               .setLatLng(r.center)

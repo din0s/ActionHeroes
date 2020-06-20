@@ -5,6 +5,13 @@
   max-width: 75%;
 
   > div {
+    .clamped {
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .close {
       background: #ffffff;
       border: 1px solid #cfcece;

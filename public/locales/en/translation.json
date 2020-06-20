@@ -209,6 +209,7 @@
     "createaction": "Create an action!",
     "created": "Action created!",
     "nameerror": "Action name not available!",
+    "noteamerror": "No available team!",
     "noteam": "No selected team",
     "image": "Choose image",
     "location": "Location",

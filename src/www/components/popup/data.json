@@ -1,6 +1,7 @@
 {
   "teams": [
     {
+      "_id": 123,
       "name": "ACM AUTH",
       "photo": "/img/actionprofile/acm.png",
       "members": 50,
@@ -10,6 +11,7 @@
       }
     },
     {
+      "_id": 321,
       "name": "My other team",
       "photo": "/img/fakedata/harry_potter.png",
       "members": 12,
