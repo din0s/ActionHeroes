@@ -4,6 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import React, { Component } from "react";
 
 import FilterList from "../../components/filterlist/FilterList";
+import Loader from "../../components/loader/Loader";
 import Pagination from "../../components/pagination/Pagination";
 import SearchBar from "../../components/searchbar/SearchBar";
 import TeamPopup from "../../components/popup/TeamPopup";
@@ -28,6 +29,7 @@ export default connect(
           selectedCategories: [],
           query: "",
           openModal: false,
+          loaded: false,
           teams: [],
         };
 
@@ -45,7 +47,7 @@ export default connect(
           this.setCategories();
 
           axios.get("/api/teams/").then((res) => {
-            this.setState({ teams: res.data });
+            this.setState({ teams: res.data, loaded: true });
           });
         };
 
@@ -125,18 +127,22 @@ export default connect(
                     onClear={() => this.setState({ selectedCategories: [] })}
                     onRemove={this.removeCategory}
                   />
-                  <Pagination
-                    baseName="TeamsPage_content"
-                    collection={this.state.teams}
-                    perPage={6}
-                    query={this.state.query.toLowerCase().trim()}
-                    mapFunc={this.showTeam}
-                    searchFilter={(team, query) =>
-                      team.name.toLowerCase().includes(query) ||
-                      team.description.toLowerCase().includes(query)
-                    }
-                    selected={this.state.selectedCategories}
-                  />
+                  {this.state.loaded ? (
+                    <Pagination
+                      baseName="TeamsPage_content"
+                      collection={this.state.teams}
+                      perPage={6}
+                      query={this.state.query.toLowerCase().trim()}
+                      mapFunc={this.showTeam}
+                      searchFilter={(team, query) =>
+                        team.name.toLowerCase().includes(query) ||
+                        team.description.toLowerCase().includes(query)
+                      }
+                      selected={this.state.selectedCategories}
+                    />
+                  ) : (
+                    <span className="TeamsPage_content" children={<Loader />} />
+                  )}
                 </span>
               </div>
             </div>

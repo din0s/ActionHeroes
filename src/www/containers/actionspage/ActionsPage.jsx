@@ -5,6 +5,7 @@ import React, { Component } from "react";
 
 import ActionPopup from "../../components/popup/ActionPopup";
 import FilterList from "../../components/filterlist/FilterList";
+import Loader from "../../components/loader/Loader";
 import Pagination from "../../components/pagination/Pagination";
 import SearchBar from "../../components/searchbar/SearchBar";
 import axios from "axios";
@@ -30,6 +31,7 @@ export default connect(
           selectedCategories: [],
           query: "",
           openModal: false,
+          loaded: false,
         };
 
         setCategories = async () => {
@@ -46,7 +48,7 @@ export default connect(
           this.setCategories();
 
           axios.get("/api/actions/").then((res) => {
-            this.setState({ actions: res.data });
+            this.setState({ actions: res.data, loaded: true });
           });
         };
 
@@ -145,18 +147,25 @@ export default connect(
                     onClear={() => this.setState({ selectedCategories: [] })}
                     onRemove={this.removeCategory}
                   />
-                  <Pagination
-                    baseName="ActionsPage_content"
-                    collection={this.state.actions}
-                    perPage={6}
-                    query={this.state.query.toLowerCase().trim()}
-                    mapFunc={this.showActions}
-                    searchFilter={(actions, query) =>
-                      actions.name.toLowerCase().includes(query) ||
-                      actions.description.toLowerCase().includes(query)
-                    }
-                    selected={this.state.selectedCategories}
-                  />
+                  {this.state.loaded ? (
+                    <Pagination
+                      baseName="ActionsPage_content"
+                      collection={this.state.actions}
+                      perPage={6}
+                      query={this.state.query.toLowerCase().trim()}
+                      mapFunc={this.showActions}
+                      searchFilter={(actions, query) =>
+                        actions.name.toLowerCase().includes(query) ||
+                        actions.description.toLowerCase().includes(query)
+                      }
+                      selected={this.state.selectedCategories}
+                    />
+                  ) : (
+                    <span
+                      className="ActionsPage_content"
+                      children={<Loader />}
+                    />
+                  )}
                 </span>
               </div>
             </div>

@@ -1,11 +1,11 @@
 import "./SpinnerPage.scss";
 
+import Loader from "../../components/loader/Loader";
 import React from "react";
-import ScaleLoader from "react-spinners/ScaleLoader";
 
 export default () => (
   <div className="SpinnerPage">
-    <ScaleLoader color={"#3480eb"} />
+    <Loader />
     <h1>Action Heroes</h1>
   </div>
 );
