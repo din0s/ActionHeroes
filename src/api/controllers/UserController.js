@@ -23,15 +23,6 @@ const generateToken = (user) =>
     }
   );
 
-const sanitizeUser = (user) => {
-  user = user.toJSON();
-  user._id = undefined;
-  user.hash = undefined;
-  user.__v = undefined;
-  user.categories = user.categories.map((c) => ({ name: c.name }));
-  return user;
-};
-
 const joinUser = async (user) => {
   const promises = [];
   const response = {};
@@ -104,12 +95,12 @@ const joinUser = async (user) => {
       })
   );
 
-  user = sanitizeUser(user);
   response[`username`] = user.username;
   response[`email`] = user.email;
   response[`bio`] = user.bio;
   response[`coordinates`] = user.coordinates;
-  response[`categories`] = user.categories;
+  response[`categories`] = user.categories.map((c) => ({ name: c.name }));
+  response[`photo`] = user.photo;
 
   try {
     await Promise.all(promises);
