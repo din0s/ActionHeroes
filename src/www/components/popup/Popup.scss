@@ -282,6 +282,23 @@
         width: 10rem;
       }
     }
+
+    .DeleteButton {
+      align-self: center;
+      background-color: rgb(242, 5, 44);
+      border-radius: 0.6rem;
+      border: 1px solid $softBlack;
+      box-shadow: 1px 1px $softBlack;
+      cursor: pointer;
+      height: 2rem;
+      margin-bottom: 1rem;
+      margin-top: 1rem;
+      margin: 0rem;
+      outline: none;
+      outline: none;
+      padding: 0.5rem;
+      width: 10rem;
+    }
   }
 }
 

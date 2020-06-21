@@ -155,7 +155,7 @@ export default connect(mapState, { followTeam })(
                 button={t("teaminfo.button")}
                 method={"patch"}
                 action={`/api/teams/${id}`}
-                functionality="update"
+                isCreate={false}
               />
               <div
                 className={`TeamProfile${

@@ -110,7 +110,7 @@ export default connect(
                 button={t("submit")}
                 method={"post"}
                 action={"api/teams/create"}
-                functionality="create"
+                isCreate={true}
               />
               <div className={"TeamsPage"}>
                 <div>

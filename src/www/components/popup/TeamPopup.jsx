@@ -3,7 +3,6 @@ import "./Popup.scss";
 import React, { Component } from "react";
 
 import ImageUploader from "react-images-upload";
-import Input from "../input/Input";
 import Popup from "reactjs-popup";
 import { Redirect } from "react-router-dom";
 import ScrollArea from "react-scrollbar";
@@ -21,6 +20,7 @@ class TeamPopup extends Component {
     teamPicture: undefined,
     serverResponse: "",
     teamId: "",
+    redirect: false,
   };
 
   createTeam = (name, description, categories, photo) => {
@@ -39,6 +39,7 @@ class TeamPopup extends Component {
 
   updateTeam = (name, description, categories, photo) => {
     const fd = new FormData();
+    console.log(this.props.action)
     fd.set("name", name);
     fd.set("description", description);
     fd.set("categories", JSON.stringify(categories));
@@ -46,8 +47,8 @@ class TeamPopup extends Component {
       fd.set("photo", photo);
     }
     axios
-      .patch("/api/teams/:team_id", fd)
-      .then((res) => this.handleSuccess(res.data))
+      .patch(this.props.action, fd)
+      .then((res) => window.location.reload(false))
       .catch((err) => this.handleError(err.response.data));
   };
 
@@ -79,6 +80,10 @@ class TeamPopup extends Component {
       this.setState({
         serverResponse: t("createteam.authentication"),
       });
+    } else if (data.error.includes("depends on")) {
+      this.setState({
+        serverResponse: t("createteam.dependson"),
+      });
     } else {
       this.setState({
         serverResponse: data.error,
@@ -86,21 +91,30 @@ class TeamPopup extends Component {
     }
   };
 
-  handleSubmit = (e, functionality) => {
-    e.preventDefault();
+  handleSubmit = (event) => {
+    event.preventDefault();
     const { teamName, description, teamCategories, teamPicture } = this.state;
-    
     if (teamName !== "" && description !== "") {
       this.setState({
         teamNameHighlight: false,
       });
-      if (functionality=="create") {
-        this.createTeam(teamName, description, teamCategories, teamPicture);
-      } else {
+      this.createTeam(teamName, description, teamCategories, teamPicture);
+      
+    } else {
+      if (!this.props.isCreate) {
+        console.log(teamName);
+        console.log(description);
+        console.log(teamCategories);
         this.updateTeam(teamName, description, teamCategories, teamPicture);
       }
-      
     }
+  };
+
+  deleteTeam = () => {
+    axios
+      .delete(this.props.action)
+      .then((res) => this.setState({ redirect: true }))
+      .catch((err) => this.handleError(err.response.data));
   };
 
   onCheckbox = (event, name) => {
@@ -130,10 +144,14 @@ class TeamPopup extends Component {
 
   render() {
     const { t, categories, checkedCategories } = this.props;
-    const { teamId } = this.state;
+    const { teamId, redirect } = this.state;
 
     if (teamId !== "") {
       return <Redirect to={`/teams/${teamId}`} />;
+    }
+
+    if (redirect) {
+      return <Redirect to={`/teams/`} />;
     }
 
     return (
@@ -161,7 +179,7 @@ class TeamPopup extends Component {
             <form
               method={this.props.method}
               action={this.props.action}
-              onSubmit={(e) => this.handleSubmit(e, this.props.functionality)}
+              onSubmit={this.handleSubmit}
             >
               <ScrollArea
                 className="FormArea"
@@ -225,6 +243,13 @@ class TeamPopup extends Component {
                 value={this.props.button}
               />
             </form>
+            {!this.props.isCreate && (
+              <button
+                className="DeleteButton"
+                onClick={this.deleteTeam}
+                children={t("createteam.delete")}
+              />
+            )}
           </div>
         )}
       </Popup>
