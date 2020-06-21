@@ -45,11 +45,7 @@ export default connect(mapState, { followTeam })(
 
         componentDidMount = () => {
           this.setCategories();
-
-          axios.get("/api/teams/").then((res) => {
-            this.setState({ teams: res.data });
-          });
-
+          
           const { id } = this.props.match.params;
           axios
             .get(`/api/teams/${id}`)
@@ -95,7 +91,8 @@ export default connect(mapState, { followTeam })(
           );
         };
 
-        followButton = (t) => {
+        followButton = () => {
+          const { t } = this.props;
           if (this.props.loggedIn) {
             if (!this.state.followed) {
               return (
@@ -179,7 +176,7 @@ export default connect(mapState, { followTeam })(
                       onClick={() => this.setState({ isBlurred: true })}
                     />
                   ) : (
-                    this.followButton(t)
+                    this.followButton()
                   )}
                 </section>
                 <section className="MidPanel">

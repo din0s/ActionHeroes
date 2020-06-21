@@ -39,7 +39,6 @@ class TeamPopup extends Component {
 
   updateTeam = (name, description, categories, photo) => {
     const fd = new FormData();
-    console.log(this.props.action)
     fd.set("name", name);
     fd.set("description", description);
     fd.set("categories", JSON.stringify(categories));
@@ -48,7 +47,7 @@ class TeamPopup extends Component {
     }
     axios
       .patch(this.props.action, fd)
-      .then((res) => window.location.reload(false))
+      .then(() => window.location.reload())
       .catch((err) => this.handleError(err.response.data));
   };
 
@@ -99,12 +98,8 @@ class TeamPopup extends Component {
         teamNameHighlight: false,
       });
       this.createTeam(teamName, description, teamCategories, teamPicture);
-      
     } else {
       if (!this.props.isCreate) {
-        console.log(teamName);
-        console.log(description);
-        console.log(teamCategories);
         this.updateTeam(teamName, description, teamCategories, teamPicture);
       }
     }
@@ -113,7 +108,7 @@ class TeamPopup extends Component {
   deleteTeam = () => {
     axios
       .delete(this.props.action)
-      .then((res) => this.setState({ redirect: true }))
+      .then(() => this.setState({ redirect: true }))
       .catch((err) => this.handleError(err.response.data));
   };
 
@@ -190,6 +185,7 @@ class TeamPopup extends Component {
                   type="text"
                   placeholder={t("createteam.teamname")}
                   defaultValue={this.props.name}
+                  required
                   onChange={(e) =>
                     this.setState({ teamName: e.target.value.trim() })
                   }

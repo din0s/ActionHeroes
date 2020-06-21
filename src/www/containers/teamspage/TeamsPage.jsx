@@ -109,7 +109,7 @@ export default connect(
                 title={t("createteam.createteam")}
                 button={t("submit")}
                 method={"post"}
-                action={"api/teams/create"}
+                action={"/api/teams/create"}
                 isCreate={true}
               />
               <div className={"TeamsPage"}>
