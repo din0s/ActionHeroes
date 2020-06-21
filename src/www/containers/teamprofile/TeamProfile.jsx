@@ -143,7 +143,7 @@ export default connect(mapState, { followTeam })(
           return (
             <div>
               <TeamPopup
-                categories={allCategories}
+                allCategories={allCategories}
                 open={this.state.openModal}
                 onClose={() => this.setState({ openModal: false })}
                 name={name}
@@ -151,15 +151,10 @@ export default connect(mapState, { followTeam })(
                 checkedCategories={categories}
                 title={t("teaminfo.title")}
                 button={t("teaminfo.button")}
-                method={"patch"}
                 action={`/api/teams/${id}`}
                 isCreate={false}
               />
-              <div
-                className={`TeamProfile${
-                  this.state.isBlurred ? " blurred" : ""
-                }`}
-              >
+              <div className={"TeamProfile"}>
                 <section className="TopPanel">
                   <span className="TopPanel_info">
                     <img alt="Team Logo" src={photoSrc} />
