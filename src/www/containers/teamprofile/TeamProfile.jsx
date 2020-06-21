@@ -45,7 +45,7 @@ export default connect(mapState, { followTeam })(
 
         componentDidMount = () => {
           this.setCategories();
-          
+
           const { id } = this.props.match.params;
           axios
             .get(`/api/teams/${id}`)
@@ -236,28 +236,6 @@ export default connect(mapState, { followTeam })(
                     ) : (
                       <p children={t("teaminfo.none")} />
                     )}
-                    {upcoming.length > 0 && <h1>{t("teaminfo.upcoming")}:</h1>}
-                    <ul>
-                      {upcoming.map((action) => {
-                        return (
-                          <li
-                            key={action._id}
-                            children={<ActionCard action={action} />}
-                          />
-                        );
-                      })}
-                    </ul>
-                    {past.length > 0 && <h1>{t("teaminfo.past")}:</h1>}
-                    <ul>
-                      {past.map((action) => {
-                        return (
-                          <li
-                            key={action._id}
-                            children={<ActionCard action={action} />}
-                          />
-                        );
-                      })}
-                    </ul>
                   </div>
                 </section>
                 <section className="BottomPanel">
@@ -292,19 +270,30 @@ export default connect(mapState, { followTeam })(
                   </div>
                   <div className="RightSide">
                     <div className="RightSide_events">
-                      {upcoming.length + past.length === 0 && (
-                        <h1>{t("teaminfo.empty")}</h1>
-                      )}
                       {upcoming.length > 0 && (
                         <h1>{t("teaminfo.upcoming")}:</h1>
                       )}
-                      {upcoming.map((action) => {
-                        return <ActionCard />;
-                      })}
+                      <ul>
+                        {upcoming.map((action) => {
+                          return (
+                            <li
+                              key={action._id}
+                              children={<ActionCard action={action} />}
+                            />
+                          );
+                        })}
+                      </ul>
                       {past.length > 0 && <h1>{t("teaminfo.past")}:</h1>}
-                      {past.map((action) => {
-                        return <ActionCard />;
-                      })}
+                      <ul>
+                        {past.map((action) => {
+                          return (
+                            <li
+                              key={action._id}
+                              children={<ActionCard action={action} />}
+                            />
+                          );
+                        })}
+                      </ul>
                     </div>
                   </div>
                 </section>
