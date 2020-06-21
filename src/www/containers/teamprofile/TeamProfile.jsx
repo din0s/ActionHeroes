@@ -53,11 +53,17 @@ export default connect(mapState, { followTeam })(
           const url = `/api/teams/${this.state.id}/follow`;
           if (this.state.followed) {
             axios.delete(url).then(() => {
-              this.setState({ followed: false });
+              this.setState({
+                followers: this.state.followers - 1,
+                followed: false,
+              });
             });
           } else {
             axios.post(url).then(() => {
-              this.setState({ followed: true });
+              this.setState({
+                followers: this.state.followers + 1,
+                followed: true,
+              });
             });
           }
 
