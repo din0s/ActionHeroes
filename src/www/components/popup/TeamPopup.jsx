@@ -1,6 +1,7 @@
 import "./Popup.scss";
 
 import React, { Component } from "react";
+import { deleteTeam, modifyTeam } from "../../actions/team";
 
 import ImageUploader from "react-images-upload";
 import Popup from "reactjs-popup";
@@ -8,7 +9,6 @@ import { Redirect } from "react-router-dom";
 import ScrollArea from "react-scrollbar";
 import axios from "axios";
 import { connect } from "react-redux";
-import { modifyTeam } from "../../actions/team";
 import { withTranslation } from "react-i18next";
 
 class TeamPopup extends Component {
@@ -107,9 +107,15 @@ class TeamPopup extends Component {
   };
 
   deleteTeam = () => {
+    const { action } = this.props;
+    // action := /api/teams/:id
+    const id = action.substring(action.lastIndexOf("/") + 1);
     axios
-      .delete(this.props.action)
-      .then(() => this.setState({ redirect: true }))
+      .delete(action)
+      .then(() => {
+        this.props.deleteTeam(id);
+        this.setState({ redirect: true });
+      })
       .catch((err) => this.handleError(err.response.data));
   };
 
@@ -255,4 +261,9 @@ class TeamPopup extends Component {
   }
 }
 
-export default connect(undefined, { modifyTeam })(withTranslation()(TeamPopup));
+const mapState = {
+  modifyTeam,
+  deleteTeam,
+};
+
+export default connect(undefined, mapState)(withTranslation()(TeamPopup));

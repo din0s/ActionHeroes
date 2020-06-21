@@ -1,6 +1,7 @@
 import "./Popup.scss";
 
 import React, { Component } from "react";
+import { deleteAction, editAction } from "../../actions/action";
 
 import DateTimePicker from "date-time-picker-react";
 import ImageUploader from "react-images-upload";
@@ -12,7 +13,6 @@ import ScrollArea from "react-scrollbar";
 import Selector from "../../components/selector/Selector";
 import axios from "axios";
 import { connect } from "react-redux";
-import { editAction } from "../../actions/action";
 import { withTranslation } from "react-i18next";
 
 const defDate = new Date();
@@ -193,7 +193,7 @@ class ActionPopup extends Component {
       actionCategories: [],
       actionPicture: undefined,
       actionLocation: initPosition,
-      actionTeam: teams.length > 0 ? teams[0]: undefined,
+      actionTeam: teams.length > 0 ? teams[0] : undefined,
       serverResponse: "",
     });
   };
@@ -345,6 +345,11 @@ const mapState = (state) => ({
   user: state.auth.user,
 });
 
-export default connect(mapState, { editAction })(
+const mapDispatch = {
+  editAction,
+  deleteAction,
+}
+
+export default connect(mapState, mapDispatch)(
   withTranslation()(ActionPopup)
 );

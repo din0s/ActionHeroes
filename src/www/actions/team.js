@@ -8,6 +8,8 @@ export const modifyTeam = (team, isCreate) => {
   };
 };
 
+export const deleteTeam = (id) => ({ type: "DELETE_TEAM", data: id });
+
 export const followTeam = (team, toggle) => {
   return (dispatch) => {
     if (toggle) {

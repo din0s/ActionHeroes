@@ -16,11 +16,23 @@ const unattendAction = (user, id) => {
   return user;
 };
 
+const deleteAction = (user, id) => {
+  const attendIndex = user.actionsAttended.findIndex((a) => a._id === id);
+  const saveIndex = user.actionsSaved.findIndex((a) => a._id === id);
+  if (attendIndex !== -1) {
+    user.actionsAttended.splice(attendIndex, 1);
+  }
+  if (saveIndex !== -1) {
+    user.actionsSaved.splice(saveIndex, 1);
+  }
+  return user;
+};
+
 const editAction = (user, action) => {
   const attendIndex = user.actionsAttended.findIndex(
-    (a) => (a._id = action._id)
+    (a) => a._id === action._id
   );
-  const saveIndex = user.actionsSaved.findIndex((a) => (a._id = action._id));
+  const saveIndex = user.actionsSaved.findIndex((a) => a._id === action._id);
   if (attendIndex !== -1) {
     user.actionsAttended[attendIndex] = action;
   }
@@ -45,8 +57,16 @@ const createTeam = (user, team) => {
   return user;
 };
 
+const deleteTeam = (user, id) => {
+  const index = user.teamsOwned.findIndex((t) => t._id === id);
+  if (index !== -1) {
+    user.teamsOwned.splice(index, 1);
+  }
+  return user;
+};
+
 const editTeam = (user, team) => {
-  const index = user.teamsOwned.findIndex((t) => (t._id = team._id));
+  const index = user.teamsOwned.findIndex((t) => t._id === team._id);
   user.teamsOwned[index] = team;
   return user;
 };
@@ -86,6 +106,8 @@ export default (state = initState, action) => {
       return { ...state, user: attendAction(state.user, action.data) };
     case "UNATTEND_ACTION":
       return { ...state, user: unattendAction(state.user, action.data) };
+    case "DELETE_ACTION":
+      return { ...state, user: deleteAction(state.user, action.data) };
     case "EDIT_ACTION":
       return { ...state, user: editAction(state.user, action.data) };
     case "SAVE_ACTION":
@@ -94,6 +116,8 @@ export default (state = initState, action) => {
       return { ...state, user: unsaveAction(state.user, action.data) };
     case "CREATE_TEAM":
       return { ...state, user: createTeam(state.user, action.data) };
+    case "DELETE_TEAM":
+      return { ...state, user: deleteTeam(state.user, action.data) };
     case "EDIT_TEAM":
       return { ...state, user: editTeam(state.user, action.data) };
     case "FOLLOW_TEAM":
