@@ -35,6 +35,7 @@ export default connect(mapState, { followTeam })(
           isOwner: false,
           followed: false,
           error: false,
+          openModal: false,
         };
 
         setCategories = async () => {
@@ -143,8 +144,8 @@ export default connect(mapState, { followTeam })(
             <div>
               <TeamPopup
                 categories={allCategories}
-                open={this.state.isBlurred}
-                onClose={() => this.setState({ isBlurred: false })}
+                open={this.state.openModal}
+                onClose={() => this.setState({ openModal: false })}
                 name={name}
                 description={description}
                 checkedCategories={categories}
@@ -173,7 +174,7 @@ export default connect(mapState, { followTeam })(
                     <button
                       className="TopPanel_followbutton"
                       children={t("teaminfo.edit")}
-                      onClick={() => this.setState({ isBlurred: true })}
+                      onClick={() => this.setState({ openModal: true })}
                     />
                   ) : (
                     this.followButton()

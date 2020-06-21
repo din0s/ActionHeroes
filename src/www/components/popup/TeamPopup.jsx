@@ -56,7 +56,7 @@ class TeamPopup extends Component {
       teamId: data._id,
     });
 
-    const isCreate = true; // change for edit
+    const isCreate = this.props.isCreate;
     const { _id, name, description, categories, photo } = data;
     this.props.modifyTeam(
       { _id, name, description, categories, photo },
