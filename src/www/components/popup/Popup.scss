@@ -5,6 +5,13 @@
   max-width: 75%;
 
   > div {
+    .clamped {
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .close {
       background: #ffffff;
       border: 1px solid #cfcece;
@@ -39,6 +46,98 @@
           flex-direction: column;
           padding: 0 2rem;
 
+          > p {
+            font-weight: bold;
+            color: rgb(80, 80, 80);
+            font-size: 0.9rem;
+            margin: 0;
+            margin-bottom: 0.8rem;
+          }
+
+          hr {
+            margin: 0.7rem 0rem;
+            opacity: 0.2;
+          }
+
+          h3 {
+            color: rgb(80, 80, 80);
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            font-size: 0.9rem;
+            margin: 0;
+            margin-left: 18px;
+          }
+
+          &_dateTime {
+            > div {
+              display: flex;
+              justify-content: center;
+
+              > div {
+                margin-top: 40px !important;
+
+                > div {
+                  :last-child {
+                    align-items: baseline !important;
+
+                    > input {
+                      margin-right: 5px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .bigBoxNo1 {
+            margin-top: 15px;
+            display: flex;
+
+            .smallBoxRight {
+              width: 49%;
+              padding-left: 2%;
+              padding-right: 1%;
+            }
+
+            .smallBoxLeft {
+              width: 47%;
+              padding-right: 1%;
+              padding-left: 3px;
+              display: block;
+              border-right: solid 2px rgb(216, 216, 216);
+            }
+          }
+
+          .bigBoxNo2 {
+            display: flex;
+            margin-bottom: 25px;
+            .smallBoxLeft {
+              width: 50%;
+              margin-left: -2%;
+            }
+            .smallBoxRight {
+              border-left: solid 2px rgb(216, 216, 216);
+              width: 47%;
+              padding-left: 2%;
+              padding-right: 1%;
+            }
+          }
+
+          .TeamSelected {
+            margin-top: 0.3rem;
+            //margin-bottom: 0.8rem;
+            > img {
+              max-width: 50px;
+              object-fit: contain;
+              margin-bottom: 0.3rem;
+            }
+            > h4 {
+              -webkit-line-clamp: 1;
+              font-weight: normal;
+              margin: 0;
+            }
+          }
           > input {
             height: 1.5rem;
           }
@@ -67,6 +166,16 @@
               line-height: 23px;
               height: 20px;
               width: 20px;
+            }
+          }
+
+          &_map {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            .Map {
+              z-index: 1;
+              max-height: 12rem;
             }
           }
 
@@ -180,6 +289,58 @@
   .popup-content {
     .FormArea_content_categories-list > label {
       width: 100% !important;
+    }
+  }
+}
+
+@media only screen and(max-width: 1200px) {
+  .popup-content {
+    > div {
+      > form {
+        .FormArea {
+          &_content {
+            .bigBoxNo1 {
+              margin-top: 0px;
+              display: block;
+              .smallBoxRight {
+                width: 100%;
+                padding-left: 0%;
+                padding-right: 0%;
+                border-top: solid 2px rgb(216, 216, 216);
+                padding-top: 15px;
+              }
+
+              .smallBoxLeft {
+                width: 100%;
+                padding-right: 0%;
+                padding-left: 0px;
+                padding-bottom: 20px;
+                display: block;
+                border-right: none;
+              }
+            }
+
+            .bigBoxNo2 {
+              display: block;
+              margin-bottom: 10px;
+              .smallBoxLeft {
+                padding-bottom: 7px;
+                margin-top: 0rem;
+                width: 100%;
+                margin-left: 0%;
+              }
+              .smallBoxRight {
+                padding-top: 3px;
+                border-top: solid 2px rgb(216, 216, 216);
+                border-left: none;
+                width: 100%;
+                padding-left: 0%;
+                padding-right: 0%;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

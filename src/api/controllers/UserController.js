@@ -107,6 +107,7 @@ const joinUser = async (user) => {
   user = sanitizeUser(user);
   response[`username`] = user.username;
   response[`email`] = user.email;
+  response[`bio`] = user.bio;
   response[`coordinates`] = user.coordinates;
   response[`categories`] = user.categories;
 
@@ -234,15 +235,21 @@ module.exports = {
           // because of the teams that they follow
           const followActions = await Action.find({
             organizer: { $in: teams.map((t) => t._id) },
-          });
+          })
+            .populate("categories")
+            .exec();
           // actions the user has explicitly stated
           // that they're interested in (attend/save)
           const interestActions = await Action.find({
-            $or: [{ attendees: { $in: [id] } }, { saves: { $in: [id] } }],
-          });
-          // combine lists without duplicates
-          const jointActions = [...new Set(followActions.concat(interestActions))];
-          response[`recommend`] = jointActions
+            $and: [
+              { _id: { $nin: followActions.map((a) => a._id) } },
+              { $or: [{ attendees: { $in: [id] } }, { saves: { $in: [id] } }] },
+            ],
+          })
+            .populate("categories")
+            .exec();
+          response[`recommend`] = followActions
+            .concat(interestActions)
             .sort((a1, a2) => a1.dateCreated < a2.dateCreated) // sort descending
             .map((action) => {
               const {

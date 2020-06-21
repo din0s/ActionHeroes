@@ -14,11 +14,6 @@
     display: none;
   }
 
-  .blurred {
-    position: fixed;
-    pointer-events: none;
-  }
-
   .clamped {
     -webkit-box-orient: vertical;
     display: -webkit-box;

@@ -6,7 +6,6 @@ import { Map, Marker, TileLayer } from "react-leaflet";
 import React, { Component } from "react";
 
 import L from "leaflet";
-import { template } from "leaflet-control-geocoder/src/util";
 
 const height = { height: "18rem" };
 
@@ -19,27 +18,63 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 export default class MapComponent extends Component {
+  extractAddress = (a, delim) => {
+    const { tourism, amenity, building, leisure } = a;
+    const { road, residential, house_number } = a;
+    const { city, town, village, hamlet, county, postcode } = a;
+
+    var topLine = "";
+    if (tourism) {
+      topLine = tourism;
+    } else if (amenity) {
+      topLine = amenity;
+    } else if (building) {
+      topLine = building;
+    } else if (leisure) {
+      topLine = leisure;
+    }
+    if (topLine !== "") {
+      topLine += delim;
+    }
+
+    var midLine = "";
+    if (road) {
+      midLine = road;
+    } else if (residential) {
+      midLine = residential;
+    }
+    if (house_number) {
+      midLine += ` ${house_number}`;
+    }
+    if (midLine !== "") {
+      midLine += delim;
+    }
+
+    var botLine = "";
+    if (city) {
+      botLine += city;
+    } else if (town) {
+      botLine += town;
+    } else if (village) {
+      botLine += village;
+    } else if (hamlet) {
+      botLine += hamlet;
+    } else if (county) {
+      botLine += county;
+    }
+    if (postcode) {
+      botLine += `, ${postcode}`;
+    }
+
+    return `${topLine}${midLine}${botLine}`;
+  };
+
   componentDidMount = () => {
     const map = this.leafletMap.leafletElement;
 
     const geocoder = L.Control.Geocoder.nominatim({
-      htmlTemplate: function(r) {
-        var a = r.address,
-          className,
-          parts = [];
-        if (a.road || a.building) {
-          parts.push("{building} {road} {house_number} {leisure} {amenity}");
-        }
-        if (a.city || a.town || a.village || a.hamlet) {
-          className =
-            parts.length > 0 ? "leaflet-control-geocoder-address-detail" : "";
-          parts.push(
-            '<span class="' +
-              className +
-              '">{postcode} {city} {town} {village} {hamlet}</span>'
-          );
-        }
-        return template(parts.join("<br/>"), a, true);
+      htmlTemplate: (r) => {
+        return this.extractAddress(r.address, "<br/>");
       },
     });
     let marker;
@@ -48,7 +83,8 @@ export default class MapComponent extends Component {
       geocoder.reverse(e.latlng, map.options.crs.scale(18), (results) => {
         var r = results[0];
         if (r) {
-          this.props.onClick(r.center, r.html);
+          const address = this.extractAddress(r.properties.address, "\n");
+          this.props.onClick(r.center, address);
           if (marker) {
             marker
               .setLatLng(r.center)

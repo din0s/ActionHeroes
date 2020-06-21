@@ -23,8 +23,9 @@ module.exports = {
   },
 
   createTeam: (req, res) => {
-    const team = new Team();
+    var team = new Team();
     const promises = [];
+    var _categories = [];
 
     if (req.body.name) {
       team[`name`] = req.body.name;
@@ -44,6 +45,7 @@ module.exports = {
       promises.push(
         Category.find({ name: { $in: JSON.parse(req.body.categories) } }).then(
           (categories) => {
+            _categories = categories;
             team[`categories`] = categories.map((c) => c._id);
           }
         )
@@ -68,12 +70,14 @@ module.exports = {
       team
         .save()
         .then(() => {
+          team = team.toJSON();
           team.__v = undefined;
           User.findByIdAndUpdate(
             { _id: req.userData.userId },
             { $addToSet: { teamsOwned: team._id } }
           )
             .then(() => {
+              team.categories = _categories.map((c) => c.name);
               return res.status(201).send(team);
             })
             .catch((err) => {
@@ -170,6 +174,7 @@ module.exports = {
               const today = new Date();
               actions.forEach((action) => {
                 const {
+                  _id,
                   name,
                   description,
                   categories,
@@ -178,9 +183,10 @@ module.exports = {
                   photo,
                 } = action;
                 const item = {
+                  _id,
                   name,
                   description,
-                  categories,
+                  categories: categories.map((c) => c.name),
                   location,
                   date,
                   photo,
@@ -266,8 +272,12 @@ module.exports = {
           { $set: query },
           { runValidators: true, context: "query", new: true }
         )
+          .populate("categories")
+          .exec()
           .then((team) => {
+            team = team.toJSON();
             team.__v = undefined;
+            team.categories = team.categories.map((c) => c.name);
             return res.status(200).send(team);
           })
           .catch((err) => {

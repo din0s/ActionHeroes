@@ -1,14 +1,28 @@
-.Card {
+@import "../../vars.scss";
+.ActionCard {
   align-items: center;
   background-image: linear-gradient(to bottom right, rgb(233, 233, 233), white);
   border-radius: 0.5rem;
-  border: 1px solid rgba($color: black, $alpha: 0.3);
+  border: 1px solid $mediumBlack;
   display: flex;
   flex-direction: row;
-  padding: 1.5rem 1rem;
   width: calc(100% - 2rem); //100% - padding left&right
+  box-shadow: 0 0 10px 5px $blackTransparent;
+  transition: 0.2s ease-in-out;
 
-  > img {
+  a {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    padding: 1.5rem 1rem;
+    width: 100%;
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px 5px $softBlack;
+  }
+
+  img {
     border-radius: 0.5rem;
     margin-right: 1rem;
     max-height: 10rem;
@@ -103,8 +117,8 @@
 }
 
 @media only screen and(max-width: 800px) {
-  .Card {
-    > img {
+  .ActionCard {
+    img {
       align-self: flex-start;
       border-radius: 0.35rem;
       max-height: 8rem;
@@ -116,11 +130,18 @@
 }
 
 @media only screen and(max-width: 560px) {
-  .Card {
+  .ActionCard {
     flex-direction: column;
-    padding: 0.6rem 0.6rem;
+    padding: 0rem 0.6rem;
     width: calc(100% - 1.2rem); //100% - padding left&right
-    > img {
+
+    a {
+      color: black;
+      text-decoration: none;
+      display: block;
+    }
+
+    img {
       display: none;
     }
 

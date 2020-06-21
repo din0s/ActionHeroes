@@ -7,6 +7,7 @@ import ActionCard from "../../components/actioncard/ActionCard";
 import SpinnerPage from "../spinner/SpinnerPage";
 import axios from "axios";
 import { connect } from "react-redux";
+import { followTeam } from "../../actions/team";
 import { parseDate } from "../../date";
 import { withTranslation } from "react-i18next";
 
@@ -14,10 +15,7 @@ const mapState = (state) => ({
   loggedIn: state.auth.loggedIn,
 });
 
-export default connect(
-  mapState,
-  undefined
-)(
+export default connect(mapState, { followTeam })(
   withRouter(
     withTranslation()(
       class TeamProfile extends Component {
@@ -55,13 +53,25 @@ export default connect(
           const url = `/api/teams/${this.state.id}/follow`;
           if (this.state.followed) {
             axios.delete(url).then(() => {
-              this.setState({ followed: false });
+              this.setState({
+                followers: this.state.followers - 1,
+                followed: false,
+              });
             });
           } else {
             axios.post(url).then(() => {
-              this.setState({ followed: true });
+              this.setState({
+                followers: this.state.followers + 1,
+                followed: true,
+              });
             });
           }
+
+          const { id, name, description, categories, photo } = this.state;
+          this.props.followTeam(
+            { _id: id, name, description, categories, photo },
+            !this.state.followed
+          );
         };
 
         render() {
@@ -206,13 +216,27 @@ export default connect(
                       <h1>{t("teaminfo.empty")}</h1>
                     )}
                     {upcoming.length > 0 && <h1>{t("teaminfo.upcoming")}:</h1>}
-                    {upcoming.map((action) => {
-                      return <ActionCard />;
-                    })}
+                    <ul>
+                      {upcoming.map((action) => {
+                        return (
+                          <li
+                            key={action._id}
+                            children={<ActionCard action={action} />}
+                          />
+                        );
+                      })}
+                    </ul>
                     {past.length > 0 && <h1>{t("teaminfo.past")}:</h1>}
-                    {past.map((action) => {
-                      return <ActionCard />;
-                    })}
+                    <ul>
+                      {past.map((action) => {
+                        return (
+                          <li
+                            key={action._id}
+                            children={<ActionCard action={action} />}
+                          />
+                        );
+                      })}
+                    </ul>
                   </div>
                 </div>
               </section>

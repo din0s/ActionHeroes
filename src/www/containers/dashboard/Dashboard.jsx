@@ -6,6 +6,7 @@ import ActionCard from "../../components/actioncard/ActionCard";
 import { Link } from "react-router-dom";
 import Pagination from "material-ui-flat-pagination";
 import Selector from "../../components/selector/Selector";
+import SpinnerPage from "../spinner/SpinnerPage";
 import axios from "axios";
 import { parseDate } from "../../date";
 import { withTranslation } from "react-i18next";
@@ -15,6 +16,7 @@ const r_page = 5;
 export default withTranslation()(
   class Dashboard extends Component {
     state = {
+      loaded: false,
       r_offset: 0, // recommended actions offset
       t_select: undefined, // team selection
       next: [],
@@ -26,7 +28,14 @@ export default withTranslation()(
     componentDidMount = () => {
       axios.get("/api/users/me/dashboard").then((res) => {
         const { next, saved, teams, recommend } = res.data;
-        this.setState({ next, saved, teams, recommend, t_select: teams[0] });
+        this.setState({
+          next,
+          saved,
+          teams,
+          recommend,
+          t_select: teams[0],
+          loaded: true,
+        });
       });
     };
 
@@ -79,7 +88,12 @@ export default withTranslation()(
         return (
           <ul>
             {recommend.slice(r_offset, r_offset + r_page).map((action) => {
-              return <ActionCard />;
+              return (
+                <li
+                  key={action._id}
+                  children={<ActionCard action={action} />}
+                />
+              );
             })}
           </ul>
         );
@@ -168,6 +182,10 @@ export default withTranslation()(
     };
 
     render() {
+      if (!this.state.loaded) {
+        return <SpinnerPage />;
+      }
+
       const { t } = this.props;
       return (
         <div className="Dashboard">

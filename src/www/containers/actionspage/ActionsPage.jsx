@@ -3,7 +3,9 @@ import "./ActionsPage.scss";
 import { Link, withRouter } from "react-router-dom";
 import React, { Component } from "react";
 
+import ActionPopup from "../../components/popup/ActionPopup";
 import FilterList from "../../components/filterlist/FilterList";
+import Loader from "../../components/loader/Loader";
 import Pagination from "../../components/pagination/Pagination";
 import SearchBar from "../../components/searchbar/SearchBar";
 import axios from "axios";
@@ -28,6 +30,8 @@ export default connect(
           categories: [],
           selectedCategories: [],
           query: "",
+          openModal: false,
+          loaded: false,
         };
 
         setCategories = async () => {
@@ -44,7 +48,7 @@ export default connect(
           this.setCategories();
 
           axios.get("/api/actions/").then((res) => {
-            this.setState({ actions: res.data });
+            this.setState({ actions: res.data, loaded: true });
           });
         };
 
@@ -114,34 +118,56 @@ export default connect(
         };
 
         render() {
+          const { t } = this.props;
           return (
-            <div className="ActionsPage">
-              <SearchBar
-                action="/actions"
-                value={this.state.query}
-                onChange={(e) => this.setState({ query: e.target.value })}
+            <div>
+              <ActionPopup
+                categories={this.state.categories}
+                open={this.state.openModal}
+                onClose={() => this.setState({ openModal: false })}
               />
-              <span>
-                <FilterList
-                  categories={this.state.categories}
-                  selected={this.state.selectedCategories}
-                  onCheckbox={this.onCheckbox}
-                  onClear={() => this.setState({ selectedCategories: [] })}
-                  onRemove={this.removeCategory}
-                />
-                <Pagination
-                  baseName="ActionsPage_content"
-                  collection={this.state.actions}
-                  perPage={6}
-                  query={this.state.query.toLowerCase().trim()}
-                  mapFunc={this.showActions}
-                  searchFilter={(actions, query) =>
-                    actions.name.toLowerCase().includes(query) ||
-                    actions.description.toLowerCase().includes(query)
-                  }
-                  selected={this.state.selectedCategories}
-                />
-              </span>
+              <div className={"ActionsPage"}>
+                <div>
+                  <SearchBar
+                    action="/actions"
+                    value={this.state.query}
+                    onChange={(e) => this.setState({ query: e.target.value })}
+                  />
+                  <button
+                    className="PopupTrigger"
+                    children={t("createaction.create")}
+                    onClick={() => this.setState({ openModal: true })}
+                  />
+                </div>
+                <span>
+                  <FilterList
+                    categories={this.state.categories}
+                    selected={this.state.selectedCategories}
+                    onCheckbox={this.onCheckbox}
+                    onClear={() => this.setState({ selectedCategories: [] })}
+                    onRemove={this.removeCategory}
+                  />
+                  {this.state.loaded ? (
+                    <Pagination
+                      baseName="ActionsPage_content"
+                      collection={this.state.actions}
+                      perPage={6}
+                      query={this.state.query.toLowerCase().trim()}
+                      mapFunc={this.showActions}
+                      searchFilter={(actions, query) =>
+                        actions.name.toLowerCase().includes(query) ||
+                        actions.description.toLowerCase().includes(query)
+                      }
+                      selected={this.state.selectedCategories}
+                    />
+                  ) : (
+                    <span
+                      className="ActionsPage_content"
+                      children={<Loader />}
+                    />
+                  )}
+                </span>
+              </div>
             </div>
           );
         }

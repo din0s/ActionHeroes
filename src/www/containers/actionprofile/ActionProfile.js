@@ -1,7 +1,8 @@
 import "./ActionProfile.scss";
 
+import { Link, Redirect, withRouter } from "react-router-dom";
 import React, { Component } from "react";
-import { Redirect, withRouter } from "react-router-dom";
+import { attendAction, saveAction } from "../../actions/action";
 
 import { Parallax } from "react-parallax";
 import SpinnerPage from "../spinner/SpinnerPage";
@@ -14,9 +15,14 @@ const mapState = (state) => ({
   loggedIn: state.auth.loggedIn,
 });
 
+const mapDispatch = {
+  attendAction,
+  saveAction,
+};
+
 export default connect(
   mapState,
-  undefined
+  mapDispatch
 )(
   withTranslation()(
     withRouter(
@@ -66,10 +72,17 @@ export default connect(
 
         handleSave = () => {
           this.handleSubmit("save", "saved");
+          this.props.saveAction(this.getActionObject(), !this.state.saved);
         };
 
         handleAttend = () => {
           this.handleSubmit("attend", "toAttend");
+          this.props.attendAction(this.getActionObject(), !this.state.toAttend);
+        };
+
+        getActionObject = () => {
+          const { id, name, description, categories, photo } = this.state;
+          return { _id: id, name, description, categories, photo };
         };
 
         render() {
@@ -188,11 +201,14 @@ export default connect(
                       )}
                     </div>
                   </div>
-                  <div className="ActionDetails_organizerDiv">
+                  <Link
+                    to={`/teams/${organizer._id}`}
+                    className="ActionDetails_organizerDiv"
+                  >
                     <img src={organizerPhoto} alt="Organizer"></img>
                     <h3 className="clamped"> {organizer.name}</h3>
                     <p>{t("actioninfo.organizer")}</p>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>

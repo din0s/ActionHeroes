@@ -199,5 +199,22 @@
     "nameerror": "Team name not available!",
     "image": "Choose image",
     "maxfile": "Max file size: 5mb, accepted: jpg, png"
+  },
+  "createaction": {
+    "authentication": "Login to continue!",
+    "actionname": "Action name",
+    "actiondate": "Action date",
+    "description": "Description",
+    "create": "Create Action",
+    "createaction": "Create an action!",
+    "created": "Action created!",
+    "nameerror": "Action name not available!",
+    "noteamerror": "No available team!",
+    "noteam": "No selected team",
+    "image": "Choose image",
+    "location": "Location",
+    "maxfile": "Max file size: 5mb, accepted: jpg, png",
+    "teams": "Organized by",
+    "date": "Choose Date and Time"
   }
 }
