@@ -270,6 +270,9 @@ export default connect(mapState, { followTeam })(
                   </div>
                   <div className="RightSide">
                     <div className="RightSide_events">
+                      {upcoming.length + past.length === 0 && (
+                        <h1>{t("teaminfo.empty")}</h1>
+                      )}
                       {upcoming.length > 0 && (
                         <h1>{t("teaminfo.upcoming")}:</h1>
                       )}
