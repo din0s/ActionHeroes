@@ -39,8 +39,6 @@ class TeamPopup extends Component {
   updateTeam = (name, description, categories, photo) => {
     const fd = new FormData();
     if (name !== this.props.name) {
-      console.log(name);
-      console.log(this.props.name);
       fd.set("name", name);
     }
     if (description !== this.props.description) {
