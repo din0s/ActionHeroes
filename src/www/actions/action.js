@@ -8,6 +8,8 @@ export const attendAction = (action, toggle) => {
   };
 };
 
+export const deleteAction = (id) => ({ type: "DELETE_ACTION", data: id });
+
 export const editAction = (action) => ({ type: "EDIT_ACTION", data: action });
 
 export const saveAction = (action, toggle) => {

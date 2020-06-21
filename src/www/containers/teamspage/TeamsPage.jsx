@@ -102,9 +102,13 @@ export default connect(
           return (
             <div>
               <TeamPopup
-                categories={categories}
+                allCategories={categories}
                 open={this.state.openModal}
                 onClose={() => this.setState({ openModal: false })}
+                title={t("createteam.createteam")}
+                button={t("submit")}
+                action={"/api/teams/create"}
+                isCreate={true}
               />
               <div className={"TeamsPage"}>
                 <div>

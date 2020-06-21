@@ -3,6 +3,7 @@
   "search": "Search...",
   "noresults": "No results.",
   "submit": "Submit",
+  "somethingwrong": "Something went wrong!",
   "filterlist": {
     "filters": "Filters",
     "clear": "Clear",
@@ -161,7 +162,10 @@
     "upcoming": "Upcoming Actions",
     "past": "Past Actions",
     "empty": "This team has no actions yet.",
-    "none": "None"
+    "none": "None",
+    "title": "Edit your team!",
+    "button": "Update",
+    "edit": "Edit Team"
   },
   "settings": {
     "success": "Successful Update",
@@ -198,7 +202,9 @@
     "created": "Team created!",
     "nameerror": "Team name not available!",
     "image": "Choose image",
-    "maxfile": "Max file size: 5mb, accepted: jpg, png"
+    "maxfile": "Max file size: 5mb, accepted: jpg, png",
+    "delete": "Delete Team",
+    "dependson": "A team that has registered actions cannot be deleted"
   },
   "createaction": {
     "authentication": "Login to continue!",
