@@ -15,7 +15,7 @@ class TeamPopup extends Component {
   state = {
     teamName: "",
     description: "",
-    teamCategories: [],
+    teamCategories: this.props.checkedCategories,
     checkedCategories: this.props.categories,
     teamPicture: undefined,
     serverResponse: "",
@@ -136,7 +136,7 @@ class TeamPopup extends Component {
     this.setState({
       teamName: "",
       description: "",
-      teamCategories: [],
+      teamCategories: this.props.checkedCategories,
       checkedCategories: this.props.categories,
       teamPicture: undefined,
     });
