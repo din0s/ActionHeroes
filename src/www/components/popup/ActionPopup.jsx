@@ -35,15 +35,15 @@ class ActionPopup extends Component {
     serverResponse: "",
     actionId: "",
     actionLocation: initPosition,
-    actionTeam: {},
+    actionTeam: undefined,
   };
 
   setTeams = () => {
-    if (this.props.user === {}) {
+    const { teamsOwned } = this.props.user;
+    if (!teamsOwned || teamsOwned.length === 0) {
       return;
     }
 
-    const { teamsOwned } = this.props.user;
     this.setState({
       teams: teamsOwned,
       actionTeam: teamsOwned[0],
@@ -185,6 +185,7 @@ class ActionPopup extends Component {
 
   reset = () => {
     this.props.onClose();
+    const { teams } = this.state;
     this.setState({
       actionName: "",
       description: "",
@@ -192,7 +193,7 @@ class ActionPopup extends Component {
       actionCategories: [],
       actionPicture: undefined,
       actionLocation: initPosition,
-      actionTeam: this.state.teams[0],
+      actionTeam: teams.length > 0 ? teams[0]: undefined,
       serverResponse: "",
     });
   };
