@@ -174,8 +174,8 @@ export default connect(
                 location={location}
                 organizer={organizer}
                 checkedCategories={categories}
-                title={t("actioninfo.title")} //trans
-                button={t("actioninfo.button")} //trans
+                title={t("actioninfo.title")}
+                button={t("actioninfo.button")}
                 isCreate={false}
               />
               <div className="ActionProfile">
@@ -195,7 +195,7 @@ export default connect(
                         <p>{parseDate(date, t)}</p>
                         {this.state.isHost ? (
                           <button
-                            children={t("actioninfo.edit")} //trans
+                            children={t("actioninfo.edit")}
                             onClick={() => this.setState({ openModal: true })}
                           />
                         ) : (

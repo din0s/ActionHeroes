@@ -5,7 +5,6 @@ import { deleteAction, editAction } from "../../actions/action";
 
 import DateTimePicker from "date-time-picker-react";
 import ImageUploader from "react-images-upload";
-import Input from "../input/Input";
 import Map from "../../components/map/Map";
 import Popup from "reactjs-popup";
 import { Redirect } from "react-router-dom";
@@ -35,7 +34,7 @@ class ActionPopup extends Component {
     serverResponse: "",
     actionId: "",
     actionLocation: this.props.location || initPosition,
-    actionTeam: this.props.organizer, // not sure about that
+    actionTeam: this.props.organizer,
     redirect: false,
   };
 
@@ -105,7 +104,6 @@ class ActionPopup extends Component {
   ) => {
     const fd = new FormData();
     if (date !== this.props.date) {
-      // we ll see about this condition
       fd.set("date", date.toISOString());
     }
     if (name !== this.props.name) {
@@ -187,7 +185,6 @@ class ActionPopup extends Component {
     }
     const apiCall = this.props.isCreate ? this.createAction : this.updateAction;
     apiCall(
-      // is this the correct order?
       actionName,
       actionDate,
       description,
@@ -251,7 +248,8 @@ class ActionPopup extends Component {
       checkedCategories: this.props.checkedCategories || [],
       actionDate: this.props.date || defDate,
       actionPicture: undefined,
-      actionTeam: this.props.organizer,
+      actionTeam:
+        this.props.organizer || teams.length > 0 ? teams[0] : undefined,
       actionId: "",
       actionLocation: this.props.location || initPosition,
       serverResponse: "",
@@ -289,150 +287,145 @@ class ActionPopup extends Component {
     } = this.state;
 
     return (
-      console.log(date),
-      (
-        <Popup
-          open={open}
-          onClose={this.reset}
-          closeOnDocumentClick={false}
-          modal
-        >
-          {(close) => (
-            <div>
-              <button className="close" onClick={close}>
-                &times;
-              </button>
-              <h2>{title}</h2>
-              <p children={serverResponse} />
-              <form
-                method={isCreate ? "post" : "patch"}
-                action={action}
-                onSubmit={this.handleSubmit}
+      <Popup
+        open={open}
+        onClose={this.reset}
+        closeOnDocumentClick={false}
+        modal
+      >
+        {(close) => (
+          <div>
+            <button className="close" onClick={close}>
+              &times;
+            </button>
+            <h2>{title}</h2>
+            <p children={serverResponse} />
+            <form
+              method={isCreate ? "post" : "patch"}
+              action={action}
+              onSubmit={this.handleSubmit}
+            >
+              <ScrollArea
+                className="FormArea"
+                contentClassName="FormArea_content"
               >
-                <ScrollArea
-                  className="FormArea"
-                  contentClassName="FormArea_content"
-                >
-                  <input
-                    name="actionName"
-                    type="text"
-                    placeholder={t("createaction.actionname")}
-                    defaultValue={actionName}
-                    required
-                    onChange={(e) =>
-                      this.setState({ actionName: e.target.value.trim() })
-                    }
-                  />
-
-                  <textarea
-                    name="description"
-                    required
-                    type="text"
-                    placeholder={t("createaction.description")}
-                    defaultValue={description}
-                    onChange={(e) =>
-                      this.setState({ description: e.target.value.trim() })
-                    }
-                  ></textarea>
-                  <div className="bigBoxNo1">
-                    <div className="smallBoxLeft">
-                      <Selector
-                        isDisabled={!isCreate}
-                        centered="center"
-                        value={<h3>{t("createaction.teams")}</h3>}
-                        onChange={(opt) =>
-                          this.setState({ actionTeam: opt.value })
-                        }
-                        options={this.state.teams.map((t) => ({
-                          value: t,
-                          label: t.name,
-                        }))}
-                      />
-                      {this.showTeamImg()}
-                    </div>
-                    <div className="smallBoxRight">
-                      <ImageUploader
-                        withIcon={true}
-                        buttonText={t("createaction.image")}
-                        imgExtension={[".jpg", ".jpeg", ".png"]}
-                        maxFileSize={5242880}
-                        singleImage={true}
-                        withPreview={true}
-                        label={t("createaction.maxfile")}
-                        onChange={(pic) => {
-                          this.setState({
-                            actionPicture: pic[0],
-                          });
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="bigBoxNo2">
-                    <div className="smallBoxLeft">
-                      <p>{t("createaction.date")}</p>
-                      <div className="FormArea_content_dateTime">
-                        <DateTimePicker
-                          initialValue={date}
-                          min={defDate}
-                          onChange={(actionDate) =>
-                            this.setState({ actionDate })
-                          }
-                        />
-                      </div>
-                    </div>
-                    <div className="smallBoxRight">
-                      <p>{t("createaction.location")}</p>
-                      <div className="FormArea_content_map">
-                        <Map
-                          className="Map"
-                          center={this.state.actionLocation.coordinates}
-                          zoom={15}
-                          onClick={(center, address) =>
-                            this.setState({
-                              actionLocation: {
-                                name: address,
-                                coordinates: Object.values(center),
-                              },
-                            })
-                          }
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="FormArea_content_categories">
-                    <p>{t("filterlist.categories")}</p>
-                    <div className="FormArea_content_categories-list">
-                      {allCategories.map((name) => {
-                        return (
-                          <label key={name}>
-                            {t(`categories.${name.toLowerCase()}`)}
-                            <input
-                              type="checkbox"
-                              onChange={(event) => this.onCheckbox(event, name)}
-                              defaultChecked={checkedCategories.includes(name)}
-                            />
-                            <span className="checkmark"></span>
-                          </label>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </ScrollArea>
-                <input className="SubmitButton" type="submit" value={button} />
-              </form>
-              {!isCreate && (
-                <button
-                  className="DeleteButton"
-                  onClick={this.deleteAction}
-                  children={t("createaction.delete")}
+                <input
+                  name="actionName"
+                  type="text"
+                  placeholder={t("createaction.actionname")}
+                  defaultValue={actionName}
+                  required
+                  onChange={(e) =>
+                    this.setState({ actionName: e.target.value.trim() })
+                  }
                 />
-              )}
-            </div>
-          )}
-        </Popup>
-      )
+
+                <textarea
+                  name="description"
+                  required
+                  type="text"
+                  placeholder={t("createaction.description")}
+                  defaultValue={description}
+                  onChange={(e) =>
+                    this.setState({ description: e.target.value.trim() })
+                  }
+                ></textarea>
+                <div className="bigBoxNo1">
+                  <div className="smallBoxLeft">
+                    <Selector
+                      isDisabled={!isCreate}
+                      centered="center"
+                      value={<h3>{t("createaction.teams")}</h3>}
+                      onChange={(opt) =>
+                        this.setState({ actionTeam: opt.value })
+                      }
+                      options={this.state.teams.map((t) => ({
+                        value: t,
+                        label: t.name,
+                      }))}
+                    />
+                    {this.showTeamImg()}
+                  </div>
+                  <div className="smallBoxRight">
+                    <ImageUploader
+                      withIcon={true}
+                      buttonText={t("createaction.image")}
+                      imgExtension={[".jpg", ".jpeg", ".png"]}
+                      maxFileSize={5242880}
+                      singleImage={true}
+                      withPreview={true}
+                      label={t("createaction.maxfile")}
+                      onChange={(pic) => {
+                        this.setState({
+                          actionPicture: pic[0],
+                        });
+                      }}
+                    />
+                  </div>
+                </div>
+                <hr />
+                <div className="bigBoxNo2">
+                  <div className="smallBoxLeft">
+                    <p>{t("createaction.date")}</p>
+                    <div className="FormArea_content_dateTime">
+                      <DateTimePicker
+                        initialValue={date}
+                        min={defDate}
+                        onChange={(actionDate) => this.setState({ actionDate })}
+                      />
+                    </div>
+                  </div>
+                  <div className="smallBoxRight">
+                    <p>{t("createaction.location")}</p>
+                    <div className="FormArea_content_map">
+                      <Map
+                        className="Map"
+                        center={this.state.actionLocation.coordinates}
+                        zoom={15}
+                        onClick={(center, address) =>
+                          this.setState({
+                            actionLocation: {
+                              name: address,
+                              coordinates: Object.values(center),
+                            },
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="FormArea_content_categories">
+                  <p>{t("filterlist.categories")}</p>
+                  <div className="FormArea_content_categories-list">
+                    {allCategories.map((name) => {
+                      return (
+                        <label key={name}>
+                          {t(`categories.${name.toLowerCase()}`)}
+                          <input
+                            type="checkbox"
+                            onChange={(event) => this.onCheckbox(event, name)}
+                            defaultChecked={checkedCategories.includes(name)}
+                          />
+                          <span className="checkmark"></span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+              </ScrollArea>
+              <input className="SubmitButton" type="submit" value={button} />
+            </form>
+            {!isCreate && (
+              <button
+                className="DeleteButton"
+                onClick={this.deleteAction}
+                children={t("createaction.delete")}
+              />
+            )}
+          </div>
+        )}
+      </Popup>
     );
   }
 }
