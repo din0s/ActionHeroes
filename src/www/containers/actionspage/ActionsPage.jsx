@@ -122,9 +122,13 @@ export default connect(
           return (
             <div>
               <ActionPopup
-                categories={this.state.categories}
+                allCategories={this.state.categories}
                 open={this.state.openModal}
                 onClose={() => this.setState({ openModal: false })}
+                action={"/api/actions/create"}
+                title={t("createaction.createaction")}
+                button={t("submit")}
+                isCreate={true}
               />
               <div className={"ActionsPage"}>
                 <div>

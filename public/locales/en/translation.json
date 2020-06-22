@@ -61,7 +61,10 @@
     "organizer": "Organizer",
     "save": "Save",
     "tags": "Τags:",
-    "unsave": "Unsave"
+    "unsave": "Unsave",
+    "title": "Edit your action!",
+    "button": "Update",
+    "edit": "Edit Action"
   },
   "footer": {
     "icons": "Icons from {{site}} and images from {{site2}}"
@@ -221,6 +224,7 @@
     "location": "Location",
     "maxfile": "Max file size: 5mb, accepted: jpg, png",
     "teams": "Organized by",
-    "date": "Choose Date and Time"
+    "date": "Choose Date and Time",
+    "delete": "Delete Action"
   }
 }

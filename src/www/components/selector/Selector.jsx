@@ -1,7 +1,7 @@
 import React from "react";
 import Select from "react-select";
 
-export default ({ centered, value, onChange, options }) => (
+export default ({ isDisabled, centered, value, onChange, options }) => (
   <Select
     className="Selector"
     components={{
@@ -19,5 +19,6 @@ export default ({ centered, value, onChange, options }) => (
     }}
     onChange={onChange}
     options={options}
+    isDisabled={isDisabled}
   />
 );
