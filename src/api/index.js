@@ -19,7 +19,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 // set localhost proxy for nginx
-app.set('trust proxy', '127.0.0.1');
+app.set("trust proxy", "127.0.0.1");
 
 // Database init connection
 const dbUser = process.env.MONGO_INITDB_ROOT_USERNAME;
@@ -55,11 +55,16 @@ var accessLogStream = rfs.createStream("access.log", {
   path: path.join(process.cwd(), "log"),
 });
 
-const unwantedLogs = ["/static", "/img", "/locales"];
+const unwantedLogs = ["/static", "/img", "/locales", "/manifest.json"];
+
+const logFormat =
+  process.env.NODE_ENV == "production"
+    ? "[:date[web]] :ip :method :url :status"
+    : "[:date[web]] :ip :method :url :status :body";
 
 // Logging to file
 app.use(
-  morgan("[:date[web]] :ip :method :url :status :body", {
+  morgan(logFormat, {
     stream: accessLogStream,
     skip: (req, res) => {
       return unwantedLogs.some((word) => req.url.startsWith(word));
@@ -69,7 +74,7 @@ app.use(
 
 // Logging to console
 app.use(
-  morgan("[:date[web]] :ip :method :url :status  :body", {
+  morgan(logFormat, {
     skip: (req, res) => {
       return unwantedLogs.some((word) => req.url.startsWith(word));
     },
