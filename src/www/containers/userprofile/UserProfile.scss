@@ -127,9 +127,9 @@
               > img {
                 align-self: center;
                 border-radius: 0.5rem;
-                height: 10rem;
-                object-fit: cover;
-                width: 10rem;
+                height: 128px;
+                object-fit: contain;
+                width: 128px;
               }
             }
 
