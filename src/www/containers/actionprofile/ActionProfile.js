@@ -97,6 +97,11 @@ export default connect(
         handleAttend = () => {
           this.handleSubmit("attend", "toAttend");
           this.props.attendAction(this.getActionObject(), !this.state.toAttend);
+          if (this.state.toAttend) {
+            this.setState({ attendees: this.state.attendees - 1 });
+          } else {
+            this.setState({ attendees: this.state.attendees + 1 });
+          }
         };
 
         getActionObject = () => {
