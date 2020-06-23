@@ -97,6 +97,11 @@ export default connect(
         handleAttend = () => {
           this.handleSubmit("attend", "toAttend");
           this.props.attendAction(this.getActionObject(), !this.state.toAttend);
+          if (this.state.toAttend) {
+            this.setState({ attendees: this.state.attendees - 1 });
+          } else {
+            this.setState({ attendees: this.state.attendees + 1 });
+          }
         };
 
         getActionObject = () => {
@@ -107,26 +112,53 @@ export default connect(
         userButtons = () => {
           const { t } = this.props;
           if (this.props.loggedIn) {
-            return (
-              <div>
-                <button
-                  onClick={this.handleSave}
-                  children={
-                    this.state.saved
-                      ? t("actioninfo.unsave")
-                      : t("actioninfo.save")
-                  }
-                />
-                <button
-                  onClick={this.handleAttend}
-                  children={
-                    this.state.toAttend
-                      ? t("actioninfo.cancel")
-                      : t("actioninfo.attend")
-                  }
-                />
-              </div>
-            );
+            if (!this.state.toAttend) {
+              return (
+                <div classname="twoButtons">
+                  <button
+                    className="attendButton"
+                    onClick={this.handleAttend}
+                    children={
+                      this.state.toAttend
+                        ? t("actioninfo.cancel")
+                        : t("actioninfo.attend")
+                    }
+                  />
+                  <button
+                    className="saveButton"
+                    onClick={this.handleSave}
+                    children={
+                      this.state.saved
+                        ? t("actioninfo.unsave")
+                        : t("actioninfo.save")
+                    }
+                  />
+                </div>
+              );
+            } else {
+              return (
+                <div classname="twoButtons">
+                  <button
+                    className="cancelButton"
+                    onClick={this.handleAttend}
+                    children={
+                      this.state.toAttend
+                        ? t("actioninfo.cancel")
+                        : t("actioninfo.attend")
+                    }
+                  />
+                  <button
+                    className="saveButton"
+                    onClick={this.handleSave}
+                    children={
+                      this.state.saved
+                        ? t("actioninfo.unsave")
+                        : t("actioninfo.save")
+                    }
+                  />
+                </div>
+              );
+            }
           }
         };
 
