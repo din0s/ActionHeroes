@@ -15,7 +15,7 @@
 
   .vertical {
     text-align: center;
-    
+
     p {
       font-size: 1.2rem;
       word-break: keep-all;
@@ -152,7 +152,7 @@
 
         > img {
           max-width: 96px;
-          object-fit: contain;
+          object-fit: cover;
         }
 
         > div {
@@ -239,7 +239,7 @@
             }
 
             > img {
-              object-fit: contain;
+              object-fit: cover;
               margin-right: 0.5rem;
               max-width: 96px;
             }
