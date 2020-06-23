@@ -129,7 +129,8 @@
     }
   },
   "actioncard": {
-    "categories": "Categories"
+    "categories": "Categories",
+    "none": "None!"
   },
   "categories": {
     "animals": "Animals",

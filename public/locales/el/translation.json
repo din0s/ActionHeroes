@@ -129,7 +129,8 @@
     }
   },
   "actioncard": {
-    "categories": "Κατηγορίες"
+    "categories": "Κατηγορίες",
+    "none": "Καμία!"
   },
   "categories": {
     "animals": "Ζώα",
