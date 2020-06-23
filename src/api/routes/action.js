@@ -5,7 +5,7 @@ const checkAuth = require("../middleware/check-auth");
 const checkAuthOptional = require("../middleware/check-auth-optional");
 const checkOwner = require("../middleware/check-owner");
 const extractTeam = require("../middleware/extract-team");
-const upload = require("../middleware/upload")(720, 405); // resize images to 720x405
+const upload = require("../middleware/upload")(1920, 1080); // resize images to 1920x1080
 
 const ActionController = require("../controllers/ActionController");
 
