@@ -54,14 +54,14 @@
   },
   "actioninfo": {
     "about": "About this action",
-    "attend": "Attend",
+    "attend": "Attend ⭐",
     "attendees": " people are interested in this action!",
-    "cancel": "Cancel",
+    "cancel": "Attending ✔",
     "map": "View on map",
     "organizer": "Organizer",
-    "save": "Save",
+    "save": "Save ♡",
     "tags": "Τags:",
-    "unsave": "Unsave",
+    "unsave": "Saved ❤︎",
     "title": "Edit your action!",
     "button": "Update",
     "edit": "Edit Action"
