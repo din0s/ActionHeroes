@@ -179,7 +179,7 @@ class ActionPopup extends Component {
       actionPicture,
     } = this.state;
     if (actionTeam === undefined) {
-      this.setState({
+      return this.setState({
         serverResponse: t("createaction.noteamerror"),
       });
     }
@@ -249,7 +249,7 @@ class ActionPopup extends Component {
       actionDate: this.props.date || defDate,
       actionPicture: undefined,
       actionTeam:
-        this.props.organizer || teams.length > 0 ? teams[0] : undefined,
+        this.props.organizer || (teams.length > 0 ? teams[0] : undefined),
       actionId: "",
       actionLocation: this.props.location || initPosition,
       serverResponse: "",
@@ -281,9 +281,8 @@ class ActionPopup extends Component {
       description,
       checkedCategories,
       serverResponse,
-      actionDate,
       actionLocation,
-      actionTeam,
+      teams,
     } = this.state;
 
     return (
@@ -339,7 +338,7 @@ class ActionPopup extends Component {
                       onChange={(opt) =>
                         this.setState({ actionTeam: opt.value })
                       }
-                      options={this.state.teams.map((t) => ({
+                      options={teams.map((t) => ({
                         value: t,
                         label: t.name,
                       }))}
@@ -380,7 +379,7 @@ class ActionPopup extends Component {
                     <div className="FormArea_content_map">
                       <Map
                         className="Map"
-                        center={this.state.actionLocation.coordinates}
+                        center={actionLocation.coordinates}
                         zoom={15}
                         onClick={(center, address) =>
                           this.setState({

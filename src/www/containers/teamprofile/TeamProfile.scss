@@ -2,6 +2,7 @@
   background-color: rgb(234, 237, 245);
   margin: auto;
   padding: 2rem 13vw;
+  min-height: 83vh;
 
   .TopPanel {
     background-color: rgba($color: white, $alpha: 0.7);
@@ -191,8 +192,12 @@
         }
 
         > ul {
-          list-style: none;  
+          list-style: none;
           padding: 0;
+          
+          > li:not(:last-of-type) {
+            margin-bottom: 1rem;
+          }
         }
       }
     }

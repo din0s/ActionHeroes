@@ -2,7 +2,10 @@
   text-align: center;
 
   main {
-    margin-top: 4rem;
+    > div {
+      padding-top: 4rem;
+      min-height: calc(100vh - 8.25rem); // nav: 4rem, footer: 4.25rem
+    }
   }
 
   .ScrollButton {

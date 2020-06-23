@@ -31,6 +31,7 @@ export default ({ action }) => {
           </div>
           <div className="ActionCard_categories">
             <h1>{t("actioncard.categories")}:</h1>
+            {categories.length === 0 && <p children={t("actioncard.none")} />}
             <ul>
               {categories.map((name) => (
                 <li key={name}>{t(`categories.${name.toLowerCase()}`)}</li>

@@ -97,14 +97,14 @@ export default connect(
                   <h3 className="clamped">{name}</h3>
                 </Link>
                 <div className="date">
-                  <span>{parseDate(date, t)}</span>
+                  <span className="clamped">{parseDate(date, t)}</span>
                 </div>
                 <a
                   href={location_link}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span>{location.name}</span>
+                  <span className="clamped">{location.name}</span>
                 </a>
                 <div className="description">
                   <p className="clamped">{description}</p>

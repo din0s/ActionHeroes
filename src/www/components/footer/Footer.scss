@@ -1,7 +1,9 @@
 footer {
-  background-color: rgba($color: gray, $alpha: 0.05);
+  background-color: whitesmoke;
   text-align: left;
   padding-bottom: 0.25rem;
+  height: 4rem;
+  width: 100%;
 
   .Divider {
     border: none;
@@ -32,12 +34,25 @@ footer {
 }
 
 @media only screen and(max-width: 550px) {
-  footer .Content {
-    flex-direction: column;
+  footer {
+    height: 6rem;
     
-    .Social_Media{
-      margin: 0;
-      padding: 0 1rem;
+    .Content {
+      flex-direction: column;
+  
+      p {
+        margin-bottom: 0.75rem;
+      }
+  
+      .Social_Media {
+        margin: 0;
+        padding: 0 1rem;
+  
+        > a > img {
+          margin-top: 0;
+          max-height: 25px;
+        }
+      }
     }
   }
 }
