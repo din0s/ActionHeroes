@@ -144,13 +144,53 @@
         width: 100%;
 
         > li {
+          display: flex;
+          height: fit-content;
+          flex-direction: column;
+          list-style: none;
           margin: 1rem;
-          margin-left: 2rem;
+          margin-left: 1rem;
           margin-right: 0;
           width: 100%;
 
-          > a > img {
-            width: 16rem;
+          > .hidden_desc {
+            display: block;
+            margin-top: 2rem;
+            > p {
+              -webkit-line-clamp: 3;
+              font-size: 1rem;
+              padding-right: 1rem;
+            }
+          }
+
+          > div {
+            height: 6.5rem;
+            > a > h3 {
+              margin-left: 13rem;
+            }
+            > div > span {
+              margin-top: 0.5rem;
+              margin-left: 13rem;
+            }
+            > a > span {
+              margin-left: 13rem;
+            }
+            .description {
+              display: none;
+            }
+          }
+
+          > a {
+            display: contents;
+
+            > img {
+              border-radius: 0.5rem;
+              height: 8rem;
+              margin: 1rem;
+              object-fit: contain;
+              position: absolute;
+              width: 12rem;
+            }
           }
         }
       }
