@@ -281,9 +281,8 @@ class ActionPopup extends Component {
       description,
       checkedCategories,
       serverResponse,
-      actionDate,
       actionLocation,
-      actionTeam,
+      teams,
     } = this.state;
 
     return (
@@ -339,7 +338,7 @@ class ActionPopup extends Component {
                       onChange={(opt) =>
                         this.setState({ actionTeam: opt.value })
                       }
-                      options={this.state.teams.map((t) => ({
+                      options={teams.map((t) => ({
                         value: t,
                         label: t.name,
                       }))}
@@ -380,7 +379,7 @@ class ActionPopup extends Component {
                     <div className="FormArea_content_map">
                       <Map
                         className="Map"
-                        center={this.state.actionLocation.coordinates}
+                        center={actionLocation.coordinates}
                         zoom={15}
                         onClick={(center, address) =>
                           this.setState({

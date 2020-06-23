@@ -34,7 +34,6 @@ export default connect(
           attendees: 0,
           categories: [],
           date: undefined,
-          isHost: false,
           location: {},
           name: "",
           organizer: "",
@@ -181,6 +180,8 @@ export default connect(
             attendees,
             categories,
             organizer,
+            openModal,
+            isHost,
           } = this.state;
 
           const actionPhoto = photo
@@ -191,13 +192,13 @@ export default connect(
             ? `/api/images/${organizer.photo}`
             : "/img/teaminfo/default.png";
 
-          const coordinates = this.state.location.coordinates;
+          const coordinates = location.coordinates;
 
           return (
             <div>
               <ActionPopup
                 allCategories={allCategories}
-                open={this.state.openModal}
+                open={openModal}
                 onClose={() => this.setState({ openModal: false })}
                 name={name}
                 description={description}
@@ -225,7 +226,7 @@ export default connect(
                       <div>
                         <h1 className="clamped">{name}</h1>
                         <p>{parseDate(date, t)}</p>
-                        {this.state.isHost ? (
+                        {isHost ? (
                           <button
                             children={t("actioninfo.edit")}
                             onClick={() => this.setState({ openModal: true })}
