@@ -1,12 +1,10 @@
 .App {
   text-align: center;
-  overflow: hidden;
 
   main {
     > div {
       padding-top: 4rem;
-      overflow: auto;
-      height: calc(100vh - 8.25rem); // nav: 4rem, footer: 4.25rem
+      min-height: calc(100vh - 8.25rem); // nav: 4rem, footer: 4.25rem
     }
   }
 
@@ -25,11 +23,5 @@
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-all;
-  }
-
-  @media only screen and(max-width: 550px) {
-    main > div {
-      height: calc(100vh - 10.25rem); // nav: 4rem, footer: 6.25rem
-    }
   }
 }

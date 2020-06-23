@@ -4,16 +4,15 @@
   align-items: center;
   background-image: url("/img/contact/newbackground.png");
   background-repeat: repeat;
-  background-size: cover;
+  background-size: 100% auto;
   display: flex;
   flex-direction: column;
-  padding: 2.75rem 0;
 
   > h2 {
     font-size: 3rem;
     font-weight: normal;
     margin-bottom: 0.5rem;
-    margin-top: 1rem;
+    margin-top: 2.5rem;
   }
 
   > h3 {
