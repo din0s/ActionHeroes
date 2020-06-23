@@ -303,8 +303,9 @@ module.exports = {
     }
 
     if (req.body.location) {
-      const coordinates = req.body.location.coordinates;
-      const name = req.body.location.name;
+      const location = JSON.parse(req.body.location);
+      const coordinates = location.coordinates;
+      const name = location.name;
 
       if (!name) {
         return res
@@ -315,11 +316,10 @@ module.exports = {
           .status(400)
           .json({ error: "Field `location.coordinates is required" });
       } else {
-        const coords = JSON.parse(coordinates);
-        if (coords.length == 2) {
+        if (coordinates.length == 2) {
           query[`location`] = {
             name: name,
-            coordinates: coords,
+            coordinates: coordinates,
           };
         } else {
           return res.status(400).json({ error: "Invalid coordinates" });

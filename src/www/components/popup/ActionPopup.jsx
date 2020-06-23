@@ -5,7 +5,6 @@ import { deleteAction, editAction } from "../../actions/action";
 
 import DateTimePicker from "date-time-picker-react";
 import ImageUploader from "react-images-upload";
-import Input from "../input/Input";
 import Map from "../../components/map/Map";
 import Popup from "reactjs-popup";
 import { Redirect } from "react-router-dom";
@@ -27,27 +26,30 @@ const initPosition = {
 class ActionPopup extends Component {
   state = {
     teams: [],
-    actionName: "",
-    description: "",
-    actionDate: defDate,
-    actionCategories: [],
+    actionName: this.props.name || "",
+    description: this.props.description || "",
+    checkedCategories: this.props.checkedCategories || [],
+    actionDate: this.props.date || defDate,
     actionPicture: undefined,
     serverResponse: "",
     actionId: "",
-    actionLocation: initPosition,
-    actionTeam: undefined,
+    actionLocation: this.props.location || initPosition,
+    actionTeam: this.props.organizer,
+    redirect: false,
   };
 
   setTeams = () => {
-    const { teamsOwned } = this.props.user;
-    if (!teamsOwned || teamsOwned.length === 0) {
-      return;
-    }
+    if (this.props.isCreate) {
+      const { teamsOwned } = this.props.user;
+      if (!teamsOwned || teamsOwned.length === 0) {
+        return;
+      }
 
-    this.setState({
-      teams: teamsOwned,
-      actionTeam: teamsOwned[0],
-    });
+      this.setState({
+        teams: teamsOwned,
+        actionTeam: teamsOwned[0],
+      });
+    }
   };
 
   componentDidMount = () => {
@@ -91,13 +93,52 @@ class ActionPopup extends Component {
       .catch((err) => this.handleError(err.response.data));
   };
 
+  updateAction = (
+    name,
+    date,
+    description,
+    categories,
+    organizer,
+    location,
+    photo
+  ) => {
+    const fd = new FormData();
+    if (date !== this.props.date) {
+      fd.set("date", date.toISOString());
+    }
+    if (name !== this.props.name) {
+      fd.set("name", name);
+    }
+    if (description !== this.props.description) {
+      fd.set("description", description);
+    }
+    if (categories !== this.props.checkedCategories) {
+      fd.set("categories", JSON.stringify(categories));
+    }
+    if (location !== this.props.location) {
+      fd.set(
+        "location",
+        JSON.stringify({
+          ...location,
+          name: location.name.replace(/\n/g, ", "),
+        })
+      );
+    }
+    if (photo) {
+      fd.set("photo", photo);
+    }
+    axios
+      .patch(this.props.action, fd)
+      .then(() => window.location.reload())
+      .catch((err) => this.handleError(err.response.data));
+  };
+
   handleSuccess = (data) => {
     this.setState({
       actionId: data._id,
     });
 
-    const isEdit = false; // change for edit
-    if (isEdit) {
+    if (!this.props.isCreate) {
       const { _id, name, description, categories, photo } = data;
       this.props.editAction({ _id, name, description, categories, photo });
     }
@@ -106,7 +147,11 @@ class ActionPopup extends Component {
   handleError = (data) => {
     const { t } = this.props;
 
-    if (data.error.includes("Action name")) {
+    if (!data.error) {
+      this.setState({
+        serverResponse: t("somethingwrong"),
+      });
+    } else if (data.error.includes("Action name")) {
       this.setState({
         serverResponse: t("createaction.nameerror"),
       });
@@ -128,7 +173,7 @@ class ActionPopup extends Component {
       actionName,
       actionDate,
       description,
-      actionCategories,
+      checkedCategories,
       actionTeam,
       actionLocation,
       actionPicture,
@@ -138,17 +183,28 @@ class ActionPopup extends Component {
         serverResponse: t("createaction.noteamerror"),
       });
     }
-    if (actionName !== "" && description !== "" && actionTeam !== undefined) {
-      this.createAction(
-        actionName,
-        actionDate,
-        description,
-        actionCategories,
-        actionTeam,
-        actionLocation,
-        actionPicture
-      );
-    }
+    const apiCall = this.props.isCreate ? this.createAction : this.updateAction;
+    apiCall(
+      actionName,
+      actionDate,
+      description,
+      checkedCategories,
+      actionTeam,
+      actionLocation,
+      actionPicture
+    );
+  };
+
+  deleteAction = () => {
+    const { action } = this.props;
+    const id = action.substring(action.lastIndexOf("/") + 1);
+    axios
+      .delete(action)
+      .then(() => {
+        this.props.deleteAction(id);
+        this.setState({ redirect: true });
+      })
+      .catch((err) => this.handleError(err.response.data));
   };
 
   showTeamImg = () => {
@@ -171,14 +227,14 @@ class ActionPopup extends Component {
 
   onCheckbox = (event, name) => {
     if (event.target.checked) {
-      const categories = this.state.actionCategories.concat(name);
       this.setState({
-        actionCategories: categories,
+        checkedCategories: this.state.checkedCategories.concat(name),
       });
     } else {
-      const filtered = this.state.actionCategories.filter((c) => c !== name);
       this.setState({
-        actionCategories: filtered,
+        checkedCategories: this.state.checkedCategories.filter(
+          (c) => c !== name
+        ),
       });
     }
   };
@@ -187,28 +243,52 @@ class ActionPopup extends Component {
     this.props.onClose();
     const { teams } = this.state;
     this.setState({
-      actionName: "",
-      description: "",
-      actionDate: defDate,
-      actionCategories: [],
+      actionName: this.props.name || "",
+      description: this.props.description || "",
+      checkedCategories: this.props.checkedCategories || [],
+      actionDate: this.props.date || defDate,
       actionPicture: undefined,
-      actionLocation: initPosition,
-      actionTeam: teams.length > 0 ? teams[0] : undefined,
+      actionTeam:
+        this.props.organizer || teams.length > 0 ? teams[0] : undefined,
+      actionId: "",
+      actionLocation: this.props.location || initPosition,
       serverResponse: "",
     });
   };
 
   render() {
-    const { t, categories } = this.props;
-    const { actionId } = this.state;
+    const { actionId, redirect } = this.state;
 
     if (actionId !== "") {
       return <Redirect to={`/actions/${actionId}`} />;
+    } else if (redirect) {
+      return <Redirect to={`/actions/`} />;
     }
+
+    const {
+      t,
+      isCreate,
+      action,
+      title,
+      button,
+      date,
+      open,
+      allCategories,
+    } = this.props;
+
+    const {
+      actionName,
+      description,
+      checkedCategories,
+      serverResponse,
+      actionDate,
+      actionLocation,
+      actionTeam,
+    } = this.state;
 
     return (
       <Popup
-        open={this.props.open}
+        open={open}
         onClose={this.reset}
         closeOnDocumentClick={false}
         modal
@@ -218,21 +298,23 @@ class ActionPopup extends Component {
             <button className="close" onClick={close}>
               &times;
             </button>
-            <h2>{t("createaction.createaction")}</h2>
-            <p children={this.state.serverResponse} />
+            <h2>{title}</h2>
+            <p children={serverResponse} />
             <form
-              method="post"
-              action="api/actions/create"
+              method={isCreate ? "post" : "patch"}
+              action={action}
               onSubmit={this.handleSubmit}
             >
               <ScrollArea
                 className="FormArea"
                 contentClassName="FormArea_content"
               >
-                <Input
+                <input
                   name="actionName"
                   type="text"
                   placeholder={t("createaction.actionname")}
+                  defaultValue={actionName}
+                  required
                   onChange={(e) =>
                     this.setState({ actionName: e.target.value.trim() })
                   }
@@ -243,6 +325,7 @@ class ActionPopup extends Component {
                   required
                   type="text"
                   placeholder={t("createaction.description")}
+                  defaultValue={description}
                   onChange={(e) =>
                     this.setState({ description: e.target.value.trim() })
                   }
@@ -250,6 +333,7 @@ class ActionPopup extends Component {
                 <div className="bigBoxNo1">
                   <div className="smallBoxLeft">
                     <Selector
+                      isDisabled={!isCreate}
                       centered="center"
                       value={<h3>{t("createaction.teams")}</h3>}
                       onChange={(opt) =>
@@ -285,6 +369,7 @@ class ActionPopup extends Component {
                     <p>{t("createaction.date")}</p>
                     <div className="FormArea_content_dateTime">
                       <DateTimePicker
+                        initialValue={date}
                         min={defDate}
                         onChange={(actionDate) => this.setState({ actionDate })}
                       />
@@ -313,13 +398,14 @@ class ActionPopup extends Component {
                 <div className="FormArea_content_categories">
                   <p>{t("filterlist.categories")}</p>
                   <div className="FormArea_content_categories-list">
-                    {categories.map((name) => {
+                    {allCategories.map((name) => {
                       return (
                         <label key={name}>
                           {t(`categories.${name.toLowerCase()}`)}
                           <input
                             type="checkbox"
                             onChange={(event) => this.onCheckbox(event, name)}
+                            defaultChecked={checkedCategories.includes(name)}
                           />
                           <span className="checkmark"></span>
                         </label>
@@ -328,12 +414,15 @@ class ActionPopup extends Component {
                   </div>
                 </div>
               </ScrollArea>
-              <input
-                className="SubmitButton"
-                type="submit"
-                value={t("submit")}
-              />
+              <input className="SubmitButton" type="submit" value={button} />
             </form>
+            {!isCreate && (
+              <button
+                className="DeleteButton"
+                onClick={this.deleteAction}
+                children={t("createaction.delete")}
+              />
+            )}
           </div>
         )}
       </Popup>
@@ -348,8 +437,6 @@ const mapState = (state) => ({
 const mapDispatch = {
   editAction,
   deleteAction,
-}
+};
 
-export default connect(mapState, mapDispatch)(
-  withTranslation()(ActionPopup)
-);
+export default connect(mapState, mapDispatch)(withTranslation()(ActionPopup));
