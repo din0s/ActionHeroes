@@ -44,7 +44,12 @@
       justify-content: center;
       list-style: none;
       margin: 0;
+      margin-top: 2rem;
       padding-left: 0;
+
+      > p {
+        padding-top: 1rem;
+      }
 
       > li {
         background-color: rgba($color: royalblue, $alpha: 0.3);
@@ -68,6 +73,7 @@
           > img {
             border-bottom-left-radius: 0.5rem;
             border-top-left-radius: 0.5rem;
+            object-fit: cover;
             height: 15rem;
             width: 20.5rem;
           }
@@ -135,60 +141,16 @@
         flex-wrap: wrap;
         justify-content: center;
         list-style: none;
-        padding-left: 1rem;
-        padding-top: 2rem;
         width: 100%;
 
         > li {
-          display: flex;
-          height: fit-content;
-          flex-direction: column;
-          list-style: none;
-          margin-bottom: 1rem;
-          margin-bottom: 2rem;
-          margin-left: 0.5rem;
-          margin-right: 0.5rem;
-          margin-top: 0rem;
+          margin: 1rem;
+          margin-left: 2rem;
+          margin-right: 0;
           width: 100%;
 
-          > .hidden_desc {
-            display: block;
-            margin-top: 2rem;
-            > p {
-              -webkit-line-clamp: 3;
-              font-size: 1rem;
-              padding-right: 1rem;
-            }
-          }
-
-          > div {
-            height: 6.5rem;
-            > a > h3 {
-              margin-left: 13rem;
-            }
-            > div > span {
-              margin-top: 0.5rem;
-              margin-left: 13rem;
-            }
-            > a > span {
-              margin-left: 13rem;
-            }
-            .description {
-              display: none;
-            }
-          }
-
-          > a {
-            display: contents;
-
-            > img {
-              border-radius: 0.5rem;
-              height: 8rem;
-              margin: 1rem;
-              object-fit: cover;
-              position: absolute;
-              width: 12rem;
-            }
+          > a > img {
+            width: 16rem;
           }
         }
       }
@@ -229,8 +191,6 @@
         flex-wrap: wrap;
         justify-content: center;
         list-style: none;
-        padding-left: 0rem;
-        padding-top: 2rem;
         width: 100%;
 
         > li {
@@ -239,7 +199,7 @@
           box-shadow: 0 0 10px 1px rgba($color: black, $alpha: 0.15);
           display: flex;
           flex-direction: column;
-          height: 23.5rem;
+          height: fit-content;
           list-style: none;
           margin-bottom: 1rem;
           margin-bottom: 2rem;

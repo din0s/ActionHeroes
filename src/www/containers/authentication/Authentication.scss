@@ -4,13 +4,10 @@ $softBlack: rgba(
 );
 
 .Auth-page {
-  background-color: rgba(
-    $color: peachpuff,
-    $alpha: 0.1
-  ); // TODO: change to image
+  align-items: center;
+  background-color: rgba($color: peachpuff, $alpha: 0.1);
   display: flex;
   justify-content: center;
-  padding: 2rem;
 
   .Auth-panel {
     align-items: center;
@@ -21,7 +18,8 @@ $softBlack: rgba(
     display: flex;
     flex-direction: column;
     margin: 10vh 0;
-    padding: 4rem 0;
+    height: fit-content;
+    padding: 1.5rem 0;
     width: 50vw;
 
     .Auth-header {

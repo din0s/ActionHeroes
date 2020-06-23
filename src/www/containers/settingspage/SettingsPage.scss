@@ -6,7 +6,11 @@
   flex-direction: row;
   justify-content: center;
   margin: auto;
-  padding: 2rem;
+
+  > div {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+  }
 
   &_navigation {
     background-color: rgba($color: white, $alpha: 0.7);
@@ -67,6 +71,7 @@
     border: 1px solid $softBlack;
     box-shadow: 1px 1px 1rem $softBlack;
     margin-left: 2rem;
+    height: fit-content;
     padding: 1rem 4rem;
     text-align: left;
     width: 48rem;
@@ -192,13 +197,24 @@
 
     align-items: center;
     flex-direction: column;
+    justify-content: start;
+
+    > div {
+      margin: 0;
+
+      &:first-of-type {
+        margin-top: 2rem;
+      }
+
+      &:last-of-type {
+        margin-bottom: 2rem;
+      }
+    }
 
     &_navigation {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       border-bottom: none;
-      margin-bottom: 0;
-      margin-left: 0;
       width: calc(#{$contentWidth} + 5rem);
 
       &_header {

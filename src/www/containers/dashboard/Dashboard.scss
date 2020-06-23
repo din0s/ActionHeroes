@@ -4,8 +4,8 @@
   background-color: rgba($color: lightgray, $alpha: 0.15);
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  padding: 1rem 2rem;
+  justify-content: space-around;
+  padding: 0 2rem;
   text-align: left;
 
   ul {
@@ -28,6 +28,7 @@
 
   &_main {
     max-width: 70vw;
+    padding-top: 1rem;
     width: 100%;
 
     > div {
@@ -111,6 +112,10 @@
 
     &_recommend {
       margin-top: 2rem;
+
+      li:not(:last-of-type) {
+        margin-bottom: 1rem;
+      }
     }
   }
 
@@ -259,6 +264,7 @@
   .Dashboard {
     align-items: center;
     flex-direction: column;
+    justify-content: start;
 
     &_main {
       max-width: unset;
@@ -269,7 +275,7 @@
 
       > div {
         background-color: unset;
-        margin-top: 1rem;
+        margin: 1rem 0;
         width: calc(100vw - 8rem);
       }
 

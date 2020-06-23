@@ -1,8 +1,13 @@
 .App {
   text-align: center;
+  overflow: hidden;
 
   main {
-    margin-top: 4rem;
+    > div {
+      padding-top: 4rem;
+      overflow: auto;
+      height: calc(100vh - 8.25rem); // nav: 4rem, footer: 4.25rem
+    }
   }
 
   .ScrollButton {
@@ -20,5 +25,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-all;
+  }
+
+  @media only screen and(max-width: 550px) {
+    main > div {
+      height: calc(100vh - 10.25rem); // nav: 4rem, footer: 6.25rem
+    }
   }
 }
