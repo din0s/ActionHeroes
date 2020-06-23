@@ -54,6 +54,7 @@
       > ul:not(.vertical) {
         display: flex;
         flex-direction: row;
+        justify-content: space-evenly;
 
         > li {
           &:not(:last-of-type) {
@@ -75,8 +76,10 @@
             border: 1px solid $softBlack;
             border-radius: 0.25rem;
             box-shadow: 0 0 10px 5px $blackTransparent;
+            height: 11.5rem;
             padding: 1rem;
             transition: 0.2s ease-in-out;
+            width: 22rem;
             word-break: break-all;
 
             &:hover {
@@ -113,8 +116,14 @@
     &_recommend {
       margin-top: 2rem;
 
-      > ul > li:not(:last-of-type) {
-        margin-bottom: 1rem;
+      > ul > li {        
+        &:not(:last-of-type) {
+          margin-bottom: 1rem;
+        }
+        
+        > .ActionCard {
+          width: 100%;
+        }
       }
     }
   }
@@ -260,6 +269,18 @@
   }
 }
 
+@media only screen and(max-width: 1750px) {
+  .Dashboard_main_next > ul:not(.vertical) > li {
+    &:last-of-type {
+      display: none;
+    }
+
+    .NextCard {
+      width: 27.5rem;
+    }
+  }
+}
+
 @media only screen and(max-width: 1400px) {
   .Dashboard {
     align-items: center;
@@ -268,6 +289,16 @@
 
     &_main {
       max-width: unset;
+
+      &_next > ul:not(.vertical) > li {
+        &:last-of-type {
+          display: initial;
+        }
+
+        .NextCard {
+          width: 20rem;
+        }
+      }
     }
 
     &_side {
@@ -290,9 +321,41 @@
   }
 }
 
+@media only screen and(max-width: 1190px) {
+  .Dashboard_main_next > ul:not(.vertical) > li {
+    &:last-of-type {
+      display: none;
+    }
+
+    .NextCard {
+      width: 25rem;
+    }
+  }
+}
+
+@media only screen and(max-width: 1190px) {
+  .Dashboard_main_next > ul:not(.vertical) > li {
+    &:not(:first-of-type) {
+      display: none;
+    }
+
+    .NextCard {
+      width: calc(100% - 1rem);
+    }
+  }
+}
+
 @media only screen and(max-width: 800px) {
-  .Dashboard_main_next > ul {
+  .Dashboard_main_next > ul:not(.vertical) {
     flex-direction: column;
+
+    > li {
+      width: calc(100% - 1rem);
+
+      &:not(:first-of-type) {
+        display: initial;
+      }
+    }
 
     > li:not(:last-of-type) {
       margin-bottom: 2rem;
@@ -300,40 +363,57 @@
     }
 
     > li .NextCard > p {
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 5;
     }
   }
 }
 
 @media only screen and(max-width: 560px) {
   .Dashboard {
-    &_main_next > ul {
-      flex-direction: column;
-
-      > li:not(:last-of-type) {
-        margin-bottom: 2rem;
-        margin-right: 0;
+    &_main {
+      &_next > ul {
+        flex-direction: column;
+  
+        > li:not(:last-of-type) {
+          margin-bottom: 2rem;
+          margin-right: 0;
+        }
+  
+        > li .NextCard {
+          > span {
+            > img {
+              max-width: 96px;
+            }
+  
+            > h4 {
+              font-size: 1.1rem;
+            }
+          }
+  
+          > p {
+            font-size: 0.9rem;
+          }
+        }
       }
 
-      > li .NextCard {
-        > span {
-          > img {
-            max-width: 96px;
-          }
+      &_recommend > ul > li > .ActionCard {
+        width: calc(100% - 1rem);
 
-          > h4 {
-            font-size: 1.1rem;
-          }
-        }
-
-        > p {
-          font-size: 0.9rem;
-        }
       }
     }
 
     &_side_saved > ul > li > a > h4 {
       margin: 0.5rem 0;
+    }
+  }
+}
+
+@media only screen and(max-width: 460px) {
+  .Dashboard_main_next > ul:not(.vertical) > li .NextCard {
+    height: 9.5rem;
+
+    img {
+      display: none;
     }
   }
 }
