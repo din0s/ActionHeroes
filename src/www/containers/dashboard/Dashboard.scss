@@ -54,7 +54,6 @@
       > ul:not(.vertical) {
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
 
         > li {
           &:not(:last-of-type) {
@@ -271,12 +270,12 @@
 
 @media only screen and(max-width: 1750px) {
   .Dashboard_main_next > ul:not(.vertical) > li {
-    &:last-of-type {
+    &:not(:first-of-type):last-of-type {
       display: none;
     }
 
     .NextCard {
-      width: 27.5rem;
+      width: 27rem;
     }
   }
 }
@@ -291,7 +290,7 @@
       max-width: unset;
 
       &_next > ul:not(.vertical) > li {
-        &:last-of-type {
+        &:not(:first-of-type):last-of-type {
           display: initial;
         }
 
@@ -323,7 +322,7 @@
 
 @media only screen and(max-width: 1190px) {
   .Dashboard_main_next > ul:not(.vertical) > li {
-    &:last-of-type {
+    &:not(:first-of-type):last-of-type {
       display: none;
     }
 
@@ -350,11 +349,8 @@
     flex-direction: column;
 
     > li {
+      display: initial !important;
       width: calc(100% - 1rem);
-
-      &:not(:first-of-type) {
-        display: initial;
-      }
     }
 
     > li:not(:last-of-type) {
