@@ -179,7 +179,7 @@ class ActionPopup extends Component {
       actionPicture,
     } = this.state;
     if (actionTeam === undefined) {
-      this.setState({
+      return this.setState({
         serverResponse: t("createaction.noteamerror"),
       });
     }
