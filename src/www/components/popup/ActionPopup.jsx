@@ -249,7 +249,7 @@ class ActionPopup extends Component {
       actionDate: this.props.date || defDate,
       actionPicture: undefined,
       actionTeam:
-        this.props.organizer || teams.length > 0 ? teams[0] : undefined,
+        this.props.organizer || (teams.length > 0 ? teams[0] : undefined),
       actionId: "",
       actionLocation: this.props.location || initPosition,
       serverResponse: "",
