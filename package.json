@@ -6,7 +6,7 @@
     "@material-ui/core": "^4.9.11",
     "@metamodules/mongo": "din0s/mongo#e7113d1",
     "axios": "^0.19.2",
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "connected-react-router": "^6.8.0",
     "date-time-picker-react": "^2.0.4",
     "deploy-node-app": "din0s/deploy-node-app#ae9ae38",
