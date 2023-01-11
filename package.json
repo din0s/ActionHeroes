@@ -15,7 +15,7 @@
     "i18next": "^19.3.2",
     "i18next-browser-languagedetector": "^4.0.2",
     "i18next-http-backend": "^1.0.15",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "leaflet": "^1.6.0",
     "leaflet-control-geocoder": "^1.13.0",
     "material-ui-flat-pagination": "^4.1.0",
